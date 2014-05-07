@@ -1,0 +1,61 @@
+
+	 			<div class="">
+	 				<?php 
+	 			if(isset($_POST['submit']))  {
+	 				       $query = $db->prepare("SELECT * FROM betaSignup WHERE isUsed = 0 AND mailsent = 0 ORDER BY id DESC");	
+	 				        
+	 				       try {
+
+		 				          $query->execute();
+		 				          
+		 				         while($row = $query->fetch(PDO::FETCH_ASSOC)) {
+		 				            	$from = "noreply@scrolldier.com";
+		 				            	$subject = "Scrolldier.com Beta key";
+		 				              	$to = $row['mail'];
+		 				              
+		 				              $message = "<div style=\"padding:10px;height:100%;width:100%;display:block;color:#222222;\">
+		 				              	<img src='http://alpha.scrolldier.com/img/Scrolldier.png' style=\"width: 200px;\" />
+		 				              	<h2>You have been Chosen!</h2>
+		 				              	<p>You have been chosen to join the Beta testing of Scrolldier.com.</p>
+		 				              	<p>Your key: ".$row['betaKey']."</p>
+		 				              	<p>Click this link for fast signup: <br />
+		 				              	alpha.scrolldier.com/u/reg.php?mail=".$row['mail']."&key=".$row['betaKey']."</p>
+		 				              	<p>Thank you so much for joining the Beta of Scrolldier.com, All feedback is appreciated.</p>
+		 				              	<p>Feedback can be sent to <a href='mailto:support@scrolldier.com'>support@scrolldier.com</a>.</p>
+		 				              	
+		 				              	<p>-Orangee @ Scrolldier.com</p>
+		 				              </div>";
+		 				              
+		 				              
+		 				              $headers = "MIME-Version: 1.0\r\n";
+		 				              $headers .= "Content-type: text/html; charset=iso-8859-1". "\r\n";
+		 				              $headers  .= "From: $from\r\n";
+		 				              
+		 				              if (mail($to, $subject, $message, $headers)) {
+		 				              	 echo "Key send to: ".$row['mail']."<br />";
+		 				              	 $x->mailSent($row['mail']);
+		 				           	  }
+								}
+	 				       	} catch (PDOException $e) {
+	 				       		echo("Error code: ".$e->getCode());
+	 				       }
+	 				 
+	 				  
+	 				  
+	 				  
+	 				}
+	 				     ?>
+	 				    <form action="" method="post">
+	 				    	<?php if(isset($_POST['submit'])) {
+	 				    		$total = $query->rowCount();
+	 				    		
+	 				    		if ($total == 0) {
+	 				    			echo("<p>No keys to send</p><br />");
+	 				    		} else {
+	 				    			echo("<p>Sent a total of:".$total."keys</p><br />");
+	 				    		}
+	 				    		
+	 				    	} ?>
+	 				    <label>Send out Beta keys:</label>
+	 				    <input name="submit" type="submit" class="btn-modern" value="Send">
+	 				    </form>

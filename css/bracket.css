@@ -1,0 +1,33 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  outline: 0px;
+  outline: none;
+}
+@font-face {
+  font-family: scrolls;
+  src: url('../data/font.woff');
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: scrolls, "Lucida Grande", Lucida, Verdana, sans-serif;
+  text-shadow: 0 2px 0 #000000;
+  color: #c4bba4;
+}
+body {
+  background-color: #1d1712;
+  font: 18px "Lucida Grande", Lucida, Verdana, sans-serif;
+  color: #d8d2c3;
+}
+.container {
+  width: 940px;
+  margin: 25px auto;
+}
+.bracket ul li {
+  list-style: none;
+  margin: 5px;
+}
