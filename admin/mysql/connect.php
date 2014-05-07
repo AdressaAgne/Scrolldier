@@ -1,9 +1,5 @@
 <?php 
 
-$db_host = "scrolldier.com.mysql";
-$db_username = "scrolldier_com";
-$db_password = "wDtvKMgE";
-$db_name = "scrolldier_com";
 //
 $db_host = "localhost";
 $db_username = "root";
