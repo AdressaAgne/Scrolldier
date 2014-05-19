@@ -363,7 +363,7 @@ $row = $query->fetch(PDO::FETCH_ASSOC);
 	<script>
 	$(function() {
 
-	$("[id*=ScrollsNr]").click(function() {
+	$("[id*=ScrollsNr]").hover(function() {
 		$(this).find("div").next("div").toggle();
 	});
 	

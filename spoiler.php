@@ -64,7 +64,7 @@ $row = $query->fetch(PDO::FETCH_ASSOC)
 <head>
 	<meta charset="utf-8">
 	<title><?php echo($row['header']) ?> @ Scrolldier.com</title>
-	<link rel="icon" type="image/png" href="img/bunny.png">
+	<link rel="icon" type="image/png" href="<?php echo($main) ?>img/bunny.png">
 	<!--[if lt IE 9]>
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
@@ -120,7 +120,7 @@ $row = $query->fetch(PDO::FETCH_ASSOC)
 				?>
 				
 					<div class="avatar scrolls">
-						<img src="resources/head_<?php echo($row['headID']) ?>.png" alt="" />
+						<img src="<?php echo($main) ?>resources/head_<?php echo($row['headID']) ?>.png" alt="" />
 					</div>
 					<div class="commentPost scrolls">
 						<h4 class="clearfix"><a class="left" href="<?php echo($main) ?>user/<?php echo(strip_tags($row['byUser'])) ?>"><?php echo(strip_tags($row['byUser'])) ?></a>
@@ -159,9 +159,9 @@ $row = $query->fetch(PDO::FETCH_ASSOC)
 				<div class="containerComment">
 					<div class="avatar scrolls">
 						<?php if (isset($_SESSION['username'])) { ?>
-							<img src="resources/head_<?php echo($_SESSION['headID']) ?>.png" alt="" />
+							<img src="<?php echo($main) ?>resources/head_<?php echo($_SESSION['headID']) ?>.png" alt="" />
 						<?php } else { ?>
-							<img src="resources/head_195.png" alt="" />
+							<img src="<?php echo($main) ?>resources/head_195.png" alt="" />
 						<?php } ?>
 					</div>
 					<div class="scrolls comment clearfix">
