@@ -7,7 +7,8 @@ if (isset($_GET['logout'])) {
 	$x->logout();
 }
 
-if (isset($_POST['submitDeletePost'])) {
+if (isset($_POST['submitDeletePost']) && isset($_SESSION['username'])) {
+		if ($_SESSION['rank'] <= 2) {
 		$query = $db->prepare("DELETE FROM scrolls where id=:id");
 		$arr = array(
 				'id' => $_POST['postID']
@@ -18,10 +19,11 @@ if (isset($_POST['submitDeletePost'])) {
 		if ($query->execute()) {
 			header("location: admin.php");
 		}
+	}
 }
 
-if (isset($_POST['name']) && isset($_POST['submit']) && isset($_POST['comment'])) {
-	
+if (isset($_POST['name']) && isset($_POST['submit']) && isset($_POST['comment']) && isset($_SESSION['username'])) {
+	if ($_SESSION['rank'] <= 2) {
 	$query = $db->prepare("INSERT INTO comment (byUser, comment, commentToID, headID) VALUES (:name, :comment, :commentToID, :headID)");
 	$arr = array(
 			'name' => $_POST['name'],
@@ -31,7 +33,11 @@ if (isset($_POST['name']) && isset($_POST['submit']) && isset($_POST['comment'])
 		);
 		
 	$x->arrayBinder($query, $arr);
-	$query->execute();			
+	$query->execute();
+	
+	} else {
+		echo("you sneaky little thing!");
+	}			
 } 
 
 if (isset($_POST['postID']) && !empty($_POST['postID'])) {
