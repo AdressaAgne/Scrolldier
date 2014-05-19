@@ -106,7 +106,6 @@
 body{
 	background-color: #121314;
 	font-family: 'Open Sans', sans-serif;
-	overflow: scroll;
 	color: #f8f8f8;
 	
 }
@@ -419,6 +418,10 @@ label{
 /* @end */
 .body{
 
+}
+.border-radius-bottom-none{
+	border-bottom-left-radius: 0px !important;
+	border-bottom-right-radius: 0px !important;
 }
 .clearfix{
 	*zoom: 1;
@@ -889,20 +892,20 @@ h4{
 		background-color: rgba(0, 0, 0, .5);
 		
 		& .curve{
-			position: absolute;
-			bottom: 0px;
-			display: inline-block;
 			width: 25px;
-			background: -webkit-linear-gradient(left, #ffc108 0%, #ffaa00 100%) #f5c000;
-			background: -moz-linear-gradient(left, #ffc108 0%, #ffaa00 100%) #f5c000;
-			background: -ms-linear-gradient(left, #ffc108 0%, #ffaa00 100%) #f5c000;
-			background: linear-gradient(to right, #ffc108 0%, #ffaa00 100%) #f5c000;
-	
-			-moz-box-shadow: inset 0 1px rgba(255, 255, 255, 0.3);
-			box-shadow: inset 0 1px rgba(255, 255, 255, 0.3);
-			
-			
-			}
+		}
+		& .curve-order{
+			background-color: #94B2CC;
+		}
+		& .curve-decay{
+			background-color: #AD7FCC;
+		}
+		& .curve-growth{
+			background-color: #A0CC56;
+		}
+		& .curve-energy{
+			background-color: #CC9500;
+		}
 	}
 }
 .search{
@@ -941,6 +944,10 @@ i[class^='icon-']{
 	& i[class^='icon-']{
 		margin-right: 5px;
 	}
+}
+.isHidden{
+	background-color: rgba(255, 255, 255, .75) !important;
+	color: #222;
 }
 .listScroll{
 	margin: -10px 10px -14.5px -10px;
@@ -982,6 +989,17 @@ i.icon-twitch{
 i.icon-youtube{
 	background-image: url('../img/youtube.jpg');
 }
+
+i.icon-deck{
+	width: 77px;
+	height: 85px;
+	background-size: 77px 85px;
+	background-image: url('../img/deck_icon.png');
+}
+i.icon-scrolls{
+	background-image: url('../img/scrolls_icon.png');
+}
+
 
 i.icon-yes{
 	background-image: url('../img/yes.png');

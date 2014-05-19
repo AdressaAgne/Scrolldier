@@ -67,7 +67,7 @@ $row = $query->fetch(PDO::FETCH_ASSOC)
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="css/style.css" />
+	<link rel="stylesheet" href="<?php echo($main) ?>css/style.css" />
 	<?php include("inc_/ad/main.php"); ?>
 </head>
 <body>
@@ -90,7 +90,7 @@ $row = $query->fetch(PDO::FETCH_ASSOC)
 								</form>
 								
 						<?php } ?></small></h3>
-						<small><?php echo($x->ago($row['time'])) ?>, By: <a href="u?u=<?php echo($row['byName']) ?>"><?php echo($row['byName']) ?></a></small>
+						<small><?php echo($x->ago($row['time'])) ?>, By: <a href="<?php echo($main) ?>user/<?php echo($row['byName']) ?>"><?php echo($row['byName']) ?></a></small>
 					</div>
 					<div class="news_content">
 						<?php echo($row['html']) ?>
@@ -121,7 +121,7 @@ $row = $query->fetch(PDO::FETCH_ASSOC)
 						<img src="resources/head_<?php echo($row['headID']) ?>.png" alt="" />
 					</div>
 					<div class="commentPost scrolls">
-						<h4 class="clearfix"><a class="left" href="u/?u=<?php echo(strip_tags($row['byUser'])) ?>"><?php echo(strip_tags($row['byUser'])) ?></a>
+						<h4 class="clearfix"><a class="left" href="<?php echo($main) ?>user/<?php echo(strip_tags($row['byUser'])) ?>"><?php echo(strip_tags($row['byUser'])) ?></a>
 						<?php $userGuild = $x->getGuild($row['byUser']) ?>
 						<?php if (!$x->hasGuild($row['byUser'])) { ?>
 							<div class="left" style="margin-left: 10px;">

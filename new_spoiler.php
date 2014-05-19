@@ -41,8 +41,8 @@ if (!isset($_SESSION['username'])) {
 	<!--[if lt IE 9]>
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
-	<script src="../jquery.js"></script>	 
-	<script src="../plugins/ckeditor/ckeditor.js"></script>	
+	<script src="<?php echo($main) ?>jquery.js"></script>	 
+	<script src="<?php echo($main) ?>plugins/ckeditor/ckeditor.js"></script>	
 		
 </head>
 <body>

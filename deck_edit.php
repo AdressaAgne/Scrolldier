@@ -6,18 +6,24 @@ session_start();
 if (isset($_GET['logout'])) {
 	$x->logout();
 }
-if (isset($_POST['name']) && isset($_POST['submit']) && isset($_POST['comment'])) {
-	
-	$query = $db->prepare("INSERT INTO comment (byUser, comment, commentToID, headID, cWhere) VALUES (:name, :comment, :commentToID, :headID, 2)");
+if (isset($_POST['submit'])) {
+
+	$query = $db->prepare("UPDATE decks SET text=:html, deck_title=:deck_title, isHidden=:isHidden WHERE id=:id");
+	if (isset($_POST['isHidden'])) {
+		$isHidden = 1;
+	} else {
+		$isHidden = 0;
+	}
 	$arr = array(
-			'name' => $_POST['name'],
-			'comment' => $_POST['comment'],
-			'commentToID' => $_GET['d'],
-			'headID' => $_POST['headID']
-		);
-		
+			'html' => $_POST['html'],
+			'isHidden' => $isHidden,
+			'deck_title' => $_POST['deck_title'],
+			'id' => $_GET['d']
+		); 
+	
 	$x->arrayBinder($query, $arr);
-	$query->execute();			
+	$query->execute();
+
 } 
 
 if (isset($_POST['postID']) && !empty($_POST['postID'])) {
@@ -46,9 +52,15 @@ $arr = array(
 		'id' => $_GET['d']
 	);
 
+
+
 $x->arrayBinder($query, $arr);
 $query->execute();		
 $row = $query->fetch(PDO::FETCH_ASSOC);
+
+if ($row['deck_author'] != $_SESSION['username']) {
+	header("location: http://scrolldier.com/decks");
+}
 ?>
 
 <!DOCTYPE html>
@@ -64,50 +76,26 @@ $row = $query->fetch(PDO::FETCH_ASSOC);
 	<link rel="stylesheet" href="<?php echo($main) ?>css/style.css" />
 	<link href="<?php echo($main) ?>plugins/lightbox/css/lightbox.css" rel="stylesheet" />
 	<script src="<?php echo($main) ?>plugins/lightbox/js/jquery-1.11.0.min.js"></script>
-	<script src="<?php echo($main) ?>plugins/lightbox/js/lightbox.min.js"></script>
+	<script src="<?php echo($main) ?>plugins/lightbox/js/lightbox.min.js"></script>	 
+	<script src="<?php echo($main) ?>plugins/ckeditor/ckeditor.js"></script>
 </head>
 <body>
 	<?php include('inc_/menu.php') ?>
 	<div class="body" id="blog">
-		
 		<div class="container">
-				<div class="container clearfix">
+			<!--Top title-->
+			<div class="container clearfix">
 					<div class="left">
 						<i class="icon-deck"></i>	
 					</div>
 					
 					<div class="left">
 						<h1><a href="http://www.scrollsguide.com/deckbuilder/#<?php echo($row['link']) ?>" target="_blank"><?php echo($row['deck_title']) ?></a></h1>
-						<small><?php echo($x->ago($row['time'])) ?> by <a href="<?php echo($main) ?>user/<?php echo($row['deck_author']) ?>"><?php echo($row['deck_author']) ?></a>, for scrolls version: <?php echo($row['meta']) ?>, with a Score of <?php echo($row['vote']) ?></small>
-					</div>
-					
-					
-					<?php if (isset($_SESSION['username'])) { ?>
-							
-						<div class="div-3 clearfix">
-							<?php if ($x->hasVoted($_SESSION['username'], $row['id'])) { ?>
-							
-								<form method="post" action="" class="left">
-									<input type="hidden" name="VoteUp" value="VoteUp" />
-									<input type="hidden" name="deckID" value="<?php echo($row['id']) ?>" />
-									<input type="submit" class="btn-modern" name="submit" value="Vote Up" />
-								</form>
-								
-								<form method="post" action="" class="left">
-									<input type="hidden" name="VoteDown" value="VoteDown" />
-									<input type="hidden" name="deckID" value="<?php echo($row['id']) ?>" />
-									<input type="submit" class="btn-modern" name="submit" value="Vote Down" />
-								</form>
-							
-							<?php } ?>
 						
-						<?php if ($row['deck_author'] == $_SESSION['username']) { ?>
-							<a href="<?php echo($main) ?>editdeck/<?php echo($row['id']) ?>" class="btn-modern btn-pagina left">edit</a>
-						<?php } ?>
-						</div>
-					<?php } ?>
+						<small><?php echo($x->ago($row['time'])) ?> by <a href="user/<?php echo($row['deck_author']) ?>"><?php echo($row['deck_author']) ?></a>, for scrolls version: <?php echo($row['meta']) ?>, with a Score of <?php echo($row['vote']) ?></small>
+					</div>
 				</div>
-				
+			<!--Scrolls list-->
 			<div class="news_wall right">
 				
 					<div class="modern clearfix border-radius-bottom-none">
@@ -264,109 +252,45 @@ $row = $query->fetch(PDO::FETCH_ASSOC);
 					</div>
 					<?php } ?>
  			</div>
-				<div class="news left">
-				<div class="clearfix div-margin">
-						<p><?php echo($row['text']) ?></p>
-				</div>
+			<!--Desc and comments-->
+			<div class="news left">
+				<div class="clearfix">
+					<?php 
+						function makeClickableLinks($s) {
+						  return preg_replace('@(https?://([-\w\.]+[-\w])+(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?)@', '<a href="$1" target="_blank">$1</a>', $s);
+						}
+					 ?>
 				
-				<div class="containerComment">	
-				
-				<?php
-				$query = $db->prepare("SELECT * FROM comment WHERE commentToID=:id AND cWhere=2 ORDER BY TIME");
-				$arr = array(
-						'id' => $_GET['d']
-					);
-				$x->arrayBinder($query, $arr);	
-					
-				function makeClickableLinks($s) {
-				  return preg_replace('@(https?://([-\w\.]+[-\w])+(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?)@', '<a href="$1" target="_blank">$1</a>', $s);
-				}
-				
-				
-				$query->execute();		
-				while ($comment = $query->fetch(PDO::FETCH_ASSOC)) {
-						
-				?>
-				
-					<div class="avatar scrolls">
-						<img src="<?php echo($main) ?>resources/head_<?php echo($comment['headID']) ?>.png" alt="" />
-					</div>
-					<div class="commentPost scrolls">
-						<h4 class="clearfix"><a class="left" href="<?php echo($main) ?>user/<?php echo($comment['byUser']) ?>"><?php echo(strip_tags($comment['byUser'])) ?></a>
-						
-						<?php $userGuild = $x->getGuild($comment['byUser']) ?>
-						<?php if (!$x->hasGuild($comment['byUser'])) { ?>
-							<div class="left" style="margin-left: 10px;"><img src="<?php echo($userGuild['badge_url']) ?>" height="16px" alt="" /></div>
-						<?php } ?>
-						
-						<?php if (isset($_SESSION['username']) && $_SESSION['rank'] < 3) { ?>
-						<small>
-						
-						<form method="post" class="right" action="">
-							<input type="hidden" name="postID" value="<?php echo($comment['id']) ?>" />
-							<input type="submit" class="delBtn" name="" value="Delete" />
-						</form>
-						<form method="post" class="right" action="">
-							<input type="hidden" name="warningUser" value="<?php echo($comment['byUser']) ?>" />
-							<input type="hidden" name="warningPost" value="<?php echo($comment['id']) ?>" />
-							<input type="submit" class="warBtn" name="" value="Warning<?php if ($comment['Warning'] >= 1) {
-								echo("(".$comment['Warning'].")");
-							} ?>" />
-						</form>
-						</small>
-						<?php } ?>
-						</h4>
-						<p><?php echo(makeClickableLinks(strip_tags($comment['comment']))) ?></p>
-					</div>
-					
-					<?php } ?>
-					
-					
-					
-				</div>
-				<?php if (isset($_SESSION['username'])) { ?>
-				<div class="containerComment">
-					<div class="avatar scrolls">
-						<?php if (isset($_SESSION['username'])) { ?>
-							<img src="<?php echo($main) ?>resources/head_<?php echo($_SESSION['headID']) ?>.png" alt="" />
-						<?php } else { ?>
-							<img src="<?php echo($main) ?>resources/head_195.png" alt="" />
-						<?php } ?>
-					</div>
-					<div class="scrolls comment clearfix">
-						<h4>Write a comment about this?</h4>
-						<small>Comments: <?php echo($x->totalComments($_GET['s'])) ?></small>
-						<form method="post" class="commentBox" action="">
-						
-							<?php if (isset($_SESSION['username'])) { ?>
-								<input type="hidden" class="textbox full div-3" name="name" value="<?php echo($_SESSION['username']) ?>" />
-								<input type="hidden" name="headID" value="<?php echo($_SESSION['headID']) ?>" />
-							<?php } else { ?>
-								<input type="text" class="textbox full div-3" name="name" placeholder="InGameName" value="" />
-								<input type="hidden" name="headID" value="195" />
-							<?php } ?>
-						
+					<form method="post" action="">
+						<div class="div-4"><input class="textbox full" type="text" name="deck_title" value="<?php echo($row['deck_title']) ?>" /></div>
+						<div class="div-4">
 							
-							<textarea name="comment" class="textarea full" placeholder="Comment"></textarea><br />
-							<div class="div-3">
-							<input type="submit" class="btn" name="submit" value="Post" />
-							</div>
-						</form>
-					</div>
+							<?php if ($row['isHidden'] == 1) { ?>
+								<input type="checkbox" checked name="isHidden" id="isHidden" value="1" />
+							<?php } else { ?>
+								<input type="checkbox" name="isHidden" id="isHidden" value="1" />
+							<?php } ?>
+							<label for="isHidden">Make deck hidden, so only you can see it (Direct link still works for everyone)</label>
+						</div>
+						<div class="div-4">
+							<textarea class="ckeditor" name="html"><?php echo($row['text']) ?></textarea>
+						</div>
+						<div class="div-4">
+							<input type="submit" name="submit" value="Save" class="btn-modern" />
+						</div>
+					</form>
 				</div>
-				<?php } ?>
 			</div>
+			
 		</div>
 	</div>
 	<?php include("inc_/footer.php"); ?>
 	
 	<script>
 	$(function() {
-
-	$("[id*=ScrollsNr]").click(function() {
-		$(this).find("div").next("div").toggle();
-	});
-	
+		$("[id*=ScrollsNr]").click(function() {
+			$(this).find("div").next("div").toggle();
+		});
 	});
 	
 	</script>

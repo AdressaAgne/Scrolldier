@@ -9,7 +9,8 @@
 		$x->logout();
 	}
 	if (!isset($_SESSION['username'])) {
-		header("location: ../login.php");
+		$actual_link = $_SERVER['REQUEST_URI'];
+		header("location: ../login.php?re=".$actual_link);
 	}
 	
 	
@@ -55,12 +56,12 @@ if (isset($_POST['submitInvite'])) {
 <head>
 	<meta charset="utf-8">
 	<title><?php echo($user['ign']) ?> - Scrolldier.com</title>
-	<link rel="icon" type="image/png" href="../img/bunny.png">	
+	<link rel="icon" type="image/png" href="<?php echo($main) ?>img/bunny.png">	
 	<!--[if lt IE 9]>
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="../css/style.css" />
+	<link rel="stylesheet" href="<?php echo($main) ?>css/style.css" />
 </head>
 <body>
 	<?php include('../inc_/menu.php') ?>
@@ -68,7 +69,7 @@ if (isset($_POST['submitInvite'])) {
 		<div class="container">
 			<div class="scrolls div-first">
 				<div class="avatar">
-					<img src="../resources/head_<?php echo($user['headID']) ?>.png" width="300px" style="margin-left: -50px; margin-top: -20px;" alt="" />
+					<img src="<?php echo($main) ?>resources/head_<?php echo($user['headID']) ?>.png" width="300px" style="margin-left: -50px; margin-top: -20px;" alt="" />
 				</div>
 			</div>
 			<?php $userGuild = $x->getGuild($user['ign']) ?>
@@ -85,7 +86,7 @@ if (isset($_POST['submitInvite'])) {
 					<img src="<?php echo($userGuild['badge_url']) ?>" alt="" />
 				<?php } ?>
 				<?php if (strtolower($_GET['u']) == strtolower($_SESSION['username'])) { ?>
-					<small class="right modern btn-pagina"><a href="edit.php">Edit Profile</a></small>
+					<small class="right modern btn-pagina"><a href="<?php echo($main) ?>edit">Edit Profile</a></small>
 				<?php } ?>
 				
 				<?php if (isset($guild) && $guild['guild_leader'] == $_SESSION['username'] && $x->hasGuild($user['ign'])) { ?>
@@ -119,7 +120,7 @@ if (isset($_POST['submitInvite'])) {
 					<div class="decks div-margin">	
 				<table  style="width: 480px !important;">
 					<?php
-					$query = $db->prepare("SELECT * FROM decks WHERE deck_author=:id ORDER BY vote DESC, time DESC");
+					$query = $db->prepare("SELECT * FROM decks WHERE deck_author=:id AND isHidden = 0 ORDER BY vote DESC, time DESC");
 					$arr = array(
 							'id' => $user['ign']
 						);
@@ -129,7 +130,7 @@ if (isset($_POST['submitInvite'])) {
 					while ($deck = $query->fetch(PDO::FETCH_ASSOC)) {
 					?>
 						<tr>
-							<td><a href="../deck_comment.php?d=<?php echo($deck['id']) ?>"><?php echo($deck['deck_title']) ?></a></td>	
+							<td><a href="<?php echo($main) ?>deck/<?php echo($deck['id']) ?>"><?php echo($deck['deck_title']) ?></a></td>	
 							<td>
 								<?php if ($deck['growth'] == 1) {
 									echo('<i class="icon-growth"></i>');

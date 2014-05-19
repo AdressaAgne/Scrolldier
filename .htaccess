@@ -1,0 +1,19 @@
+ErrorDocument 404 http://scrolldier.com/error/404.php
+ErrorDocument 401 http://scrolldier.com/error/404.php
+ErrorDocument 403 http://scrolldier.com/error/404.php
+
+RewriteEngine on
+RewriteRule ^deck/([^/.]+)/?$ deck_comment.php?d=$1 [L]
+RewriteRule ^editdeck/([^/.]+)/?$ deck_edit.php?d=$1 [L]
+RewriteRule ^decks deck.php [L]
+RewriteRule ^new/deck new_deck.php [L]
+RewriteRule ^logout logout.php [L]
+RewriteRule ^edit/user u/edit.php [L]
+RewriteRule ^new/guild guild/index.php [L]
+RewriteRule ^guilds guild.php [L]
+RewriteRule ^guild/([^/.]+)/?$ guild/g.php?g=$1 [L]
+RewriteRule ^user/([^/.]+)/?$ u/index.php?u=$1 [L]
+
+RewriteRule ^user u/index.php [L]
+RewriteRule ^post/([^/.]+)/?$ spoiler.php?s=$1 [L]
+RewriteRule ^([^/.]+)/?$ index.php [L]

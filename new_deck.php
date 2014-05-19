@@ -58,9 +58,14 @@ if (!isset($_SESSION['username'])) {
 					} else {
 						$comp = 0;
 					}
+					if (isset($_POST['isHidden'])) {
+						$isHidden = 1;
+					} else {
+						$isHidden = 0;
+					}
 					
 				//http://a.scrollsguide.com/deck/load?id=265 CHECK TO THIS LATER
-					$query = $db->prepare("INSERT INTO decks (deck_title, deck_author, growth, energy, tOrder, decay, wild, meta, link, scrolls, text, competative, JSON) VALUES(:deck_title, :deck_author, :growth, :energy, :order, :decay, :wild, :meta, :link, :scrolls, :text, :competative, :JSON)");
+					$query = $db->prepare("INSERT INTO decks (deck_title, deck_author, growth, energy, tOrder, decay, wild, meta, link, scrolls, text, competative, JSON, isHidden) VALUES(:deck_title, :deck_author, :growth, :energy, :order, :decay, :wild, :meta, :link, :scrolls, :text, :competative, :JSON, :isHidden)");
 					
 					$url = "http://a.scrollsguide.com/deck/load?id=".preg_replace("/[^0-9]/","", $_POST['link']);
 					$JSON = file_get_contents($url);
@@ -78,7 +83,8 @@ if (!isset($_SESSION['username'])) {
 							'scrolls' => $scrolls,
 							'text' => $_POST['description'],
 							'competative' => $comp,
-							'JSON' => $JSON
+							'JSON' => $JSON,
+							'isHidden' => $isHidden
 							
 						);
 					
@@ -86,7 +92,7 @@ if (!isset($_SESSION['username'])) {
 					
 					if ($query->execute()) {
 						$_GET['success'] = "Deck Submitted";
-						header("location: deck.php");
+						header("location: ".$main."decks");
 					}
 
 				
@@ -107,14 +113,14 @@ if (!isset($_SESSION['username'])) {
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Scrolls - Alternative Profile Page</title>
-	<link rel="stylesheet" href="css/style.css" />
+	<title>Scrolls - New Deck</title>
+	<link rel="stylesheet" href="<?php echo($main) ?>css/style.css" />
 	<link rel="icon" type="image/png" href="img/bunny.png">
 	<!--[if lt IE 9]>
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
-	<script src="../jquery.js"></script>	 
-	<script src="../plugins/ckeditor/ckeditor.js"></script>	
+	<script src="<?php echo($main) ?>jquery.js"></script>	 
+	<script src="<?php echo($main) ?>plugins/ckeditor/ckeditor.js"></script>	
 </head>
 <body style="padding-bottom: 0px;">
 	<?php include('inc_/menu.php'); ?>
@@ -135,8 +141,7 @@ if (!isset($_SESSION['username'])) {
 			</div>
 			
 			<div class="div-3 div-marign">
-					<label for="deck_link">ScrollsGuide Deckbuilder link</label><br />
-					<p>You only need the last numbers after # <br />scrollsguide.com/deckbuilder/#<span class="color-green">12239</span></p>
+					<label for="deck_link"><a href="http://www.scrollsguide.com/deckbuilder">SG Deckbuilder deck link</a></label><br />
 					<input type="text" class="textbox full" name="link" id="deck_link" value="" placeholder=""/>
 			</div>
 			
@@ -175,8 +180,8 @@ if (!isset($_SESSION['username'])) {
 			<div class="div-3 div-marign">
 				<label>What meta is this deck designed for</label><br />
 				<select name="meta">
-					<option value="0.121.0">0.121.0 (Latest, Test server)</option>
-					<option selected value="0.119.1">0.119.1 (Latest, Main Server)</option>
+					<option selected value="0.121.0">0.121.0 (Latest, Main Server)</option>
+					<option value="0.119.1">0.119.1</option>
 					<option value="0.117">0.117</option>
 					<option value="0.112.2">0.112.2</option>
 					<option value="0.110.5">0.110.5</option>
@@ -187,7 +192,11 @@ if (!isset($_SESSION['username'])) {
  			</div>
  			<div class="div-3">
  				<input type="checkbox" name="comp" id="comp" value="1" />
- 				<label for="comp">Is this a competitive deck? 1600+ Rating</label>
+ 				<label for="comp">Is this a competitive deck? 1600+ Rating (Master Caller)</label>
+ 			</div>
+ 			<div class="div-3">
+ 				<input type="checkbox" name="isHidden" id="isHidden" value="1" />
+ 				<label for="isHidden">Make deck hidden, so only you can see it (Direct link still works for everyone)</label>
  			</div>
  			<div class="div-3">
  				<label for="desc">Write a summary of your deck, how do you play it?</label>

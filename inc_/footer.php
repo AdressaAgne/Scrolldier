@@ -14,7 +14,7 @@
 			<ul>
 				<li><a href="http://scrollsguide.com" target="_blank">Scrollsguide</a></li>
 				<li><a href="http://scrollsdev.tumblr.com/" target="_blank">Scrolls Dev Blog</a></li>
-				<li><a href="http://academy.scrollsguide.com/placeholder/" target="_blank">SG Academy</a></li>
+				<li><a href="http://academy.scrollsguide.com/" target="_blank">SG Academy</a></li>
 				<li><a href="http://scrollstoolbox.com/" target="_blank">ScrollsToolbox</a></li>
 				<li><a href="http://theyseemescrollin.com/" target="_blank">They See Me scrollin</a></li>
 				<li><a href="http://reddit.com/r/scrolls" target="_blank">/r/scrolls</a></li>
@@ -26,8 +26,8 @@
 			<ul>
 				<li><a href="http://<?php echo($linkPre); ?>scrolldier.com/login.php">Login</a></li>
 				<li><a href="http://<?php echo($linkPre); ?>scrolldier.com/">Home</a></li>
-				<li><a href="http://<?php echo($linkPre); ?>scrolldier.com/deck.php">Decks</a></li>
-				<li><a href="http://<?php echo($linkPre); ?>scrolldier.com/guild.php">Guilds</a></li>
+				<li><a href="http://<?php echo($linkPre); ?>scrolldier.com/decks">Decks</a></li>
+				<li><a href="http://<?php echo($linkPre); ?>scrolldier.com/guilds">Guilds</a></li>
 				<li><a href="http://<?php echo($linkPre); ?>scrolldier.com/scrolls.php">Scrolls</a></li>
 			</ul>
 		</div>

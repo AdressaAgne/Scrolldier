@@ -136,7 +136,7 @@
 						<td></td>
 						<td><?php echo($x->getRankName($user['rankID'])) ?></td>
 						
-						<td><a href="../u/?u=<?php echo($user['user_id']) ?>"><?php echo($user['user_id']) ?></a></td>
+						<td><a href="<?php echo($main) ?>user/<?php echo($user['user_id']) ?>"><?php echo($user['user_id']) ?></a></td>
 					</tr>
 					
 					<?php } ?>

@@ -74,15 +74,15 @@
 				
 				<div class="last">
 					<div class="header">
-						<h3><a href="spoiler.php?s=<?php echo($row['id']) ?>"><?php echo($row['header']) ?></a><small><?php if (isset($_SESSION['username']) && ($_SESSION['rank'] == 1 || $_SESSION['username'] == $row['byName']))  { ?>
+						<h3><a href="post/<?php echo($row['id']) ?>"><?php echo($row['header']) ?></a><small><?php if (isset($_SESSION['username']) && ($_SESSION['rank'] == 1 || $_SESSION['username'] == $row['byName']))  { ?>
 								<a class="btn-pagina modern right" href="edit.php?edit=<?php echo($row['id']) ?>">Edit</a>	
 						<?php } ?></small></h3>
-						<small><?php echo($x->ago($row['time'])) ?>, By: <a href="u?u=<?php echo($row['byName']) ?>"><?php echo($row['byName']) ?></a>, (comments: <?php echo($x->totalComments($row['id'])) ?>)</small>
+						<small><?php echo($x->ago($row['time'])) ?>, By: <a href="user/<?php echo($row['byName']) ?>"><?php echo($row['byName']) ?></a>, (comments: <?php echo($x->totalComments($row['id'])) ?>)</small>
 					</div>
 					<div class="news_content">
 						<?php echo($row['html']) ?>
 					</div>
-					<a href="spoiler.php?s=<?php echo($row['id']) ?>" class="modern btn-pagina">Read more</a>
+					<a href="post/<?php echo($row['id']) ?>" class="modern btn-pagina">Read more</a>
 				</div>
 				
 				<?php } ?>

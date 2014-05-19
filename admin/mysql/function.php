@@ -848,9 +848,6 @@ function deckVote($id, $value=true, $user) {
 				$_SESSION['username'] = $row['ign'];
 				$_SESSION['rank'] = $row['rank'];
 				$_SESSION['headID'] = $row['headID'];
-				if (isset($_SESSION['username'])) {
-					header('location:'.$_SERVER['PHP_SELF']);
-				}
 			} else {
 				$_GET['error'] = "Wrong login information";
 				if (isset($_GET['success'])) {
@@ -866,7 +863,11 @@ function deckVote($id, $value=true, $user) {
 	
 	function logout() {
 		unset($_SESSION['username']);
+		unset($_SESSION['rank']);
+		unset($_SESSION['headID']);
 		session_destroy();
+		
+		header("location: index.php");
 	}
 
 	function editPost($id, $header, $html, $by, $isHidden) {
@@ -1025,7 +1026,7 @@ function deckVote($id, $value=true, $user) {
 	       }
 	   
 	       if (!$full) $string = array_slice($string, 0, 1);
-	       return $string ? implode(', ', $string) . ' ago' : 'just now';
+	       return $string ? implode(', ', $string) : 'just now';
 	 }
 	 function dayAgo($datetime)
 	 {

@@ -69,12 +69,12 @@
 						<?php } else { ?>
 							<td></td>
 						<?php } ?>
-						<td><a href="guild/g.php?g=<?php echo($deck['id']) ?>"><?php echo($deck['name']) ?></a></td>
+						<td><a href="guild/<?php echo($deck['id']) ?>"><?php echo($deck['name']) ?></a></td>
 						<td><?php echo($deck['short_name']) ?></td>
 						<td><?php echo($total) ?></td>
 						<td><?php echo($deck['requerd_rating']) ?></td>
 						<td>NaN</td>
-						<td><a href="u/?u=<?php echo($deck['guild_leader']) ?>"><?php echo($deck['guild_leader']) ?></a></td>
+						<td><a href="user/<?php echo($deck['guild_leader']) ?>"><?php echo($deck['guild_leader']) ?></a></td>
 					</tr>
 					
 					<?php } ?>

@@ -5,29 +5,25 @@
 	
 	
 	session_start();
-	if (isset($_GET['logout'])) {
-		$x->logout();
-	}
-	
-	if (isset($_SESSION['username'])) {
-		header('location: index.php');
-	}
 	
 	if (isset($_POST['lign']) && isset($_POST['lpassword'])) {
 		$login = $x->login($_POST['lign'], $_POST['lpassword']);
 		if ($login === 1) {
-			if (isset($_SESSION['lign'])) {
-				if (isset($_GET['re']) && !empty($_GET['re'])) {
-					header('location: '.$_GET['re']);
-				} else {
-					header('location: ../index.php');
-				}
-				
-			}
+			
 		} else {
 			$_GET['error'] = "Wrong login information";
 			unset($_GET['success']);
 		};
+	}
+	
+	if (isset($_SESSION['username'])) {
+		if (isset($_GET['re']) && !empty($_GET['re'])) {
+			$new_url = preg_replace('/&?logout/', '', $_GET['re']);
+			header('location: '.$main.$new_url);
+			
+		} else {
+			header('location: '.$main);
+		}
 	}
  ?>
 
