@@ -23,7 +23,7 @@ if (isset($_POST['submitDeletePost']) && isset($_SESSION['username'])) {
 }
 
 if (isset($_POST['name']) && isset($_POST['submit']) && isset($_POST['comment']) && isset($_SESSION['username'])) {
-	if ($_SESSION['rank'] <= 2) {
+	
 	$query = $db->prepare("INSERT INTO comment (byUser, comment, commentToID, headID) VALUES (:name, :comment, :commentToID, :headID)");
 	$arr = array(
 			'name' => $_POST['name'],
@@ -33,11 +33,7 @@ if (isset($_POST['name']) && isset($_POST['submit']) && isset($_POST['comment'])
 		);
 		
 	$x->arrayBinder($query, $arr);
-	$query->execute();
-	
-	} else {
-		echo("you sneaky little thing!");
-	}			
+	$query->execute();			
 } 
 
 if (isset($_POST['postID']) && !empty($_POST['postID'])) {

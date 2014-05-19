@@ -10,7 +10,7 @@ if (isset($_GET['logout'])) {
 if (!isset($_SESSION['username'])) {
 	header("location: login.php");
 }
-	if (isset($_POST['html']) & !empty($_POST['html'])) {
+	if (isset($_POST['html']) & !empty($_POST['html']) && isset($_SESSION['username']) && $_SESSION['rank'] <= 2) {
 		
 		
 		if (empty($_POST['name'])) {
