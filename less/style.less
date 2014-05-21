@@ -53,6 +53,9 @@
 			background-image: -ms-linear-gradient(top, darken(#26262A, 5%) 0%, darken(#1C1C1F, 5%) 100%);
 			background-image: linear-gradient(to bottom, darken(#26262A, 5%) 0%, darken(#1C1C1F, 5%) 100%);
 		}
+		&.btn-no-margin{
+			margin: 0px !important;
+		}
 	
 }
 
@@ -908,16 +911,37 @@ h4{
 		}
 	}
 }
-.search{
-	width: 100px;
-	border: 1px solid rgba(0, 0, 0, .4);
+.searchbox{
+	& ul li{
+		padding: 0 0px 10px;
+	}
+	& .chooseBox{
+		& ul.typeIcons li{
+			padding-top: 2px;
+		}
+		& ul.typeIcons {
+			margin-right: 10px;
+		}
+	}
+}
+.searchText{
+	width: 70px;
+	border: 1px solid #e7e7e7;
 	height: 20px;
-	border-radius: 3px;
-	padding: 10px 10px;
+	border-radius: 100px 0 0 100px;
+	padding: 12px 7px 11px;
+	background-color: #f8f8f8;
+	color: #222222;
+	-webkit-transition: width .5s ease 0s;
+	-moz-transition: width .5s ease 0s;
+	-ms-transition: width .5s ease 0s;
+	-o-transition: width .5s ease 0s;
+	transition: width .5s ease 0s;
 	
-	background-color: rgba(0, 0, 0, .1);
-	color: #f8f8f8;
-	
+}
+.searchButton{
+	border-radius: 0 100px 100px 0;
+	margin-left: -5px;
 }
 .align-center{
 	text-align: center;
