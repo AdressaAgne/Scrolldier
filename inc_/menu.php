@@ -24,9 +24,9 @@
 					
 					
 					<?php if ($thisPage == "/deck.php") { ?>
-						<li class="active"><a href="<?php echo($main) ?>decks">Decks</a></li>
+						<li class="active"><a href="<?php echo($main) ?>decks/">Decks</a></li>
 					<?php } else { ?>
-						<li><a href="<?php echo($main) ?>decks">Decks</a></li>
+						<li><a href="<?php echo($main) ?>decks/">Decks</a></li>
 					<?php } ?>
 					
 					<?php if ($thisPage == "/guild.php") { ?>

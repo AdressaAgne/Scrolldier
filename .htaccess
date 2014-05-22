@@ -1,12 +1,15 @@
-ErrorDocument 404 http://scrolldier.com/error/404.php
-ErrorDocument 401 http://scrolldier.com/error/404.php
-ErrorDocument 403 http://scrolldier.com/error/404.php
+ErrorDocument 404 /error/404.php
+ErrorDocument 401 /error/404.php
+ErrorDocument 403 /error/404.php
+
+
 
 RewriteEngine on
+
 RewriteRule ^deck/([^/.]+)/?$ deck_comment.php?d=$1 [L]
 RewriteRule ^editdeck/([^/.]+)/?$ deck_edit.php?d=$1 [L]
 
-RewriteRule ^decks/(([0-9]+/)?(/([^/.]+)/(/(order|energy|growth|decay|wild))*/)?)$ deck.php?page=$2&search=$3 [L]
+RewriteRule ^decks/(([0-9]+/)?(([a-zA-Z0-9]+)?(/(order|energy|growth|decay|wild|s|c))*/)?)$ deck.php?page=$2&search=$4&para=$3&SearchType=$6 [L]
 
 RewriteRule ^new/deck new_deck.php [L]
 RewriteRule ^logout logout.php [L]
