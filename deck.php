@@ -56,6 +56,19 @@
 		
 		$ressource = "";
 		$para = $_GET['para'];
+		if (!empty($para)) {
+		
+			if(($pos = strpos($para, '/')) !== false)
+			{
+			   $para = substr($para, $pos + 1);
+			}
+			else
+			{
+			   $para = get_last_word($para);
+			}
+			$para = "/".$para;
+		
+		}
 		
 		if ($_GET['SearchType'] == "c") {
 			$ressource .= " AND (";
@@ -129,7 +142,7 @@
 		if (isset($_GET['search']) && !empty($_GET['search']) && $_GET['search'] != "") {
 		
 			$query = $db->prepare("SELECT * FROM decks
-								   WHERE (deck_title LIKE :search OR deck_author LIKE :search ) ".$ressource."
+								   WHERE (deck_title LIKE :search OR deck_author LIKE :search) ".$ressource."
 								   ORDER BY isHidden DESC,
 								   meta DESC, vote DESC,
 								   time DESC LIMIT :limitStart, :limitEnd");
@@ -140,12 +153,11 @@
 			
 		} else {
 		
-			$query = $db->prepare("SELECT * FROM decks
-								   ORDER BY isHidden DESC,
-								   meta DESC, vote DESC,
-								   time DESC LIMIT :limitStart, :limitEnd");
+		$query = $db->prepare("SELECT * FROM decks
+							   ORDER BY isHidden DESC,
+							   meta DESC, vote DESC,
+							   time DESC LIMIT :limitStart, :limitEnd");
 		}
-		
 		
 		$arr = array(
 				'limitStart' => $start,
@@ -177,6 +189,8 @@
 		<div class="container">
 			<?php if (!empty($_GET['search'])) { ?>
 				<p>The search for: "<?php echo(str_replace('/','',$_GET['search'])) ?>" gave <?php echo($query->rowCount()) ?> results</p>
+				<!--<p><?php echo($para) ?></p>
+				<p><?php echo($ressource) ?></p>-->
 			<?php } ?>
 			<div class="decks div-margin">
 			
@@ -237,7 +251,7 @@
 									  <li>
 									  	<!-- Contains -->
 									  	<input type="radio" <?php if ($_GET['SearchType'] == "c" || empty($_GET['SearchType'])) {echo("checked");} ?> id="typeC" name="searchType" value="c" />
-									  	<label for="typeC">Contains Ressource</label>
+									  	<label for="typeC">Contains Resource</label>
 									  </li>
 								 </ul>
 								</form>
@@ -248,12 +262,12 @@
 				</div>
 				<table>
 					<tr class="modern">
-						<td><a href="?orderBy=vote">Score</a></td>
-						<td width="300px"><a href="?orderBy=name">Name</a></td>
-						<td width="120px"><a href="?orderBy=type">Type</a></td>
-						<td width="50px"><a href="?orderBy=scrolls">Scrolls</a></td>
+						<td>Score</td>
+						<td width="300px">Name</td>
+						<td width="120px">Type</td>
+						<td width="50px">Scrolls</td>
 						<td>Version</td>
-						<td width=""><a href="?orderBy=author">Author</a></td>	
+						<td>Author</td>	
 						<td>Comments</td>
 						<td>Age</td>
 					</tr>

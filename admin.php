@@ -153,7 +153,7 @@ if (isset($_POST['submitRename'])) {
 	 
 	 <div class="indexbg fullScreen">
 	 	<div class="container">
-	 			
+
 	 			<?php if (isset($_SESSION['username']) && ($_SESSION['rank'] <= 2)) { ?>
 	 					<p>Total Accounts: <?php echo($x->totalAccounts()) ?></p> <br />
 	 					

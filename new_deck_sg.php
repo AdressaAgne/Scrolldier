@@ -8,7 +8,7 @@ if (isset($_GET['logout'])) {
 	$x->logout();
 }
 if (!isset($_SESSION['username'])) {
-	header("location: login.php");
+	header("location: ".$main."login.php");
 }
 //preg_replace("/[^0-9]/","",'604-619-5135');
 //FIX http://i.imgur.com/VHQ1OTR.jpg

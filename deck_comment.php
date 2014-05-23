@@ -49,6 +49,107 @@ $arr = array(
 $x->arrayBinder($query, $arr);
 $query->execute();		
 $row = $query->fetch(PDO::FETCH_ASSOC);
+
+
+	$listOfScrolls = array();			
+$json = $row['JSON'];
+$data = json_decode($json, TRUE);
+if ($data['msg'] == "success") { 
+	
+	
+	
+	for ($i = 0; $i < count($data['data']['scrolls']); $i++) {
+	
+		$query = $db->prepare("SELECT * FROM scrollsCard WHERE id=:id");
+		$arr = array(
+				'id' => $data['data']['scrolls'][$i]['id']
+			);
+		
+		$x->arrayBinder($query, $arr);
+		$query->execute();		
+		$card = $query->fetch(PDO::FETCH_ASSOC);
+	  
+	  
+	  	$scrollsCost = 0;
+	  	$scrollType = "";
+	  	
+	  	if (!empty($card['costorder'])) {
+	  		
+	  		$scrollsCost = $card['costorder'];
+	  		$scrollType = "order";
+	  		
+	  	} elseif (!empty($card['costgrowth'])) {
+	  	
+	  		$scrollsCost = $card['costgrowth'];	
+	  		$scrollType = "growth";
+	  		
+	  	} elseif (!empty($card['costenergy'])) {
+	  	
+	  		$scrollsCost = $card['costenergy'];
+	  		$scrollType = "energy";
+	  	
+	  	}elseif (!empty($card['costdecat'])) {
+	  	
+	  		$scrollsCost = $card['costdecay'];
+	  		$scrollType = "decay";
+	  		
+	  	}
+	  
+	  	$singelScroll = array(
+	  		2 => $scrollsCost,
+	  		3 => $card['image'],
+	  		4 => $data['data']['scrolls'][$i]['c'],
+	  		5 => $card['name'],
+	  		6 => $scrollType,
+	  		7 => 0,
+	  		8 => 0,
+	  		9 => $card['description'],
+	  		10 => $card['passiverules_1'],
+	  		11 => $card['passiverules_2'],
+	  		12 => $card['passiverules_3'],
+	  		13 => $card['types'],
+	  		14 => $card['kind'],
+	  		15 => $card['id']
+	  		
+	  	);
+	  
+	  	array_push($listOfScrolls, $singelScroll);
+	  
+	}
+} 
+function my_sort($a,$b) {
+if ($a==$b) return 0;
+   return ($a<$b)?-1:1;
+}
+				
+				
+usort($listOfScrolls, "my_sort");
+
+		
+//Export to plain text	
+$planeTextExport = "";
+$total = 0;
+for ($ex = 0; $ex < count($listOfScrolls); $ex++){
+
+	$cost = $listOfScrolls[$ex][4];
+	$total = $total + $cost;
+	$planeTextExport .= $cost."x ".$listOfScrolls[$ex][5]."\n";
+	$cost = 0;
+}
+$planeTextExport .= "\nTotal: ".$total;
+
+//export to in-game JSON
+$JSONExport = '{"deck":"'.$row['deck_title'].'","author":"'.$row['deck_author'].'","types":[';
+
+for ($ex2 = 0; $ex2 < count($listOfScrolls); $ex2++){
+	for ($i = 0; $i < $listOfScrolls[$ex2][4]; $i++) {
+		$JSONExport .= $listOfScrolls[$ex2][15].",";
+	}
+}
+
+$JSONExport = trim($JSONExport,",");
+$JSONExport .= "]}";
+
 ?>
 
 <!DOCTYPE html>
@@ -81,36 +182,38 @@ $row = $query->fetch(PDO::FETCH_ASSOC);
 						<small><?php echo($x->ago($row['time'])) ?> by <a href="<?php echo($main) ?>user/<?php echo($row['deck_author']) ?>"><?php echo($row['deck_author']) ?></a>, for scrolls version: <?php echo($row['meta']) ?>, with a Score of <?php echo($row['vote']) ?></small>
 					</div>
 					
-					
-					<?php if (isset($_SESSION['username'])) { ?>
-							
-						<div class="div-3 clearfix">
-							<?php if ($x->hasVoted($_SESSION['username'], $row['id'])) { ?>
-							
-								<form method="post" action="" class="left">
-									<input type="hidden" name="VoteUp" value="VoteUp" />
-									<input type="hidden" name="deckID" value="<?php echo($row['id']) ?>" />
-									<input type="submit" class="btn-modern" name="submit" value="Vote Up" />
-								</form>
-								
-								<form method="post" action="" class="left">
-									<input type="hidden" name="VoteDown" value="VoteDown" />
-									<input type="hidden" name="deckID" value="<?php echo($row['id']) ?>" />
-									<input type="submit" class="btn-modern" name="submit" value="Vote Down" />
-								</form>
-							
-							<?php } ?>
-						
-						<?php if ($row['deck_author'] == $_SESSION['username']) { ?>
-							<a href="<?php echo($main) ?>editdeck/<?php echo($row['id']) ?>" class="btn-modern btn-pagina left">edit</a>
-						<?php } ?>
-						</div>
-					<?php } ?>
+
 				</div>
 				
 			<div class="news_wall right">
-				
-					<div class="modern clearfix border-radius-bottom-none">
+				<div class="clearfix">
+				<button class="btn-modern btn-pagina btn-no-margin left" id="btn-Export-submit">Export</button>
+				<?php if (isset($_SESSION['username'])) { ?>
+					<?php if ($row['deck_author'] == $_SESSION['username']) { ?>
+					<a href="<?php echo($main) ?>editdeck/<?php echo($row['id']) ?>" class="btn-modern btn-pagina btn-no-margin left">edit</a>
+					<?php } ?>
+						<?php if ($x->hasVoted($_SESSION['username'], $row['id'])) { ?>
+						
+							<form method="post" action="" class="left">
+								<input type="hidden" name="VoteUp" value="VoteUp" />
+								<input type="hidden" name="deckID" value="<?php echo($row['id']) ?>" />
+								<input type="submit" class="btn-modern btn-pagina btn-no-margin" name="submit" value="Vote Up" />
+							</form>
+							
+							<form method="post" action="" class="left">
+								<input type="hidden" name="VoteDown" value="VoteDown" />
+								<input type="hidden" name="deckID" value="<?php echo($row['id']) ?>" />
+								<input type="submit" class="btn-modern btn-pagina btn-no-margin" name="submit" value="Vote Down" />
+							</form>
+						
+						<?php } ?>
+				<?php } ?>
+						<div class="modern left clearfix export" id="export">
+							<textarea class="exportBox" rows="10" disabled><?php echo($planeTextExport) ?></textarea>
+							<input type="text" class="exportBox" disabled name="" value='<?php echo($JSONExport) ?>' />
+						</div>
+					</div>
+					<div class="modern clearfix">
 						  <div class="left">
 							<?php if ($row['growth'] == 1) {
 								echo('<i class="icon-growth"></i>');
@@ -142,105 +245,20 @@ $row = $query->fetch(PDO::FETCH_ASSOC);
 				
 				<?php include("inc_/curve.php"); ?>
 				<?php echo(addBigColoredCurve($row['id'])); ?>
-				<?php 
-				
-				$json = $row['JSON'];
-				$data = json_decode($json, TRUE);
-				if ($data['msg'] == "success") { 
-					
-					$curve = array(
-						1 => intval(0),
-						2 => intval(0),
-						3 => intval(0),
-						4 => intval(0),
-						5 => intval(0),
-						6 => intval(0),
-						7 => intval(0),
-						8 => intval(0),
-						9 => intval(0),
-						10 => intval(0),
-						11 => intval(0),
-						12 => intval(0),
-						13 => intval(0)
-					);
-					$listOfScrolls = array();
-					
-					for ($i = 0; $i < count($data['data']['scrolls']); $i++) {
-					
-						$query = $db->prepare("SELECT * FROM scrollsCard WHERE id=:id");
-						$arr = array(
-								'id' => $data['data']['scrolls'][$i]['id']
-							);
-						
-						$x->arrayBinder($query, $arr);
-						$query->execute();		
-						$card = $query->fetch(PDO::FETCH_ASSOC);
-					  
-					  	$singelScroll = array(
-					  		2 => $card['name'],
-					  		3 => $card['image'],
-					  		4 => $data['data']['scrolls'][$i]['c'],
-					  		5 => $card['costorder'],
-					  		6 => $card['costgrowth'],
-					  		7 => $card['costdecay'],
-					  		8 => $card['costenergy'],
-					  		9 => $card['description'],
-					  		10 => $card['passiverules_1'],
-					  		11 => $card['passiverules_2'],
-					  		12 => $card['passiverules_3'],
-					  		13 => $card['types'],
-					  		14 => $card['kind']
-					  		
-					  	);
-					  
-					  	array_push($listOfScrolls, $singelScroll);
-					  
-					 	if ($card['rarity'] == 0) {
-					 		$scrollClass = "mR";
-					 	}
-					 	if ($card['rarity'] == 1) {
-					 		$scrollClass = "mR";
-					 	}
-					 	if ($card['rarity'] == 2) {
-					 		$scrollClass = "mR";
-					 	}
-					}
-				} 
-				function my_sort($a,$b)
-				{
-				if ($a==$b) return 0;
-				   return ($a<$b)?-1:1;
-				}
-				
-				
-				usort($listOfScrolls, "my_sort");
-
-				?>
 					
 
 					<?php for ($j = 0; $j < count($listOfScrolls); $j++) { ?>
 						
 				<div class="clearfix" id="ScrollsNr<?php echo($listOfScrolls[$j][3]); ?>">
-					<div id="" class="deckScrollList <?php echo($scrollClass) ?> " style="overflow: hidden;"> 
+					<div id="" class="deckScrollList mR " style="overflow: hidden;"> 
 						 <span class="left">
-						 <?php if (!empty($listOfScrolls[$j][5])) { ?>
-							<span class="resource"><i class="icon-order small"></i><?php echo($listOfScrolls[$j][5]) ?></span>
-						<?php } ?>
-						<?php if (!empty($listOfScrolls[$j][6])) { ?>
-							<span class="resource"><i class="icon-growth small"></i><?php echo($listOfScrolls[$j][6]) ?></span>
-						<?php } ?>
-						<?php if (!empty($listOfScrolls[$j][7])) { ?>
-							<span class="resource"><i class="icon-decay small"></i><?php echo($listOfScrolls[$j][7]) ?></span>
-						<?php } ?>
-						<?php if (!empty($listOfScrolls[$j][8])) { ?>
-							<span class="resource"><i class="icon-energy small"></i><?php echo($listOfScrolls[$j][8]) ?></span>
-						<?php } ?>
+							<span class="resource"><i class="icon-<?php echo($listOfScrolls[$j][6]) ?> small"></i><?php echo($listOfScrolls[$j][2]) ?></span>
 						</span>
 						
-						<span class="left"><?php echo($listOfScrolls[$j][2]); ?></span>
+						<span class="left"><?php echo($listOfScrolls[$j][5]); ?></span>
 
 						<span class="right">
-							<a href="<?php echo($main) ?>resources/cardImages/<?php echo($listOfScrolls[$j][3]) ?>.png" data-title="<?php echo($listOfScrolls[$j][2]); ?>, x<?php echo($listOfScrolls[$j][4]); ?>" data-lightbox="Scrolls"><img class="listScroll" src="<?php echo($main) ?>resources/cardImages/<?php echo($listOfScrolls[$j][3]) ?>.png" alt="" /></a>
+							<a href="<?php echo($main) ?>resources/cardImages/<?php echo($listOfScrolls[$j][3]) ?>.png" data-title="<?php echo($listOfScrolls[$j][5]); ?>, x<?php echo($listOfScrolls[$j][4]); ?>" data-lightbox="Scrolls"><img class="listScroll" src="<?php echo($main) ?>resources/cardImages/<?php echo($listOfScrolls[$j][3]) ?>.png" alt="" /></a>
 						</span>
 						
 						<span class="right" style="margin-right: 20px;">x<?php echo($listOfScrolls[$j][4]); ?></span>
@@ -359,7 +377,6 @@ $row = $query->fetch(PDO::FETCH_ASSOC);
 		</div>
 	</div>
 	<?php include("inc_/footer.php"); ?>
-	
 	<script>
 	$(function() {
 
@@ -367,6 +384,10 @@ $row = $query->fetch(PDO::FETCH_ASSOC);
 		$(this).find("div").next("div").toggle();
 	});
 	
+	
+	$("#btn-Export-submit").click(function() {
+		$("#export").toggle();
+	});
 	});
 	
 	</script>
