@@ -17,7 +17,6 @@ if (!isset($_SESSION['username'])) {
 //preg_replace("/[^0-9]/","",'604-619-5135');
 //FIX http://i.imgur.com/VHQ1OTR.jpg
 	if (isset($_POST['deckSubmit']) && !empty($_POST['deckSubmit'])) {
-		if (!empty($_POST['title'])) {
 			if (!empty($_POST['link'])) {
 				
 				if (!empty($_POST['scrolls'])) {
@@ -69,47 +68,40 @@ if (!isset($_SESSION['username'])) {
 					}
 					
 				//http://a.scrollsguide.com/deck/load?id=265 CHECK TO THIS LATER
-					$query = $db->prepare("INSERT INTO decks (deck_title, deck_author, growth, energy, tOrder, decay, wild, meta, scrolls, text, competative, JSON, isHidden) VALUES(:deck_title, :deck_author, :growth, :energy, :order, :decay, :wild, :meta, :scrolls, :text, :competative, :JSON, :isHidden)");
+				    $query = $db->prepare("INSERT INTO decks (deck_title, deck_author, growth, energy, tOrder, decay, wild, meta, scrolls, text, competative, JSON, isHidden) VALUES(:deck_title, :deck_author, :growth, :energy, :order, :decay, :wild, :meta, :scrolls, :text, :competative, :JSON, :isHidden)");
+				
+					$json = $_POST['link'];	
+					$data = json_decode($json, TRUE);
 					
-						$json = $_POST['link'];	
-						$data = json_decode($json, TRUE);
+					$duplicate = "";
+					$phpArray = array(
+						"msg" => "success",
+						"data" => array(
+							"scrolls" =>array_unique(array()),
+							"name" => $data['deck'],
+							"deleted" => 0,
+							"resources" => array("growth")
+						),
+						"apiversion" => 1
 						
-						$duplicate = "";
-						$phpArray = array(
-							"msg" => "success",
-							"data" => array(
-								"scrolls" => array(),
-								"name" => $data['deck'],
-								"deleted" => 0,
-								"resources" => array("growth")
-							),
-							"apiversion" => 1
-							
-						);
-						for ($i = 0; $i < count($data['types']);) {
-							if (!isset($phpArray['data']['scrolls'][$i]['id'][$data['types'][$i]])) {
-//								$duplicate .= "%".$data['types'][$i];
-								
-								$count = array_count_values($data['types']);
-								array_push($phpArray['data']['scrolls'], array("id" => $data['types'][$i], "c" => $count[$data['types'][$i]]));
-							}
-							$i++;
-						}
+					);
+				
+					for ($i = 0; $i < count($data['types']); $i++) {
+							$count = array_count_values($data['types']);
+							$toInsert = array(
+							        "id" => $data['types'][$i],
+							        "c" => $count[$data['types'][$i]]
+							);
+							array_push($phpArray['data']["scrolls"], $toInsert);
+					}
+					$phpArray['data']['scrolls'] = array_map("unserialize", array_unique(array_map("serialize", $phpArray['data']['scrolls'])));
+					$phpArray['data']['scrolls'] = array_values($phpArray['data']['scrolls']);
 					
-					
-					 ?>
-					<pre>
-						<?php echo(print_r($data)) ?>
-					</pre>
-					<pre>
-						<?php echo(print_r($phpArray)) ?>
-					</pre>
-					<?php
 
 					$data2 = json_encode($phpArray);
 					
 					$arr = array(
-							'deck_title' => $_POST['title'],
+							'deck_title' => $data['deck'],
 							'deck_author' => $_SESSION['username'],
 							'growth' => $growth,
 							'energy' => $energy,
@@ -137,10 +129,6 @@ if (!isset($_SESSION['username'])) {
 			} else {
 				$_GET['info'] = "Enter a Deck Link";
 			}
-			
-		} else {
-			$_GET['info'] = "Enter a Deck title";
-		}
 	}
 
 //vars; title, scrolls, link, type_order, type_energy, type_growth, type_decay, type_wild, meta
@@ -167,11 +155,6 @@ if (!isset($_SESSION['username'])) {
  			<p>Don't post a deck that you found or have not made yourself. When you are posting it will show up in your name!</p>
  		</div>
  		<form method="post" class="div-marign" action="">
- 			<div class="div-3 div-marign">
- 				<label for="deck_title">Deck Title</label><br />
- 				<input type="text" class="textbox full" name="title" id="deck_title" value="" />
- 			</div>
- 			
  			<div class="div-3 div-marign">
  				<label for="deck_scrolls">Total Scrolls in deck</label><br />
  				<input type="text" class="textbox full" name="scrolls" id="deck_scrolls" value="50" placeholder="50"/>
