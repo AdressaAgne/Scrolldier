@@ -11,7 +11,7 @@
 		if ($login === 1) {
 			
 		} else {
-			$_GET['error'] = "Wrong login information";
+			$_GET['error'] = "Wrong login information<br />Forgot password? click <a href='".$main."reset.php'>here</a>";
 			unset($_GET['success']);
 		};
 	}
@@ -44,6 +44,9 @@
 	
 	<div class="loginContainer modern clearfix">
 		<h1>Login</h1>
+		<?php if (isset($_GET['error'])) {
+			echo("<span class='color-red'>".$_GET['error']."</span>");
+		} ?>
 		<form method="post" action="">
 			<div class="div-1 div-margin">
 				<label for="ign">In Game Name</label><br />

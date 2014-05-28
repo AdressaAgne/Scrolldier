@@ -12,14 +12,18 @@ if (!isset($_SESSION['username'])) {
 }
 
 
+
 if(isset($_POST['submitScrolls']))  {
 
 	$url = "http://a.scrollsguide.com/scrolls";
 	$json = file_get_contents($url);
 	$data = json_decode($json, TRUE);
 	if ($data['msg'] == "success") { 
-
-		for ($i = 0; $i < count($data['data']); $i++) {			
+	$empty = $db->prepare("DELETE FROM scrollsCard");
+		if ($empty->execute()) {
+		for ($i = 0; $i < count($data['data']); $i++) {	
+			
+				
 			$query = $db->prepare("INSERT INTO scrollsCard
 
 			(id, name, description, kind, types, costgrowth, costorder, costenergy, costdecay, ap, ac, hp, flavor, rarity,
@@ -67,9 +71,9 @@ if(isset($_POST['submitScrolls']))  {
 				$anim1 = NULL;
 			}
 			if (isset($data['data'][$i]['anim']['bottom'])) {
-				$anim4 = $data['data'][$i]['anim']['bottom'];
+				$anim3 = $data['data'][$i]['anim']['bottom'];
 			} else {
-				$anim4 = NULL;
+				$anim3 = NULL;
 			}
 			
 			
@@ -106,12 +110,11 @@ if(isset($_POST['submitScrolls']))  {
 			
 			$x->arrayBinder($query, $arr);
 			
-			if ($query->execute()) {
-				
-			}
-			
+				if ($query->execute()) {
+					
+				}
 		}
-	
+	}
 	}
 
 }
@@ -139,10 +142,10 @@ if (isset($_POST['submitRename'])) {
 	<meta charset="utf-8">
 	<title>Scrolls - Alternative Profile Page</title>
 	<link rel="stylesheet" href="css/style.css" />
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
 	<link rel="icon" type="image/png" href="img/bunny.png">
 	<!--[if lt IE 9]>
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
 	<![endif]-->
 	<script src="../jquery.js"></script>	 
 	<script src="../plugins/ckeditor/ckeditor.js"></script>	
@@ -184,12 +187,28 @@ if (isset($_POST['submitRename'])) {
 	 					
 	 				</div>
 	 			
+	 			
+	 				<div class="div-3">
+	 				<h2>Password resets:</h2>
+	 					<ul>
+	 					<?php $query = $db->prepare("SELECT * FROM resets ORDER BY id DESC");	
+	 					$query->execute();
+	 					
+	 					while ($row = $query->fetch(PDO::FETCH_ASSOC)) { ?>
+	 					
+	 						<li>mail: <?php echo($row['mail']) ?>, Username: <?php echo($row['ign']) ?>, IP: <?php echo($row['ip']) ?></li>
+	 					
+	 					<?php } ?>
+	 				</ul>
+	 				
+	 				</div>
+	 			
 	 			</div>
-	 			
-	 			
-	 			
-	 			
-	 			
+
+				
+			
+			
+
 	 			<?php } else { ?>
 	 				<div class="scrollsHardBack">
 	 					<p>No access!</p>

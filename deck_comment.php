@@ -51,7 +51,29 @@ $query->execute();
 $row = $query->fetch(PDO::FETCH_ASSOC);
 
 
-	$listOfScrolls = array();			
+if (isset($_POST['submitDelete'])) {
+	
+	
+	$query = $db->prepare("DELETE FROM decks where id = :id AND deck_author = :ign");
+	$arr = array(
+			'id' => $row['id']
+		);
+	
+	$x->arrayBinderINT($query, $arr);
+	$arr = array(
+			'ign' => $_SESSION['username']
+		);
+	
+	$x->arrayBinder($query, $arr);
+	
+	if ($query->execute()) {
+		header("location: ".$main."decks/");
+	}
+	
+		
+}
+
+$listOfScrolls = array();			
 $json = $row['JSON'];
 $data = json_decode($json, TRUE);
 if ($data['msg'] == "success") { 
@@ -191,6 +213,11 @@ $JSONExport .= "]}";
 				<?php if (isset($_SESSION['username'])) { ?>
 					<?php if ($row['deck_author'] == $_SESSION['username']) { ?>
 					<a href="<?php echo($main) ?>editdeck/<?php echo($row['id']) ?>" class="btn-modern btn-pagina btn-no-margin left">edit</a>
+					
+					<form method="post" action="" class="left">
+						<input type="submit" class="btn-modern btn-pagina btn-no-margin" name="submitDelete" value="Delete" />
+					</form>
+					
 					<?php } ?>
 						<?php if ($x->hasVoted($_SESSION['username'], $row['id'])) { ?>
 						

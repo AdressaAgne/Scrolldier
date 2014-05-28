@@ -8,7 +8,7 @@ if (isset($_GET['logout'])) {
 }
 if (isset($_POST['submit'])) {
 
-	$query = $db->prepare("UPDATE decks SET text=:html, deck_title=:deck_title, isHidden=:isHidden WHERE id=:id");
+	$query = $db->prepare("UPDATE decks SET text=:html, deck_title=:deck_title, isHidden=:isHidden, meta=:meta WHERE id=:id");
 	if (isset($_POST['isHidden'])) {
 		$isHidden = 1;
 	} else {
@@ -18,6 +18,7 @@ if (isset($_POST['submit'])) {
 			'html' => $_POST['html'],
 			'isHidden' => $isHidden,
 			'deck_title' => $_POST['deck_title'],
+			'meta' => $_POST['meta'],
 			'id' => $_GET['d']
 		); 
 	
@@ -271,6 +272,21 @@ if ($row['deck_author'] != $_SESSION['username']) {
 								<input type="checkbox" name="isHidden" id="isHidden" value="1" />
 							<?php } ?>
 							<label for="isHidden">Make deck hidden, so only you can see it (Direct link still works for everyone)</label>
+						</div>
+						<div class="div-4">
+							<label>Change Game version for deck</label><br />
+							<select name="meta">
+								<option selected="selected" value="<?php echo($row['meta']) ?>"><?php echo($row['meta']) ?></option>
+								<option value="0.122.0">0.122.0 (Latest, Test Server)</option>
+								<option value="0.121.0">0.121.0 (Latest, Main Server)</option>
+								<option value="0.119.1">0.119.1</option>
+								<option value="0.117">0.117</option>
+								<option value="0.112.2">0.112.2</option>
+								<option value="0.110.5">0.110.5</option>
+								<option value="0.105">0.105</option>
+								<option value="0.103">0.103</option>
+								<option value="0.97">0.97</option>
+							</select>
 						</div>
 						<div class="div-4">
 							<textarea class="ckeditor" name="html"><?php echo($row['text']) ?></textarea>

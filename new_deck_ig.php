@@ -95,6 +95,10 @@ if (!isset($_SESSION['username'])) {
 
 					$data2 = json_encode($phpArray);
 					
+					if (empty($data['deck'])) {
+						$data['deck'] = "Unknown";
+					}
+					
 					$arr = array(
 							'deck_title' => $data['deck'],
 							'deck_author' => $_SESSION['username'],
@@ -154,7 +158,9 @@ if (!isset($_SESSION['username'])) {
 			<div class="div-3 div-marign">
 					<label for="deck_link">In-Game export text (JSON string)</label><br />
 					<input type="text" class="textbox full" name="link" id="deck_link" value='<?php if (isset($_GET["json"])) {
-						echo($_GET["json"]);
+						$JSONoutput = str_replace("'", "&#39;", $_GET["json"]);
+						$JSONoutput = str_replace("\"", "&#34;", $JSONoutput);
+						echo($JSONoutput);
 					} ?>' placeholder=""/>
 			</div>
 			
