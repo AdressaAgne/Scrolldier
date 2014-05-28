@@ -100,10 +100,17 @@
 			<ul>
 				<div class="avatar">
 					
-					<?php if (file_exists('resources/head_'.$_SESSION['headID'].'.png')) { ?>
-						<img src="<?php echo($main) ?>resources/head_<?php echo($_SESSION['headID']) ?>.png" width="200px" alt="" />
-					<?php } elseif (file_exists('../resources/head_'.$_SESSION['headID'].'.png')) { ?>
-						<img src="<?php echo($main) ?>resources/head_<?php echo($_SESSION['headID']) ?>.png" width="200px" alt="" />
+					<?php if (file_exists('resources/head_'.$_SESSION['headID'].'.png') || file_exists('../resources/head_'.$_SESSION['headID'].'.png')) { ?>
+						
+						
+						
+						<?php if ($_SESSION['headID'] == 194) { ?>
+							<img style="margin-top: 15px;" src="<?php echo($main) ?>resources/head_<?php echo($_SESSION['headID']) ?>.png" width="200px" alt="" />
+						<?php } else { ?>
+							<img src="<?php echo($main) ?>resources/head_<?php echo($_SESSION['headID']) ?>.png" width="200px" alt="" />
+						<?php } ?>
+						
+				
 					<?php } else {
 						$_GET['w'] = 'Could not find in game head! Contact <a href="mailto:support@scrolldier.com">support@scrolldier.com</a> for help';
 					 } ?>

@@ -67,6 +67,7 @@ if (isset($_POST['submitInvite'])) {
 	<?php include('../inc_/menu.php') ?>
 	<div class="body" id="blog">
 		<div class="container">
+			<p>Temporary profile design</p>
 			<div class="scrolls div-first">
 				<div class="avatar">
 					<img src="<?php echo($main) ?>resources/head_<?php echo($user['headID']) ?>.png" width="300px" style="margin-left: -50px; margin-top: -20px;" alt="" />
@@ -86,7 +87,7 @@ if (isset($_POST['submitInvite'])) {
 					<img src="<?php echo($userGuild['badge_url']) ?>" alt="" />
 				<?php } ?>
 				<?php if (strtolower($_GET['u']) == strtolower($_SESSION['username'])) { ?>
-					<small class="right modern btn-pagina"><a href="<?php echo($main) ?>user/edit">Edit Profile</a></small>
+					<small class="right modern btn-pagina"><a href="<?php echo($main) ?>edit/user">Edit Profile</a></small>
 				<?php } ?>
 				
 				<?php if (isset($guild) && $guild['guild_leader'] == $_SESSION['username'] && $x->hasGuild($user['ign'])) { ?>

@@ -30,7 +30,7 @@ if (!isset($_SESSION['username'])) {
 </head>
 <body style="padding-bottom: 0px;">	 
  	<div class="container">
- 		
+ 		<?php include('inc_/menu.php') ?>
  		<div class="wall_big clearfix">
  <!-- 		Scrolls search	-->		
  		<div class="modern clearfix">
@@ -60,7 +60,7 @@ if (!isset($_SESSION['username'])) {
 		 		</div>
  			</div>
  			<div class="div-4">
- 				<p>Filters: t:, c:, d:, ap:, ac:, hp:</p>
+ 				<p>Filters: t:, c:, d:, ap:, cd:, hp:</p>
  			</div>
  		</div>
  
@@ -204,6 +204,7 @@ if (!isset($_SESSION['username'])) {
  		</div>
  		
  	</div>
+ 	<?php include('inc_/footer.php') ?>
  <script>
  $(function() {
  	var finalJSON = "";

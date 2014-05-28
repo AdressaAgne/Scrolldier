@@ -62,7 +62,7 @@
 	
 	if (isset($_POST['changeHead']) && !empty($_POST['changeHead'])) {
 		if ($x->updatePlayerHead($row['ign'])) {
-			$_GET['success'] = "Head successfully updated";
+			$_GET['success'] = "Head successfully updated, too see your new head please relog";
 		}
 	}
 	
