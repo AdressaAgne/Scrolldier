@@ -482,12 +482,87 @@ label{
 	width: 526.666666666px;
 	margin: 5px;
 }
+.div-full-choose{
+	float: left;
+	width: 515px;
+	margin: 5px;
+}
 .div-margin{
 	margin: 5px;
+}
+.img-margin{
+	margin: 1px;
+	width: 110px;
+	height: 85.125px;
+	cursor: pointer;
+	background-size: 100% 100%;
+}
+#scroll-ap, #scroll-ac, #scroll-hp{
+	position: absolute;
+	float: left;
+	top: 20px;
+	font-size: 40px !important;
+}
+
+#scroll-ap{
+	left: 70px;
+}
+#scroll-ac{
+	left: 160px;
+}
+#scroll-hp{
+	left: 248px;
+}
+
+
+.scrolls_statsbar{
+	position: absolute;
+	float: left;
+	clear: left;
+	width: 300px;
+	height: 75px;
+	background-image: url(../img/scrolls_statsbar.png);
+	background-size: 100% 100%;
+	bottom: 5px;
+	left: 20px;
+}
+
+.deckbuilderContainer{
+	height: 600px;
+	overflow-y: scroll;
+	
+}
+& #scroll:hover #scroll-top-name{
+	background-color: rgba(0, 0, 0, .4);
+}
+#scroll-top-name{
+	word-break: keep-all;
+	text-align: center;
+	text-shadow: 0 1px #000000;
+}
+.scrollLibraryAbout{
+	position: relative;
+	font-size: 14px;
+	height: 230px;
+	& ul li{
+		list-style: none;
+		margin: 0px;
+	
+}
+	& .div-4{
+		float: left;
+		width: 100%;
+		margin: 1px 0px;
+	}
+	
+}
+#scroll-cost{
+	margin-right: 5px;
 }
 .div-bottom{
 	border-bottom: 1px solid #333;
 	padding-bottom: 10px;
+	
 }
 .test{
 	background-color: #ef7474;
@@ -527,7 +602,11 @@ label{
 	float: left;
 	width: 100%;
 	margin: 5px;
+	&.div-no-margin{
+		margin: 0px;
+	}
 }
+
 .div-submit{
 	margin-left: 10px;
 }
@@ -541,6 +620,18 @@ p{
 		color: darken(#e4dabd, 10%) !important;
 	}
 }
+
+.wall_small{
+	width: 340px;
+	float: left;
+	margin-left: 5px;
+}
+.wall_big{
+	width: 605px;
+	float: left;
+	margin-left: 5px;
+}
+
 .container{
 	width: 960px;
 	margin: 50px auto;
@@ -1006,6 +1097,33 @@ i[class^='icon-']{
 }
 i.icon-order{
 	background-image: url('../img/o.png');
+}
+
+
+i.icon-import{
+	width: 32px;
+	height: 32px;
+	background-size: 32px 32px;
+	margin-bottom: -10px;
+	background-image: url('../img/import.png');
+}
+i.icon-sg{
+	width: 200px;
+	height: 46.590909px;
+	background-size: 200px 46.590909px;
+	margin-left: -10px;
+	margin-bottom: 6px;
+	margin-top: 13px;
+	background-image: url('../img/sgLogo.png');
+}
+
+i.icon-scrollsLogo{
+	width: 200px;
+	height: 68px;
+	background-size: 200px 68px;
+	margin-left: -15px;
+	margin-bottom: -5px;
+	background-image: url('../img/scrolls_logo.png');
 }
 i.icon-growth{
 	background-image: url('../img/g.png');
