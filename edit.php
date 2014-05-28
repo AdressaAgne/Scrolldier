@@ -83,7 +83,7 @@ if (!isset($_SESSION['username'])) {
 							<label for="isHidden">Make post hidden</label>
 						</div>
 						<div class="div-4">
-							<textarea class="ckeditor" name="html"><?php echo($row['html']) ?></textarea>
+							<textarea class="ckeditor" id="editor" name="html"><?php echo($row['html']) ?></textarea>
 						</div>
 						<div class="div-3">
 							<input type="hidden" name="name" value="<?php echo($row['byName']) ?>" placeholder="User" />

@@ -315,10 +315,10 @@
 						<?php if ($p['allow_edit_desc'] == 1 || $isGuildLeader == true) { ?>
 						<div class="div-4">
 							<div class="div-3 div-margin">
-								<label for="gd">Guild Description</label>
+								<label for="editor">Guild Description</label>
 							</div>
 							<div class="div-4">
-								<textarea class="ckeditor" id="gd" name="desciption"><?php echo($g['desciption']) ?></textarea>
+								<textarea class="ckeditor" id="editor" name="desciption"><?php echo($g['desciption']) ?></textarea>
 							</div>
 						</div>
 						<?php } ?>

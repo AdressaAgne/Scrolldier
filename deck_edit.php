@@ -289,7 +289,7 @@ if ($row['deck_author'] != $_SESSION['username']) {
 							</select>
 						</div>
 						<div class="div-4">
-							<textarea class="ckeditor" name="html"><?php echo($row['text']) ?></textarea>
+							<textarea class="ckeditor" id="editor" name="html"><?php echo($row['text']) ?></textarea>
 						</div>
 						<div class="div-4">
 							<input type="submit" name="submit" value="Save" class="btn-modern" />
