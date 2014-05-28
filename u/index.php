@@ -86,7 +86,7 @@ if (isset($_POST['submitInvite'])) {
 					<img src="<?php echo($userGuild['badge_url']) ?>" alt="" />
 				<?php } ?>
 				<?php if (strtolower($_GET['u']) == strtolower($_SESSION['username'])) { ?>
-					<small class="right modern btn-pagina"><a href="<?php echo($main) ?>edit">Edit Profile</a></small>
+					<small class="right modern btn-pagina"><a href="<?php echo($main) ?>user/edit">Edit Profile</a></small>
 				<?php } ?>
 				
 				<?php if (isset($guild) && $guild['guild_leader'] == $_SESSION['username'] && $x->hasGuild($user['ign'])) { ?>

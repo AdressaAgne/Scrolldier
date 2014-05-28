@@ -88,7 +88,7 @@ if ($data['msg'] == "success") {
 	  		$scrollsCost = $card['costenergy'];
 	  		$scrollType = "energy";
 	  	
-	  	}elseif (!empty($card['costdecat'])) {
+	  	}elseif (!empty($card['costdecay'])) {
 	  	
 	  		$scrollsCost = $card['costdecay'];
 	  		$scrollType = "decay";

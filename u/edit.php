@@ -17,7 +17,7 @@
 	$arr = array(
 			'ign' => $_SESSION['username']
 		);
-	$x->arrayBinderInt($query, $arr);
+	$x->arrayBinder($query, $arr);
 		
 	$query->execute();
 	

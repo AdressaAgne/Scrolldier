@@ -115,6 +115,7 @@ if (!isset($_SESSION['username'])) {
 	<meta charset="utf-8">
 	<title>Scrolls - New Deck</title>
 	<link rel="stylesheet" href="<?php echo($main) ?>css/style.css" />
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
 	<link rel="icon" type="image/png" href="img/bunny.png">
 	<!--[if lt IE 9]>
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -180,6 +181,7 @@ if (!isset($_SESSION['username'])) {
 			<div class="div-3 div-marign">
 				<label>What meta is this deck designed for</label><br />
 				<select name="meta">
+					<option  value="0.122.0">0.122.0 (Latest, Test Server)</option>
 					<option selected value="0.121.0">0.121.0 (Latest, Main Server)</option>
 					<option value="0.119.1">0.119.1</option>
 					<option value="0.117">0.117</option>

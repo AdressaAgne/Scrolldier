@@ -85,6 +85,35 @@
 							//execute Query
 							if ($aQuery->execute()) {
 								$_GET['success'] .= 'Account Registred<br/>';
+								try {
+								    	$from = "noreply@scrolldier.com";
+								    	$subject = "Scrolldier.com Mail Confirme";
+								      	$to = $mail;
+								      
+								      $message = "<div style=\"padding:10px;height:100%;width:100%;display:block;color:#222222;\">
+								      	<img src='http://scrolldier.com/img/Scrolldier.png' style=\"width: 200px;\" />
+								      	<h2>Confirm Your Mail</h2>
+								      	<p>Your new key to confirm your mail: ".$key."</p>
+								      	<p>Click this link to confirm: <br />
+								      	<a href='".$main."confirm.php?c=".$key."'>".$main."confirm.php?c=".$key."</a></p>
+								      
+								      	<p>Thank you so much for joining Scrolldier.com, All feedback is appreciated.</p>
+								      	<p>Feedback can be sent to <a href='mailto:support@scrolldier.com'>support@scrolldier.com</a>.</p>
+								      	
+								      	<p>-Orangee @ Scrolldier.com</p>
+								      </div>";
+								      
+								      
+								      $headers = "MIME-Version: 1.0\r\n";
+								      $headers .= "Content-type: text/html; charset=iso-8859-1". "\r\n";
+								      $headers  .= "From: $from\r\n";
+								      
+								      if (mail($to, $subject, $message, $headers)) {
+								      	
+								   	  }
+								} catch (PDOException $e) {
+									echo($e);
+								}
 							}
 							} else {
 								$_GET['info'] .= 'In Game Name already used <br/>';
