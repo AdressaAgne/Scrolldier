@@ -18,12 +18,6 @@ if (!isset($_SESSION['username'])) {
 //FIX http://i.imgur.com/VHQ1OTR.jpg
 	if (isset($_POST['deckSubmit']) && !empty($_POST['deckSubmit'])) {
 			if (!empty($_POST['link'])) {
-				
-				if (!empty($_POST['scrolls'])) {
-					$scrolls = $_POST['scrolls'];
-				} else {
-					$scrolls = 50;
-				}
 					
 					if (empty($_SESSION['username'])) {
 						$_SESSION['username'] = $_POST['deck_author'];
@@ -85,7 +79,7 @@ if (!isset($_SESSION['username'])) {
 						"apiversion" => 1
 						
 					);
-				
+					$total = 0;
 					for ($i = 0; $i < count($data['types']); $i++) {
 							$count = array_count_values($data['types']);
 							$toInsert = array(
@@ -93,6 +87,7 @@ if (!isset($_SESSION['username'])) {
 							        "c" => $count[$data['types'][$i]]
 							);
 							array_push($phpArray['data']["scrolls"], $toInsert);
+							$total++;
 					}
 					$phpArray['data']['scrolls'] = array_map("unserialize", array_unique(array_map("serialize", $phpArray['data']['scrolls'])));
 					$phpArray['data']['scrolls'] = array_values($phpArray['data']['scrolls']);
@@ -109,7 +104,7 @@ if (!isset($_SESSION['username'])) {
 							'decay' => $decay,
 							'wild' => $wild,
 							'meta' => $_POST['meta'],
-							'scrolls' => $scrolls,
+							'scrolls' => $total,
 							'text' => $_POST['description'],
 							'competative' => $comp,
 							'JSON' => $data2,
@@ -140,6 +135,7 @@ if (!isset($_SESSION['username'])) {
 	<meta charset="utf-8">
 	<title>Scrolls - New Deck</title>
 	<link rel="stylesheet" href="<?php echo($main) ?>css/style.css" />
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
 	<link rel="icon" type="image/png" href="img/bunny.png">
 	<!--[if lt IE 9]>
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -154,15 +150,12 @@ if (!isset($_SESSION['username'])) {
  		<div class="div-3 div-margin">
  			<p>Don't post a deck that you found or have not made yourself. When you are posting it will show up in your name!</p>
  		</div>
- 		<form method="post" class="div-marign" action="">
- 			<div class="div-3 div-marign">
- 				<label for="deck_scrolls">Total Scrolls in deck</label><br />
- 				<input type="text" class="textbox full" name="scrolls" id="deck_scrolls" value="50" placeholder="50"/>
-			</div>
-			
+ 		<form method="post" class="div-marign" action="">			
 			<div class="div-3 div-marign">
 					<label for="deck_link">In-Game export text (JSON string)</label><br />
-					<input type="text" class="textbox full" name="link" id="deck_link" value="" placeholder=""/>
+					<input type="text" class="textbox full" name="link" id="deck_link" value='<?php if (isset($_GET["json"])) {
+						echo($_GET["json"]);
+					} ?>' placeholder=""/>
 			</div>
 			
 			<div class="div-3 div-marign">
@@ -200,6 +193,7 @@ if (!isset($_SESSION['username'])) {
 			<div class="div-3 div-marign">
 				<label>What meta is this deck designed for</label><br />
 				<select name="meta">
+					<option value="0.122.0">0.122.0 (Latest, Test Server)</option>
 					<option selected value="0.121.0">0.121.0 (Latest, Main Server)</option>
 					<option value="0.119.1">0.119.1</option>
 					<option value="0.117">0.117</option>
