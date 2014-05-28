@@ -63,7 +63,7 @@ if (!isset($_SESSION['username'])) {
 							<label for="isHidden">Make post hidden</label>
 						</div>	
 						<div class="div-4">
-							<textarea class="ckeditor" name="html"></textarea>
+							<textarea class="ckeditor" name="html" id="editor"></textarea>
 						</div>
 						<br />
 						<div class="div-3">

@@ -121,3 +121,34 @@ figure figcaption
 	text-align: center;
 	display: block; /* For IE8 */
 }
+
+i[class^='icon-']{
+	display: inline-block;
+	margin: 2px;
+	width: 20px;
+	height: 20px;
+	background-size: 20px 20px;
+	background-repeat: no-repeat;
+	background-position: center center;	
+}
+
+i.icon-order{
+	background-image: url('plugins/scrolldier/o.png');
+}
+i.icon-growth{
+	background-image: url('plugins/scrolldier/g.png');
+	background-size: 18px;
+}
+i.icon-energy{
+	background-image: url('plugins/scrolldier/e.png');
+}
+i.icon-decay{
+	background-image: url('plugins/scrolldier/d.png');
+}
+i.icon-wild{
+	background-image: url('plugins/scrolldier/w2.png');
+}
+i.icon-wild-old{
+	background-image: url('plugins/scrolldier/w.png');
+}
+
