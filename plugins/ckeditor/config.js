@@ -80,6 +80,16 @@ CKEDITOR.plugins.add('scrolldier',
                CKEDITOR.instances.editor.insertHtml( '<i class="icon-wild">&nbsp;</i>' );
            }
        } );
+   editor.addCommand( 'coin', {
+          exec: function( editor ) {
+              CKEDITOR.instances.editor.insertHtml( '<i class="icon-coin">&nbsp;</i>' );
+          }
+      } );
+   editor.addCommand( 'shard', {
+          exec: function( editor ) {
+              CKEDITOR.instances.editor.insertHtml( '<i class="icon-shard">&nbsp;</i>' );
+          }
+      } );    
         
         editor.ui.addButton('decay_icon',
             {
@@ -101,29 +111,46 @@ CKEDITOR.plugins.add('scrolldier',
                label: 'Energy Icon',
                command: 'energy',
                icon : CKEDITOR.plugins.getPath('scrolldier') + 'e.png',
-               toolbar: "scrolls_icons,2"
+               toolbar: "scrolls_icons,3"
            });
        editor.ui.addButton('growth_icon',
            {
                label: 'Growth Icon',
                command: 'growth',
                icon : CKEDITOR.plugins.getPath('scrolldier') + 'g.png',
-               toolbar: "scrolls_icons,2"
+               toolbar: "scrolls_icons,4"
            });
       editor.ui.addButton('wild_icon_old',
           {
               label: 'Wild Icon',
               command: 'wild-old',
               icon : CKEDITOR.plugins.getPath('scrolldier') + 'w.png',
-              toolbar: "scrolls_icons,2"
+              toolbar: "scrolls_icons,5"
           });
       editor.ui.addButton('wild_icon',
           {
               label: 'Wild Icon',
               command: 'wild',
               icon : CKEDITOR.plugins.getPath('scrolldier') + 'w2.png',
-              toolbar: "scrolls_icons,2"
+              toolbar: "scrolls_icons,6"
           });
+          
+          
+          
+      editor.ui.addButton('coin_icon',
+          {
+              label: 'Gold Coin Icon',
+              command: 'coin',
+              icon : CKEDITOR.plugins.getPath('scrolldier') + 'gold_icon.png',
+              toolbar: "scrolls_icons,7"
+          });
+      editor.ui.addButton('shard_icon',
+          {
+              label: 'Void Shard Icon',
+              command: 'shard',
+              icon : CKEDITOR.plugins.getPath('scrolldier') + 'voidshard_icon.png',
+              toolbar: "scrolls_icons,8"
+          });    
     }
 });
 

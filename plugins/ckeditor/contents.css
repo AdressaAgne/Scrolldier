@@ -139,16 +139,23 @@ i.icon-growth{
 	background-image: url('plugins/scrolldier/g.png');
 	background-size: 18px;
 }
+
 i.icon-energy{
 	background-image: url('plugins/scrolldier/e.png');
 }
 i.icon-decay{
-	background-image: url('http://scrolldier.com/img/d.png');
+	background-image: url('plugins/scrolldier/d.png');
 }
 i.icon-wild{
 	background-image: url('plugins/scrolldier/w2.png');
 }
 i.icon-wild-old{
 	background-image: url('plugins/scrolldier/w.png');
+}
+i.icon-coin{
+	background-image: url('plugins/scrolldier/c.png');
+}
+i.icon-shard{
+	background-image: url('plugins/scrolldier/v.png');
 }
 
