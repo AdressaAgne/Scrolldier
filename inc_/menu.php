@@ -1,10 +1,8 @@
 <?php include_once("analytics.php"); ?>
 <?php $thisPage = $_SERVER['PHP_SELF']; ?>
-<?php if ($thisPage == "/u/index.php" || $thisPage == "/u/edit.php") { ?>
-	<div class="logo" onclick="location.href='../index.php'"></div>
-<?php } else { ?>
-	<div class="logo" onclick="location.href='index.php'"></div>
-<?php } ?>
+
+	<div class="logo" onclick="location.href='<?php echo($main) ?>'"></div>
+
 
 
 <div class="container clearfix">

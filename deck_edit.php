@@ -23,7 +23,10 @@ if (isset($_POST['submit'])) {
 		); 
 	
 	$x->arrayBinder($query, $arr);
-	$query->execute();
+	
+	if ($query->execute()) {
+		header("location:".$main."deck/".$_GET['d']);
+	}
 
 } 
 
