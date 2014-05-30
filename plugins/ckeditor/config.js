@@ -16,7 +16,6 @@ CKEDITOR.editorConfig = function( config ) {
 		{ name: 'insert' },
 		{ name: 'forms' },
 		{ name: 'tools' },
-		{ name: 'document',	   groups: [ 'mode', 'document', 'doctools' ] },
 		{ name: 'others' },
 		{ name: 'scrolls_icons' },
 		'/',

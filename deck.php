@@ -35,7 +35,7 @@
 		
 	} elseif (isset($_POST['submit']) && empty($_POST['search_box'])) {
 		
-		header("location: ".$main."decks/");
+		header("location: ".$main."decks/1/");
 	}
 		
 		$pageSize = 20;
@@ -201,17 +201,21 @@
 
 	<?php include('inc_/menu.php') ?>
 		<div class="container">
-			<?php if (!empty($_GET['search'])) { ?>
-				<p>The search for: "<?php echo(str_replace('/','',$_GET['search'])) ?>" gave <?php echo($totalDecks) ?> results</p>
-				<!--<p><?php echo($para) ?></p>
-				<p><?php echo($ressource) ?></p>-->
-			<?php } ?>
+			
+			
 			<div class="decks div-margin">
 			
-		
+			
+			
+			<?php if (!empty($_GET['search'])) { ?>
+				<p>The search for "<?php echo(str_replace('/','',$_GET['search'])) ?>" gave <?php echo($totalDecks) ?> results</p>
+			<?php } else { ?>
+				<p>Total decks: <?php echo($totalDecks); ?></p>
+			<?php } ?>
 			
 				<div class="searchbox">
 					<form method="post" action="" class="">
+						
 						<div class="chooseBox clearfix">
 							<div class="checkbox">
 								<form method="post" action="">
@@ -221,6 +225,29 @@
 										<a class="btn-modern btn-pagina btn-no-margin" href="<?php echo($main) ?>new/deck">New Deck</a><br />
 									</li>
 									<?php } ?>
+									<?php
+										
+										
+										$totalPages = intval($totalDecks / $pageSize)+1;
+										
+									if ($totalPages != 1) {
+									 for ($i = 1; $i <= $totalPages; $i++) {
+										
+										
+										if ($i != $_GET['page']) { ?>
+										
+											<li class="left"><a class="btn-modern btn-pagina btn-no-margin" href="<?php echo($main) ?>decks/<?php echo($i) ?>/<?php echo($_GET['para']) ?>"><?php echo($i) ?></a></li>
+											
+											
+										<?php }
+										
+										if ($i == $_GET['page']) { ?>
+										
+											<li class="left"><a  class="btn-modern btn-pagina btn-no-margin active" href="<?php echo($main) ?>decks/<?php echo($i) ?>/<?php echo($_GET['para']) ?>"><?php echo($i) ?></a></li>
+																
+										<?php }					
+									} 
+									} ?>
 								</ul>
 								<ul class="right">
 								 <li>
@@ -363,30 +390,41 @@
 			</div>
 			
 			<div class="deckPagina">
-
 				<?php
+				$totalPages = intval($totalDecks / $pageSize)+1;
 					
+					if ($_GET['page'] != 1) { ?>
 					
-					$totalPages = intval($totalDecks / $pageSize)+1;
+					<a  class="btn-modern btn-pagina btn-no-margin" href="<?php echo($main) ?>decks/<?php echo(intval($_GET['page']-1)) ?>/<?php echo($_GET['para']) ?>">Prev</a>
 					
+				<?php	}
+				
 				if ($totalPages != 1) {
 				 for ($i = 1; $i <= $totalPages; $i++) {
 					
 					
 					if ($i != $_GET['page']) { ?>
 					
-						<a  class="modern btn-pagina" href="<?php echo($main) ?>decks/<?php echo($i) ?>/<?php echo($_GET['para']) ?>"><?php echo($i) ?></a>
+						<a  class="btn-modern btn-pagina btn-no-margin" href="<?php echo($main) ?>decks/<?php echo($i) ?>/<?php echo($_GET['para']) ?>"><?php echo($i) ?></a>
 						
 						
 					<?php }
 					
 					if ($i == $_GET['page']) { ?>
 					
-						<a  class="modern btn-pagina active" href="<?php echo($main) ?>decks/<?php echo($i) ?>/<?php echo($_GET['para']) ?>"><?php echo($i) ?></a>
+						<a  class="btn-modern btn-pagina btn-no-margin active" href="<?php echo($main) ?>decks/<?php echo($i) ?>/<?php echo($_GET['para']) ?>"><?php echo($i) ?></a>
 											
 					<?php }					
 				} 
-				} ?>
+				} 
+				
+				if ($_GET['page'] != $totalPages) { ?>
+					
+					<a  class="btn-modern btn-pagina btn-no-margin" href="<?php echo($main) ?>decks/<?php echo(intval($_GET['page']+1)) ?>/<?php echo($_GET['para']) ?>">Next</a>
+					
+				<?php	}
+				
+				?>
 			</div>
 			
 		</div>

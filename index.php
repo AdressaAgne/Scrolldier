@@ -41,7 +41,12 @@
 				
 				<?php
 				//[LIMIT {[offset,] row_count | row_count OFFSET offset}]
-				$query = $db->prepare("SELECT * FROM scrolls WHERE isHidden=0 ORDER BY time DESC LIMIT :limitStart, :limitEnd");	
+				$query = $db->prepare("SELECT * FROM scrolls WHERE isHidden=0 ORDER BY time DESC LIMIT :limitStart, :limitEnd");
+				
+				$totalPosts = $db->prepare("SELECT * FROM scrolls WHERE isHidden=0");
+				$totalPosts->execute();
+				
+				$totalPosts = $totalPosts->rowCount();
 				
 				$pageSize = 5;
 				

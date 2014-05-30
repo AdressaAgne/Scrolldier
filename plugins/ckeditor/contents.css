@@ -6,14 +6,13 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 body
 {
 	/* Font */
-	font-family: sans-serif, Arial, Verdana, "Trebuchet MS";
 	font-size: 12px;
 
 	/* Text color */
-	color: #f8f8f8;
+	color: #121314;
 
 	/* Remove the background color to make it transparent */
-	background-color: #121314;
+	background-color: #f8f8f8;
 
 	margin: 20px;
 }
@@ -50,7 +49,7 @@ blockquote
 
 a
 {
-	color: #0782C1;
+	color: #e4dabd;
 }
 
 ol,ul,dl

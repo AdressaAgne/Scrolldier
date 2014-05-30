@@ -24,11 +24,13 @@
 		<div class="div-2 div-margin">
 			<h4>Shortcuts</h4>
 			<ul>
-				<li><a href="http://<?php echo($linkPre); ?>scrolldier.com/login.php">Login</a></li>
-				<li><a href="http://<?php echo($linkPre); ?>scrolldier.com/">Home</a></li>
-				<li><a href="http://<?php echo($linkPre); ?>scrolldier.com/decks">Decks</a></li>
-				<li><a href="http://<?php echo($linkPre); ?>scrolldier.com/guilds">Guilds</a></li>
-				<li><a href="http://<?php echo($linkPre); ?>scrolldier.com/scrolls.php">Scrolls</a></li>
+				<li><a href="<?php echo($main) ?>login.php">Login</a></li>
+				<li><a href="<?php echo($main) ?>">Home</a></li>
+				<li><a href="<?php echo($main) ?>decks">Decks</a></li>
+				<li><a href="<?php echo($main) ?>guilds">Guilds</a></li>
+				<li><a href="<?php echo($main) ?>scrolls.php">Scrolls</a></li>
+				<li><a href="<?php echo($main) ?>tile.php">Tiles</a></li>
+				<li><a href="<?php echo($main) ?>audio.php">Audio</a></li>
 			</ul>
 		</div>
 		<div class="div-1 div-margin">

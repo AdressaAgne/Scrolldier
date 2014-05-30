@@ -16,6 +16,11 @@
 	
 }
 
+
+[class^='btn-']{
+	color: #f8f8f8 !important;
+}
+
 /* @end */
 .btn-pagina{
 	display: inline-block;
@@ -59,8 +64,19 @@
 		&.btn-choose{
 			padding: 20px 40px;
 		}
+		&.active{
+			-moz-box-shadow: inset 0 1px #000000, inset 0 -1px #38373B;
+				box-shadow: inset 0 1px #000000, inset 0 -1px #38373B;
+			
+				background-image: -webkit-linear-gradient(top, #1C1C1F 0%, #26262A 100%);
+			background-image: -moz-linear-gradient(top, #1C1C1F 0%, #26262A 100%);
+			background-image: -ms-linear-gradient(top, #1C1C1F 0%, #26262A 100%);
+			background-image: linear-gradient(to bottom, #1C1C1F 0%, #26262A 100%);
+		}
 	
 }
+
+
 .export{
 	display: none;
 }
