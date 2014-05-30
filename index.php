@@ -82,7 +82,9 @@
 					<div class="news_content">
 						<?php echo($row['html']) ?>
 					</div>
-					<a href="post/<?php echo($row['id']) ?>" class="modern btn-pagina">Read more</a>
+					<div class="readMore">
+						<a href="post/<?php echo($row['id']) ?>" class="readMore">Continue Reading</a>
+					</div>
 				</div>
 				
 				<?php } ?>

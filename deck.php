@@ -167,6 +167,14 @@
 		
 		
 		$query->execute();
+		
+		if (isset($_GET['search']) && !empty($_GET['search']) && $_GET['search'] != "") {
+			$totalDecks = $db->prepare("SELECT * FROM decks WHERE isHidden = 0 AND (deck_title LIKE :search OR deck_author LIKE :search) ".$ressource."");
+		} else {
+			$totalDecks = $db->prepare("SELECT * FROM decks WHERE isHidden = 0");
+		}
+		$totalDecks->execute();
+		$totalDecks = $totalDecks->rowCount();
  ?>
 
 <!DOCTYPE html>
@@ -348,7 +356,32 @@
 								
 			</div>
 			
+			<div class="deckPagina">
+
+				<?php
+					
+					
+					$totalPages = intval($totalDecks / $pageSize) + 1;
+				 for ($i = 1; $i <= $totalPages; $i++) {
+					
+					
+					if ($i != $_GET['page']) { ?>
+					
+						<a  class="modern btn-pagina" href="<?php echo($main) ?>decks/<?php echo($i) ?>/<?php echo($_GET['para']) ?>"><?php echo($i) ?></a>
+						
+						
+					<?php }
+					
+					if ($i == $_GET['page']) { ?>
+					
+						<a  class="modern btn-pagina active" href="<?php echo($main) ?>decks/<?php echo($i) ?>/<?php echo($_GET['para']) ?>"><?php echo($i) ?></a>
+											
+					<?php }					
+				} ?>
+			</div>
+			
 		</div>
+		
 	<?php include("inc_/footer.php"); ?>
 </body>
 </html>

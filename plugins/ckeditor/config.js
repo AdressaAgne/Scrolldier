@@ -141,14 +141,14 @@ CKEDITOR.plugins.add('scrolldier',
           {
               label: 'Gold Coin Icon',
               command: 'coin',
-              icon : CKEDITOR.plugins.getPath('scrolldier') + 'gold_icon.png',
+              icon : CKEDITOR.plugins.getPath('scrolldier') + 'c.png',
               toolbar: "scrolls_icons,7"
           });
       editor.ui.addButton('shard_icon',
           {
               label: 'Void Shard Icon',
               command: 'shard',
-              icon : CKEDITOR.plugins.getPath('scrolldier') + 'voidshard_icon.png',
+              icon : CKEDITOR.plugins.getPath('scrolldier') + 'v.png',
               toolbar: "scrolls_icons,8"
           });    
     }

@@ -31,6 +31,158 @@ if (!isset($_SESSION['username'])) {
 <body style="padding-bottom: 0px;">	 
  	<div class="container">
  		<?php include('inc_/menu.php') ?>
+ 		<div class="wall_small">
+ 		 			<!-- 	scroll info	-->
+ 		 			<div class="modern scrollLibraryAbout clearfix">
+ 		 				<div id="clearfix left div-4">
+ 		 					
+ 		<!-- 					name, cost and ressource-->
+ 		 					<div class="div-4 left clearfix">
+ 		 						<h4 class="left" id="scroll-name"></h4>
+ 		 						<span class="right" id="scroll-type"></span><h4 class="right" id="scroll-cost"></h4>
+ 		 					</div>
+ 		 					
+ 		<!-- 					types and kind-->
+ 		 					<div class="div-4 left clearfix">
+ 		 						<span class="left" id="scroll-kind"></span> <span class="left" id="scroll-types"></span>
+ 		 					</div>
+ 		 					
+ 		<!-- 					passive rules-->
+ 		 					<div class="div-4 left clearfix">
+ 		 						<ul>
+ 		 							<li class="hidden" id="scroll-passive-1"></li>
+ 		 							<li class="hidden" id="scroll-passive-2"></li>
+ 		 							<li class="hidden" id="scroll-passive-3"></li>
+ 		 						</ul>
+ 		 					</div>
+ 		 					
+ 		 				</div>
+ 		<!-- 					desc--> 				
+ 		 				<div class="div-4" style="margin-top: 5px;">
+ 		 					<p class="left div-4" id="scroll-desc"></p>
+ 		 				</div>
+ 		 				<div class="scrolls_statsbar">
+ 		 					<h1 id="scroll-ap"></h1>
+ 		 					<h1 id="scroll-ac"></h1>
+ 		 					<h1 id="scroll-hp"></h1>
+ 		 				</div>
+ 		 			</div>
+ 		 			<!-- 	Curve	-->
+ 		 			<div class="mR deckScrollList clearfix">
+ 		 				<span id="totalScrolls"></span>
+ 		 				<button class="btn-modern btn-pagina right" id="clearDeck">Clear</button>
+ 		 			</div>
+ 		 			<!-- 	scrolls in deck	-->
+ 		 			<div class="">
+ 		 				<ul id="fullDeck">
+ 		 				
+ 		 				<?php if (!empty($_GET['deck'])) { ?>
+ 		 					<?php 
+ 		 					$query = $db->prepare("SELECT * FROM decks WHERE id=:id");
+ 		 					$arr = array(
+ 		 							'id' => $_GET['deck']
+ 		 						);
+ 		 					
+ 		 					$x->arrayBinder($query, $arr);
+ 		 					$query->execute();		
+ 		 					$row = $query->fetch(PDO::FETCH_ASSOC);
+ 		 					$listOfScrolls = array();			
+ 		 					$json = $row['JSON'];
+ 		 					$data = json_decode($json, TRUE);
+ 		 					if ($data['msg'] == "success") { 
+ 		 						
+ 		 						
+ 		 						
+ 		 						for ($i = 0; $i < count($data['data']['scrolls']); $i++) {
+ 		 						
+ 		 							$query = $db->prepare("SELECT * FROM scrollsCard WHERE id=:id");
+ 		 							$arr = array(
+ 		 									'id' => $data['data']['scrolls'][$i]['id']
+ 		 								);
+ 		 							
+ 		 							$x->arrayBinder($query, $arr);
+ 		 							$query->execute();		
+ 		 							$card = $query->fetch(PDO::FETCH_ASSOC);
+ 		 						  
+ 		 						  
+ 		 						  	$scrollsCost = 0;
+ 		 						  	$scrollType = "";
+ 		 						  	
+ 		 						  	if (!empty($card['costorder'])) {
+ 		 						  		
+ 		 						  		$scrollsCost = $card['costorder'];
+ 		 						  		$scrollType = "order";
+ 		 						  		
+ 		 						  	} elseif (!empty($card['costgrowth'])) {
+ 		 						  	
+ 		 						  		$scrollsCost = $card['costgrowth'];	
+ 		 						  		$scrollType = "growth";
+ 		 						  		
+ 		 						  	} elseif (!empty($card['costenergy'])) {
+ 		 						  	
+ 		 						  		$scrollsCost = $card['costenergy'];
+ 		 						  		$scrollType = "energy";
+ 		 						  	
+ 		 						  	}elseif (!empty($card['costdecay'])) {
+ 		 						  	
+ 		 						  		$scrollsCost = $card['costdecay'];
+ 		 						  		$scrollType = "decay";
+ 		 						  		
+ 		 						  	}
+ 		 						  
+ 		 						  	$singelScroll = array(
+ 		 						  		2 => $scrollsCost,
+ 		 						  		3 => $card['image'],
+ 		 						  		4 => $data['data']['scrolls'][$i]['c'],
+ 		 						  		5 => $card['name'],
+ 		 						  		6 => $scrollType,
+ 		 						  		7 => 0,
+ 		 						  		8 => 0,
+ 		 						  		9 => $card['description'],
+ 		 						  		10 => $card['passiverules_1'],
+ 		 						  		11 => $card['passiverules_2'],
+ 		 						  		12 => $card['passiverules_3'],
+ 		 						  		13 => $card['types'],
+ 		 						  		14 => $card['kind'],
+ 		 						  		15 => $card['id']
+ 		 						  		
+ 		 						  	);
+ 		 						  
+ 		 						  	array_push($listOfScrolls, $singelScroll);
+ 		 						  
+ 		 						}
+ 		 					} 
+ 		 					function my_sort($a,$b) {
+ 		 					if ($a==$b) return 0;
+ 		 					   return ($a<$b)?-1:1;
+ 		 					}
+ 		 									
+ 		 									
+ 		 					usort($listOfScrolls, "my_sort");
+ 		 				?>
+ 		 				<?php for ($j = 0; $j < count($listOfScrolls); $j++) { ?>
+ 		 				
+ 		 					<div id="scroll-in-deck" scroll-in-deck-id="<?php echo($listOfScrolls[$j][15]) ?>" class="deckScrollList mR" style="overflow: hidden;">
+ 		 						<span class="left">
+ 		 							<span class="resource"><i class="icon-<?php echo($listOfScrolls[$j][6]) ?> small"></i> <?php echo($listOfScrolls[$j][2]) ?></span>
+ 		 						</span>
+ 		 					
+ 		 						<span class="left" id="scroll-in-deck-name"><?php echo($listOfScrolls[$j][5]) ?></span>
+ 		 					
+ 		 						<span class="right">
+ 		 							<img class="listScroll" src="http://localhost/resources/cardImages/<?php echo($listOfScrolls[$j][3]) ?>.png" alt="">
+ 		 						</span>
+ 		 						<span class="right" id="quantity" style="margin-right: 20px;"><?php echo($listOfScrolls[$j][4]) ?></span>
+ 		 						<span class="right">x</span>
+ 		 					</div>
+ 		 					
+ 		 					
+ 		 					<?php } ?>
+ 					<?php } ?>
+ 		 					
+ 		 				</ul>
+ 		 			</div>
+ 		 		</div>
  		<div class="wall_big clearfix">
  <!-- 		Scrolls search	-->		
  		<div class="modern clearfix">
@@ -141,7 +293,7 @@ if (!isset($_SESSION['username'])) {
  			<div class="left modern div-4 div-no-margin">
  				<h3>Save Deck</h3>
  				<div class="div-4 div-margin">
- 					<input type="textbox" id="jsonOUTPUT" class="textbox full" disabled name="json" value="" placeholder="Autogenerated JSON string" />
+ 					<input type="textbox" id="jsonOUTPUT" class="textbox full" disabled name="json" value="" placeholder="Autogenerated JSON string" /><i class="icon-export"></i>
  				</div>
  				<div class="div-4 div-margin">
  					<label for="deckName">Deck name:</label><br />
@@ -154,54 +306,7 @@ if (!isset($_SESSION['username'])) {
  		</div>
  		
 		
- 		<div class="wall_small">
- 			<!-- 	scroll info	-->
- 			<div class="modern scrollLibraryAbout clearfix">
- 				<div id="clearfix left div-4">
- 					
-<!-- 					name, cost and ressource-->
- 					<div class="div-4 left clearfix">
- 						<h4 class="left" id="scroll-name"></h4>
- 						<span class="right" id="scroll-type"></span><h4 class="right" id="scroll-cost"></h4>
- 					</div>
- 					
-<!-- 					types and kind-->
- 					<div class="div-4 left clearfix">
- 						<span class="left" id="scroll-kind"></span> <span class="left" id="scroll-types"></span>
- 					</div>
- 					
-<!-- 					passive rules-->
- 					<div class="div-4 left clearfix">
- 						<ul>
- 							<li class="hidden" id="scroll-passive-1"></li>
- 							<li class="hidden" id="scroll-passive-2"></li>
- 							<li class="hidden" id="scroll-passive-3"></li>
- 						</ul>
- 					</div>
- 					
- 				</div>
-<!-- 					desc--> 				
- 				<div class="div-4" style="margin-top: 5px;">
- 					<p class="left div-4" id="scroll-desc"></p>
- 				</div>
- 				<div class="scrolls_statsbar">
- 					<h1 id="scroll-ap"></h1>
- 					<h1 id="scroll-ac"></h1>
- 					<h1 id="scroll-hp"></h1>
- 				</div>
- 			</div>
- 			<!-- 	Curve	-->
- 			<div class="mR deckScrollList clearfix">
- 				<span id="totalScrolls"></span>
- 				<button class="btn-modern btn-pagina right" id="clearDeck">Clear</button>
- 			</div>
- 			<!-- 	scrolls in deck	-->
- 			<div class="">
- 				<ul id="fullDeck">
- 					
- 				</ul>
- 			</div>
- 		</div>
+ 		
  		
  	</div>
  	<?php include('inc_/footer.php') ?>

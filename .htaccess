@@ -12,7 +12,8 @@ RewriteRule ^editdeck/([^/.]+)/?$ deck_edit.php?d=$1 [L]
 RewriteRule ^decks/(([0-9]+/)?(([a-zA-Z0-9]+)?(/(order|energy|growth|decay|wild|s|c))*/)?)$ deck.php?page=$2&search=$4&para=$3&SearchType=$6 [L]
 
 RewriteRule ^new/deck new_deck_choose.php [L]
-RewriteRule ^deckbuilder new_deckbuilder.php [L]
+RewriteRule ^deckbuilder/([^/.]*)/?$ new_deckbuilder.php?deck=$1 [L]
+
 RewriteRule ^new/import/scrollguide new_deck_sg.php [L]
 
 RewriteRule ^new/import/in-game/([^/.]*)/?$ new_deck_ig.php?json=$1 [L]
