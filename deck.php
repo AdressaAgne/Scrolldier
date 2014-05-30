@@ -38,7 +38,7 @@
 		header("location: ".$main."decks/");
 	}
 		
-		$pageSize = 30;
+		$pageSize = 20;
 		
 		if (!isset($_GET['page']) || empty($_GET['page'])) {
 			$page = 1;
@@ -151,8 +151,16 @@
 				);
 			$x->arrayBinder($query, $arr);
 			
+			$totalDecks = $db->prepare("SELECT * FROM decks
+								   WHERE isHidden=0 AND (deck_title LIKE :search OR deck_author LIKE :search) ".$ressource);
+			$arr = array(
+					'search' => "%".str_replace('/','',$_GET['search'])."%"
+				);
+			$x->arrayBinder($totalDecks, $arr);
+			
+			
 		} else {
-		
+		$totalDecks = $db->prepare("SELECT * FROM decks WHERE isHidden = 0");
 		$query = $db->prepare("SELECT * FROM decks
 							   ORDER BY isHidden DESC,
 							   meta DESC, vote DESC,
@@ -168,11 +176,9 @@
 		
 		$query->execute();
 		
-		if (isset($_GET['search']) && !empty($_GET['search']) && $_GET['search'] != "") {
-			$totalDecks = $db->prepare("SELECT * FROM decks WHERE isHidden = 0 AND (deck_title LIKE :search OR deck_author LIKE :search) ".$ressource."");
-		} else {
-			$totalDecks = $db->prepare("SELECT * FROM decks WHERE isHidden = 0");
-		}
+		
+		
+		
 		$totalDecks->execute();
 		$totalDecks = $totalDecks->rowCount();
  ?>
@@ -196,7 +202,7 @@
 	<?php include('inc_/menu.php') ?>
 		<div class="container">
 			<?php if (!empty($_GET['search'])) { ?>
-				<p>The search for: "<?php echo(str_replace('/','',$_GET['search'])) ?>" gave <?php echo($query->rowCount()) ?> results</p>
+				<p>The search for: "<?php echo(str_replace('/','',$_GET['search'])) ?>" gave <?php echo($totalDecks) ?> results</p>
 				<!--<p><?php echo($para) ?></p>
 				<p><?php echo($ressource) ?></p>-->
 			<?php } ?>
@@ -361,7 +367,9 @@
 				<?php
 					
 					
-					$totalPages = intval($totalDecks / $pageSize) + 1;
+					$totalPages = intval($totalDecks / $pageSize)+1;
+					
+				if ($totalPages != 1) {
 				 for ($i = 1; $i <= $totalPages; $i++) {
 					
 					
@@ -377,6 +385,7 @@
 						<a  class="modern btn-pagina active" href="<?php echo($main) ?>decks/<?php echo($i) ?>/<?php echo($_GET['para']) ?>"><?php echo($i) ?></a>
 											
 					<?php }					
+				} 
 				} ?>
 			</div>
 			
