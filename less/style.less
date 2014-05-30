@@ -1028,20 +1028,30 @@ h4{
 		background-color: rgba(0, 0, 0, .5);
 		
 		& .curve{
-			width: 25px;
+			width: 23px;
 		}
+		@ressourceDarken: 10%;
 		& .curve-order{
 			background-color: #94B2CC;
+			-moz-box-shadow: inset 0px 0px 5px darken(#94B2CC, @ressourceDarken);
+			box-shadow: inset 0px 0px 5px darken(#94B2CC, @ressourceDarken);
 		}
 		& .curve-decay{
 			background-color: #AD7FCC;
+			-moz-box-shadow: inset 0px 0px 5px darken(#AD7FCC, @ressourceDarken);
+			box-shadow: inset 0px 0px 5px darken(#AD7FCC, @ressourceDarken);
 		}
 		& .curve-growth{
 			background-color: #A0CC56;
+			-moz-box-shadow: inset 0px 0px 5px darken(#A0CC56, @ressourceDarken);
+			box-shadow: inset 0px 0px 5px darken(#A0CC56, @ressourceDarken);
 		}
 		& .curve-energy{
 			background-color: #CC9500;
+			-moz-box-shadow: inset 0px 0px 5px darken(#CC9500, @ressourceDarken);
+			box-shadow: inset 0px 0px 5px darken(#CC9500, @ressourceDarken);
 		}
+		
 	}
 }
 .searchbox{

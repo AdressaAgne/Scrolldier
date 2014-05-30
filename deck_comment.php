@@ -200,7 +200,7 @@ $JSONExport .= "]}";
 					</div>
 					
 					<div class="left">
-						<h1><a href="http://www.scrollsguide.com/deckbuilder/#<?php echo($row['link']) ?>" target="_blank"><?php echo($row['deck_title']) ?></a></h1>
+						<h1><a href="<?php echo($main) ?>deckbuilder/<?php echo($row['id']) ?>"><?php echo($row['deck_title']) ?></a></h1>
 						<small><?php echo($x->ago($row['time'])) ?> by <a href="<?php echo($main) ?>user/<?php echo($row['deck_author']) ?>"><?php echo($row['deck_author']) ?></a>, for scrolls version: <?php echo($row['meta']) ?>, with a Score of <?php echo($row['vote']) ?></small>
 					</div>
 					

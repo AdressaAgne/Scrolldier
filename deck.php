@@ -38,7 +38,7 @@
 		header("location: ".$main."decks/1/");
 	}
 		
-		$pageSize = 20;
+		$pageSize = 30;
 		
 		if (!isset($_GET['page']) || empty($_GET['page'])) {
 			$page = 1;
