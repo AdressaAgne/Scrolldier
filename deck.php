@@ -152,7 +152,7 @@
 			$x->arrayBinder($query, $arr);
 			
 			$totalDecks = $db->prepare("SELECT * FROM decks
-								   WHERE isHidden=0 AND (deck_title LIKE :search OR deck_author LIKE :search) ".$ressource);
+								   WHERE (deck_title LIKE :search OR deck_author LIKE :search) ".$ressource);
 			$arr = array(
 					'search' => "%".str_replace('/','',$_GET['search'])."%"
 				);
@@ -160,7 +160,8 @@
 			
 			
 		} else {
-		$totalDecks = $db->prepare("SELECT * FROM decks WHERE isHidden = 0");
+		$totalDecks = $db->prepare("SELECT * FROM decks");
+		
 		$query = $db->prepare("SELECT * FROM decks
 							   ORDER BY isHidden DESC,
 							   meta DESC, vote DESC,
