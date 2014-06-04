@@ -236,8 +236,8 @@ $JSONExport .= "]}";
 						<?php } ?>
 				<?php } ?>
 						<div class="modern left clearfix export" id="export">
-							<textarea class="exportBox" rows="10" disabled><?php echo($planeTextExport) ?></textarea>
-							<input type="text" class="exportBox" disabled name="" value='<?php echo($JSONExport) ?>' />
+							<textarea class="exportBox" rows="10" readonly><?php echo($planeTextExport) ?></textarea>
+							<input type="text" class="exportBox" readonly name="" value='<?php echo($JSONExport) ?>' />
 						</div>
 					</div>
 					<div class="modern clearfix">

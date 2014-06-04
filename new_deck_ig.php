@@ -199,7 +199,8 @@ if (!isset($_SESSION['username'])) {
 			<div class="div-3 div-marign">
 				<label>What meta is this deck designed for</label><br />
 				<select name="meta">
-					<option value="0.122.0">0.122.0 (Latest, Test Server)</option>
+					<option value="0.123.0">0.123.0 (Latest, Test Server)</option>
+					<option value="0.122.0">0.122.0</option>
 					<option selected value="0.121.0">0.121.0 (Latest, Main Server)</option>
 					<option value="0.119.1">0.119.1</option>
 					<option value="0.117">0.117</option>

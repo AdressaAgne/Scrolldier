@@ -280,7 +280,8 @@ if ($row['deck_author'] != $_SESSION['username']) {
 							<label>Change Game version for deck</label><br />
 							<select name="meta">
 								<option selected="selected" value="<?php echo($row['meta']) ?>"><?php echo($row['meta']) ?></option>
-								<option value="0.122.0">0.122.0 (Latest, Test Server)</option>
+								<option value="0.123.0">0.123.0 (Latest, Test Server)</option>
+								<option value="0.122.0">0.122.0</option>
 								<option value="0.121.0">0.121.0 (Latest, Main Server)</option>
 								<option value="0.119.1">0.119.1</option>
 								<option value="0.117">0.117</option>

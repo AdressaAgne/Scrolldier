@@ -95,7 +95,7 @@
 			</div>
 			<div class="div-second scrolls clearfix">
 				<h1>Settings</h1>
-				<!--<form method="post" action="">
+				<form method="post" action="">
 					<div class="div-3 settings-element">
 						<h4>General Settings</h4>
 						<div class="div-3">
@@ -131,7 +131,7 @@
 							<input type="submit" name="generalSave" class="btn" value="Save" />
 						</div>
 					</div>
-				</form>-->
+				</form>
 				<form method="post" action="">
 					<div class="div-3 settings-element">
 					<?php if (isset($_GET['info']) && !empty($_GET['info'])) { ?>
