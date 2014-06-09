@@ -357,6 +357,49 @@ function deckVote($id, $value=true, $user) {
 			return($this->errorHandle($e));
 		}
 	}
+	function getUserRank($ign) {
+		include('connect.php');
+		$query = $db->prepare("SELECT rank FROM accounts WHERE ign=:ign");
+		$arr = array(
+				'ign' => $ign
+			);
+		
+		$this->arrayBinder($query, $arr);
+		
+		try {
+			
+			if ($query->execute()) {
+				$row = $query->fetch(PDO::FETCH_ASSOC);
+				return $row['rank'];
+			}
+			
+		} catch (PDOException $e) {
+			return($this->errorHandle($e));
+		}
+	}
+	function isAlphaUser($ign) {
+		include('connect.php');
+		$query = $db->prepare("SELECT id FROM accounts WHERE ign=:ign");
+		$arr = array(
+				'ign' => $ign
+			);
+		
+		$this->arrayBinder($query, $arr);
+		
+		try {
+			
+			if ($query->execute()) {
+				$row = $query->fetch(PDO::FETCH_ASSOC);
+				
+
+					return $row['id'];
+
+			}
+			
+		} catch (PDOException $e) {
+			return($this->errorHandle($e));
+		}
+	}
 	function getGuildID2($name) {
 		include('connect.php');
 		$query = $db->prepare("

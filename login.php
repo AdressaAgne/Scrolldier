@@ -42,22 +42,26 @@
 <body>
 	<div class="logo"></div>
 	
-	<div class="loginContainer modern clearfix">
-		<h1>Login</h1>
-		<?php if (isset($_GET['error'])) {
-			echo("<span class='color-red'>".$_GET['error']."</span>");
-		} ?>
-		<form method="post" action="">
-			<div class="div-1 div-margin">
+	<div style="width: 300px;" class="clearfix div-center">
+		<h2 class="div-4 modern">Login</h2>
+		
+		<?php if (isset($_GET['error'])) { ?>
+			<div class="div-4">
+				<span class='color-red div-4'><?php echo($_GET['error']) ?></span>
+			</div>
+		<?php } ?>
+		<form method="post" class="div-4" action="">
+			<div class="div-4 div-margin">
 				<label for="ign">In Game Name</label><br />
 				<input type="text" class="textbox full div-2" name="lign" id="ign" value="" placeholder="In Game Name" />
 			</div>
-			<div class="div-1 div-margin">
+			<div class="div-4 div-margin">
 				<label for="lpassword">Password</label><br />
 				<input type="password" class="textbox full div-2" name="lpassword" id="lpassword" value="" placeholder="Password" />
 			</div>
-			<div class="div-1 div-margin">
-				<input type="submit" name="" class="btn" value="Login" />
+			<div class="div-4 div-margin">
+				<input type="submit" name="" class="btn-modern btn-no-margin" value="Login" />
+				<span>Don't have an account? <a href="<?php echo($main) ?>u/reg.php">Sign Up</a></span>
 			</div>
 		</form>
 	</div>

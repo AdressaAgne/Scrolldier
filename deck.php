@@ -142,9 +142,8 @@
 		if (isset($_GET['search']) && !empty($_GET['search']) && $_GET['search'] != "") {
 		
 			$query = $db->prepare("SELECT * FROM decks
-								   WHERE (deck_title LIKE :search OR deck_author LIKE :search) ".$ressource."
-								   ORDER BY isHidden DESC,
-								   meta DESC, vote DESC,
+								   WHERE isHidden = 0 AND (deck_title LIKE :search OR deck_author LIKE :search) ".$ressource."
+								   ORDER BY meta DESC, vote DESC,
 								   time DESC LIMIT :limitStart, :limitEnd");
 			$arr = array(
 					'search' => "%".str_replace('/','',$_GET['search'])."%"
@@ -152,7 +151,7 @@
 			$x->arrayBinder($query, $arr);
 			
 			$totalDecks = $db->prepare("SELECT * FROM decks
-								   WHERE (deck_title LIKE :search OR deck_author LIKE :search) ".$ressource);
+								   WHERE isHidden = 0 AND (deck_title LIKE :search OR deck_author LIKE :search) ".$ressource);
 			$arr = array(
 					'search' => "%".str_replace('/','',$_GET['search'])."%"
 				);
@@ -160,11 +159,10 @@
 			
 			
 		} else {
-		$totalDecks = $db->prepare("SELECT * FROM decks");
+		$totalDecks = $db->prepare("SELECT * FROM decks WHERE isHidden = 0");
 		
-		$query = $db->prepare("SELECT * FROM decks
-							   ORDER BY isHidden DESC,
-							   meta DESC, vote DESC,
+		$query = $db->prepare("SELECT * FROM decks WHERE isHidden = 0
+							   ORDER BY  meta DESC, vote DESC,
 							   time DESC LIMIT :limitStart, :limitEnd");
 		}
 		

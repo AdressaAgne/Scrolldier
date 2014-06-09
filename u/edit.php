@@ -84,18 +84,20 @@
 	
 	<div class="body" id="blog">
 		<div class="container">
-			<div class="scrolls div-first">
+				<div class="wall_small">
+					<h1 class="modern">Avatar</h1>
 				<div class="avatar">
 					<img src="../resources/head_<?php echo($row['headID']) ?>.png" width="300px" style="margin-left: -50px; margin-top: -20px;" alt="" />
 				</div>
 				<form method="post" action="">
 					<input type="hidden" name="changeHead" value="changeHead" />
-					<input type="submit" class="btn" name="" value="Update Avatar" />
+					<input type="submit" class="btn-modern btn-no-margin" name="" value="Update Avatar" />
 				</form>
 			</div>
-			<div class="div-second scrolls clearfix">
-				<h1>Settings</h1>
-				<form method="post" action="">
+				
+				<div class="wall_big">
+				<h1 class="modern">Settings</h1>
+				<!--<form method="post" action="" class="">
 					<div class="div-3 settings-element">
 						<h4>General Settings</h4>
 						<div class="div-3">
@@ -109,29 +111,24 @@
 					</div>
 					<div class="div-3 chooseBox left clear settings-element clearfix">
 						<div class="div-3">
-							<div class="checkbox">
-								<ul class="">
-								  <li class="div-2">
-								      <input id="twitch" type="checkbox" checked="checked" name="" value="">
-								      <label class="checkbox" for="twitch"><i class="icon-twitch"></i> Twitch</label> 
-								      <input type="text" class="textbox full url" name="" value="" placeholder="Twtich url" />
-								  </li>
-								  <li class="div-2">  
-								      <input id="youtube" type="checkbox" checked="checked" name="" value="">
-								      <label class="checkbox" for="youtube"><i class="icon-youtube"></i> Youtube</label> 
-								       <input type="text" class="textbox full url" name="" value="" placeholder="Youtube url" />
-								     
-								  </li>
-								</ul>
+							<div class="span-4">
+							      <input id="twitch" type="checkbox" checked="checked" name="" value="">
+							      <label class="checkbox" for="twitch"><i class="icon-twitch"></i> Twitch</label> <br />
+							      <input type="text" class="textbox div-2" name="" value="" placeholder="Twtich url" />
+							</div>
+							<div class="span-4">   
+							      <input id="youtube" type="checkbox" checked="checked" name="" value="">
+							      <label class="checkbox" for="youtube"><i class="icon-youtube"></i> Youtube</label> <br />
+							       <input type="text" class="textbox div-2" name="" value="" placeholder="Youtube url" />
 							</div>
 						</div>
 					</div>
 					<div class="div-3 settings-element">
 						<div class="div-3">
-							<input type="submit" name="generalSave" class="btn" value="Save" />
+							<input type="submit" name="generalSave" class="btn-modern btn-no-margin" value="Save" />
 						</div>
 					</div>
-				</form>
+				</form>-->
 				<form method="post" action="">
 					<div class="div-3 settings-element">
 					<?php if (isset($_GET['info']) && !empty($_GET['info'])) { ?>
@@ -163,7 +160,7 @@
 					<div class="div-3 settings-element">
 						<div class="div-3">
 							<input type="hidden" name="editPassword" value="editPassword" />
-							<input type="submit" name="changeSave" class="btn" value="Change Password" />
+							<input type="submit" name="changeSave" class="btn-modern btn-no-margin" value="Change Password" />
 						</div>
 					</div>
 				</form>

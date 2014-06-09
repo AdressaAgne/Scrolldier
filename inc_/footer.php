@@ -56,7 +56,6 @@
 		<div class="div-4">
 			<p class="align-center">Scrolldier.com is still in beta, and things may not work</p>
 			<p class="align-center">Need help or got questions? send a mail, or ask on IRC: irc.esper.net - #scrolldier</p>
-
 			<p class="align-center">© Scrolldier.com 2014</p>
 		</div>
 	</div>

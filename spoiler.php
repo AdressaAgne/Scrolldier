@@ -125,6 +125,8 @@ $row = $query->fetch(PDO::FETCH_ASSOC)
 					<div class="commentPost scrolls">
 						<h4 class="clearfix"><a class="left" href="<?php echo($main) ?>user/<?php echo(strip_tags($row['byUser'])) ?>"><?php echo(strip_tags($row['byUser'])) ?></a>
 						<?php $userGuild = $x->getGuild($row['byUser']) ?>
+						
+						
 						<?php if (!$x->hasGuild($row['byUser'])) { ?>
 							<div class="left" style="margin-left: 10px;">
 									<img src="<?php echo($userGuild['badge_url']) ?>" height="16px" alt="" />
@@ -146,8 +148,14 @@ $row = $query->fetch(PDO::FETCH_ASSOC)
 						</form>
 						</small>
 						<?php } ?>
+						
+						<?php $thisRank = $x->getUserRank($row['byUser']); ?>
+						<?php $thisUser = $row['byUser']; ?>
+						<?php include("inc_/icon_comment.php"); ?>
+						
 						</h4>
 						<p><?php echo(makeClickableLinks(strip_tags($row['comment']))) ?></p>
+						
 					</div>
 					
 					<?php } ?>
@@ -179,8 +187,8 @@ $row = $query->fetch(PDO::FETCH_ASSOC)
 						
 							
 							<textarea name="comment" class="textarea full" placeholder="Comment"></textarea><br />
-							<div class="div-3">
-							<input type="submit" class="btn" name="submit" value="Post" />
+							<div class="div-btn">
+							<input type="submit" class="btn-modern btn-no-margin" name="submit" value="Submit" />
 							</div>
 						</form>
 					</div>

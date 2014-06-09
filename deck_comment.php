@@ -339,10 +339,14 @@ $JSONExport .= "]}";
 					<div class="commentPost scrolls">
 						<h4 class="clearfix"><a class="left" href="<?php echo($main) ?>user/<?php echo($comment['byUser']) ?>"><?php echo(strip_tags($comment['byUser'])) ?></a>
 						
+						
 						<?php $userGuild = $x->getGuild($comment['byUser']) ?>
 						<?php if (!$x->hasGuild($comment['byUser'])) { ?>
 							<div class="left" style="margin-left: 10px;"><img src="<?php echo($userGuild['badge_url']) ?>" height="16px" alt="" /></div>
 						<?php } ?>
+						
+						
+						
 						
 						<?php if (isset($_SESSION['username']) && $_SESSION['rank'] < 3) { ?>
 						<small>
@@ -357,9 +361,14 @@ $JSONExport .= "]}";
 							<input type="submit" class="warBtn" name="" value="Warning<?php if ($comment['Warning'] >= 1) {
 								echo("(".$comment['Warning'].")");
 							} ?>" />
+							
 						</form>
 						</small>
 						<?php } ?>
+						
+						<?php $thisRank = $x->getUserRank($comment['byUser']); ?>
+						<?php $thisUser = $comment['byUser']; ?>
+						<?php include("inc_/icon_comment.php") ?>
 						</h4>
 						<p><?php echo(makeClickableLinks(strip_tags($comment['comment']))) ?></p>
 					</div>
@@ -393,8 +402,8 @@ $JSONExport .= "]}";
 						
 							
 							<textarea name="comment" class="textarea full" placeholder="Comment"></textarea><br />
-							<div class="div-3">
-							<input type="submit" class="btn" name="submit" value="Post" />
+							<div class="div-btn">
+								<input type="submit" class="btn-modern btn-no-margin" name="submit" value="Submit" />
 							</div>
 						</form>
 					</div>

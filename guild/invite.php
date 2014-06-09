@@ -74,7 +74,7 @@
 						<input list="player" name="player" class="textbox full div-1" placeholder="Search player">
 						<datalist id="player">
 						<?php 
-							$query = $db->prepare("SELECT ign FROM accounts");
+							$query = $db->prepare("SELECT ign FROM accounts WHERE guild = 0");
 							$query->execute();
 	
 							while ($player = $query->fetch(PDO::FETCH_ASSOC)) {

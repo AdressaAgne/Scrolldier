@@ -219,9 +219,9 @@ if (!isset($_SESSION['username'])) {
  				<input type="checkbox" name="isHidden" id="isHidden" value="1" />
  				<label for="isHidden">Make deck hidden, so only you can see it (Direct link still works for everyone)</label>
  			</div>
- 			<div class="div-3">
- 				<label for="desc">Write a summary of your deck, how do you play it?</label>
- 				<textarea name="description" class="textarea" id="desc"></textarea>
+ 			<div class="div-4">
+ 				<label for="editor">Write a summary of your deck, how do you play it?</label>
+ 				<textarea name="description" class="ckeditor" id="editor"></textarea>
  			</div>
  			<div class="div-3 div-marign">	
  				<input type="hidden" name="author" value="<?php echo($_SESSION['username']) ?>" />

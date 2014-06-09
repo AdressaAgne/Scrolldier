@@ -57,7 +57,7 @@
 		              
 		              $message = "<div style=\"padding:10px;height:100%;width:100%;display:block;color:#222222;\">
 		              	<img src='http://alpha.scrolldier.com/img/Scrolldier.png' style=\"width: 200px;\" />
-		              	<h2>Passwrod reset</h2>
+		              	<h2>Password reset</h2>
 		              	<p>You or someone else just did a reset on your password</p>
 		              	<p>Your new Password: ".$newpw."</p>
 		              	<p>Click this link to login: <br />

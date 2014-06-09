@@ -1,7 +1,9 @@
 <?php 
 include('admin/mysql/connect.php');
 include('admin/mysql/function.php');
+include('admin/mysql/badges.php');
 $x = new xClass();
+$badge = new badges();
 
 session_start();
 if (isset($_GET['logout'])) {
@@ -132,8 +134,14 @@ if (isset($_POST['submitRename'])) {
 	}
 }
 
+if (isset($_POST['submitAddBadge'])) {
+	$badge->newBadge($_POST['ign'], $_POST['badge'], $_POST['text']);
+}
 
-
+if (isset($_POST['submitDeleteBadge'])) {
+	$badge->deleteBadge($_POST['id']);
+}
+	
  ?>
 
 <!DOCTYPE html>
@@ -141,7 +149,7 @@ if (isset($_POST['submitRename'])) {
 <head>
 	<meta charset="utf-8">
 	<title>Scrolls - Alternative Profile Page</title>
-	<link rel="stylesheet" href="css/style.css" />
+	<link rel="stylesheet" href="<?php echo($main) ?>css/style.css" />
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
 	<link rel="icon" type="image/png" href="img/bunny.png">
 	<!--[if lt IE 9]>
@@ -155,9 +163,12 @@ if (isset($_POST['submitRename'])) {
 	 <?php include('inc_/menu.php'); ?>
 	 
 	 <div class="indexbg fullScreen">
+ <?php if (isset($_SESSION['username']) && ($_SESSION['rank'] <= 2)) { ?>
 	 	<div class="container">
-
-	 			<?php if (isset($_SESSION['username']) && ($_SESSION['rank'] <= 2)) { ?>
+	 		<div class="wall_small">
+	 			<h3 class="modern">General</h3>
+	 			<div class="div-4">
+	 			
 	 					<p>Total Accounts: <?php echo($x->totalAccounts()) ?></p> <br />
 	 					
 	 				    <form method="post" action="">
@@ -171,10 +182,9 @@ if (isset($_POST['submitRename'])) {
 	 				    	<label>Rename files to add .png</label>
 	 				    	<input name="submitRename" type="submit" class="btn-modern" value="Rename">
 	 				    </form>
-	 			<?php  } ?>
+	 				<?php  } ?>
 	 			
-	 				
-	 				<div class="div-3">
+	 			<div class="div-4">
 	 					<h2>Hidden Spoiler Posts</h2>
 	 					<?php $query = $db->prepare("SELECT * FROM scrolls WHERE isHidden=1 ORDER BY time DESC");	
 	 					$query->execute();
@@ -186,9 +196,7 @@ if (isset($_POST['submitRename'])) {
 	 					<?php } ?>
 	 					
 	 				</div>
-	 			
-	 			
-	 				<div class="div-3">
+	 			<div class="div-4">
 	 				<h2>Password resets:</h2>
 	 					<ul>
 	 					<?php $query = $db->prepare("SELECT * FROM resets ORDER BY id DESC");	
@@ -196,24 +204,95 @@ if (isset($_POST['submitRename'])) {
 	 					
 	 					while ($row = $query->fetch(PDO::FETCH_ASSOC)) { ?>
 	 					
-	 						<li>mail: <?php echo($row['mail']) ?>, Username: <?php echo($row['ign']) ?>, IP: <?php echo($row['ip']) ?></li>
+	 						<li><?php echo($row['ign']) ?> @ <?php echo($row['ip']) ?></li>
 	 					
 	 					<?php } ?>
 	 				</ul>
 	 				
 	 				</div>
-	 			
 	 			</div>
-
+	 		</div>
+	 	
+	 	<div class="wall_big">
+	 		<h3 class="modern">Badges</h3>
+	 		<form method="post" action="">
+				<div class="div-4">
+					<div class="div-4">
+						<ul class="badge-icon-admin left">
+							<?php for ($i = 0; $i < $badge->getBadge(0, true); $i++) { ?>
+								<li>
+									<input type="radio" name="badge" id="badge-<?php echo($i) ?>" value="<?php echo($i) ?>" />
+									<label for="badge-<?php echo($i) ?>" class="checkbox"><i class="<?php echo($badge->getBadge($i)) ?>"></i></label>
+								</li>
+							<?php } ?>
+							
+						</ul>
+					</div>
+					<div class="div-4">
+						<input list="player" name="ign" class="textbox span-4" placeholder="Badge for ['ign']">
+						<datalist id="player">
+						<?php 
+							$query = $db->prepare("SELECT ign FROM accounts WHERE guild = 0");
+							$query->execute();
+		
+							while ($player = $query->fetch(PDO::FETCH_ASSOC)) {
+							echo("<option value='".$player['ign']."'>");
+								
+							 } ?>
+						</datalist>
+					</div>
+					<div class="div-4">
+						<input type="text" class="textbox span-4" name="text" value="" placeholder="Badge Text" />
+					</div>
+				</div>
+				<div class="div-4">
+					<input type="submit" name="submitAddBadge" value="Add" class="btn-modern btn-no-margin" />
+				</div>
+			</form>
+	 		
+	 		
+	 		<div class="div-4">
+	 			<table class="div-4">
+	 				<tr>
+	 					<td>Badge</td>
+	 					<td>User</td>
+	 					<td>Text</td>
+	 					<td></td>
+	 				</tr>
+	 				
+	 				<?php $query = $db->prepare("SELECT * FROM badges ORDER BY id DESC");
+	 				$query->execute();
+	 				
+	 				while ($row = $query->fetch(PDO::FETCH_ASSOC)) { ?>
+	 					<tr>
+	 						<td><i class='<?php echo($row['type']) ?>'></i></td>
+	 						<td><?php echo($row['user']) ?></td>
+	 						<td><?php echo($row['text']) ?></td>
+	 						
+	 						<td>
+	 							<form method="post" action="">
+	 								<input type="hidden" name="id" value="<?php echo($row['id']) ?>" />
+	 								<input type="submit" name="submitDeleteBadge" value="Del" class="btn-modern btn-no-margin" />
+	 							</form>
+	 						</td>
+	 						
+	 					</tr>
+	 				<?php } ?>
+	 			</table>
+	 		
+	 		</div>
+	 		
+	 	</div>
+</div>
 				
 			
 			
 
-	 			<?php } else { ?>
-	 				<div class="scrollsHardBack">
-	 					<p>No access!</p>
-	 				</div>
-	 			<?php } ?>
+<?php } else { ?>
+	<div class="scrollsHardBack">
+		<p>No access!</p>
+	</div>
+<?php } ?>
 	 	</div>
 	 </div>
 
