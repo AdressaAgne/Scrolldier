@@ -1,5 +1,5 @@
 <?php
-//header ('Content-Type: image/png');
+header ('Content-Type: image/png');
 set_time_limit(5000);
 
 function get_file_extension($file_name) {
