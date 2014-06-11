@@ -166,10 +166,8 @@ if (isset($_POST['submitDeleteBadge'])) {
  <?php if (isset($_SESSION['username']) && ($_SESSION['rank'] <= 2)) { ?>
 	 	<div class="container">
 	 		<div class="wall_small">
-	 			<h3 class="modern">General</h3>
+	 			<h3 class="modern">Total Accounts: <?php echo($x->totalAccounts()) ?></h3>
 	 			<div class="div-4">
-	 			
-	 					<p>Total Accounts: <?php echo($x->totalAccounts()) ?></p> <br />
 	 					
 	 				    <form method="post" action="">
 	 				    	<label>Update Scroll Library:</label>
@@ -177,12 +175,11 @@ if (isset($_POST['submitDeleteBadge'])) {
 	 				    </form>
 	 				   
 	 				    <?php if ($_SESSION['rank'] == 1) { ?>
-	 				    <br />
 	 				    <form method="post" action="">
 	 				    	<label>Rename files to add .png</label>
 	 				    	<input name="submitRename" type="submit" class="btn-modern" value="Rename">
 	 				    </form>
-	 				<?php  } ?>
+	 					<?php  } ?>
 	 			
 	 			<div class="div-4">
 	 					<h2>Hidden Spoiler Posts</h2>
@@ -252,7 +249,8 @@ if (isset($_POST['submitDeleteBadge'])) {
 	 		
 	 		
 	 		<div class="div-4">
-	 			<table class="div-4">
+	 			<div class="decks">
+	 			<table class="div-4 bg">
 	 				<tr>
 	 					<td>Badge</td>
 	 					<td>User</td>
@@ -279,7 +277,7 @@ if (isset($_POST['submitDeleteBadge'])) {
 	 					</tr>
 	 				<?php } ?>
 	 			</table>
-	 		
+	 		</div>
 	 		</div>
 	 		
 	 	</div>

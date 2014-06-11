@@ -52,6 +52,12 @@ if (isset($_GET['logout'])) {
  				<li><i class='icon-dota'></i><ul><li class='modern'>Zylus</li></ul></li>
  				<li><i class='icon-icecream'></i><ul><li class='modern'>iScrE4m</li></ul></li>
  				
+				<li><i class='icon-matches-2k'></i><ul><li class='modern'>Played over 2000 matches</li></ul></li>
+				<li><i class='icon-matches-1k'></i><ul><li class='modern'>Played over 1000 matches</li></ul></li>
+				<li><i class='icon-ranked-1k'></i><ul><li class='modern'>Won over 1000 ranked matches</li></ul></li>
+				<li><i class='icon-ranked-500'></i><ul><li class='modern'>Won over 500 ranked matches</li></ul></li>
+				<li><i class='icon-lost-1k'></i><ul><li class='modern'>Lost over 1000 matches</li></ul></li>
+ 				
  				
  				<li><i class='icon-1st'></i><ul><li class='modern'>1at place in a tournament</li></ul></li>
  				<li><i class='icon-2nd'></i><ul><li class='modern'>2nd place in a tournament</li></ul></li>

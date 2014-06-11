@@ -16,6 +16,18 @@ RewriteRule ^decks/(([0-9]+/)?(([a-zA-Z0-9]+)?(/(order|energy|growth|decay|wild|
 RewriteRule ^new/deck new_deck_choose.php [L]
 RewriteRule ^beetlestone beetlestone.php [L]
 RewriteRule ^admin admin.php [L]
+RewriteRule ^badges badges.php [L]
+
+RewriteRule ^error error/db.php [L]
+RewriteRule ^scroll/designer u/make.php [L]
+
+RewriteRule ^userImage/([^/.]*)/?$ u/img.php?user=$1 [L]
+
+
+RewriteRule ^scroll/([^/.]*)/([^/.]*)/([^/.]*)/([^/.]*)/([^/.]*)/([^/.]*)/([^/.]*)/([^/.]*)/([^/.]*)?$ u/scroll.php?type=$1&rarity=$2&nr=$3&tier=$4&cardImage=$5&text=$6&scrollType=$7&kin=$8&ap=$9 [L]
+
+RewriteRule ^userAvatar/([^/.]*)/?$ u/avatar.php?user=$1 [L]
+
 
 RewriteRule ^deckbuilder/([^/.]*)/?$ new_deckbuilder.php?deck=$1 [L]
 

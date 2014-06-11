@@ -180,6 +180,7 @@ if (!isset($_SESSION['username'])) {
 			
 			<div class="div-3 div-marign">
 				<label>What meta is this deck designed for</label><br />
+				<label class="select">
 				<select name="meta">
 					<option value="0.123.0">0.123.0 (Latest, Test Server)</option>
 					<option value="0.122.0">0.122.0</option>
@@ -192,6 +193,7 @@ if (!isset($_SESSION['username'])) {
 					<option value="0.103">0.103</option>
 					<option value="0.97">0.97</option>
 				</select>
+				</label>
  			</div>
  			<div class="div-3">
  				<input type="checkbox" name="comp" id="comp" value="1" />

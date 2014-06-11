@@ -53,19 +53,6 @@ if (isset($_POST['submitInvite'])) {
 	}
 }
 
-
-$query = $db->prepare("SELECT * FROM decks WHERE deck_author = :ign
-					   ORDER BY isHidden DESC,
-					   meta DESC, vote DESC,
-					   time DESC");
-
-$arr = array(
-		'ign' => $user['ign']
-	);
-$x->arrayBinder($query, $arr);
-
-
-$query->execute();
 	
 //http://a.scrollsguide.com/player?name=orangee&achievements&fields=all&avatar
 $url = "http://a.scrollsguide.com/player?name=".$user['ign']."&achievements&fields=all&avatar";
@@ -101,7 +88,7 @@ if ($data['msg'] == "success") {
 
 //$data['data']['achievements'][$j]['aID'] == $achiv['data'][$i]['id']
 
-	
+if ($data['msg'] == "success") { 	
 $userAchives = array();
 
 for ($i = 0; $i < count($data['data']['achievements']); $i++) {
@@ -130,6 +117,7 @@ for ($i = 0; $i < count($data['data']['achievements']); $i++) {
  	}
 }
 
+}
 function getBadgeName($id) {
 	$badgeNames = array("Adventurer", "Adept", "Trickster", "Sorcerer", "Apprentice Caller", "Caller", "Accomplished Caller", "Master Caller", "Exalted Caller", "Grand Master", "Aspect-Commander", "Ascendant");
 	
@@ -216,6 +204,11 @@ $userStats['ratio'] = round($userStats['won'] / $userStats['played'] * 100, 1);
 						</div>
 					<?php } ?>
 					
+				</div>
+				
+				<div class="div-4">
+					<p>Embed Profile (html)</p>
+					<textarea readonly="readonly" class="exportBox"><a href="http://scrolldier.com/user/<?php echo($user['ign']) ?>"><img src="http://scrolldier.com/userImage/<?php echo($user['ign']) ?>" alt="<?php echo($user['ign']) ?>'s Profile" /></a></textarea>
 				</div>			
 				
 				<!--if ($data['data']['achievements'][$j]['aID'] == $achiv['data'][$i]['id']) {-->
@@ -371,7 +364,21 @@ $userStats['ratio'] = round($userStats['won'] / $userStats['played'] * 100, 1);
 								<td>Name</td>
 								<td width="120px">Type</td>
 							</tr>
-							<?php while ($deck = $query->fetch(PDO::FETCH_ASSOC)) { ?>
+							<?php 
+							$query = $db->prepare("SELECT * FROM decks WHERE deck_author = :ign
+												   ORDER BY isHidden DESC,
+												   meta DESC, vote DESC,
+												   time DESC");
+							
+							$arr = array(
+									'ign' => $user['ign']
+								);
+							$x->arrayBinder($query, $arr);
+							
+							
+							$query->execute();
+							
+							while ($deck = $query->fetch(PDO::FETCH_ASSOC)) { ?>
 							
 							<?php if ($deck['isHidden'] == 0) { ?>
 							

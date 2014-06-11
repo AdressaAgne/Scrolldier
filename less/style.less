@@ -219,8 +219,8 @@ body{
 	float: left;
 	width: 450px;
 	font-size: 16px;
-	background-color: #f8f8f8;
-	border: 1px solid #f8f8f8;
+	background-color: #dedede;
+	border: 1px solid #cdcdcd;
 	color: #262626;
 	padding: 5px 10px;
 
@@ -234,6 +234,52 @@ body{
 		padding: 20px;
 	}
 }
+select {
+	font-family: 'Open Sans';
+    padding: 7px 10px;
+    height: 30px;
+    margin: 0;
+    border-radius:1px;
+    background: #dedede;
+    color:#888;
+    border:none;
+    outline:none;
+    color: #222;
+    display: inline-block;
+    -webkit-appearance: none;
+    -moz-appearance: none !important;
+ 	appearance: none;
+    cursor: pointer;
+    min-width: 200px;
+}
+
+label.select {position:relative}
+label.select:after {
+    content:'≻';
+    font: 14px 'Open Sans';
+    color: #aaa;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+    right: 3px; top: 0px;
+	padding: 0px 9px 3px 11px;
+    border-bottom: 1px solid #bdbdbd;
+    position: absolute;
+    pointer-events: none;
+}
+label.select:before {
+    content:'';
+    right:4px;
+    top: -2.5px;
+    width:25px; height: 30px;
+    background:#dedede;
+    /* dedede */
+    position:absolute;
+    pointer-events:none;
+    display:block;
+}
+
 label{
 	color: #f8f8f8;
 	margin-bottom: 3px;
@@ -251,14 +297,16 @@ label{
 		}
 	}
 }
+
+
 .textarea{
 	display: inline-block;
 	float: left;
 	width: 100%;
 	font-size: 16px;
 	height: 100px;
-	background-color: #f8f8f8;
-	border: 1px solid #f8f8f8;
+	background-color: #dedede;
+	border: 1px solid #cdcdcd;
 	color: #262626;
 	padding: 10px;
 
@@ -979,8 +1027,8 @@ h4{
 	height: 450px;
 	overflow: hidden;
 }
-.decks{
-	& table{
+
+.decks table{
 		width: 100%;
 		border-collapse: collapse;
 		
@@ -1024,7 +1072,7 @@ h4{
 			}
 		}
 	}
-}
+
 
 @media (max-width: 1074px) {
 	.containerNarrow{
@@ -1406,6 +1454,56 @@ i.icon-icecream{
 	
 	background-image: url('../resources/badges/icecream.png');
 }
+
+i.icon-matches-2k{
+	width: @icon-badge;
+	height: @icon-badge;
+	margin-bottom: -10px;
+	background-size: @icon-badge @icon-badge;
+	
+	background-image: url('../resources/badges/1kMatches.png');
+}
+i.icon-matches-1k{
+	width: @icon-badge;
+	height: @icon-badge;
+	margin-bottom: -10px;
+	background-size: @icon-badge @icon-badge;
+	
+	background-image: url('../resources/badges/500Matches.png');
+}
+
+
+i.icon-ranked-1k{
+	width: @icon-badge;
+	height: @icon-badge;
+	margin-bottom: -10px;
+	background-size: @icon-badge @icon-badge;
+	
+	background-image: url('../resources/badges/1Kranked.png');
+}
+
+i.icon-ranked-500{
+	width: @icon-badge;
+	height: @icon-badge;
+	margin-bottom: -10px;
+	background-size: @icon-badge @icon-badge;
+	
+	background-image: url('../resources/badges/500ranked.png');
+}
+
+i.icon-lost-1k{
+	width: @icon-badge;
+	height: @icon-badge;
+	margin-bottom: -10px;
+	background-size: @icon-badge @icon-badge;
+	
+	background-image: url('../resources/badges/lost.png');
+}
+
+
+
+
+
 
 
 i.icon-win-most{

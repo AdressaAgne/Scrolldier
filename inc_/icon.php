@@ -43,6 +43,25 @@
  	echo("<li><i class='".$row['type']."'></i><ul><li class='modern'>".$row['text']."</li></ul></li>");
  }
  
+// $userStats['played'] matches palyed
+// $userStats['ranked'] ranked matches won
+// $userStats['lost'] matches lost
+
+ if ($userStats['played'] >= 2000) {
+ 	echo("<li><i class='icon-matches-2k'></i><ul><li class='modern'>Played over 2000 matches</li></ul></li>");
+ } elseif ($userStats['played'] >= 1000) {
+ 	echo("<li><i class='icon-matches-1k'></i><ul><li class='modern'>Played over 1000 matches</li></ul></li>");
+ }
+ 
+ if ($userStats['ranked'] >= 1000) {
+ 	echo("<li><i class='icon-ranked-1k'></i><ul><li class='modern'>Won over 1000 ranked matches</li></ul></li>");
+ } elseif ($userStats['ranked'] >= 500) {
+ 	echo("<li><i class='icon-ranked-500'></i><ul><li class='modern'>Won over 500 ranked matches</li></ul></li>");
+ }
+ 
+ if ($userStats['lost'] >= 1000) {
+ 	echo("<li><i class='icon-lost-1k'></i><ul><li class='modern'>Lost over 1000 matches</li></ul></li>");
+ }
  
 
 ?></ul>
