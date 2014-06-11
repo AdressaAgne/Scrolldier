@@ -1,5 +1,9 @@
 <?php
-header ('Content-Type: image/png');
+include('../admin/mysql/connect.php');
+include('../admin/mysql/function.php');
+$xClass = new xClass();
+
+session_start();
 
 
 $width = 512;
@@ -14,7 +18,8 @@ function getBack($type, $rarity = 0) {
 	 "scroll/scrolls__scrollbase_energy_".$rarity."_result.png",
 	 "scroll/scrolls__scrollbase_growth_".$rarity."_result.png",
 	 "scroll/scrolls__scrollbase_order_".$rarity."_result.png",
-	 "scroll/scrolls__scrollbase_order_".$rarity."_result.png"
+	 "scroll/scrolls__scrollbase_order_".$rarity."_result.png",
+	 "scroll/scrolls__scrollbase_Chaos_".$rarity."_result.png"
 	);
 	
 	return $scroll[$type];
@@ -54,7 +59,8 @@ function getRType($i = 0) {
 	 "scroll/256_energy_result.png",
 	 "scroll/256_growth_result.png",
 	 "scroll/256_order_result.png",
-	 "scroll/256_special_result.png"
+	 "scroll/256_special_result.png",
+	 "scroll/256_chaos_result.png"
 	);
 	return $scroll[$i];
 }
@@ -134,9 +140,14 @@ if ($_POST['tier'] != 0) {
 imagecopyresampled($bg, $plate, 200, 0, 0, 0, $plateWidth, $plateWidth/2, 512, 256);
 
 //ressource
-imagecopyresampled($bg, $type, 225, 7, 0, 0, 64, 64, 256, 256);
 
 
+
+if ($_POST['type'] == 5) {
+	imagecopyresampled($bg, $type, 225, 11, 0, 0, 60, 56, 141, 124);
+} else {
+	imagecopyresampled($bg, $type, 225, 7, 0, 0, 64, 64, 256, 256);
+}
 //cost
 imagecopyresampled($bg, $number, 290, $offset+5, 0, 0, imageSX($number)*.8, imageSY($number)*.8, imageSX($number), imageSY($number));
 
@@ -217,14 +228,55 @@ if (!empty($_POST['pas'])) {
 
 imagettftext($bg, $genral_fontsize, 0, 100, intval(600+$breadTextOffset), $header_color, $genral_font, wordwrap($_POST['de'], 40, "\n"));
 	
+	
+	$userDir = strtolower($_SESSION['username']);
+	$destDir = "user_files/".$userDir."/";
+	
+	
+	if (!is_dir($destDir)) {
+		mkdir($destDir, 0777);
+	}
+	
+	
+	$imageName = uniqid();
+	$path = $destDir.$imageName.".png";
+	$parmaLink = $main."u/".$path;
+	
+	$scroll_Query = $db->prepare("INSERT INTO fanScrolls 
+	(user, parma_link, link, ressource, rarity, type, sub_type, title, cost, tier, art, ap, cd, hp, passive_1, passive_2, passive_3, description) VALUES
+	(:ign, :pLink, :Link, :ressource, :rarity, :type, :sub_type, :title, :cost, :tier, :art, :ap, :cd, :hp, :passive_1, :passive_2, :passive_3, :description)");
+	
 
-
-
-
-
-imagepng($bg);
-
-imagedestroy($bg);
-
+	$scroll_Array = array(
+			'ign' => $_SESSION['username'],
+			'pLink' => $parmaLink,
+			'Link' => $imageName,
+			'ressource' => $_POST['type'],
+			'rarity' => $_POST['rarity'],
+			'type' => $_POST['scrollType'],
+			'sub_type' => $_POST['kin'],
+			'title' => $_POST['text'],
+			'cost' => $_POST['nr'],
+			'tier' => $_POST['tier'],
+			'art' => $_POST['cardImage'],
+			'ap' => $_POST['ap'],
+			'cd' => $_POST['cd'],
+			'hp' => $_POST['hp'],
+			'passive_1' => $_POST['p'],
+			'passive_2' => $_POST['pa'],
+			'passive_3' => $_POST['pas'],
+			'description' => $_POST['de']
+			
+		); 
+	
+	$xClass->arrayBinder($scroll_Query, $scroll_Array);
+	
+		if ($scroll_Query->execute()) {
+			imagepng($bg, $path);
+			imagedestroy($bg);
+			header("location: ".$main."fanart/".$imageName);			
+		}
+	
+	
 
 ?>

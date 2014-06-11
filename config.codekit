@@ -161,6 +161,15 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
+	"\/css\/cardImages.css": {
+		"fileType": 16,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/css\/cardImages.css",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/css\/master.css": {
 		"fileType": 16,
 		"ignore": 1,
@@ -1293,6 +1302,26 @@
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 1
+		},
+	"\/less\/cardImages.less": {
+		"allowInsecureImports": 0,
+		"createSourceMap": 0,
+		"disableJavascript": 0,
+		"fileType": 1,
+		"ieCompatibility": 1,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/less\/cardImages.less",
+		"outputAbbreviatedPath": "\/css\/cardImages.css",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 0,
+		"relativeURLS": 0,
+		"shouldRunAutoprefixer": 0,
+		"shouldRunBless": 0,
+		"strictImports": 0,
+		"strictMath": 0,
+		"strictUnits": 0
 		},
 	"\/less\/style.less": {
 		"allowInsecureImports": 0,
@@ -10685,15 +10714,6 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/u\/betaSignup.php": {
-		"fileType": 8192,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/u\/betaSignup.php",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
-		},
 	"\/u\/edit.php": {
 		"fileType": 8192,
 		"ignore": 0,
@@ -10747,6 +10767,17 @@
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
+		},
+	"\/u\/scroll\/256_chaos_result.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 19391,
+		"inputAbbreviatedPath": "\/u\/scroll\/256_chaos_result.png",
+		"outputAbbreviatedPath": "\/u\/scroll\/256_chaos_result.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
 		},
 	"\/u\/scroll\/256_decay_result.png": {
 		"fileType": 32768,
@@ -10953,6 +10984,39 @@
 		"initialSize": 24000,
 		"inputAbbreviatedPath": "\/u\/scroll\/scrolls__resource_cost_result.png",
 		"outputAbbreviatedPath": "\/u\/scroll\/scrolls__resource_cost_result.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/u\/scroll\/scrolls__scrollbase_Chaos_0_result.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 366254,
+		"inputAbbreviatedPath": "\/u\/scroll\/scrolls__scrollbase_Chaos_0_result.png",
+		"outputAbbreviatedPath": "\/u\/scroll\/scrolls__scrollbase_Chaos_0_result.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/u\/scroll\/scrolls__scrollbase_Chaos_1_result.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 416515,
+		"inputAbbreviatedPath": "\/u\/scroll\/scrolls__scrollbase_Chaos_1_result.png",
+		"outputAbbreviatedPath": "\/u\/scroll\/scrolls__scrollbase_Chaos_1_result.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/u\/scroll\/scrolls__scrollbase_Chaos_2_result.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 414905,
+		"inputAbbreviatedPath": "\/u\/scroll\/scrolls__scrollbase_Chaos_2_result.png",
+		"outputAbbreviatedPath": "\/u\/scroll\/scrolls__scrollbase_Chaos_2_result.png",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 0
@@ -11228,6 +11292,48 @@
 		"initialSize": 2554,
 		"inputAbbreviatedPath": "\/u\/scroll\/yellow_9_result.png",
 		"outputAbbreviatedPath": "\/u\/scroll\/yellow_9_result.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/u\/spriteMaker.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/u\/spriteMaker.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
+	"\/u\/thingy.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 795482,
+		"inputAbbreviatedPath": "\/u\/thingy.png",
+		"outputAbbreviatedPath": "\/u\/thingy.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/u\/user_files\/5398b82e3fc81.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 794656,
+		"inputAbbreviatedPath": "\/u\/user_files\/5398b82e3fc81.png",
+		"outputAbbreviatedPath": "\/u\/user_files\/5398b82e3fc81.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/u\/user_files\/thingy.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 795482,
+		"inputAbbreviatedPath": "\/u\/user_files\/thingy.png",
+		"outputAbbreviatedPath": "\/u\/user_files\/thingy.png",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 0

@@ -40,14 +40,21 @@
 						<?php } else { ?>
 							<li><a href="<?php echo($main) ?>new_spoiler.php">New Spoiler</a></li>
 						<?php } ?>
-					<?php } ?>
-					
-					
-					<?php if ($thisPage == "/feedback.php") { ?>
-						<li class="active"><a href="<?php echo($main) ?>feedback.php">Feedback</a></li>
 					<?php } else { ?>
-						<li><a href="<?php echo($main) ?>feedback.php">Feedback</a></li>
+						<?php if ($thisPage == "/feedback.php") { ?>
+							<li class="active"><a href="<?php echo($main) ?>feedback.php">Feedback</a></li>
+						<?php } else { ?>
+							<li><a href="<?php echo($main) ?>feedback.php">Feedback</a></li>
+						<?php } ?>
 					<?php } ?>
+					
+					
+					<?php if ($thisPage == "/u/make.php") { ?>
+						<li class="active"><a href="<?php echo($main) ?>scroll/designer">Make Scroll</a></li>
+					<?php } else { ?>
+						<li><a href="<?php echo($main) ?>scroll/designer">Make Scroll</a></li>
+					<?php } ?>
+					
 				</ul>
 		
 		

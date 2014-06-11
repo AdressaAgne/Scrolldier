@@ -447,6 +447,34 @@ $userStats['ratio'] = round($userStats['won'] / $userStats['played'] * 100, 1);
 					<?php } ?>
 				</div>
 			</div>
+			
+				
+				<?php 
+						
+				$fan_query = $db->prepare("SELECT * FROM fanScrolls WHERE user=:ign");	
+					
+				$fan_arr = array(
+						'ign' => $user['ign']
+					);
+				$x->arrayBinder($fan_query, $fan_arr);
+					
+				$fan_query->execute();
+						
+				?>
+						
+			<?php if ($fan_query->rowCount() != 0) { ?>
+			<div class="div-4">
+				<h3>Fan Art Made:</h3>
+				<?php while ($fanScroll = $fan_query->fetch(PDO::FETCH_ASSOC)) { ?>
+					<div class="span-2">
+						<a href="<?php echo($main."fanart/".$fanScroll['link']); ?>">
+						<img src="<?php echo($fanScroll['parma_link']); ?>" class="div-4" alt="" />
+						</a>
+					</div>
+				<?php }  ?>
+				</div>
+			<?php } ?>
+			
 		</div>
 	</div>
 <?php include("../inc_/footer.php"); ?>

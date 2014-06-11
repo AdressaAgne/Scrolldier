@@ -1,14 +1,17 @@
 <?php 
-//include('../admin/mysql/connect.php');
-//include('../admin/mysql/function.php');
-//$x = new xClass();
-//
-//
-//session_start();
-//if (isset($_GET['logout'])) {
-//	$x->logout();
-//}
-$main = "http://$_SERVER[HTTP_HOST]/";
+include('../admin/mysql/connect.php');
+include('../admin/mysql/function.php');
+$x = new xClass();
+
+
+session_start();
+if (isset($_GET['logout'])) {
+	$x->logout();
+}
+if (!isset($_SESSION['username'])) {
+	$actual_link = $_SERVER['REQUEST_URI'];
+	header("location: ../login.php?re=".$actual_link);
+}
 	
  ?>
 
@@ -28,10 +31,9 @@ $main = "http://$_SERVER[HTTP_HOST]/";
 		
 </head>
 <body>
-
-	 <!--http://localhost/u/scroll.php?type=1&rarity=1&nr=4&tier=0&cardImage=1083&text=Header&scrollType=1&ap=5&hp=4&ac=4&p1=passive1&p2=passive2&p3=passive3&d=Description-->
+<?php include('../inc_/menu.php'); ?>
 	 <div class="container">
-	 	<form method="post" action="scroll.php">
+	 	<form method="post" action="<?php echo($main) ?>u/scroll.php">
 	 		<div class="div-4">
 	 			<p>Resource</p>
 	 			
@@ -52,6 +54,14 @@ $main = "http://$_SERVER[HTTP_HOST]/";
 						<li>
 							<input type="radio" name="type" id="badge-3" value="3" />
 							<label for="badge-3" class="checkbox"><i class="icon-order"></i></label>
+						</li>
+						<li>
+							<input type="radio" name="type" id="badge-4" value="4" />
+							<label for="badge-4" class="checkbox"><i class="icon-wild"></i></label>
+						</li>
+						<li>
+							<input type="radio" name="type" id="badge-5" value="5" />
+							<label for="badge-5" class="checkbox"><img src="<?php echo($main) ?>u/scroll/256_chaos_result.png" alt="" width="26" /></label>
 						</li>
 	 				
 	 			</ul>
@@ -99,7 +109,7 @@ $main = "http://$_SERVER[HTTP_HOST]/";
 		 					<input type="radio" <?php if ($i == 0) {
 		 						echo("checked");
 		 					} ?>  name="cardImage" id="art-<?php echo($i) ?>" value="spoilerArt/<?php echo($i) ?>" />
-		 					<label for="art-<?php echo($i) ?>" class="checkbox"><img src="../resources/cardImages/spoilerArt/<?php echo($i) ?>.png" alt="" width="50px"/></label>
+		 					<label for="art-<?php echo($i) ?>" class="checkbox"><img src="../resources/cardImages/spoilerArt/<?php echo($i) ?>.png" alt="" width="100px"/></label>
 		 				</li>
 		 			
 		 		
@@ -121,18 +131,18 @@ $main = "http://$_SERVER[HTTP_HOST]/";
 		 		<input type="text" class="textbox div-2" name="kin" value="" placeholder="Sub-Type"/>
 		 		
 			</div>
-			<div class="div-4">
+			<div class="div-4" id="stats">
 				<div class="span-2">
 					<p>Attack</p>
 					<input type="number" class="textbox div-2" name="ap" value="1" min="-1" max="9" placeholder="Attack"/>
 				</div>
 				<div class="span-2">
-					<p>Health</p>
-					<input type="number" class="textbox div-2" name="hp" value="1" min="-1" max="9" placeholder="Health"/>
-				</div>
-				<div class="span-2">
 					<p>Countdown</p>
 					<input type="number" class="textbox div-2" name="cd" value="1" min="-1" max="9" placeholder="Countdown"/>
+				</div>
+				<div class="span-2">
+					<p>Health</p>
+					<input type="number" class="textbox div-2" name="hp" value="1" min="-1" max="9" placeholder="Health"/>
 				</div>
 			</div>
 			<div class="div-4">	
@@ -158,6 +168,18 @@ $main = "http://$_SERVER[HTTP_HOST]/";
 	 
 	 </div>
 
+<?php include('../inc_/footer.php'); ?>
+<script>
+$(function() {
+	$("input[name=scrollType]:radio").change(function () {
+		if ($(this).val() < 2) {
+			$("#stats").slideDown();
+		} else {
+			$("#stats").slideUp();
+		}
+	});
+});
 
+</script>
 </body>
 </html

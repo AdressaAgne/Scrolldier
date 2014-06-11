@@ -19,6 +19,9 @@ RewriteRule ^admin admin.php [L]
 RewriteRule ^badges badges.php [L]
 
 RewriteRule ^error error/db.php [L]
+
+RewriteRule ^fanart/([^/.]*)/?$ u/viewScroll.php?image=$1 [L]
+
 RewriteRule ^scroll/designer u/make.php [L]
 
 RewriteRule ^userImage/([^/.]*)/?$ u/img.php?user=$1 [L]
