@@ -2,9 +2,6 @@
 header ('Content-Type: image/png');
 set_time_limit(5000);
 
-
-
-
 function get_file_extension($file_name) {
 	return substr(strrchr($file_name,'.'),1);
 }
@@ -27,11 +24,11 @@ $imageCount = count($files);
 $w = 100;
 $h = $w*.75;
 $y = 0;
-$break = round(sqrt(count($files)), PHP_ROUND_HALF_UP);
+$break = intval(round(sqrt(count($files)), PHP_ROUND_HALF_UP));
 
 
 
-$bg = @imagecreatetruecolor($break*$w, $break*$h)
+$bg = @imagecreatetruecolor(($break*$w)+$w, ($break*$h)+$h)
     or die("Cannot Initialize new GD image stream");
 
 
