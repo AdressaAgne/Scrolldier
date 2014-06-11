@@ -26,9 +26,9 @@ $h = $w*.75;
 $y = 0;
 $break = intval(sqrt($imageCount));
 
-print(count($files)."-");
-
-print($break);
+//print(count($files)."-");
+//
+//print($break);
 
 $bg = @imagecreatetruecolor(($break*$w)+$w, ($break*$h)+$h)
     or die("Cannot Initialize new GD image stream");
@@ -37,40 +37,40 @@ $bg = @imagecreatetruecolor(($break*$w)+$w, ($break*$h)+$h)
 
 //print_r($files);
 
-//for ($i = 0; $i < $imageCount; $i++) {
-//	
-//	if (get_file_extension($files[$i]) == "png") {
-//	
-//	for ($j = 0; $j < $imageCount/$break; $j++) {
-//		
-//		if ($i >= $break*$j) {
-//			$y2 = $h*$j;
-//			$x = 100*($i-($break*$j));	
-//			
-//			$img = imagecreatefrompng($dir.$files[$i]);
-//			imagecopyresampled($bg, $img, $x, $y2, 0, 0, $w, $h, 300, 225);
-//			imagedestroy($img);
-//			
-//		} else {
-//			$y2 = 0;
-//			$x = 100*$i;
-//			
-//			$img = imagecreatefrompng($dir.$files[$i]);
-//			imagecopyresampled($bg, $img, $x, $y2, 0, 0, $w, $h, 300, 225);
-//			imagedestroy($img);
-//
-//		}
-//		
-//	}
-//	
-//	}
-//	
-//}
+for ($i = 0; $i < $imageCount; $i++) {
+	
+	if (get_file_extension($files[$i]) == "png") {
+	
+	for ($j = 0; $j < $imageCount/$break; $j++) {
+		
+		if ($i >= $break*$j) {
+			$y2 = $h*$j;
+			$x = 100*($i-($break*$j));	
+			
+			$img = imagecreatefrompng($dir.$files[$i]);
+			imagecopyresampled($bg, $img, $x, $y2, 0, 0, $w, $h, 300, 225);
+			imagedestroy($img);
+			
+		} else {
+			$y2 = 0;
+			$x = 100*$i;
+			
+			$img = imagecreatefrompng($dir.$files[$i]);
+			imagecopyresampled($bg, $img, $x, $y2, 0, 0, $w, $h, 300, 225);
+			imagedestroy($img);
+
+		}
+		
+	}
+	
+	}
+	
+}
 
 
-//imagepng($bg);
-//
-//imagedestroy($bg);
+imagepng($bg);
+
+imagedestroy($bg);
 
 
 ?>
