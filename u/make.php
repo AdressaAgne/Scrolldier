@@ -73,9 +73,9 @@ if (!isset($_SESSION['username'])) {
 			</div>
 	 		<div class="div-4">
 	 			<p>Rarity</p>
-		 		<input type="radio" name="rarity" value="0" id="rarity-1" /><label for="rarity-1"> Common</label>
-		 		<input type="radio" checked="" name="rarity" value="1" id="rarity-2" /><label for="rarity-2"> Uncommon</label>
-		 		<input type="radio" name="rarity" value="2" id="rarity-3" /><label for="rarity-3"> Rare</label>
+		 		<input type="radio" name="rarity" value="0" id="rarity-1" /><label class="hand" for="rarity-1"> Common</label>
+		 		<input type="radio" checked="" name="rarity" value="1" id="rarity-2" /><label class="hand" for="rarity-2"> Uncommon</label>
+		 		<input type="radio" name="rarity" value="2" id="rarity-3" /><label class="hand" for="rarity-3"> Rare</label>
 		 	</div>
 		 	<div class="div-4">
 		 		<div class="span-2">
@@ -101,15 +101,17 @@ if (!isset($_SESSION['username'])) {
 		 	</div>
 		 	<div class="div-4">
 		 		<p>Art</p>
-		 		<ul class="badge-icon-admin">
+		 		<ul class="badge-icon-scroll">
 		 	
 		 		
-		 		<?php for ($i = 0; $i < 16; $i++) { ?>
+		 		<?php for ($i = 0; $i < 17; $i++) { ?>
 		 				<li>
 		 					<input type="radio" <?php if ($i == 0) {
 		 						echo("checked");
 		 					} ?>  name="cardImage" id="art-<?php echo($i) ?>" value="spoilerArt/<?php echo($i) ?>" />
-		 					<label for="art-<?php echo($i) ?>" class="checkbox"><img src="../resources/cardImages/spoilerArt/<?php echo($i) ?>.png" alt="" width="100px"/></label>
+		 					
+		 					<label for="art-<?php echo($i) ?>" class="checkbox" style="background-image: url(../resources/cardImages/spoilerArt/<?php echo($i) ?>.png);">
+		 					</label>
 		 				</li>
 		 			
 		 		
@@ -122,9 +124,9 @@ if (!isset($_SESSION['username'])) {
 		 		<p>Type</p>
 
 		 		<input type="radio" checked="" name="scrollType" value="0" id="scrollType-0" /><label for="scrollType-0"> Creature</label>
-		 		<input type="radio" name="scrollType" value="1" id="scrollType-1" /><label for="scrollType-1"> Structure</label>
-		 		<input type="radio" name="scrollType" value="2" id="scrollType-2" /><label for="scrollType-2"> Spell</label>
-		 		<input type="radio" name="scrollType" value="3" id="scrollType-3" /><label for="scrollType-3"> Enchantment</label>	 		
+		 		<input type="radio" name="scrollType" value="1" id="scrollType-1" /><label class="hand" for="scrollType-1"> Structure</label>
+		 		<input type="radio" name="scrollType" value="2" id="scrollType-2" /><label class="hand" for="scrollType-2"> Spell</label>
+		 		<input type="radio" name="scrollType" value="3" id="scrollType-3" /><label class="hand" for="scrollType-3"> Enchantment</label>	 		
 		 	</div>
 		 	<div class="div-4">
 		 		<p>Sub-Type</p>
@@ -145,22 +147,40 @@ if (!isset($_SESSION['username'])) {
 					<input type="number" class="textbox div-2" name="hp" value="1" min="-1" max="9" placeholder="Health"/>
 				</div>
 			</div>
-			<div class="div-4">	
-				<p>Trait 1</p>
-				<input type="text" class="textbox div-2" name="p" value="" placeholder="Trait 1"/>
-			</div>
 			<div class="div-4">
-				<p>Trait 2</p>
-				<input type="text" class="textbox div-2"  name="pa" value="" placeholder="Trait 2"/>
+				<div class="span-2">	
+					<p>Trait 1</p>
+					<input type="text" class="textbox div-2" name="p" value="" placeholder="Trait 1"/>
+				</div>
+				<div class="span-2">
+					<p>Trait 2</p>
+					<input type="text" class="textbox div-2"  name="pa" value="" placeholder="Trait 2"/>
+				</div>
+				<div class="span-2">
+					<p>Trait 3</p>
+					<input type="text" class="textbox div-2" name="pas" value="" placeholder="Trait 3"/>
+				</div>
 			</div>
+			
 			<div class="div-4">
-				<p>Trait 3</p>
-				<input type="text" class="textbox div-2" name="pas" value="" placeholder="Trait 3"/>
+				<input type="checkbox" name="Ability_btn" id="Ability_btn" value="btn" />
+				<label class="hand" for="Ability_btn">Add ability button</label>
+				<div class="div-4 div-no-margin hidden" id="Ability_input">
+					<p>Button text</p>
+					<input type="text" class="textbox" name="Ability_btn_true" value="" placeholder="Button text" />
+				</div>
 			</div>
+			
 			<div class="div-3">
 				<p>Description</p>
 				<textarea name="de" class="textarea"  placeholder="Desciption"></textarea>
 			</div>
+			
+			<!--<div class="div-3">
+				<p>Lore</p>
+				<textarea name="lore" class="textarea"  placeholder="Lore"></textarea>
+			</div>-->
+			
 			<div class="div-4">
 				<input type="submit" name="" class="btn-modern btn-no-margin" value="Make" />
 			</div>
@@ -176,6 +196,15 @@ $(function() {
 			$("#stats").slideDown();
 		} else {
 			$("#stats").slideUp();
+		}
+	});
+	
+	
+	$("#Ability_btn").change(function () {
+		if ($(this).is(":checked")) {
+			$("#Ability_input").slideDown();
+		} else {
+			$("#Ability_input").slideUp();
 		}
 	});
 });

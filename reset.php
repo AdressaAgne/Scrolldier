@@ -160,6 +160,9 @@
 				<input type="submit" name="submit" class="btn" value="Send me a new password" />
 			</div>
 		</form>
+		<div class="div-4">
+			<p>If u know you got an account, and this is not working for you Please send a mail to <a href="mailto:support@scrolldier.com">support@scrolldier.com</a>, or ping Orangee on IRC</p>
+		</div>
 	</div>
 <?php include("inc_/footer.php"); ?>
 </body>

@@ -857,21 +857,6 @@ function deckVote($id, $value=true, $user) {
 			return($this->errorHandle($e));
 		}
 	}
-	function delUser($id) {
-		include('connect.php');
-		$query = $db->prepare("DELETE FROM accounts where id = :id");
-		$arr = array(
-				'id' => $id
-			);
-		
-		$this->arrayBinder($query, $arr);
-		try {
-			$query->execute();
-						
-		} catch (PDOException $e) {
-			return($this->errorHandle($e));
-		}
-	}
 	
 	function login($username, $password) {
 		include('connect.php');

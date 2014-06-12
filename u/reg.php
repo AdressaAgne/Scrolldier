@@ -28,8 +28,6 @@
 		};
 	}
 	
-	//http://a.scrollsguide.com/player?name=IGN&avatar
-	
 	if (isset($_POST['ign']) && isset($_POST['mail'])) {
 	
 		//POST values ign, mail, key, pw, pwa
@@ -170,7 +168,7 @@
 					<form method="post" action="">
 						<div class="div-1 div-margin">
 							<label for="ign">In Game Name</label><br />
-							<input type="text" class="textbox full div-2" name="lign" id="ign" value="" placeholder="In Game Name" />
+							<input type="text"  class="textbox full div-2" name="lign" id="ign" value="" placeholder="In Game Name" />
 						</div>
 						<div class="div-1 div-margin">
 							<label for="lpassword">Password</label><br />

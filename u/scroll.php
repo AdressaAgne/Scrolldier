@@ -2,7 +2,7 @@
 include('../admin/mysql/connect.php');
 include('../admin/mysql/function.php');
 $xClass = new xClass();
-
+//header ('Content-Type: image/png');
 session_start();
 
 
@@ -118,6 +118,7 @@ $header_font = "font.ttf";
 
 $header_color = imagecolorallocate($bg, 61, 43, 33);
 $text_color = imagecolorallocate($bg, 248, 248, 248);
+$btn_color = imagecolorallocate($bg, 255, 255, 255);
 
 $header_fontsize = 40;
 $fontsize = 25;
@@ -189,14 +190,24 @@ $statTable = imagecreatefrompng("scroll/scrolls__statsbar_result.png");
 $statTableW = 420;
 $statTableStart = 74;
 imagecopyresampled($bg, $statTable, 73, $offset+460, 0, 0, $statTableW, $statTableW * .25, 1024, 256);
-	
+
+if (empty($_POST['ap'])) {
+	$_POST['ap'] = -1;
+}
+if (empty($_POST['cd'])) {
+	$_POST['cd'] = -1;
+}
+if (empty($_POST['hp'])) {
+	$_POST['hp'] = -1;
+}
+
 $ap = imagecreatefrompng(getNumber($_POST['ap']));
 imagecopyresampled($bg, $ap, $statTableStart+85, 500, 0, 0, 38, 38, 128, 128);	
 	
-$hp = imagecreatefrompng(getNumber($_POST['hp']));
+$hp = imagecreatefrompng(getNumber($_POST['cd']));
 imagecopyresampled($bg, $hp, $statTableStart+210, 500, 0, 0, 38, 38, 128, 128);	
 
-$cd = imagecreatefrompng(getNumber($_POST['cd']));
+$cd = imagecreatefrompng(getNumber($_POST['hp']));
 imagecopyresampled($bg, $cd, $statTableStart+330, 500, 0, 0, 38, 38, 128, 128);	
 }
 
@@ -204,31 +215,71 @@ imagecopyresampled($bg, $cd, $statTableStart+330, 500, 0, 0, 38, 38, 128, 128);
 $genral_font = "honeymeadbold.ttf";
 $genral_font_i = "honeymeadbolditalic.ttf";
 
-$genral_fontsize = 22;
+$genral_fontsize = 24;
 
 $breadTextOffset = 0;
 $breadTextOffsetExpand = $genral_fontsize;
+$wrapBreak = 38;
+$passiveWrapBreak = $wrapBreak - 5;
+
+function moveTextDown() {
+	$breadTextOffset += $breadTextOffsetExpand;
+}
 
 if (!empty($_POST['p'])) {
+	$p = "* ".$_POST['p'];
+	imagettftext($bg, $genral_fontsize, 0, 100, intval(590+$breadTextOffset), $header_color, $genral_font_i, wordwrap("* ".$p, $passiveWrapBreak, "\n"));
 	
-	imagettftext($bg, $genral_fontsize, 0, 100, intval(590+$breadTextOffset), $header_color, $genral_font_i, "* ".$_POST['p']);
-	
-	$breadTextOffset = $breadTextOffsetExpand + $breadTextOffset;
+	if (strlen($p) > $passiveWrapBreak) {
+		$breadTextOffset += $breadTextOffsetExpand;
+	}
+	$breadTextOffset += $breadTextOffsetExpand;
 }
 if (!empty($_POST['pa'])) {
-	imagettftext($bg, $genral_fontsize, 0, 100, intval(590+$breadTextOffset), $header_color, $genral_font_i, "* ".$_POST['pa']);
+	$pa = "* ".$_POST['pa'];
+	imagettftext($bg, $genral_fontsize, 0, 100, intval(590+$breadTextOffset), $header_color, $genral_font_i, wordwrap("* ".$pa, $passiveWrapBreak, "\n"));
 	
-	$breadTextOffset = $breadTextOffsetExpand + $breadTextOffset;
+	if (strlen($pa) > $passiveWrapBreak) {
+		$breadTextOffset += $breadTextOffsetExpand;
+	}
+	$breadTextOffset += $breadTextOffsetExpand;
+	
 }
 if (!empty($_POST['pas'])) {
-	imagettftext($bg, $genral_fontsize, 0, 100, intval(590+$breadTextOffset), $header_color, $genral_font_i, "* ".$_POST['pas']);
+	$pas = "* ".$_POST['pas'];
+	imagettftext($bg, $genral_fontsize, 0, 100, intval(590+$breadTextOffset), $header_color, $genral_font_i, wordwrap("* ".$pas, $passiveWrapBreak, "\n"));
 
-	$breadTextOffset = $breadTextOffsetExpand + $breadTextOffset;
+	if (strlen($pas) > $passiveWrapBreak) {
+		$breadTextOffset += $breadTextOffsetExpand;
+	}
+	$breadTextOffset += $breadTextOffsetExpand;
 }
 
-imagettftext($bg, $genral_fontsize, 0, 100, intval(600+$breadTextOffset), $header_color, $genral_font, wordwrap($_POST['de'], 40, "\n"));
+imagettftext($bg, $genral_fontsize, 0, 100, intval(600+$breadTextOffset), $header_color, $genral_font, wordwrap($_POST['de'], $wrapBreak, "\n"));
+
+
+
+if (isset($_POST['Ability_btn'])) {
 	
+	if (isset($_POST['Ability_btn_true']) && !empty($_POST['Ability_btn_true'])) {	
+		$btn = imagecreatefrompng("scroll/scrolls__activability_result.png");	
+		$btnW = 328;
+		imagecopyresampled($bg, $btn, 120, 810, 0, 0, $btnW, $btnW*.29, 1024, 256);	
+		
+		$text_box = imagettfbbox($fontsize, 0 , $header_font, $_POST['Ability_btn_true']);
+		
+		$text_width = $text_box[2]-$text_box[0];
+		
+		$x = ((950*.59)/2) - ($text_width/2);
+		
+		imagettftext($bg, $fontsize, 0, $x, 865, $btn_color, $header_font, $_POST['Ability_btn_true']);
+		
+	}
 	
+}
+
+
+
 	$userDir = strtolower($_SESSION['username']);
 	$destDir = "user_files/".$userDir."/";
 	
@@ -237,8 +288,12 @@ imagettftext($bg, $genral_fontsize, 0, 100, intval(600+$breadTextOffset), $heade
 		mkdir($destDir, 0777);
 	}
 	
+	if (isset($_POST['overWrite']) && !empty($_POST['overWrite'])) {
+		$imageName = $_POST['overWrite'];
+	} else {
+		$imageName = uniqid();
+	}
 	
-	$imageName = uniqid();
 	$path = $destDir.$imageName.".png";
 	$parmaLink = $main."u/".$path;
 	
@@ -273,6 +328,7 @@ imagettftext($bg, $genral_fontsize, 0, 100, intval(600+$breadTextOffset), $heade
 	
 		if ($scroll_Query->execute()) {
 			imagepng($bg, $path);
+//			imagepng($bg);
 			imagedestroy($bg);
 			header("location: ".$main."fanart/".$imageName);			
 		}
