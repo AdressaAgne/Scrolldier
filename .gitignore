@@ -4,4 +4,4 @@
 
 *.codekit
 
-*.codekit
+admin/mysql/connect.php
