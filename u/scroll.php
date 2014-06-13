@@ -2,7 +2,7 @@
 include('../admin/mysql/connect.php');
 include('../admin/mysql/function.php');
 $xClass = new xClass();
-//header ('Content-Type: image/png');
+header ('Content-Type: image/png');
 session_start();
 
 
@@ -255,16 +255,25 @@ if (!empty($_POST['pas'])) {
 	$breadTextOffset += $breadTextOffsetExpand;
 }
 
+//////////// Start Desc ////////////
 
 $margin = 5;
 $descText = $_POST['de'];
+
+$descText = preg_replace('/^\s+|\n|\r|\s+$/m', ' ',$descText);
+$descText = preg_replace('/\s+/', ' ',$descText);
+
+
 //explode text by words
-$textwidth = 280;
+$textwidth = 270;
 $text_a = explode(' ', $descText);
 $text_new = '';
 $lineheight = 0;
 $lineheightIncrement = 28;
 
+
+//$bgColor = imagecolorallocate($bg, 18, 19, 20);
+//imagefilledrectangle($bg, 100, 800,100+$textwidth, 700, $bgColor);
 //print_r($text_a);
 
 $wordSpcing = 0;
@@ -286,7 +295,7 @@ foreach($text_a as $word){
     }
 
 	
-    imagettftext($bg, $genral_fontsize, 0, 100+($lastWord + ($spacing*$k)), intval(600+$breadTextOffset+$lineheight), $header_color, $genral_font, $word);
+    imagettftext($bg, $genral_fontsize, 0, 95+($lastWord + ($spacing*$k)), intval(600+$breadTextOffset+$lineheight), $header_color, $genral_font, $word);
     
     if ($wordSpcing >= $textwidth) {
 		$isNewLine = true;
@@ -306,12 +315,108 @@ foreach($text_a as $word){
 	$lastWord = $wordSpcing;
     
 }
+////////////  End Desc  ////////////
+//////////// Start Lore ////////////
 
-// imagettftext($bg, $genral_fontsize, 0, 100, intval(600+$breadTextOffset), $header_color, $genral_font, $text_new);
+$descText = $_POST['lore'];
 
 
+$textwidth = 270;
+$text_a = explode(' ', $descText);
+$text_new = '';
+$text_new2 = '';
+$lineheight = 0;
+$lineheightIncrement = 28;
+
+//print_r($text_a);
+
+$wordSpcing = 0;
+
+$spacing = 10;
+
+$lastWord = 0;
+$k = 0;
+
+$isNewLine = false;
 
 
+// Getting lore Text height
+foreach($text_a as $word){
+
+    $box = imagettfbbox($genral_fontsize, 0, $genral_font_i, $text_new.' '.$word);
+
+    if($box[2] > $width - $margin*2){
+        $text_new .= "\n".$word;
+    } else {
+        $text_new .= " ".$word;
+    }
+}
+
+$boxHeight = abs($box[5] - $box[1]);
+
+
+//if Cast Button then move lore text up
+if (isset($_POST['Ability_btn'])) {
+	$boxHeight += 80;
+}
+$lineWidth = 0;
+foreach($text_a as $word){
+	$wordBox = imagettfbbox($genral_fontsize, 0, $genral_font_i, $word);
+    if($wordBox[0] < -1) {
+        $wordSpcing += abs($wordBox[2]) - abs($wordBox[0]) - 1;
+    } else {
+    	$wordSpcing += abs($wordBox[2] - $wordBox[0]);
+    }
+    
+    
+    foreach($text_a as $word2){
+    
+        $boxLine = imagettfbbox($genral_fontsize, 0, $genral_font_i, $text_new2.' '.$word2);
+    
+        if($boxLine[2] > $textwidth){
+            break;
+        } else {
+            $text_new2 .= " ".$word2;
+        }
+    }
+	
+	if($boxLine[0] < -1) {
+	    $lineWidth = abs($boxLine[2]) - abs($boxLine[0]) - 1;
+	} else {
+		$lineWidth = abs($boxLine[2] - $boxLine[0]);
+	}
+	
+	
+	$xWord = (($lastWord + ($spacing*$k)));
+	$xWord = ($textwidth/2) - ($lineWidth/2) + $xWord;
+	
+    imagettftext($bg, $genral_fontsize, 0, $xWord, intval(880+$breadTextOffset+$lineheight) -$boxHeight, $header_color, $genral_font_i, $word);
+    
+    
+    
+    if ($wordSpcing >= $textwidth) {
+		$isNewLine = true;
+    	
+		$wordSpcing = 0;
+    	$lineheight += $lineheightIncrement;
+
+		$k = 0;
+		
+
+		
+    } else {
+    	$k++;
+        $isNewLine = false;
+    	$text_new = ' '.$word;
+    	    
+    }
+    
+	$lastWord = $wordSpcing;
+    
+}
+
+
+//////////// End Lore ////////////
 
 
 if (isset($_POST['Ability_btn'])) {
@@ -335,89 +440,89 @@ if (isset($_POST['Ability_btn'])) {
 
 
 
-	$userDir = strtolower($_SESSION['username']);
-	$destDir = "user_files/".$userDir."/";
+//	$userDir = strtolower($_SESSION['username']);
+//	$destDir = "user_files/".$userDir."/";
+//	
+//	
+//	if (!is_dir($destDir)) {
+//		mkdir($destDir, 0777, true);
+//	}
+//	
+//	if (isset($_POST['overWrtie']) && !empty($_POST['overWrtie'])) {
+//		$imageName = $_POST['overWrtie'];
+//	} else {
+//		$imageName = uniqid();
+//	}
+//	
+//	$path = $destDir.$imageName.".png";
+//	$parmaLink = $main."u/".$path;
+//	
+//	if (isset($_POST['overWrtie']) && !empty($_POST['overWrtie'])) {
+//		//UPDATE scrolls SET html=:html, header=:header, byName=:byName, isHidden=:isHidden
+//		$scroll_Query = $db->prepare("UPDATE fanScrolls SET ressource=:ressource, rarity=:rarity, type=:type, sub_type=:sub_type, title=:title, cost=:cost, tier=:tier, art=:art, ap=:ap, cd=:cd, hp=:hp, passive_1=:passive_1, passive_2=:passive_2, passive_3=:passive_3, description=:description, btn=:btn WHERE link=:link");
+//		$scroll_Array = array(
+//				'link' => $_POST['overWrtie'],
+//				'ressource' => $_POST['type'],
+//				'rarity' => $_POST['rarity'],
+//				'type' => $_POST['scrollType'],
+//				'sub_type' => $_POST['kin'],
+//				'title' => $_POST['text'],
+//				'cost' => $_POST['nr'],
+//				'tier' => $_POST['tier'],
+//				'art' => $_POST['cardImage'],
+//				'ap' => $_POST['ap'],
+//				'cd' => $_POST['cd'],
+//				'hp' => $_POST['hp'],
+//				'passive_1' => $_POST['p'],
+//				'passive_2' => $_POST['pa'],
+//				'passive_3' => $_POST['pas'],
+//				'description' => $_POST['de'],
+//				'btn' => $_POST['Ability_btn_true']
+//				
+//			); 
+//		
+//	} else {
+//		$scroll_Query = $db->prepare("INSERT INTO fanScrolls 
+//		(user, parma_link, link, ressource, rarity, type, sub_type, title, cost, tier, art, ap, cd, hp, passive_1, passive_2, passive_3, description, btn) VALUES (:ign, :pLink, :Link, :ressource, :rarity, :type, :sub_type, :title, :cost, :tier, :art, :ap, :cd, :hp, :passive_1, :passive_2, :passive_3, :description, :btn)");
+//		
+//		$scroll_Array = array(
+//				'ign' => $_SESSION['username'],
+//				'pLink' => $parmaLink,
+//				'Link' => $imageName,
+//				'ressource' => $_POST['type'],
+//				'rarity' => $_POST['rarity'],
+//				'type' => $_POST['scrollType'],
+//				'sub_type' => $_POST['kin'],
+//				'title' => $_POST['text'],
+//				'cost' => $_POST['nr'],
+//				'tier' => $_POST['tier'],
+//				'art' => $_POST['cardImage'],
+//				'ap' => $_POST['ap'],
+//				'cd' => $_POST['cd'],
+//				'hp' => $_POST['hp'],
+//				'passive_1' => $_POST['p'],
+//				'passive_2' => $_POST['pa'],
+//				'passive_3' => $_POST['pas'],
+//				'description' => $_POST['de'],
+//				'btn' => $_POST['Ability_btn_true']
+//				
+//			); 
+//	}
+//
+//	
+//	
+//	   $xClass->arrayBinder($scroll_Query, $scroll_Array);
+//	
+//		if ($scroll_Query->execute()) {
+//			if (file_exists($path)) {
+//				unlink($path);
+//			}
+//			imagepng($bg, $path);
+//			
+//			imagedestroy($bg);
+//			header("location: ".$main."fanart/".$imageName);			
+//		}
 	
-	
-	if (!is_dir($destDir)) {
-		mkdir($destDir, 0777, true);
-	}
-	
-	if (isset($_POST['overWrtie']) && !empty($_POST['overWrtie'])) {
-		$imageName = $_POST['overWrtie'];
-	} else {
-		$imageName = uniqid();
-	}
-	
-	$path = $destDir.$imageName.".png";
-	$parmaLink = $main."u/".$path;
-	
-	if (isset($_POST['overWrtie']) && !empty($_POST['overWrtie'])) {
-		//UPDATE scrolls SET html=:html, header=:header, byName=:byName, isHidden=:isHidden
-		$scroll_Query = $db->prepare("UPDATE fanScrolls SET ressource=:ressource, rarity=:rarity, type=:type, sub_type=:sub_type, title=:title, cost=:cost, tier=:tier, art=:art, ap=:ap, cd=:cd, hp=:hp, passive_1=:passive_1, passive_2=:passive_2, passive_3=:passive_3, description=:description, btn=:btn WHERE link=:link");
-		$scroll_Array = array(
-				'link' => $_POST['overWrtie'],
-				'ressource' => $_POST['type'],
-				'rarity' => $_POST['rarity'],
-				'type' => $_POST['scrollType'],
-				'sub_type' => $_POST['kin'],
-				'title' => $_POST['text'],
-				'cost' => $_POST['nr'],
-				'tier' => $_POST['tier'],
-				'art' => $_POST['cardImage'],
-				'ap' => $_POST['ap'],
-				'cd' => $_POST['cd'],
-				'hp' => $_POST['hp'],
-				'passive_1' => $_POST['p'],
-				'passive_2' => $_POST['pa'],
-				'passive_3' => $_POST['pas'],
-				'description' => $_POST['de'],
-				'btn' => $_POST['Ability_btn_true']
-				
-			); 
-		
-	} else {
-		$scroll_Query = $db->prepare("INSERT INTO fanScrolls 
-		(user, parma_link, link, ressource, rarity, type, sub_type, title, cost, tier, art, ap, cd, hp, passive_1, passive_2, passive_3, description, btn) VALUES (:ign, :pLink, :Link, :ressource, :rarity, :type, :sub_type, :title, :cost, :tier, :art, :ap, :cd, :hp, :passive_1, :passive_2, :passive_3, :description, :btn)");
-		
-		$scroll_Array = array(
-				'ign' => $_SESSION['username'],
-				'pLink' => $parmaLink,
-				'Link' => $imageName,
-				'ressource' => $_POST['type'],
-				'rarity' => $_POST['rarity'],
-				'type' => $_POST['scrollType'],
-				'sub_type' => $_POST['kin'],
-				'title' => $_POST['text'],
-				'cost' => $_POST['nr'],
-				'tier' => $_POST['tier'],
-				'art' => $_POST['cardImage'],
-				'ap' => $_POST['ap'],
-				'cd' => $_POST['cd'],
-				'hp' => $_POST['hp'],
-				'passive_1' => $_POST['p'],
-				'passive_2' => $_POST['pa'],
-				'passive_3' => $_POST['pas'],
-				'description' => $_POST['de'],
-				'btn' => $_POST['Ability_btn_true']
-				
-			); 
-	}
-
-	
-	
-	   $xClass->arrayBinder($scroll_Query, $scroll_Array);
-	
-		if ($scroll_Query->execute()) {
-			if (file_exists($path)) {
-				unlink($path);
-			}
-			imagepng($bg, $path);
-			
-			imagedestroy($bg);
-			header("location: ".$main."fanart/".$imageName);			
-		}
-	
-//	imagepng($bg);
+	imagepng($bg);
 
 ?>

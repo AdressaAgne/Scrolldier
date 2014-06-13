@@ -209,10 +209,10 @@ if (isset($_POST['link']) && !empty($_POST['link'])) {
 				<textarea name="de" class="textarea"  placeholder="Desciption"><?php if (isset($fanScroll)) {echo($fanScroll['description']);} ?></textarea>
 			</div>
 			
-			<!--<div class="div-3">
+			<div class="div-3">
 				<p>Lore</p>
 				<textarea name="lore" class="textarea"  placeholder="Lore"></textarea>
-			</div>-->
+			</div>
 			
 			<?php if (isset($fanScroll)){ ?>
 				<div class="div-4">
