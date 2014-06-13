@@ -9,7 +9,6 @@
 		$x->logout();
 	}
  
- 
  	
 			
 	$fan_query = $db->prepare("SELECT * FROM fanScrolls WHERE link=:link");	
@@ -45,6 +44,7 @@
 			}
 		
 	}
+
 ?>
 
 <!DOCTYPE html>
@@ -66,15 +66,19 @@
 		<div class="container">
 		<?php if (isset($_SESSION['username']) && $_SESSION['username'] == $fanScroll['user']) { ?>
 		<div class="div-4">
-			<form method="post" action="">
+			<form method="post" action="" class="left">
 				<input type="submit" class="btn-modern btn-no-margin" name="delArt" value="Delete" />
+			</form>
+			<form method="post" action="<?php echo($main) ?>scroll/designer" class="left">
+				<input type="hidden" name="link" value="<?php echo($fanScroll['link']) ?>" />
+				<input type="submit" class="btn-modern btn-no-margin" name="editArt" value="Edit" />
 			</form>
 		</div>
 		<?php } ?>
 		
 		<?php if ($fan_query->rowCount() != 0) { ?>
 			<div class="span-3 div-center align-center">	
-				<p><?php echo($fanScroll['title']) ?> is made by <?php echo($fanScroll['user']) ?></p>
+				<p><?php echo($fanScroll['title']) ?> is made by <a href="<?php echo($main."user/".$fanScroll['user']) ?>"><?php echo($fanScroll['user']) ?></a></p>
 				<img src="<?php echo($fanScroll['parma_link']) ?>" class="div-4" alt="" />
 			</div>
 			<div class="div-3 div-center">

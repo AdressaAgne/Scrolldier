@@ -354,7 +354,7 @@ $userStats['ratio'] = round($userStats['won'] / $userStats['played'] * 100, 1);
 							<?php include("../inc_/icon.php") ?>
 						</div>
 					</div>
-					<?php if ($query->rowCount() != 0) { ?>
+
 					<div class="div-4">
 					<h1 class="modern">Decks by <?php echo($user['ign']) ?></h1>
 					<div class="decks">	
@@ -444,7 +444,7 @@ $userStats['ratio'] = round($userStats['won'] / $userStats['played'] * 100, 1);
 						</table>
 						</div>
 					</div>
-					<?php } ?>
+
 				</div>
 			</div>
 			

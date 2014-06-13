@@ -5,12 +5,12 @@ set_time_limit(5000);
 		return substr(strrchr($file_name,'.'),1);
 	}
 
-	$iw = 100;
-	$ih = $iw * 0.75;
+	$iw = 64;
+	$ih = 64;
 	
 	$imagesPerRow = 20;
 	
-	$path = '../resources/cardImages/';
+	$path = '../resources/badges/';
 	
 	
 	

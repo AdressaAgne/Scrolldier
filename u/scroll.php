@@ -124,7 +124,7 @@ $header_fontsize = 40;
 $fontsize = 25;
 
 
-$cardImageW = 401;
+$cardImageW = 420;
 
 //card Image
 imagecopyresampled($bg, $cardImage, 82, 198, 0, 0, $cardImageW, $cardImageW * .75, 300, 225);
@@ -219,7 +219,7 @@ $genral_fontsize = 24;
 
 $breadTextOffset = 0;
 $breadTextOffsetExpand = $genral_fontsize;
-$wrapBreak = 38;
+$wrapBreak = 34;
 $passiveWrapBreak = $wrapBreak - 5;
 
 function moveTextDown() {
@@ -228,7 +228,7 @@ function moveTextDown() {
 
 if (!empty($_POST['p'])) {
 	$p = "* ".$_POST['p'];
-	imagettftext($bg, $genral_fontsize, 0, 100, intval(590+$breadTextOffset), $header_color, $genral_font_i, wordwrap("* ".$p, $passiveWrapBreak, "\n"));
+	imagettftext($bg, $genral_fontsize, 0, 100, intval(590+$breadTextOffset), $header_color, $genral_font_i, wordwrap($p, $passiveWrapBreak, "\n"));
 	
 	if (strlen($p) > $passiveWrapBreak) {
 		$breadTextOffset += $breadTextOffsetExpand;
@@ -237,7 +237,7 @@ if (!empty($_POST['p'])) {
 }
 if (!empty($_POST['pa'])) {
 	$pa = "* ".$_POST['pa'];
-	imagettftext($bg, $genral_fontsize, 0, 100, intval(590+$breadTextOffset), $header_color, $genral_font_i, wordwrap("* ".$pa, $passiveWrapBreak, "\n"));
+	imagettftext($bg, $genral_fontsize, 0, 100, intval(590+$breadTextOffset), $header_color, $genral_font_i, wordwrap($pa, $passiveWrapBreak, "\n"));
 	
 	if (strlen($pa) > $passiveWrapBreak) {
 		$breadTextOffset += $breadTextOffsetExpand;
@@ -247,7 +247,7 @@ if (!empty($_POST['pa'])) {
 }
 if (!empty($_POST['pas'])) {
 	$pas = "* ".$_POST['pas'];
-	imagettftext($bg, $genral_fontsize, 0, 100, intval(590+$breadTextOffset), $header_color, $genral_font_i, wordwrap("* ".$pas, $passiveWrapBreak, "\n"));
+	imagettftext($bg, $genral_fontsize, 0, 100, intval(590+$breadTextOffset), $header_color, $genral_font_i, wordwrap($pas, $passiveWrapBreak, "\n"));
 
 	if (strlen($pas) > $passiveWrapBreak) {
 		$breadTextOffset += $breadTextOffsetExpand;
@@ -255,7 +255,62 @@ if (!empty($_POST['pas'])) {
 	$breadTextOffset += $breadTextOffsetExpand;
 }
 
-imagettftext($bg, $genral_fontsize, 0, 100, intval(600+$breadTextOffset), $header_color, $genral_font, wordwrap($_POST['de'], $wrapBreak, "\n"));
+
+$margin = 5;
+$descText = $_POST['de'];
+//explode text by words
+$textwidth = 280;
+$text_a = explode(' ', $descText);
+$text_new = '';
+$lineheight = 0;
+$lineheightIncrement = 25;
+
+//print_r($text_a);
+
+$wordSpcing = 0;
+
+$spacing = 10;
+
+$lastWord = 0;
+$k = 0;
+
+$isNewLine = false;
+foreach($text_a as $word){
+	$wordBox = imagettfbbox($genral_fontsize, 0, $genral_font, $word);
+    
+	
+    if($wordBox[0] < -1) {
+        $wordSpcing += abs($wordBox[2]) - abs($wordBox[0]) - 1;
+    } else {
+    	$wordSpcing += abs($wordBox[2] - $wordBox[0]);
+    }
+
+	
+    imagettftext($bg, $genral_fontsize, 0, 100+($lastWord + ($spacing*$k)), intval(600+$breadTextOffset+$lineheight), $header_color, $genral_font, $word);
+    
+    if ($wordSpcing >= $textwidth) {
+		$isNewLine = true;
+    		
+    		
+		$wordSpcing = 0;
+    	$lineheight += $lineheightIncrement;
+
+		$k = 0;
+    } else {
+    	$k++;
+        $isNewLine = false;
+    		
+    	    
+    }
+    
+	$lastWord = $wordSpcing;
+    
+}
+
+// imagettftext($bg, $genral_fontsize, 0, 100, intval(600+$breadTextOffset), $header_color, $genral_font, $text_new);
+
+
+
 
 
 
@@ -285,11 +340,11 @@ if (isset($_POST['Ability_btn'])) {
 	
 	
 	if (!is_dir($destDir)) {
-		mkdir($destDir, 0777);
+		mkdir($destDir, 0777, true);
 	}
 	
-	if (isset($_POST['overWrite']) && !empty($_POST['overWrite'])) {
-		$imageName = $_POST['overWrite'];
+	if (isset($_POST['overWrtie']) && !empty($_POST['overWrtie'])) {
+		$imageName = $_POST['overWrtie'];
 	} else {
 		$imageName = uniqid();
 	}
@@ -297,42 +352,72 @@ if (isset($_POST['Ability_btn'])) {
 	$path = $destDir.$imageName.".png";
 	$parmaLink = $main."u/".$path;
 	
-	$scroll_Query = $db->prepare("INSERT INTO fanScrolls 
-	(user, parma_link, link, ressource, rarity, type, sub_type, title, cost, tier, art, ap, cd, hp, passive_1, passive_2, passive_3, description) VALUES
-	(:ign, :pLink, :Link, :ressource, :rarity, :type, :sub_type, :title, :cost, :tier, :art, :ap, :cd, :hp, :passive_1, :passive_2, :passive_3, :description)");
-	
+	if (isset($_POST['overWrtie']) && !empty($_POST['overWrtie'])) {
+		//UPDATE scrolls SET html=:html, header=:header, byName=:byName, isHidden=:isHidden
+		$scroll_Query = $db->prepare("UPDATE fanScrolls SET ressource=:ressource, rarity=:rarity, type=:type, sub_type=:sub_type, title=:title, cost=:cost, tier=:tier, art=:art, ap=:ap, cd=:cd, hp=:hp, passive_1=:passive_1, passive_2=:passive_2, passive_3=:passive_3, description=:description, btn=:btn WHERE link=:link");
+		$scroll_Array = array(
+				'link' => $_POST['overWrtie'],
+				'ressource' => $_POST['type'],
+				'rarity' => $_POST['rarity'],
+				'type' => $_POST['scrollType'],
+				'sub_type' => $_POST['kin'],
+				'title' => $_POST['text'],
+				'cost' => $_POST['nr'],
+				'tier' => $_POST['tier'],
+				'art' => $_POST['cardImage'],
+				'ap' => $_POST['ap'],
+				'cd' => $_POST['cd'],
+				'hp' => $_POST['hp'],
+				'passive_1' => $_POST['p'],
+				'passive_2' => $_POST['pa'],
+				'passive_3' => $_POST['pas'],
+				'description' => $_POST['de'],
+				'btn' => $_POST['Ability_btn_true']
+				
+			); 
+		
+	} else {
+		$scroll_Query = $db->prepare("INSERT INTO fanScrolls 
+		(user, parma_link, link, ressource, rarity, type, sub_type, title, cost, tier, art, ap, cd, hp, passive_1, passive_2, passive_3, description, btn) VALUES (:ign, :pLink, :Link, :ressource, :rarity, :type, :sub_type, :title, :cost, :tier, :art, :ap, :cd, :hp, :passive_1, :passive_2, :passive_3, :description, :btn)");
+		
+		$scroll_Array = array(
+				'ign' => $_SESSION['username'],
+				'pLink' => $parmaLink,
+				'Link' => $imageName,
+				'ressource' => $_POST['type'],
+				'rarity' => $_POST['rarity'],
+				'type' => $_POST['scrollType'],
+				'sub_type' => $_POST['kin'],
+				'title' => $_POST['text'],
+				'cost' => $_POST['nr'],
+				'tier' => $_POST['tier'],
+				'art' => $_POST['cardImage'],
+				'ap' => $_POST['ap'],
+				'cd' => $_POST['cd'],
+				'hp' => $_POST['hp'],
+				'passive_1' => $_POST['p'],
+				'passive_2' => $_POST['pa'],
+				'passive_3' => $_POST['pas'],
+				'description' => $_POST['de'],
+				'btn' => $_POST['Ability_btn_true']
+				
+			); 
+	}
 
-	$scroll_Array = array(
-			'ign' => $_SESSION['username'],
-			'pLink' => $parmaLink,
-			'Link' => $imageName,
-			'ressource' => $_POST['type'],
-			'rarity' => $_POST['rarity'],
-			'type' => $_POST['scrollType'],
-			'sub_type' => $_POST['kin'],
-			'title' => $_POST['text'],
-			'cost' => $_POST['nr'],
-			'tier' => $_POST['tier'],
-			'art' => $_POST['cardImage'],
-			'ap' => $_POST['ap'],
-			'cd' => $_POST['cd'],
-			'hp' => $_POST['hp'],
-			'passive_1' => $_POST['p'],
-			'passive_2' => $_POST['pa'],
-			'passive_3' => $_POST['pas'],
-			'description' => $_POST['de']
-			
-		); 
 	
-	$xClass->arrayBinder($scroll_Query, $scroll_Array);
+	
+	   $xClass->arrayBinder($scroll_Query, $scroll_Array);
 	
 		if ($scroll_Query->execute()) {
+			if (file_exists($path)) {
+				unlink($path);
+			}
 			imagepng($bg, $path);
-//			imagepng($bg);
+			
 			imagedestroy($bg);
 			header("location: ".$main."fanart/".$imageName);			
 		}
 	
-	
+//	imagepng($bg);
 
 ?>

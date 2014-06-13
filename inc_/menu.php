@@ -50,9 +50,9 @@
 					
 					
 					<?php if ($thisPage == "/u/make.php") { ?>
-						<li class="active"><a href="<?php echo($main) ?>scroll/designer">Make Scroll</a></li>
+						<li class="active"><a href="<?php echo($main) ?>scroll/library">FanScroll</a></li>
 					<?php } else { ?>
-						<li><a href="<?php echo($main) ?>scroll/designer">Make Scroll</a></li>
+						<li><a href="<?php echo($main) ?>scroll/library">FanScroll</a></li>
 					<?php } ?>
 					
 				</ul>

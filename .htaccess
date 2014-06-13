@@ -23,6 +23,7 @@ RewriteRule ^error error/db.php [L]
 RewriteRule ^fanart/([^/.]*)/?$ u/viewScroll.php?image=$1 [L]
 
 RewriteRule ^scroll/designer u/make.php [L]
+RewriteRule ^scroll/library u/library.php [L]
 
 RewriteRule ^userImage/([^/.]*)/?$ u/img.php?user=$1 [L]
 

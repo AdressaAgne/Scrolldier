@@ -4456,6 +4456,18 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
+	"\/README.md": {
+		"enableFootnoteSupport": 0,
+		"enableSmartyPants": 1,
+		"expandTabs": 1,
+		"fileType": 4096,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/README.md",
+		"outputAbbreviatedPath": "\/README.html",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/reset.php": {
 		"fileType": 8192,
 		"ignore": 0,
@@ -8964,6 +8976,39 @@
 		"outputPathIsSetByUser": 0,
 		"processed": 0
 		},
+	"\/resources\/cardImages\/spoilerArt\/17.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 10705,
+		"inputAbbreviatedPath": "\/resources\/cardImages\/spoilerArt\/17.png",
+		"outputAbbreviatedPath": "\/resources\/cardImages\/spoilerArt\/17.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/resources\/cardImages\/spoilerArt\/18.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 13588,
+		"inputAbbreviatedPath": "\/resources\/cardImages\/spoilerArt\/18.png",
+		"outputAbbreviatedPath": "\/resources\/cardImages\/spoilerArt\/18.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/resources\/cardImages\/spoilerArt\/19.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 15877,
+		"inputAbbreviatedPath": "\/resources\/cardImages\/spoilerArt\/19.png",
+		"outputAbbreviatedPath": "\/resources\/cardImages\/spoilerArt\/19.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
 	"\/resources\/cardImages\/spoilerArt\/2.png": {
 		"fileType": 32768,
 		"ignore": 0,
@@ -8974,6 +9019,28 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 1
+		},
+	"\/resources\/cardImages\/spoilerArt\/20.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 9210,
+		"inputAbbreviatedPath": "\/resources\/cardImages\/spoilerArt\/20.png",
+		"outputAbbreviatedPath": "\/resources\/cardImages\/spoilerArt\/20.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/resources\/cardImages\/spoilerArt\/21.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 11252,
+		"inputAbbreviatedPath": "\/resources\/cardImages\/spoilerArt\/21.png",
+		"outputAbbreviatedPath": "\/resources\/cardImages\/spoilerArt\/21.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
 		},
 	"\/resources\/cardImages\/spoilerArt\/3.png": {
 		"fileType": 32768,
@@ -11338,6 +11405,17 @@
 		"outputPathIsSetByUser": 0,
 		"processed": 0
 		},
+	"\/u\/user_files\/orangee\/45.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 779780,
+		"inputAbbreviatedPath": "\/u\/user_files\/orangee\/45.png",
+		"outputAbbreviatedPath": "\/u\/user_files\/orangee\/45.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
 	"\/u\/user_files\/orangee\/5398caecc8144.png": {
 		"fileType": 32768,
 		"ignore": 0,
@@ -11543,6 +11621,116 @@
 		"initialSize": 794875,
 		"inputAbbreviatedPath": "\/u\/user_files\/orangee\/5398db6bb9dbc.png",
 		"outputAbbreviatedPath": "\/u\/user_files\/orangee\/5398db6bb9dbc.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/u\/user_files\/orangee\/5398fe9fc33d9.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 794656,
+		"inputAbbreviatedPath": "\/u\/user_files\/orangee\/5398fe9fc33d9.png",
+		"outputAbbreviatedPath": "\/u\/user_files\/orangee\/5398fe9fc33d9.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/u\/user_files\/orangee\/5399cd2056d6b.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 619487,
+		"inputAbbreviatedPath": "\/u\/user_files\/orangee\/5399cd2056d6b.png",
+		"outputAbbreviatedPath": "\/u\/user_files\/orangee\/5399cd2056d6b.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/u\/user_files\/orangee\/5399cd2cd0a27.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 753548,
+		"inputAbbreviatedPath": "\/u\/user_files\/orangee\/5399cd2cd0a27.png",
+		"outputAbbreviatedPath": "\/u\/user_files\/orangee\/5399cd2cd0a27.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/u\/user_files\/orangee\/5399cd323d1d4.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 765394,
+		"inputAbbreviatedPath": "\/u\/user_files\/orangee\/5399cd323d1d4.png",
+		"outputAbbreviatedPath": "\/u\/user_files\/orangee\/5399cd323d1d4.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/u\/user_files\/orangee\/5399cd38e2112.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 746597,
+		"inputAbbreviatedPath": "\/u\/user_files\/orangee\/5399cd38e2112.png",
+		"outputAbbreviatedPath": "\/u\/user_files\/orangee\/5399cd38e2112.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/u\/user_files\/orangee\/5399ce31b0e23.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 760937,
+		"inputAbbreviatedPath": "\/u\/user_files\/orangee\/5399ce31b0e23.png",
+		"outputAbbreviatedPath": "\/u\/user_files\/orangee\/5399ce31b0e23.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/u\/user_files\/orangee\/5399ce83ba994.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 738393,
+		"inputAbbreviatedPath": "\/u\/user_files\/orangee\/5399ce83ba994.png",
+		"outputAbbreviatedPath": "\/u\/user_files\/orangee\/5399ce83ba994.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/u\/user_files\/orangee\/5399effaf181a.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 776635,
+		"inputAbbreviatedPath": "\/u\/user_files\/orangee\/5399effaf181a.png",
+		"outputAbbreviatedPath": "\/u\/user_files\/orangee\/5399effaf181a.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/u\/user_files\/orangee\/5399f0061af6a.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 777510,
+		"inputAbbreviatedPath": "\/u\/user_files\/orangee\/5399f0061af6a.png",
+		"outputAbbreviatedPath": "\/u\/user_files\/orangee\/5399f0061af6a.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/u\/user_files\/orangee\/5399f0552acf5.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 778815,
+		"inputAbbreviatedPath": "\/u\/user_files\/orangee\/5399f0552acf5.png",
+		"outputAbbreviatedPath": "\/u\/user_files\/orangee\/5399f0552acf5.png",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 0
