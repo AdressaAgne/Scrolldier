@@ -360,7 +360,11 @@ if (isset($_POST['Ability_btn'])) {
 	$boxHeight += 80;
 }
 $lineWidth = 0;
+
+//printing out each word
 foreach($text_a as $word){
+
+	//getting with of word
 	$wordBox = imagettfbbox($genral_fontsize, 0, $genral_font_i, $word);
     if($wordBox[0] < -1) {
         $wordSpcing += abs($wordBox[2]) - abs($wordBox[0]) - 1;
@@ -368,7 +372,7 @@ foreach($text_a as $word){
     	$wordSpcing += abs($wordBox[2] - $wordBox[0]);
     }
     
-    
+    //with of line
     foreach($text_a as $word2){
     
         $boxLine = imagettfbbox($genral_fontsize, 0, $genral_font_i, $text_new2.' '.$word2);
@@ -386,14 +390,14 @@ foreach($text_a as $word){
 		$lineWidth = abs($boxLine[2] - $boxLine[0]);
 	}
 	
-	
+	//placeing
 	$xWord = (($lastWord + ($spacing*$k)));
 	$xWord = ($textwidth/2) - ($lineWidth/2) + $xWord;
 	
-    imagettftext($bg, $genral_fontsize, 0, $xWord, intval(880+$breadTextOffset+$lineheight) -$boxHeight, $header_color, $genral_font_i, $word);
+    imagettftext($bg, $genral_fontsize, 0, $xWord, intval(880+$breadTextOffset+$lineheight) - $boxHeight, $header_color, $genral_font_i, $word);
     
     
-    
+    //resetting placeing when new line
     if ($wordSpcing >= $textwidth) {
 		$isNewLine = true;
     	
@@ -401,8 +405,6 @@ foreach($text_a as $word){
     	$lineheight += $lineheightIncrement;
 
 		$k = 0;
-		
-
 		
     } else {
     	$k++;
