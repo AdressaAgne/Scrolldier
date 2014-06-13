@@ -366,13 +366,14 @@ foreach($text_a as $word){
 
 	//getting with of word
 	$wordBox = imagettfbbox($genral_fontsize, 0, $genral_font_i, $word);
+	
     if($wordBox[0] < -1) {
         $wordSpcing += abs($wordBox[2]) - abs($wordBox[0]) - 1;
     } else {
     	$wordSpcing += abs($wordBox[2] - $wordBox[0]);
     }
     
-    //with of line
+    //Width of line
     foreach($text_a as $word2){
     
         $boxLine = imagettfbbox($genral_fontsize, 0, $genral_font_i, $text_new2.' '.$word2);
@@ -385,16 +386,16 @@ foreach($text_a as $word){
     }
 	
 	if($boxLine[0] < -1) {
-	    $lineWidth = abs($boxLine[2]) - abs($boxLine[0]) - 1;
+	    $lineWidth = abs($boxLine[2] - $boxLine[0]) - 1;
 	} else {
 		$lineWidth = abs($boxLine[2] - $boxLine[0]);
 	}
 	
 	//placeing
-	$xWord = (($lastWord + ($spacing*$k)));
-	$xWord = ($textwidth/2) - ($lineWidth/2) + $xWord;
+	$xWord = 95 + (($lastWord + ($spacing*$k)));
+	$xWord -= (($textwidth/2) - ($lineWidth/2));
 	
-    imagettftext($bg, $genral_fontsize, 0, $xWord, intval(880+$breadTextOffset+$lineheight) - $boxHeight, $header_color, $genral_font_i, $word);
+    imagettftext($bg, $genral_fontsize, 0, $xWord, intval(880+$lineheight) - $boxHeight, $header_color, $genral_font_i, $word);
     
     
     //resetting placeing when new line
