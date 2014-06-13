@@ -263,7 +263,7 @@ $textwidth = 280;
 $text_a = explode(' ', $descText);
 $text_new = '';
 $lineheight = 0;
-$lineheightIncrement = 25;
+$lineheightIncrement = 28;
 
 //print_r($text_a);
 
