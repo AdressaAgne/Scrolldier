@@ -13,7 +13,7 @@
  	header('Pragma: no-cache');
  	
 			
-	$fan_query = $db->prepare("SELECT * FROM fanScrolls");	
+	$fan_query = $db->prepare("SELECT * FROM fanScrolls ORDER BY id");	
 	$fan_query->execute();
 
 ?>

@@ -7,6 +7,8 @@
 				<li><a href="http://mojang.com" target="_blank">Mojang</a></li>
 				<li><a href="http://scrolls.com" target="_blank">Scrolls</a></li>
 				<li><a href="http://a.scrollsguide.com" target="_blank">Scrollsguide API</a></li>
+				<li><a href="<?php echo($main."user/kbasten") ?>">kBasten</a></li>
+				<li><a href="<?php echo($main."user/cradstache") ?>">cradstache</a></li>
 			</ul>
 		</div>
 		<div class="div-2 div-margin">
@@ -51,11 +53,16 @@
 							<input type="submit" class="btn-modern" name="" value="Donate" />
 						</form>
 					</li>
+					<li><a href="https://twitter.com/Agne240" class="twitter-follow-button" data-show-count="false">Follow @Agne240</a>
+					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></li>
 				</ul>
 		</div>
 		<div class="div-4">
 			<p class="align-center">Scrolldier.com is still in beta, and things may not work</p>
 			<p class="align-center">Need help or got questions? send a mail, or ask on IRC: irc.esper.net - #scrolldier</p>
+			
+			
+			
 			<p class="align-center">© Scrolldier.com 2014</p>
 		</div>
 	</div>

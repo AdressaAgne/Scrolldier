@@ -451,7 +451,7 @@ $userStats['ratio'] = round($userStats['won'] / $userStats['played'] * 100, 1);
 				
 				<?php 
 						
-				$fan_query = $db->prepare("SELECT * FROM fanScrolls WHERE user=:ign");	
+				$fan_query = $db->prepare("SELECT * FROM fanScrolls WHERE user=:ign ORDER BY id");	
 					
 				$fan_arr = array(
 						'ign' => $user['ign']

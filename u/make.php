@@ -206,12 +206,12 @@ if (isset($_POST['link']) && !empty($_POST['link'])) {
 			
 			<div class="div-3">
 				<p>Description</p>
-				<textarea name="de" class="textarea"  placeholder="Desciption"><?php if (isset($fanScroll)) {echo($fanScroll['description']);} ?></textarea>
+				<textarea name="de" class="textarea" maxlength="280" placeholder="Desciption"><?php if (isset($fanScroll)) {echo($fanScroll['description']);} ?></textarea>
 			</div>
 			
 			<div class="div-3">
 				<p>Lore</p>
-				<textarea name="lore" class="textarea"  placeholder="Lore"></textarea>
+				<textarea name="lore" class="textarea"  maxlength="140" placeholder="Lore"><?php if (isset($fanScroll)) {echo($fanScroll['lore']);} ?></textarea>
 			</div>
 			
 			<?php if (isset($fanScroll)){ ?>

@@ -13,7 +13,11 @@ RewriteRule ^editdeck/([^/.]+)/?$ deck_edit.php?d=$1 [L]
 
 RewriteRule ^decks/(([0-9]+/)?(([a-zA-Z0-9]+)?(/(order|energy|growth|decay|wild|s|c))*/)?)$ deck.php?page=$2&search=$4&para=$3&SearchType=$6 [L]
 
+RewriteRule ^decks-in-the-last-day deck_24.php [L]
+
 RewriteRule ^new/deck new_deck_choose.php [L]
+
+
 RewriteRule ^beetlestone beetlestone.php [L]
 RewriteRule ^admin admin.php [L]
 RewriteRule ^badges badges.php [L]
