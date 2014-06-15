@@ -12,8 +12,29 @@
  	header('Cache-Control: no-cache');
  	header('Pragma: no-cache');
  	
-			
-	$fan_query = $db->prepare("SELECT * FROM fanScrolls ORDER BY id");	
+	// ressource
+	// 0 = Decay
+	// 1 = Energy
+	// 2 = Growth
+	// 3 = Order
+	// 4 = Wild
+	// 5 = Chaos		
+	$extra = "";
+	if ($_GET['r'] == 6) {
+		$fan_query = $db->prepare("SELECT * FROM fanScrolls WHERE ressource = 0 ORDER BY id");
+		
+	} elseif ( isset($_GET['r']) && !empty($_GET['r']) ) {
+		$fan_query = $db->prepare("SELECT * FROM fanScrolls WHERE ressource = :r ORDER BY id");
+		$fan_arr = array(
+					'r' => $_GET['r']
+				);		
+		$x->arrayBinder($fan_query, $fan_arr);
+		
+	} else {
+		$fan_query = $db->prepare("SELECT * FROM fanScrolls ORDER BY id");
+	}
+	
+		
 	$fan_query->execute();
 
 ?>
@@ -38,11 +59,18 @@
 			
 		
 		<div class="container">
-			<?php if (isset($_SESSION['username'])) { ?>
-				<div class="div-4">
-					<a href="<?php echo($main)."scroll/designer" ?>" class="btn-modern btn-no-margin">New Scroll</a>
+			<div class="div-4">
+				<?php if (isset($_SESSION['username'])) { ?>
+						<a href="<?php echo($main)."scroll/designer" ?>" class="btn-modern btn-no-margin">New Scroll</a>
+				<?php } ?>
+				<div class="right">
+					<a href="<?php echo($main."scroll/library/6/") ?>"><i class="icon-decay"></i></a>
+					<a href="<?php echo($main."scroll/library/1/") ?>"><i class="icon-energy"></i></a>
+					<a href="<?php echo($main."scroll/library/2/") ?>"><i class="icon-growth"></i></a>
+					<a href="<?php echo($main."scroll/library/3/") ?>"><i class="icon-order"></i></a>
+					<a href="<?php echo($main."scroll/library/4/") ?>"><i class="icon-wild"></i></a>
 				</div>
-			<?php } ?>
+			</div>
 			<?php while ($fanScroll = $fan_query->fetch(PDO::FETCH_ASSOC)) { ?>
 			<div class="span-2">
 				<div class="div-4">	
