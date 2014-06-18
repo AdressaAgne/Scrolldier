@@ -30,22 +30,7 @@
  	}
  }
  
- 
- 
- $query = $db->prepare("SELECT * FROM badges WHERE user=:ign");
- $arr = array(
- 		'ign' => strtolower($thisUser)
- 	);
- $x->arrayBinder($query, $arr);
- $query->execute();
- 
- while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
- 	echo("<li><i class='".$row['type']."'></i><ul><li class='modern'>".$row['text']."</li></ul></li>");
- }
- 
-// $userStats['played'] matches palyed
-// $userStats['ranked'] ranked matches won
-// $userStats['lost'] matches lost
+
 
  if ($userStats['played'] >= 2000) {
  	echo("<li><i class='icon-matches-2k'></i><ul><li class='modern'>Played over 2000 matches</li></ul></li>");
@@ -61,6 +46,35 @@
  
  if ($userStats['lost'] >= 1000) {
  	echo("<li><i class='icon-lost-1k'></i><ul><li class='modern'>Lost over 1000 matches</li></ul></li>");
+ }
+ 
+ 
+ $query = $db->prepare("SELECT * FROM fanScrolls WHERE user=:ign");
+ $arr = array(
+ 		'ign' => strtolower($thisUser)
+ 	);
+ $x->arrayBinder($query, $arr);
+ $query->execute();
+ 
+ 
+ if ($query->rowCount() > 0) {
+ 	echo("<li><i class='icon-scroll-badge'></i><ul><li class='modern'>Have made a scroll in the scroll designer</li></ul></li>");
+ }
+ 
+ 
+ 
+ 
+ 
+ 
+ $query = $db->prepare("SELECT * FROM badges WHERE user=:ign");
+ $arr = array(
+ 		'ign' => strtolower($thisUser)
+ 	);
+ $x->arrayBinder($query, $arr);
+ $query->execute();
+ 
+ while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
+ 	echo("<li><i class='".$row['type']."'></i><ul><li class='modern'>".$row['text']."</li></ul></li>");
  }
  
 

@@ -465,6 +465,11 @@ $userStats['ratio'] = round($userStats['won'] / $userStats['played'] * 100, 1);
 			<?php if ($fan_query->rowCount() != 0) { ?>
 			<div class="div-4">
 				<h3>Fan Art Made:</h3>
+				
+				<?php if ($user['rank'] == 1 && $user['ign'] == $_SESSION['username']) { ?>
+					<a href="<?php echo($main."scrollDownload") ?>" target="_blank" class="btn-modern btn-no-margin">Download all</a>
+				<?php } ?>
+				
 				<?php while ($fanScroll = $fan_query->fetch(PDO::FETCH_ASSOC)) { ?>
 					<div class="span-2">
 						<a href="<?php echo($main."fanart/".$fanScroll['link']); ?>">

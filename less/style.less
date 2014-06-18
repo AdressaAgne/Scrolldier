@@ -59,7 +59,7 @@
 			background-image: linear-gradient(to bottom, darken(#26262A, 5%) 0%, darken(#1C1C1F, 5%) 100%);
 		}
 		&.btn-no-margin{
-			margin: 0px !important;
+			margin: 0px 0px !important;
 		}
 		&.btn-choose{
 			padding: 20px 40px;
@@ -136,8 +136,17 @@
 		background-color: lighten(#FF8800, 10%);
 	}
 }
+.fontDwarven{
+	font-family: dwaren !important;
+}
 @font-face {
 	font-family: sFont;
+	src: url('../fonts/honeymeadbold.woff');
+	font-weight: bold;
+}
+
+@font-face {
+	font-family: dwaren;
 	src: url('../fonts/dwarven.woff');
 	font-weight: bold;
 }
@@ -463,22 +472,31 @@ ul li.modern{
 	}
 	
 	& ul li{
-		padding: 15px 0px;
+		padding: 15px 8px;
 		list-style: none;
 		display: inline-block;
 		height: 60px;
+		border-right: 1px solid rgba(0, 0, 0, .4);
+		border-left: 1px solid rgba(255, 255, 255, .1);
+		margin-left: -4px;
+		text-align: center;
 		
-		
+		&:last-of-type{
+			border-right: none;
+		}
+		&:first-of-type{
+			border-left: none;
+		}
 	}
 	
 	
 	& ul li a{
 		height: 60px;
-		padding: 25px 10px;
+		padding: 25px 5px;
 		text-decoration: none;
 		font: normal 30px sFont;
 		color: #f0f0f0;
-		
+		font-family: sFont;
 		&:hover{
 			color: darken(#f0f0f0, 10%);
 			
@@ -567,7 +585,22 @@ ul li{
 .achive-text{
 	font-size: 12px;
 }
-//340px
+
+input[type='range']{
+	margin: 5px;
+}
+
+.colorBox{
+	width: 180px;
+	height: 180px;
+	
+	&.small{
+		width: 22px;
+		height: 22px;
+		display: block;
+	}
+}
+
 .span-achive{
 	float: left;
 	width: 48px;
@@ -596,6 +629,11 @@ ul li{
 .span-6{
 	float: left;
 	width: 66.6666666666%;
+}
+
+.span-9{
+	float: left;
+	width: 85%;
 }
 
 
@@ -1420,7 +1458,11 @@ ul.badge-icon-admin{
 			opacity: 1;
 		}
 	}
-}ul.badge-icon-scroll{
+}
+
+
+
+ul.badge-icon-scroll{
 	float: left;
 	font-size: 12px;
 	color: #f8f8f8;
@@ -1469,6 +1511,22 @@ i.icon-ban{
 	background-size: @icon-badge @icon-badge;
 	
 	background-image: url('../resources/badges/banned.png');
+}
+i.icon-scroll-badge{
+	width: @icon-badge;
+	height: @icon-badge;
+	margin-bottom: -10px;
+	background-size: @icon-badge @icon-badge;
+	
+	background-image: url('../resources/badges/scrollBadge.png');
+}
+i.icon-nr-200{
+	width: @icon-badge;
+	height: @icon-badge;
+	margin-bottom: -10px;
+	background-size: @icon-badge @icon-badge;
+	
+	background-image: url('../resources/badges/200.png');
 }
 i.icon-beetle{
 	width: @icon-badge;

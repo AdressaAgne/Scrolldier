@@ -235,6 +235,7 @@ $JSONExport .= "]}";
 						
 						<?php } ?>
 				<?php } ?>
+					<a class="btn-modern btn-pagina btn-no-margin left" href="<?php echo($main."u/makeDeckImage.php?d=".$row['id']) ?>">Deck as image (WIP)</a>
 						<div class="modern left clearfix export" id="export">
 							<textarea class="exportBox" rows="10" readonly><?php echo($planeTextExport) ?></textarea>
 							<input type="text" class="exportBox" readonly name="" value='<?php echo($JSONExport) ?>' />

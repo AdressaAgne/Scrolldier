@@ -18,9 +18,17 @@ RewriteRule ^decks-in-the-last-day deck_24.php [L]
 RewriteRule ^new/deck new_deck_choose.php [L]
 
 
+RewriteRule ^inbox/message/([^/.]*)/?$ inboxMsg.php?player=$1 [L]
+
+RewriteRule ^inbox/main inbox.php [L]
+
+
+
 RewriteRule ^beetlestone beetlestone.php [L]
 RewriteRule ^admin admin.php [L]
 RewriteRule ^badges badges.php [L]
+
+RewriteRule ^scrollDownload u/user_files/downloadUserLibrary.php [L]
 
 RewriteRule ^error error/db.php [L]
 

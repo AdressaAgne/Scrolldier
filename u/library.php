@@ -20,7 +20,7 @@
 	// 4 = Wild
 	// 5 = Chaos		
 	$extra = "";
-	if ($_GET['r'] == 6) {
+	if ($_GET['r'] == 7) {
 		$fan_query = $db->prepare("SELECT * FROM fanScrolls WHERE ressource = 0 ORDER BY id");
 		
 	} elseif ( isset($_GET['r']) && !empty($_GET['r']) ) {
@@ -64,7 +64,7 @@
 						<a href="<?php echo($main)."scroll/designer" ?>" class="btn-modern btn-no-margin">New Scroll</a>
 				<?php } ?>
 				<div class="right">
-					<a href="<?php echo($main."scroll/library/6/") ?>"><i class="icon-decay"></i></a>
+					<a href="<?php echo($main."scroll/library/7/") ?>"><i class="icon-decay"></i></a>
 					<a href="<?php echo($main."scroll/library/1/") ?>"><i class="icon-energy"></i></a>
 					<a href="<?php echo($main."scroll/library/2/") ?>"><i class="icon-growth"></i></a>
 					<a href="<?php echo($main."scroll/library/3/") ?>"><i class="icon-order"></i></a>
@@ -74,7 +74,7 @@
 			<?php while ($fanScroll = $fan_query->fetch(PDO::FETCH_ASSOC)) { ?>
 			<div class="span-2">
 				<div class="div-4">	
-				<p>by <?php echo($fanScroll['user']) ?></p>
+				<p class=" align-center">Made by <a href="<?php echo($main."user/".$fanScroll['user']) ?>"><?php echo($fanScroll['user']) ?></a></p>
 				
 				<a href="<?php echo($main."fanart/".$fanScroll['link']) ?>">
 					<img src="<?php echo($fanScroll['parma_link']) ?>" class="div-4" alt="" />

@@ -18,7 +18,7 @@ if (isset($_POST['submitJoin'])) {
 		
 		if ($x->addGuildMember($_SESSION['username'], $_POST['gid'], false)) {
 			$_GET['success'] = "You joined a Guild!";
-			$x->delGuildInvite($_POST['id']);
+			
 		}
 		
 	} else {
@@ -34,6 +34,13 @@ if (isset($_POST['submitDecline'])) {
 		$_GET['info'] = "Error";
 	}
 }
+
+$x->setReadMessage($_SESSION['username'],2);
+
+if (isset($_POST['submitDeleteMessage'])) {
+	$x->delGuildInvite($_POST['msgID']);
+}
+
  ?>
 
 <!DOCTYPE html>
@@ -41,14 +48,14 @@ if (isset($_POST['submitDecline'])) {
 <head>
 	<meta charset="utf-8">
 	<title>Scrolls - Notifications</title>
-	<link rel="stylesheet" href="css/style.css" />
-	<link rel="icon" type="image/png" href="img/bunny.png">
+	<link rel="stylesheet" href="<?php echo($main) ?>css/style.css" />
+	<link rel="icon" type="image/png" href="<?php echo($main) ?>img/bunny.png">
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
 	<!--[if lt IE 9]>
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
-	<script src="../jquery.js"></script>	 
-	<script src="../plugins/ckeditor/ckeditor.js"></script>	
+	<script src="<?php echo($main) ?>jquery.js"></script>	 
+	<script src="<?php echo($main) ?>plugins/ckeditor/ckeditor.js"></script>	
 </head>
 <body style="padding-bottom: 0px;">
 	<?php include('inc_/menu.php'); ?>
@@ -64,7 +71,9 @@ if (isset($_POST['submitDecline'])) {
  				<p class="color-green"><?php echo($_GET['success']) ?></p>
  			</div>
  		<?php } ?>
- 	
+ 		<div class="div-4">
+			<a href="<?php echo($main."inbox/message/") ?>" class="btn-modern btn-no-margin">Send a Private message</a>
+ 		</div>
  		<div class="decks">
 			<table>
 				<tr class="modern">
@@ -96,6 +105,7 @@ if (isset($_POST['submitDecline'])) {
 				
 				<?php while ($info = $query->fetch(PDO::FETCH_ASSOC)) { ?>
 				
+<!--	If type = 1 then print out, type 1 = Guild invite	-->
 					<?php if ($info['type'] == 1) { ?>
 					<tr>
 						<td><a href="guild/g.php?g=<?php echo($info['guild_id']) ?>"><?php echo($info['text']) ?></a></td>
@@ -133,6 +143,28 @@ if (isset($_POST['submitDecline'])) {
 						} ?></td>
 					</tr>
 					<? } ?>
+<!--	If type = 2 then print out, type 2 = Private Message	-->					
+					<?php if ($info['type'] == 2) { ?>
+					<tr>
+						<td><?php echo($info['text']) ?></td>
+						<td>
+							<a href="<?php echo($main."inbox/message/".$info['from_user']) ?>">Reply</a>
+							PM from <?php echo($info['from_user']) ?>
+						</td>
+						<td><?php echo($x->ago($info['time'])) ?> ago</td>
+						<td><?php if ($info['haveRed'] == 0) {
+							echo('<i class="icon-round"></i>');
+						} ?>
+						<form method="post" action="">
+							<input type="submit" name="submitDeleteMessage" class="btn-modern btn-no-margin" value="Delete" />
+							<input type="hidden" name="msgID" value="<?php echo($info['id']) ?>" />
+						</form>
+						</td>
+					</tr>
+					<? } ?>
+					
+					
+					
 				<?php } ?>
 			</table>
  		</div>

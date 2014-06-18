@@ -24,7 +24,8 @@ class badges {
 			"beetle",
 			"dota",
 			"crad",
-			"icecream"
+			"icecream",
+			"nr-200"
 		);
 		if ($count == false) {
 			return "icon-".$badgeIcons[$i];

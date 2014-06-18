@@ -18,11 +18,25 @@ function getBack($type, $rarity = 0) {
 	 "scroll/scrolls__scrollbase_energy_".$rarity."_result.png",
 	 "scroll/scrolls__scrollbase_growth_".$rarity."_result.png",
 	 "scroll/scrolls__scrollbase_order_".$rarity."_result.png",
-	 "scroll/scrolls__scrollbase_order_".$rarity."_result.png",
-	 "scroll/scrolls__scrollbase_Chaos_".$rarity."_result.png"
+	 "scroll/scrolls__scrollbase_Wild_".$rarity."_result.png",
+	 "scroll/scrolls__scrollbase_Chaos_".$rarity."_result.png",
+	  "scroll/scrolls__scrollbase_neutral_".$rarity.".png",
 	);
 	
 	return $scroll[$type];
+}
+
+function getBackSize($i) {
+	$scroll = array(
+	 512,
+	 512,
+	 512,
+	 512,
+	 633,
+	 633
+	);
+	
+	return $scroll[$i];
 }
 
 function getCardImage($i) {
@@ -52,6 +66,9 @@ function getCostNumber($i = 0) {
 	return $number;
 }
 
+function getOverlay($i) {
+	return "scroll/scrolls__scrollbase_colorizarion_layer_".$i.".png";
+}
 
 function getRType($i = 0) {
 	$scroll = array(
@@ -60,7 +77,8 @@ function getRType($i = 0) {
 	 "scroll/256_growth_result.png",
 	 "scroll/256_order_result.png",
 	 "scroll/256_special_result.png",
-	 "scroll/256_chaos_result.png"
+	 "scroll/256_chaos_result.png",
+	 "scroll/256_custome_result.png"
 	);
 	return $scroll[$i];
 }
@@ -88,6 +106,9 @@ $bg = imagecreatefrompng("../resources/bg.png");
 
 
 $scroll = imagecreatefrompng(getBack($_POST['type'], $_POST['rarity']));
+
+$overlay = imagecreatefrompng(getOverlay($_POST['rarity']));
+
 
 $type = imagecreatefrompng(getRType($_POST['type']));
 
@@ -130,12 +151,48 @@ $cardImageW = 420;
 imagecopyresampled($bg, $cardImage, 82, 198, 0, 0, $cardImageW, $cardImageW * .75, 300, 225);
 
 //scroll
-imagecopyresampled($bg, $scroll, 0, $offset, 0, 0, 950*.59, 950, 512, 1024);
 
+if ($_POST['type'] >= 4) {
+	imagecopyresampled($bg, $scroll, 0, $offset, 0, 0, 950*.59, 950, 633, 1024);
+} else {
+	imagecopyresampled($bg, $scroll, 0, $offset, 0, 0, 950*.59, 950, 512, 1024);
+}
+
+if ($_POST['type'] == 6) {
+
+$r = $_POST['colorR'];
+$g = $_POST['colorG'];
+$b = $_POST['colorB'];
+
+
+
+$rgb = array($r,$g,$b);
+
+
+$rgb = array(255-$rgb[0],255-$rgb[1],255-$rgb[2]);
+imagealphablending($type, false );
+imagesavealpha( $type, true );
+
+imagealphablending($overlay, false );
+imagesavealpha( $overlay, true );
+
+imagefilter($overlay, IMG_FILTER_NEGATE); 
+imagefilter($overlay, IMG_FILTER_COLORIZE, $rgb[0], $rgb[1], $rgb[2]); 
+imagefilter($overlay, IMG_FILTER_NEGATE); 
+
+imagefilter($type, IMG_FILTER_NEGATE); 
+imagefilter($type, IMG_FILTER_COLORIZE, $rgb[0], $rgb[1], $rgb[2]); 
+imagefilter($type, IMG_FILTER_NEGATE); 
+
+//set faction overlay
+imagecopyresampled($bg, $overlay, 0, $offset, 0, 0, 950*.59, 950, 633, 1024);
+
+}
 //tier
 if ($_POST['tier'] != 0) {
 	imagecopyresampled($bg, $tier, 0, $offset, 0, 0, 950*.59, 950, 633, 1024);
 }
+	
 
 //cost type plate
 imagecopyresampled($bg, $plate, 200, 0, 0, 0, $plateWidth, $plateWidth/2, 512, 256);
@@ -162,7 +219,7 @@ $text = $_POST['text'];
 $text_box = imagettfbbox($header_fontsize, 0 , $header_font, $text);
 $text_width = $text_box[2]-$text_box[0];
 $x = ((950*.59)/2) - ($text_width/2);
-imagettftext($bg, $header_fontsize, 0, $x, 122, $header_color, $header_font, $text);
+imagettftext($bg, $header_fontsize, 0, $x+5, 122, $header_color, $header_font, $text);
 
 
 $scrollType = getScrollType($_POST['scrollType']);
@@ -324,6 +381,9 @@ $descText = $_POST['lore'];
 $totalWidth = 350;
 $words = explode(' ', $_POST['lore']);
  
+ $words = preg_replace('/^\s+|\n|\r|\s+$/m', ' ',$words);
+ $words = preg_replace('/\s+/', ' ',$words);
+ 
 $lines = array();
 
 
@@ -370,7 +430,7 @@ array_push($lines, $line); // push back a copy of line into our array
  	$boxHeight += 80;
  }
  
- $startY = 880 - $boxHeight;
+ $startY = 870 - $boxHeight;
  
  
 // render the lines

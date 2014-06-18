@@ -56,6 +56,15 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
+	"\/admin\/mysql\/scroll_comp.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/admin\/mysql\/scroll_comp.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/admin\/user.php": {
 		"fileType": 8192,
 		"ignore": 0,
@@ -197,6 +206,15 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
+	"\/deck_24.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/deck_24.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/deck_api.php": {
 		"fileType": 8192,
 		"ignore": 0,
@@ -232,8 +250,8 @@
 		"outputAbbreviatedPath": "\/min\/deckbuilder-ck.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
-		"outputStyle": 1,
-		"syntaxCheckerStyle": 1
+		"outputStyle": 0,
+		"syntaxCheckerStyle": 0
 		},
 	"\/edit.php": {
 		"fileType": 8192,
@@ -4840,6 +4858,17 @@
 		"outputPathIsSetByUser": 0,
 		"processed": 1
 		},
+	"\/resources\/badges\/200.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 4895,
+		"inputAbbreviatedPath": "\/resources\/badges\/200.png",
+		"outputAbbreviatedPath": "\/resources\/badges\/200.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
 	"\/resources\/badges\/2nd.png": {
 		"fileType": 32768,
 		"ignore": 0,
@@ -5158,6 +5187,17 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 1
+		},
+	"\/resources\/badges\/scrollBadge.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 6965,
+		"inputAbbreviatedPath": "\/resources\/badges\/scrollBadge.png",
+		"outputAbbreviatedPath": "\/resources\/badges\/scrollBadge.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
 		},
 	"\/resources\/badges\/sg.png": {
 		"fileType": 32768,
@@ -10792,6 +10832,28 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
+	"\/u\/deckImage\/bg1.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 1838,
+		"inputAbbreviatedPath": "\/u\/deckImage\/bg1.png",
+		"outputAbbreviatedPath": "\/u\/deckImage\/bg1.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/u\/deckImage\/curveBG.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 2551,
+		"inputAbbreviatedPath": "\/u\/deckImage\/curveBG.png",
+		"outputAbbreviatedPath": "\/u\/deckImage\/curveBG.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
 	"\/u\/edit.php": {
 		"fileType": 8192,
 		"ignore": 0,
@@ -10837,6 +10899,15 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
+	"\/u\/makeDeckImage.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/u\/makeDeckImage.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/u\/reg.php": {
 		"fileType": 8192,
 		"ignore": 0,
@@ -10862,6 +10933,17 @@
 		"initialSize": 19391,
 		"inputAbbreviatedPath": "\/u\/scroll\/256_chaos_result.png",
 		"outputAbbreviatedPath": "\/u\/scroll\/256_chaos_result.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/u\/scroll\/256_custome_result.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 12586,
+		"inputAbbreviatedPath": "\/u\/scroll\/256_custome_result.png",
+		"outputAbbreviatedPath": "\/u\/scroll\/256_custome_result.png",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 0
@@ -10939,6 +11021,17 @@
 		"initialSize": 354666,
 		"inputAbbreviatedPath": "\/u\/scroll\/crafting_3_3_result.png",
 		"outputAbbreviatedPath": "\/u\/scroll\/crafting_3_3_result.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/u\/scroll\/foil_result.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 219815,
+		"inputAbbreviatedPath": "\/u\/scroll\/foil_result.png",
+		"outputAbbreviatedPath": "\/u\/scroll\/foil_result.png",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 0
@@ -11090,7 +11183,7 @@
 		"fileType": 32768,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"initialSize": 366254,
+		"initialSize": 729124,
 		"inputAbbreviatedPath": "\/u\/scroll\/scrolls__scrollbase_Chaos_0_result.png",
 		"outputAbbreviatedPath": "\/u\/scroll\/scrolls__scrollbase_Chaos_0_result.png",
 		"outputPathIsOutsideProject": 0,
@@ -11101,7 +11194,7 @@
 		"fileType": 32768,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"initialSize": 416515,
+		"initialSize": 802878,
 		"inputAbbreviatedPath": "\/u\/scroll\/scrolls__scrollbase_Chaos_1_result.png",
 		"outputAbbreviatedPath": "\/u\/scroll\/scrolls__scrollbase_Chaos_1_result.png",
 		"outputPathIsOutsideProject": 0,
@@ -11112,9 +11205,42 @@
 		"fileType": 32768,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"initialSize": 414905,
+		"initialSize": 810799,
 		"inputAbbreviatedPath": "\/u\/scroll\/scrolls__scrollbase_Chaos_2_result.png",
 		"outputAbbreviatedPath": "\/u\/scroll\/scrolls__scrollbase_Chaos_2_result.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/u\/scroll\/scrolls__scrollbase_colorizarion_layer_0.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 33802,
+		"inputAbbreviatedPath": "\/u\/scroll\/scrolls__scrollbase_colorizarion_layer_0.png",
+		"outputAbbreviatedPath": "\/u\/scroll\/scrolls__scrollbase_colorizarion_layer_0.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/u\/scroll\/scrolls__scrollbase_colorizarion_layer_1.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 28615,
+		"inputAbbreviatedPath": "\/u\/scroll\/scrolls__scrollbase_colorizarion_layer_1.png",
+		"outputAbbreviatedPath": "\/u\/scroll\/scrolls__scrollbase_colorizarion_layer_1.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/u\/scroll\/scrolls__scrollbase_colorizarion_layer_2.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 30025,
+		"inputAbbreviatedPath": "\/u\/scroll\/scrolls__scrollbase_colorizarion_layer_2.png",
+		"outputAbbreviatedPath": "\/u\/scroll\/scrolls__scrollbase_colorizarion_layer_2.png",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 0
@@ -11218,6 +11344,39 @@
 		"outputPathIsSetByUser": 0,
 		"processed": 0
 		},
+	"\/u\/scroll\/scrolls__scrollbase_neutral_0.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 740549,
+		"inputAbbreviatedPath": "\/u\/scroll\/scrolls__scrollbase_neutral_0.png",
+		"outputAbbreviatedPath": "\/u\/scroll\/scrolls__scrollbase_neutral_0.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/u\/scroll\/scrolls__scrollbase_neutral_1.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 827946,
+		"inputAbbreviatedPath": "\/u\/scroll\/scrolls__scrollbase_neutral_1.png",
+		"outputAbbreviatedPath": "\/u\/scroll\/scrolls__scrollbase_neutral_1.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/u\/scroll\/scrolls__scrollbase_neutral_2.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 818675,
+		"inputAbbreviatedPath": "\/u\/scroll\/scrolls__scrollbase_neutral_2.png",
+		"outputAbbreviatedPath": "\/u\/scroll\/scrolls__scrollbase_neutral_2.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
 	"\/u\/scroll\/scrolls__scrollbase_order_0_result.png": {
 		"fileType": 32768,
 		"ignore": 0,
@@ -11269,6 +11428,39 @@
 		"initialSize": 347620,
 		"inputAbbreviatedPath": "\/u\/scroll\/scrolls__scrollbase_pile_2_result.png",
 		"outputAbbreviatedPath": "\/u\/scroll\/scrolls__scrollbase_pile_2_result.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/u\/scroll\/scrolls__scrollbase_Wild_0_result.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 732134,
+		"inputAbbreviatedPath": "\/u\/scroll\/scrolls__scrollbase_Wild_0_result.png",
+		"outputAbbreviatedPath": "\/u\/scroll\/scrolls__scrollbase_Wild_0_result.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/u\/scroll\/scrolls__scrollbase_Wild_1_result.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 806424,
+		"inputAbbreviatedPath": "\/u\/scroll\/scrolls__scrollbase_Wild_1_result.png",
+		"outputAbbreviatedPath": "\/u\/scroll\/scrolls__scrollbase_Wild_1_result.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/u\/scroll\/scrolls__scrollbase_Wild_2_result.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 819531,
+		"inputAbbreviatedPath": "\/u\/scroll\/scrolls__scrollbase_Wild_2_result.png",
+		"outputAbbreviatedPath": "\/u\/scroll\/scrolls__scrollbase_Wild_2_result.png",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 0
@@ -11394,6 +11586,15 @@
 		"outputPathIsSetByUser": 0,
 		"processed": 0
 		},
+	"\/u\/scroll2.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/u\/scroll2.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/u\/spriteMaker.php": {
 		"fileType": 8192,
 		"ignore": 0,
@@ -11413,6 +11614,15 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 0
+		},
+	"\/u\/user_files\/downloadUserLibrary.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/u\/user_files\/downloadUserLibrary.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
 		},
 	"\/u\/user_files\/orangee\/45.png": {
 		"fileType": 32768,
@@ -11751,6 +11961,83 @@
 		"initialSize": 813527,
 		"inputAbbreviatedPath": "\/u\/user_files\/orangee\/539b6e381b06a.png",
 		"outputAbbreviatedPath": "\/u\/user_files\/orangee\/539b6e381b06a.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/u\/user_files\/orangee\/539b6eae8a546.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 817667,
+		"inputAbbreviatedPath": "\/u\/user_files\/orangee\/539b6eae8a546.png",
+		"outputAbbreviatedPath": "\/u\/user_files\/orangee\/539b6eae8a546.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/u\/user_files\/orangee\/539ff2fc97fd4.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 234453,
+		"inputAbbreviatedPath": "\/u\/user_files\/orangee\/539ff2fc97fd4.png",
+		"outputAbbreviatedPath": "\/u\/user_files\/orangee\/539ff2fc97fd4.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/u\/user_files\/orangee\/539ff3062ea52.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 663952,
+		"inputAbbreviatedPath": "\/u\/user_files\/orangee\/539ff3062ea52.png",
+		"outputAbbreviatedPath": "\/u\/user_files\/orangee\/539ff3062ea52.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/u\/user_files\/orangee\/539ff3b1b1f18.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 847056,
+		"inputAbbreviatedPath": "\/u\/user_files\/orangee\/539ff3b1b1f18.png",
+		"outputAbbreviatedPath": "\/u\/user_files\/orangee\/539ff3b1b1f18.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/u\/user_files\/orangee\/53a00f7ba8060.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 818642,
+		"inputAbbreviatedPath": "\/u\/user_files\/orangee\/53a00f7ba8060.png",
+		"outputAbbreviatedPath": "\/u\/user_files\/orangee\/53a00f7ba8060.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/u\/user_files\/orangee\/53a00f8e51efe.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 841049,
+		"inputAbbreviatedPath": "\/u\/user_files\/orangee\/53a00f8e51efe.png",
+		"outputAbbreviatedPath": "\/u\/user_files\/orangee\/53a00f8e51efe.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/u\/user_files\/orangee\/53a0189300cb4.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 836938,
+		"inputAbbreviatedPath": "\/u\/user_files\/orangee\/53a0189300cb4.png",
+		"outputAbbreviatedPath": "\/u\/user_files\/orangee\/53a0189300cb4.png",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 0

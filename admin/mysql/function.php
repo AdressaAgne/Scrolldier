@@ -627,7 +627,26 @@ function deckVote($id, $value=true, $user) {
 			return($this->errorHandle($e));
 		}
 	}
-	
+	function setReadMessage($ign, $type) {
+		include('connect.php');
+		
+			$query = $db->prepare("UPDATE notification SET haveRed=1 WHERE user_id=:toUser AND type = :type");
+			$arr = array(
+					'toUser' => $ign,
+					'type' => $type
+			);
+			$this->arrayBinder($query, $arr);
+			
+			try {
+				if ($query->execute()) {
+					return true;
+				} else {
+					return false;
+				}
+			} catch (PDOException $e) {
+				return(false);
+			}
+	}
 	function notfiCount($name) {
 		include('connect.php');
 		$query = $db->prepare("SELECT id FROM notification WHERE user_id=:ign AND haveRed = 0");

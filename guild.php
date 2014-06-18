@@ -65,7 +65,7 @@
 					 ?>
 					<tr>
 						<?php if (!empty($deck['badge_url'])) { ?>
-							<td><img src="<?php echo($deck['badge_url']) ?>" alt="<?php echo($deck['name']) ?>" /></td>
+							<td><img width="22px" src="<?php echo($deck['badge_url']) ?>" alt="<?php echo($deck['name']) ?>" /></td>
 						<?php } else { ?>
 							<td></td>
 						<?php } ?>

@@ -49,7 +49,7 @@
 					<?php } ?>
 					
 					
-					<?php if ($thisPage == "/u/make.php") { ?>
+					<?php if ($thisPage == "/u/library.php") { ?>
 						<li class="active"><a href="<?php echo($main) ?>scroll/library/">FanScroll</a></li>
 					<?php } else { ?>
 						<li><a href="<?php echo($main) ?>scroll/library/">FanScroll</a></li>
@@ -80,7 +80,7 @@
 	<?php } ?>
 	
 		<?php $notfiCount = $x->notfiCount($_SESSION['username']); ?>
-		<div class="left"><a class="modern" href="<?php echo($main) ?>inbox.php">Inbox<?php if ($notfiCount == 0) {
+		<div class="left"><a class="modern" href="<?php echo($main) ?>inbox/main">Inbox<?php if ($notfiCount == 0) {
 			echo("<i class='icon-round disabled'></i>");
 		} else {
 			echo("<i class='icon-round'></i>");

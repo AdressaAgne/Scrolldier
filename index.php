@@ -88,7 +88,7 @@
 						<?php echo($row['html']) ?>
 					</div>
 					<div class="readMore">
-						<a href="post/<?php echo($row['id']) ?>" class="readMore">Continue Reading</a>
+						<a href="post/<?php echo($row['id']) ?>" class="readMore fontDwarven">Continue Reading</a>
 					</div>
 				</div>
 				

@@ -52,10 +52,14 @@ if (isset($_POST['link']) && !empty($_POST['link'])) {
 	 	<form method="post" action="<?php echo($main) ?>u/scroll.php">
 	 		<div class="div-4">
 	 			<p>Resource</p>
-
-	 			<ul class="badge-icon-admin">
-
-
+					<div class="div-4">
+						<input id="res_0" checked type="radio" name="res" value="0" />
+						<label for="res_0" class="hand">Preset</label>
+						<input id="res_1" type="radio" name="res" value="1" />
+						<label for="res_1" class="hand">Custom</label>
+					</div>
+			
+	 			<ul class="badge-icon-admin" id="type_preset">
 						
 	 					<li>
 	 						<input <?php if (isset($fanScroll) && $fanScroll['ressource'] == 0) {echo("checked");} ?> type="radio" checked="" name="type" id="badge-0" value="0"  />
@@ -81,9 +85,40 @@ if (isset($_POST['link']) && !empty($_POST['link'])) {
 							<input <?php if (isset($fanScroll) && $fanScroll['ressource'] == 5) {echo("checked");} ?> type="radio" name="type" id="badge-5" value="5" />
 							<label for="badge-5" class="checkbox"><img src="<?php echo($main) ?>u/scroll/256_chaos_result.png" alt="" width="26" /></label>
 						</li>
+						<li>
+							<input id="type_6" <?php if (isset($fanScroll) && $fanScroll['ressource'] == 6) {echo("checked");} ?> type="radio" name="type" id="badge-6" value="6" class="hidden" />
+
+						</li>
 	 				
 	 			</ul>
 	 			
+	 		</div>
+	 		<div class="div-4 hidden" id="colorChanger">
+	 			<p>Choose Colors</p>
+	 			
+	 			<div class="span-4">
+		 			<div class="div-4">
+		 				<p>Red: <span id="rText">0</span></p>
+		 				<div class="colorBox small left span-2" id="r0" style="background-color: rgb(0, 0, 0);"></div>
+		 					<input type="range" id="r" name="colorR" class="left span-9" value="0" max="255" min="0" />
+		 				<div class="colorBox small left span-2" id="r255" style="background-color: rgb(255, 0, 0);"></div>
+		 			</div>
+		 			<div class="div-4">
+		 				<p>Green: <span id="gText">0</span></p>
+		 				<div class="colorBox small left span-2" id="g0" style="background-color: rgb(0, 0, 0);"></div>
+		 					<input type="range" id="g" name="colorG" class="left span-9" value="0" max="255" min="0" />
+		 				<div class="colorBox small left span-2" id="g255" style="background-color: rgb(0, 255, 0);"></div>
+		 			</div>
+		 			<div class="div-4">
+		 				<p>Blue: <span id="bText">0</span></p>
+		 				<div class="colorBox small left span-2" id="b0" style="background-color: rgb(0, 0, 0);"></div>
+		 					<input type="range" id="b" name="colorB" class="left span-9" value="0" max="255" min="0" />
+		 				<div class="colorBox small left span-2" id="b255" style="background-color: rgb(0, 0, 255);"></div>
+		 			</div>
+	 			</div>
+	 			<div class="span-2">
+	 				<div class="colorBox left" id="colorBox" style="background-color: rgb(0, 0, 0);"></div>
+	 			</div>
 	 		</div>
 			<div class="div-4">
 				<p>Title</p>
@@ -260,6 +295,71 @@ $(function() {
 			$("#Ability_input").slideUp();
 		}
 	});
+	
+	var lastChecked = 0;
+	$("input[name=res]:radio").change(function() {
+		if ($(this).val() == 1) {
+			console.log(0);
+			lastChecked = $("input[name=type]:checked").val();
+			
+			$("#type_6").click();
+		} else {
+
+			$("input:radio[name=type][value="+lastChecked+"]").click();
+		}
+	});
+	
+	$("input[name=type]:radio").change(function() {
+		if ($(this).val() == 6) {
+			$("#colorChanger").slideDown();
+			$("#type_preset").slideUp();
+		} else {
+			$("#colorChanger").slideUp();
+			$("#type_preset").slideDown();
+		}
+	});
+	//.colorBor, #r, #g, #b
+	$("#r").mousemove(function() {
+		changeColor();
+	});
+	$("#g").mousemove(function() {
+		changeColor();
+	});
+	$("#b").mousemove(function() {
+		changeColor();
+	});
+	
+	$("#r").change(function() {
+		changeColor();
+	});
+	$("#g").change(function() {
+		changeColor();
+	});
+	$("#b").change(function() {
+		changeColor();
+	});
+	
+	function changeColor() {
+		var r = $("#r").val();
+		var g = $("#g").val();
+		var b = $("#b").val();
+		
+		$("#colorBox").css("background-color", "rgb("+r+", "+g+", "+b+")");
+	
+		
+		$("#r0").css("background-color", "rgb(0, "+g+", "+b+")");
+		$("#r255").css("background-color", "rgb(255, "+g+", "+b+")");
+		
+		$("#g0").css("background-color", "rgb("+r+", 0, "+b+")");
+		$("#g255").css("background-color", "rgb("+r+", 255, "+b+")");
+		
+		$("#b0").css("background-color", "rgb("+r+", "+g+", 0)");
+		$("#b255").css("background-color", "rgb("+r+", "+g+", 255)");
+	
+		$("#rText").text(r);
+		$("#gText").text(g);
+		$("#bText").text(b);
+	}
 });
 
 </script>
