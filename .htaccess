@@ -13,20 +13,20 @@ RewriteRule ^editdeck/([^/.]+)/?$ deck_edit.php?d=$1 [L]
 
 RewriteRule ^decks/(([0-9]+/)?(([a-zA-Z0-9]+)?(/(order|energy|growth|decay|wild|s|c))*/)?)$ deck.php?page=$2&search=$4&para=$3&SearchType=$6 [L]
 
-RewriteRule ^decks-in-the-last-day deck_24.php [L]
+RewriteRule ^decks-in-the-last-day$ deck_24.php [L]
 
-RewriteRule ^new/deck new_deck_choose.php [L]
+RewriteRule ^new/deck$ new_deck_choose.php [L]
 
 
-RewriteRule ^beetlestone beetlestone.php [L]
-RewriteRule ^admin admin.php [L]
-RewriteRule ^badges badges.php [L]
+RewriteRule ^beetlestone$ beetlestone.php [L]
+RewriteRule ^admin$ admin.php [L]
+RewriteRule ^badges$ badges.php [L]
 
-RewriteRule ^error error/db.php [L]
+RewriteRule ^error$ error/db.php [L]
 
 RewriteRule ^fanart/([^/.]*)/?$ u/viewScroll.php?image=$1 [L]
 
-RewriteRule ^scroll/designer u/make.php [L]
+RewriteRule ^scroll/designer$ u/make.php [L]
 RewriteRule ^scroll/library/([^/.]*)/?$  u/library.php?r=$1 [L]
 
 RewriteRule ^userImage/([^/.]*)/?$ u/img.php?user=$1 [L]
@@ -39,17 +39,17 @@ RewriteRule ^userAvatar/([^/.]*)/?$ u/avatar.php?user=$1 [L]
 
 RewriteRule ^deckbuilder/([^/.]*)/?$ new_deckbuilder.php?deck=$1 [L]
 
-RewriteRule ^new/import/scrollguide new_deck_sg.php [L]
+RewriteRule ^new/import/scrollguide$ new_deck_sg.php [L]
 
 RewriteRule ^new/import/in-game/([^/.]*)/?$ new_deck_ig.php?json=$1 [L]
 
-RewriteRule ^logout logout.php [L]
-RewriteRule ^edit/user u/edit.php [L]
-RewriteRule ^new/guild guild/index.php [L]
-RewriteRule ^guilds guild.php [L]
+RewriteRule ^logout$ logout.php [L]
+RewriteRule ^edit/user$ u/edit.php [L]
+RewriteRule ^new/guild$ guild/index.php [L]
+RewriteRule ^guilds$ guild.php [L]
 RewriteRule ^guild/([^/.]+)/?$ guild/g.php?g=$1 [L]
 RewriteRule ^user/([^/.]+)/?$ u/index.php?u=$1 [L]
 
-RewriteRule ^user u/index.php [L]
+RewriteRule ^user$ u/index.php [L]
 RewriteRule ^post/([^/.]+)/?$ spoiler.php?s=$1 [L]
 RewriteRule ^([^/.]+)/?$ index.php?p=$1 [L]
