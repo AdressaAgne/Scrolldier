@@ -13,6 +13,7 @@
 	font-family: 'Open Sans', sans-serif;
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;
+	text-decoration: none;
 	
 }
 
@@ -136,9 +137,21 @@
 		background-color: lighten(#FF8800, 10%);
 	}
 }
-.fontDwarven{
+.fontDwarven, strong{
+	text-decoration: none;
 	font-family: dwaren !important;
 }
+
+h1 strong{
+	font-size: 42px;
+}
+h2 strong{
+	font-size: 36px;
+}
+h3 strong{
+	font-size: 32px;
+}
+
 @font-face {
 	font-family: sFont;
 	src: url('../fonts/honeymeadbold.woff');
@@ -466,9 +479,15 @@ ul li.modern{
 	background-image: -ms-linear-gradient(top, #26262A 0%, #1C1C1F 100%);
 	background-image: linear-gradient(to bottom, #26262A 0%, #1C1C1F 100%);
 	
+	&.center{
+		text-align: center;
+	}	
+
+	
 	&.active{
 		-moz-box-shadow: inset 0 -1px 0 #000000, inset 0 -4px #ecba24, inset 0 1px 0 #38373B;
 		box-shadow: inset 0 -1px 0 #000000, inset 0 -4px #ecba24, inset 0 1px 0 #38373B;
+		
 	}
 	
 	& ul li{
@@ -487,6 +506,16 @@ ul li.modern{
 		&:first-of-type{
 			border-left: none;
 		}
+		&:hover{
+			-moz-box-shadow: inset 0 100px rgba(0, 0, 0, .1);
+			box-shadow: inset 0 100px rgba(0, 0, 0, .1);
+			
+		}
+		&.active:hover{
+			-moz-box-shadow:inset 0 100px rgba(0, 0, 0, .1), inset 0 -1px 0 #000000, inset 0 -4px #ecba24, inset 0 1px 0 #38373B;
+			box-shadow:inset 0 100px rgba(0, 0, 0, .1), inset 0 -1px 0 #000000, inset 0 -4px #ecba24, inset 0 1px 0 #38373B;
+		}
+		
 	}
 	
 	
@@ -522,6 +551,7 @@ ul li.modern{
 		}
 	}
 }
+
 .avatar{
 	overflow: hidden;
 	height: 200px;
@@ -534,6 +564,135 @@ ul li.modern{
 .border-radius-bottom-none{
 	border-bottom-left-radius: 0px !important;
 	border-bottom-right-radius: 0px !important;
+}
+
+@scrollW: 633px / 2;
+@scrollH: 1024px / 2;
+
+@artW: 250px;
+@artH: @artW * .75;
+
+#fixed{
+	position: relative;
+	width: @scrollW;
+	height: @scrollH;
+	& .scrollBackground{
+		position: absolute;
+		width: @scrollW;
+		height: @scrollH;
+		background-size: @scrollW @scrollH;
+	}
+	
+	& .scrollTier{
+		position: absolute;
+		width: @scrollW;
+		height: @scrollH;
+		background-size: @scrollW @scrollH;
+	}
+	
+	& .scrollArt{
+		top: 100px;
+		left: 40px;
+		position: absolute;
+		width: @artW;
+		height: @artH;
+		background-size: @artW @artH;
+	}
+	& .scrollTitle{
+		
+		z-index: 9999;
+		font-family: dwaren;
+		font-size: 30px;
+		color: rgb(59, 41, 32);
+		text-align: center;
+		position: absolute;
+		width: @artW;
+
+
+		
+		top: 40px;
+		left: 36px;
+	}
+	& .scrollSub{
+			z-index: 9999;
+			font-family: dwaren;
+			font-size: 20px;
+			color: rgb(59, 41, 32);
+			text-align: center;
+			position: absolute;
+			width: @artW;
+
+			top: 68px;
+			left: 36px;
+		}
+	
+	@plateW: 105px;
+	@plateH: @plateW/2;
+	& .scrollPlate{
+		top: -12px;
+		right: (@scrollW / 2) - @plateH - 2;
+		z-index: 1;
+		position: absolute;
+		width: @plateW;
+		height: @plateH;
+		background-repeat: no-repeat;
+		background-image: url(../u/scroll/scrolls__resource_cost_result.png);
+		background-size: @plateW @plateH;
+		
+		& .scrollType{
+			float: left;
+			margin-left: 15px;
+			width: 50px;
+			height: 50px;
+			background-size: 38px 38px;
+			background-repeat: no-repeat;
+			background-position: center center;
+		}
+		
+		& .scrollCost{
+			float: left;
+			width: 20px;
+			height: 33px;
+			margin-top: 10px;
+			margin-left: -5px;
+			background-size: auto 100%;
+			background-repeat: no-repeat;
+			background-position: center center;
+		}
+	}
+	@statW: 235px;
+	@statH: @statW * .25;
+	& .scrollStats{
+		top: 250px;
+		left: (@scrollW / 2) - (@statW / 2) + 2;
+		z-index: 1;
+		position: absolute;
+		width: @statW;
+		height: @statH;
+		background-repeat: no-repeat;
+		background-image: url(../u/scroll/scrolls__statsbar_result.png);
+		background-size: @statW @statH;
+		
+		& .scrollAP, .scrollCD, .scrollHP{
+			float: left;
+			margin-top: 16px;
+			width: 50px;
+			height: 25px;
+			background-size: auto 100%;
+			background-repeat: no-repeat;
+			background-position: center center;
+		}
+		& .scrollAP{
+			margin-left: 34px;
+		}
+		& .scrollCD{
+			margin-left: 15px;
+		}
+		& .scrollHP{
+			margin-left: 25px;
+		}
+	}
+	
 }
 .clearfix{
 	*zoom: 1;
@@ -630,6 +789,7 @@ input[type='range']{
 	float: left;
 	width: 66.6666666666%;
 }
+
 
 .span-9{
 	float: left;
@@ -1460,7 +1620,37 @@ ul.badge-icon-admin{
 	}
 }
 
+label.normal_checkbox{
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	
+	background-color: #dedede;
+	border: 1px solid #cdcdcd;
+	color: #262626;
 
+
+	box-sizing: border-box;
+	border-radius: 1px;
+	
+	margin-bottom: -2px;
+	cursor: pointer;
+}
+
+input[type='checkbox'].normal_checkbox {
+   display: none;
+}
+
+input[type='checkbox'].normal_checkbox:checked + label.normal_checkbox:before{
+	content: "✓";
+	font-size: 18px;
+	color: #222222;
+	position: absolute;
+	margin-top: -3px;
+	display: block;
+	width: 16px;
+	height: 16px;
+}
 
 ul.badge-icon-scroll{
 	float: left;

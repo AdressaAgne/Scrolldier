@@ -7,11 +7,11 @@ session_start();
 if (isset($_GET['logout'])) {
 	$x->logout();
 }
-if (!isset($_SESSION['username'])) {
+if (!isset($_SESSION['username']) && $_SESSION['rank'] <= 2) {
 	header("location: login.php");
 }
 
-	if (isset($_POST['html']) & !empty($_POST['html'])) {
+	if (isset($_POST['html']) && !empty($_POST['html']) && isset($_SESSION['username']) && $_SESSION['rank'] <= 2) {
 		
 		if (empty($_POST['name'])) {
 			$_POST['name'] = "Unknown";
@@ -38,6 +38,7 @@ if (!isset($_SESSION['username'])) {
 	<title>Scrolls - Alternative Profile Page</title>
 	<link rel="stylesheet" href="css/style.css" />
 	<link rel="icon" type="image/png" href="img/bunny.png">
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
 	<!--[if lt IE 9]>
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
@@ -52,7 +53,7 @@ if (!isset($_SESSION['username'])) {
 	 	<div class="container">
 	 		<div id="patchNews" class="clearfix">
 	 			
-	 			<?php if (isset($_SESSION['username']) && ($_SESSION['rank'] <= 2)) { ?>
+	 			
 	 			<div class="scrollsHardBack">
 					<form method="post" action="">
 						<div class="div-3">
@@ -72,11 +73,6 @@ if (!isset($_SESSION['username'])) {
 						</div>
 					</form>
 	 			</div>
-	 			<?php } else { ?>
-	 				<div class="scrollsHardBack">
-	 					<p>No access!</p>
-	 				</div>
-	 			<?php } ?>
 	 		</div>
 	 	</div>
 	 </div>

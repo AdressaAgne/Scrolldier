@@ -35,8 +35,6 @@ if (isset($_POST['submitDecline'])) {
 	}
 }
 
-$x->setReadMessage($_SESSION['username'],2);
-
 if (isset($_POST['submitDeleteMessage'])) {
 	$x->delGuildInvite($_POST['msgID']);
 }
@@ -74,7 +72,7 @@ if (isset($_POST['submitDeleteMessage'])) {
  		<div class="div-4">
 			<a href="<?php echo($main."inbox/message/") ?>" class="btn-modern btn-no-margin">Send a Private message</a>
  		</div>
- 		<div class="decks">
+ 		<div class="decks div-4">
 			<table>
 				<tr class="modern">
 					<td>Notifications</td>
@@ -85,7 +83,7 @@ if (isset($_POST['submitDeleteMessage'])) {
 				
 				
 				<?php 
-				$query = $db->prepare("SELECT * FROM notification WHERE user_id=:ign");
+				$query = $db->prepare("SELECT * FROM notification WHERE user_id=:ign ORDER BY time DESC");
 				$arr = array(
 						'ign' => $_SESSION['username']
 					);
@@ -151,10 +149,27 @@ if (isset($_POST['submitDeleteMessage'])) {
 							<a href="<?php echo($main."inbox/message/".$info['from_user']) ?>">Reply</a>
 							PM from <?php echo($info['from_user']) ?>
 						</td>
-						<td><?php echo($x->ago($info['time'])) ?> ago</td>
-						<td><?php if ($info['haveRed'] == 0) {
+						<td><?php echo($x->ago($info['time'])) ?> ago<?php if ($info['haveRed'] == 0) {
 							echo('<i class="icon-round"></i>');
-						} ?>
+						} ?></td>
+						<td>
+						<form method="post" action="">
+							<input type="submit" name="submitDeleteMessage" class="btn-modern btn-no-margin" value="Delete" />
+							<input type="hidden" name="msgID" value="<?php echo($info['id']) ?>" />
+						</form>
+						</td>
+					</tr>
+					<? } ?>
+					
+					<?php if ($info['type'] == 3) { ?>
+					<tr>
+						<td><?php echo($info['text']) ?></td>
+						<td>
+						</td>
+						<td><?php echo($x->ago($info['time'])) ?> ago<?php if ($info['haveRed'] == 0) {
+							echo('<i class="icon-round"></i>');
+						} ?></td>
+						<td>
 						<form method="post" action="">
 							<input type="submit" name="submitDeleteMessage" class="btn-modern btn-no-margin" value="Delete" />
 							<input type="hidden" name="msgID" value="<?php echo($info['id']) ?>" />
@@ -170,5 +185,10 @@ if (isset($_POST['submitDeleteMessage'])) {
  		</div>
  	</div>
  	<?php include("inc_/footer.php"); ?>
+ 	<?php 
+ 		$x->setReadMessage($_SESSION['username'],1);
+ 		$x->setReadMessage($_SESSION['username'],2);
+ 		$x->setReadMessage($_SESSION['username'],3);
+ 	 ?>
 </body>
 </html>

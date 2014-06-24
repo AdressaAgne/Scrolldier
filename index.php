@@ -31,7 +31,7 @@
 	<div class="body" id="blog">
 		<div class="container">
 			
-				<?php include("inc_/liveStreams.php") ?>
+
 		</div>
 	
 		<div class="container">

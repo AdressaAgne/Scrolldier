@@ -97,8 +97,8 @@
 				
 				<div class="wall_big">
 				<h1 class="modern">Settings</h1>
-				<!--<form method="post" action="" class="">
-					<div class="div-3 settings-element">
+				<form method="post" action="" class="">
+					<!--<div class="div-3 settings-element">
 						<h4>General Settings</h4>
 						<div class="div-3">
 							<label for="ign">In Game Name</label><br />
@@ -108,8 +108,9 @@
 							<label for="mail">Mail</label><br />
 							<input type="email" class="textbox full div-1" name="mail" id="mail" value="<?php echo($row['mail']) ?>" placeholder="Mail" />
 						</div>
-					</div>
+					</div>-->
 					<div class="div-3 chooseBox left clear settings-element clearfix">
+						<h4>Social</h4>
 						<div class="div-3">
 							<div class="span-4">
 							      <input id="twitch" type="checkbox" checked="checked" name="" value="">
@@ -124,11 +125,30 @@
 						</div>
 					</div>
 					<div class="div-3 settings-element">
+						<h4>Frontpage</h4>
+						<div class="div-3">
+							<input type="checkbox" class="normal_checkbox" name="frontTwitch" id="frontTwitch" checked="" value="" />
+							<label for="frontTwitch" class="normal_checkbox"></label>
+							<label for="frontTwitch" class="hand">Show Twitch stream's on front page</label>
+						</div>
+						<div class="div-3">
+							<input type="checkbox" class="normal_checkbox" name="frontTwitter" id="frontTwitter" checked="" value="" />
+							<label for="frontTwitter" class="normal_checkbox"></label>
+							<label for="frontTwitter" class="hand">Show Dev's Twitter feed on front page</label>
+						</div>
+						<h4>Profile</h4>
+						<div class="div-3">
+							<input type="checkbox" class="normal_checkbox" name="profileMatch" id="profileMatch" checked="" value="" />
+							<label for="profileMatch" class="normal_checkbox"></label>
+							<label for="profileMatch" class="hand">View my match history to other players</label>
+						</div>
+					</div>
+					<div class="div-3 settings-element">
 						<div class="div-3">
 							<input type="submit" name="generalSave" class="btn-modern btn-no-margin" value="Save" />
 						</div>
 					</div>
-				</form>-->
+				</form>
 				<form method="post" action="">
 					<div class="div-3 settings-element">
 					<?php if (isset($_GET['info']) && !empty($_GET['info'])) { ?>

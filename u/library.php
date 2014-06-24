@@ -21,17 +21,17 @@
 	// 5 = Chaos		
 	$extra = "";
 	if ($_GET['r'] == 7) {
-		$fan_query = $db->prepare("SELECT * FROM fanScrolls WHERE ressource = 0 ORDER BY id");
+		$fan_query = $db->prepare("SELECT * FROM fanScrolls WHERE ressource = 0 ORDER BY id DESC");
 		
 	} elseif ( isset($_GET['r']) && !empty($_GET['r']) ) {
-		$fan_query = $db->prepare("SELECT * FROM fanScrolls WHERE ressource = :r ORDER BY id");
+		$fan_query = $db->prepare("SELECT * FROM fanScrolls WHERE ressource = :r ORDER BY id DESC");
 		$fan_arr = array(
 					'r' => $_GET['r']
 				);		
 		$x->arrayBinder($fan_query, $fan_arr);
 		
 	} else {
-		$fan_query = $db->prepare("SELECT * FROM fanScrolls ORDER BY id");
+		$fan_query = $db->prepare("SELECT * FROM fanScrolls ORDER BY id DESC");
 	}
 	
 		

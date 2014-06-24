@@ -6,18 +6,57 @@ session_start();
 if (isset($_GET['logout'])) {
 	$x->logout();
 }
+
+$query = $db->prepare("SELECT * FROM decks WHERE id=:id");
+$arr = array(
+		'id' => $_GET['d']
+	);
+
+$x->arrayBinder($query, $arr);
+$query->execute();		
+$row = $query->fetch(PDO::FETCH_ASSOC);
+
 if (isset($_POST['name']) && isset($_POST['submit']) && isset($_POST['comment'])) {
 	
 	$query = $db->prepare("INSERT INTO comment (byUser, comment, commentToID, headID, cWhere) VALUES (:name, :comment, :commentToID, :headID, 2)");
 	$arr = array(
 			'name' => $_POST['name'],
 			'comment' => $_POST['comment'],
-			'commentToID' => $_GET['d'],
+			'commentToID' => $row['id'],
 			'headID' => $_POST['headID']
 		);
 		
 	$x->arrayBinder($query, $arr);
-	$query->execute();			
+	
+	if ($query->execute()) {
+		if ($row['deck_author'] != $_SESSION['username']) {
+			$x->setNotificationDeck($row['deck_author'], $_POST['name'], $row['id']);
+		}
+		
+		$hasSent = array();
+		array_push($hasSent, strtolower($row['deck_author']));
+		array_push($hasSent, strtolower($_SESSION['username']));
+		
+		
+		$replyQuery = $db->prepare("SELECT byUser FROM comment WHERE commentToID=:id AND cWhere=2");
+		$reply_arr = array(
+				'id' => $row['id']
+			);
+		$x->arrayBinder($replyQuery, $reply_arr);	
+		
+		
+		if ($replyQuery->execute()) {
+			while ($reply = $replyQuery->fetch(PDO::FETCH_ASSOC)) {
+			
+				if (!in_array(strtolower($reply['byUser']), $hasSent)) {
+					array_push($hasSent, strtolower($reply['byUser']));
+					$x->setNotificationReply($reply['byUser'], $_POST['name'], $main."deck/".$row['id'], "deck");
+				}
+			}
+		}
+		
+		
+	}		
 } 
 
 if (isset($_POST['postID']) && !empty($_POST['postID'])) {
@@ -41,14 +80,7 @@ if (!isset($_GET['s']) || empty($_GET['s'])) {
 	$_GET['s'] = 1;
 }
 
-$query = $db->prepare("SELECT * FROM decks WHERE id=:id");
-$arr = array(
-		'id' => $_GET['d']
-	);
 
-$x->arrayBinder($query, $arr);
-$query->execute();		
-$row = $query->fetch(PDO::FETCH_ASSOC);
 
 
 if (isset($_POST['submitDelete'])) {

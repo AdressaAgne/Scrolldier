@@ -8,10 +8,10 @@
 	if (isset($_GET['logout'])) {
 		$x->logout();
 	}
-	if (!isset($_SESSION['username'])) {
-		$actual_link = $_SERVER['REQUEST_URI'];
-		header("location: ../login.php?re=".$actual_link);
-	}
+//	if (!isset($_SESSION['username'])) {
+//		$actual_link = $_SERVER['REQUEST_URI'];
+//		header("location: ../login.php?re=".$actual_link);
+//	}
 	
 	
 	

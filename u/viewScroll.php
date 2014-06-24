@@ -56,8 +56,36 @@
 				'headID' => $_POST['headID']
 			);
 			
-		$x->arrayBinder($query, $arr);
-		$query->execute();			
+		$x->arrayBinder($query, $arr);		
+		if ($query->execute()) {
+			if ($fanScroll['user'] != $_SESSION['username']) {
+				$x->setNotificationArt($fanScroll['user'], $_POST['name'], $fanScroll['link']);
+			}
+			
+			$hasSent = array();
+			array_push($hasSent, strtolower($fanScroll['user']));
+			array_push($hasSent, strtolower($_SESSION['username']));
+			
+			
+			$replyQuery = $db->prepare("SELECT byUser FROM comment WHERE commentToID=:id AND cWhere=3");
+			$reply_arr = array(
+					'id' => $fanScroll['id']
+				);
+			$x->arrayBinder($replyQuery, $reply_arr);	
+			
+			
+			if ($replyQuery->execute()) {
+				while ($reply = $replyQuery->fetch(PDO::FETCH_ASSOC)) {
+				
+					if (!in_array(strtolower($fanScroll['user']), $hasSent)) {
+						array_push($hasSent, strtolower($fanScroll['user']));
+						$x->setNotificationReply($fanScroll['user'], $_POST['name'], $main."fanart/".$fanScroll['link'], "scroll");
+					}
+				}
+			}
+			
+			
+		}			
 	} 
 	
 	if (isset($_POST['postID']) && !empty($_POST['postID'])) {

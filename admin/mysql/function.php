@@ -630,7 +630,7 @@ function deckVote($id, $value=true, $user) {
 	function setReadMessage($ign, $type) {
 		include('connect.php');
 		
-			$query = $db->prepare("UPDATE notification SET haveRed=1 WHERE user_id=:toUser AND type = :type");
+			$query = $db->prepare("UPDATE notification SET haveRed=1 WHERE user_id=:toUser AND type = :type AND haveRed=0");
 			$arr = array(
 					'toUser' => $ign,
 					'type' => $type
@@ -647,6 +647,86 @@ function deckVote($id, $value=true, $user) {
 				return(false);
 			}
 	}
+	
+	function setNotificationDeck($toUser, $fromUser, $deckID) {
+		include('connect.php');
+		
+			$query = $db->prepare("INSERT INTO notification (user_id, type, text, from_user) VALUES(:toUser, 3, :html, :fromUser)");
+			$arr = array(
+					'html' => "<a href='".$main."user/".$fromUser."'>".$fromUser."</a> wrote a comment on your <a href='".$main."deck/".$deckID."'>deck</a> ",
+					
+					
+					'toUser' => $toUser,
+					'fromUser' => $fromUser
+			);
+			$this->arrayBinder($query, $arr);
+			
+			try {
+				$query->execute() ? true : false;
+			} catch (PDOException $e) {
+				return(false);
+			}
+	}
+	
+	function setNotificationArt($toUser, $fromUser, $link) {
+		include('connect.php');
+		
+			$query = $db->prepare("INSERT INTO notification (user_id, type, text, from_user) VALUES(:toUser, 3, :html, :fromUser)");
+			$arr = array(
+					'html' => "<a href='".$main."user/".$fromUser."'>".$fromUser."</a> wrote a comment on your <a href='".$main."fanart/".$link."'>scroll</a> ",
+					
+					
+					'toUser' => $toUser,
+					'fromUser' => $fromUser
+			);
+			$this->arrayBinder($query, $arr);
+			
+			try {
+				$query->execute() ? true : false;
+			} catch (PDOException $e) {
+				return(false);
+			}
+	}
+	
+	function setNotificationPost($toUser, $fromUser, $id) {
+		include('connect.php');
+		
+			$query = $db->prepare("INSERT INTO notification (user_id, type, text, from_user) VALUES(:toUser, 3, :html, :fromUser)");
+			$arr = array(
+					'html' => "<a href='".$main."user/".$fromUser."'>".$fromUser."</a> wrote a comment on your <a href='".$main."post/".$id."'>spoiler post</a> ",
+					
+					
+					'toUser' => $toUser,
+					'fromUser' => $fromUser
+			);
+			$this->arrayBinder($query, $arr);
+			
+			try {
+				$query->execute() ? true : false;
+			} catch (PDOException $e) {
+				return(false);
+			}
+	}
+	function setNotificationReply($toUser, $fromUser, $link, $type) {
+		include('connect.php');
+		
+			$query = $db->prepare("INSERT INTO notification (user_id, type, text, from_user) VALUES(:toUser, 3, :html, :fromUser)");
+			$arr = array(
+					'html' => "<a href='".$main."user/".$fromUser."'>".$fromUser."</a> wrote a comment on a <a href='".$link."'>".$type."</a> you commented on.",
+					
+					
+					'toUser' => $toUser,
+					'fromUser' => $fromUser
+			);
+			$this->arrayBinder($query, $arr);
+			
+			try {
+				$query->execute() ? true : false;
+			} catch (PDOException $e) {
+				return(false);
+			}
+	}
+	
 	function notfiCount($name) {
 		include('connect.php');
 		$query = $db->prepare("SELECT id FROM notification WHERE user_id=:ign AND haveRed = 0");

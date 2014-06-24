@@ -8,9 +8,9 @@
 <div class="container clearfix">
 	
 	<?php if (isset($_SESSION['username'])) { ?>
-		<div class="menu" style="margin-top: 22px;">
+		<div class="menu center" style="margin-top: 22px;">
 	<?php } else { ?>
-		<div class="menu">
+		<div class="menu center">
 	<?php }?>
 		
 				<ul>
