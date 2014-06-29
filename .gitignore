@@ -9,3 +9,5 @@ admin/mysql/connect.php
 *.jpg
 
 *.codekit
+
+*.esproj

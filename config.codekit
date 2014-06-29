@@ -352,6 +352,17 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
+	"\/img\/    .jpg": {
+		"fileType": 16384,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 306899,
+		"inputAbbreviatedPath": "\/img\/    .jpg",
+		"outputAbbreviatedPath": "\/img\/    .jpg",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 1
+		},
 	"\/img\/arrow_down.png": {
 		"fileType": 32768,
 		"ignore": 0,
@@ -384,6 +395,39 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 1
+		},
+	"\/img\/banner_wallpaper_energy.jpg": {
+		"fileType": 16384,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 155469,
+		"inputAbbreviatedPath": "\/img\/banner_wallpaper_energy.jpg",
+		"outputAbbreviatedPath": "\/img\/banner_wallpaper_energy.jpg",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/img\/banner_wallpaper_growth.jpg": {
+		"fileType": 16384,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 194702,
+		"inputAbbreviatedPath": "\/img\/banner_wallpaper_growth.jpg",
+		"outputAbbreviatedPath": "\/img\/banner_wallpaper_growth.jpg",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/img\/banner_wallpaper_order.jpg": {
+		"fileType": 16384,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 190694,
+		"inputAbbreviatedPath": "\/img\/banner_wallpaper_order.jpg",
+		"outputAbbreviatedPath": "\/img\/banner_wallpaper_order.jpg",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
 		},
 	"\/img\/bg.jpg": {
 		"fileType": 16384,
@@ -458,6 +502,17 @@
 		"initialSize": 268,
 		"inputAbbreviatedPath": "\/img\/comment.png",
 		"outputAbbreviatedPath": "\/img\/comment.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/img\/comment_white.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 1113,
+		"inputAbbreviatedPath": "\/img\/comment_white.png",
+		"outputAbbreviatedPath": "\/img\/comment_white.png",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 0
@@ -657,17 +712,6 @@
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
-		},
-	"\/img\/indexbg.jpg": {
-		"fileType": 16384,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"initialSize": 306899,
-		"inputAbbreviatedPath": "\/img\/indexbg.jpg",
-		"outputAbbreviatedPath": "\/img\/indexbg.jpg",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"processed": 1
 		},
 	"\/img\/indexbg.png": {
 		"fileType": 32768,
