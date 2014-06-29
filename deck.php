@@ -303,12 +303,12 @@
 				<table>
 					<tr class="modern">
 						<td>Score</td>
-						<td width="300px">Name</td>
-						<td width="120px">Type</td>
+						<td width="300px">Deck title</td>
+						<td width="120px"><i class="icon-growth"></i><i class="icon-decay"></i><i class="icon-order"></i><i class="icon-energy"></i></td>
 						<td width="50px">Scrolls</td>
 						<td>Version</td>
 						<td>Author</td>	
-						<td>Comments</td>
+						<td><i class="icon-comment"></i></td>
 						<td>Age</td>
 					</tr>
 					<?php while ($deck = $query->fetch(PDO::FETCH_ASSOC)) { ?>

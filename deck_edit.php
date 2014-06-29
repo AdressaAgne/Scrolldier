@@ -6,7 +6,23 @@ session_start();
 if (isset($_GET['logout'])) {
 	$x->logout();
 }
-if (isset($_POST['submit'])) {
+
+$query = $db->prepare("SELECT * FROM decks WHERE id=:id");
+$arr = array(
+		'id' => $_GET['d']
+	);
+
+
+
+$x->arrayBinder($query, $arr);
+$query->execute();		
+$row = $query->fetch(PDO::FETCH_ASSOC);
+
+if ($row['deck_author'] != $_SESSION['username']) {
+	header("location: http://scrolldier.com/decks");
+}
+
+if (isset($_POST['submit']) && $_SESSION['username'] == $row['deck_author']) {
 
 	$query = $db->prepare("UPDATE decks SET text=:html, deck_title=:deck_title, isHidden=:isHidden, meta=:meta WHERE id=:id");
 	if (isset($_POST['isHidden'])) {
@@ -51,20 +67,9 @@ if (!isset($_GET['s']) || empty($_GET['s'])) {
 	$_GET['s'] = 1;
 }
 
-$query = $db->prepare("SELECT * FROM decks WHERE id=:id");
-$arr = array(
-		'id' => $_GET['d']
-	);
 
 
 
-$x->arrayBinder($query, $arr);
-$query->execute();		
-$row = $query->fetch(PDO::FETCH_ASSOC);
-
-if ($row['deck_author'] != $_SESSION['username']) {
-	header("location: http://scrolldier.com/decks");
-}
 ?>
 
 <!DOCTYPE html>

@@ -31,6 +31,7 @@
 		<br />
 		<p>Ads are on the page so i can afford to pay for the servers, if you want to get rid of the ads. You can Donate</p>
 		<br />
+		<p>When donating please include your Scrolldier name, so you can get your donor badge!</p>
 		<p>€5+ will give you a Donor badge, <i class="icon-donor"></i></p>
 		<p><form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" class="left">
 			<input type="hidden" name="cmd" value="_donations">

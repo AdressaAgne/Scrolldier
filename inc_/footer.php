@@ -67,3 +67,31 @@
 		</div>
 	</div>
 </div>
+<script src="<?php echo($main) ?>jquery.js"></script>
+<script>
+
+$(function() {
+
+	var r = Math.floor((Math.random() * 3));
+
+	switch (r) {
+		case 0:
+			s = "decay";
+			break;
+		case 1:
+			s = "energy";
+			break;
+		case 2:
+			s = "order";
+			break;
+		case 3:
+			s = "growth";
+			break;
+		
+	}
+	
+	$("body").addClass(s);
+
+});
+
+</script>

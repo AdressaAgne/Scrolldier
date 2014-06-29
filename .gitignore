@@ -5,3 +5,7 @@
 *.codekit
 
 admin/mysql/connect.php
+
+*.jpg
+
+*.codekit

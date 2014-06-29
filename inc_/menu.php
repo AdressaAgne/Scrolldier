@@ -1,9 +1,7 @@
 <?php include_once("analytics.php"); ?>
 <?php $thisPage = $_SERVER['PHP_SELF']; ?>
-
+	<div class="wallpaper"></div>
 	<div class="logo" onclick="location.href='<?php echo($main) ?>'"></div>
-
-
 
 <div class="container clearfix">
 	

@@ -506,6 +506,17 @@
 		"outputPathIsSetByUser": 0,
 		"processed": 0
 		},
+	"\/img\/decay_wallpaper.jpg": {
+		"fileType": 16384,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 1.38625e+07,
+		"inputAbbreviatedPath": "\/img\/decay_wallpaper.jpg",
+		"outputAbbreviatedPath": "\/img\/decay_wallpaper.jpg",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
 	"\/img\/deck_decay.png": {
 		"fileType": 32768,
 		"ignore": 0,
@@ -933,6 +944,17 @@
 		"outputPathIsSetByUser": 0,
 		"processed": 0
 		},
+	"\/img\/Scrolldier_new.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 40206,
+		"inputAbbreviatedPath": "\/img\/Scrolldier_new.png",
+		"outputAbbreviatedPath": "\/img\/Scrolldier_new.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
 	"\/img\/scrolls.png": {
 		"fileType": 32768,
 		"ignore": 0,
@@ -1061,6 +1083,17 @@
 		"initialSize": 206209,
 		"inputAbbreviatedPath": "\/img\/sisofowl-blur.jpg",
 		"outputAbbreviatedPath": "\/img\/sisofowl-blur.jpg",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/img\/sisofowl.jpg": {
+		"fileType": 16384,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 160181,
+		"inputAbbreviatedPath": "\/img\/sisofowl.jpg",
+		"outputAbbreviatedPath": "\/img\/sisofowl.jpg",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 0
@@ -5228,6 +5261,17 @@
 		"outputPathIsSetByUser": 0,
 		"processed": 1
 		},
+	"\/resources\/badges\/topDonor.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 4965,
+		"inputAbbreviatedPath": "\/resources\/badges\/topDonor.png",
+		"outputAbbreviatedPath": "\/resources\/badges\/topDonor.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
 	"\/resources\/badges\/Trials_swordinstone_1_result.png": {
 		"fileType": 32768,
 		"ignore": 0,
@@ -9144,6 +9188,17 @@
 		"outputPathIsSetByUser": 0,
 		"processed": 0
 		},
+	"\/resources\/cardImages\/spoilerArt\/26.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 118229,
+		"inputAbbreviatedPath": "\/resources\/cardImages\/spoilerArt\/26.png",
+		"outputAbbreviatedPath": "\/resources\/cardImages\/spoilerArt\/26.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
 	"\/resources\/cardImages\/spoilerArt\/3.png": {
 		"fileType": 32768,
 		"ignore": 0,
@@ -9628,6 +9683,28 @@
 		"outputPathIsSetByUser": 0,
 		"processed": 1
 		},
+	"\/resources\/head_127.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 35913,
+		"inputAbbreviatedPath": "\/resources\/head_127.png",
+		"outputAbbreviatedPath": "\/resources\/head_127.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 1
+		},
+	"\/resources\/head_129.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 51022,
+		"inputAbbreviatedPath": "\/resources\/head_129.png",
+		"outputAbbreviatedPath": "\/resources\/head_129.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 1
+		},
 	"\/resources\/head_13.png": {
 		"fileType": 32768,
 		"ignore": 0,
@@ -10057,17 +10134,6 @@
 		"outputPathIsSetByUser": 0,
 		"processed": 1
 		},
-	"\/resources\/head_6.tex_2.png": {
-		"fileType": 32768,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"initialSize": 35913,
-		"inputAbbreviatedPath": "\/resources\/head_6.tex_2.png",
-		"outputAbbreviatedPath": "\/resources\/head_6.tex_2.png",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"processed": 1
-		},
 	"\/resources\/head_7.tex.png": {
 		"fileType": 32768,
 		"ignore": 0,
@@ -10119,17 +10185,6 @@
 		"initialSize": 40599,
 		"inputAbbreviatedPath": "\/resources\/head_8.tex.png",
 		"outputAbbreviatedPath": "\/resources\/head_8.tex.png",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"processed": 1
-		},
-	"\/resources\/head_8.tex_2.png": {
-		"fileType": 32768,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"initialSize": 51022,
-		"inputAbbreviatedPath": "\/resources\/head_8.tex_2.png",
-		"outputAbbreviatedPath": "\/resources\/head_8.tex_2.png",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 1

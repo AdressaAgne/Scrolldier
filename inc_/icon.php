@@ -13,7 +13,7 @@
  } 
  
  if ($x->hasDonated($thisUser)) {
- 	echo("<li><i class='icon-donor'></i><ul><li class='modern'>Have donated to Scrolldier.com</li></ul></li>");
+ 	echo("<li><i class='icon-donor'></i><ul><li class='modern'>Has donated to Scrolldier.com</li></ul></li>");
  } 
   
  if ($x->isGuildLeader($thisUser)) {

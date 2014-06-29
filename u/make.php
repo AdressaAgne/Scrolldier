@@ -172,7 +172,7 @@ if (isset($_POST['link']) && !empty($_POST['link'])) {
 			 			<?php } ?>
 			 		
 		 		
-		 		<?php for ($i = 0; $i <= 25; $i++) { ?>
+		 		<?php for ($i = 0; $i <= 26; $i++) { ?>
 		 				<li>
 		 					
 		 					<input type="radio" <?php if ($i == 0 && !isset($fanScroll)) {
