@@ -302,7 +302,7 @@
 				</div>
 				<table>
 					<tr class="modern">
-						<td>Score</td>
+						<td><i class="icon-star"></i> </td>
 						<td width="300px">Deck title</td>
 						<td width="120px"><i class="icon-growth"></i><i class="icon-decay"></i><i class="icon-order"></i><i class="icon-energy"></i></td>
 						<td width="50px">Scrolls</td>
@@ -315,10 +315,10 @@
 					
 					<?php if ($deck['isHidden'] == 0) { ?>
 					
-					<tr onclick="location.href='<?php echo($main) ?>deck/<?php echo($deck['id']) ?>'" style="cursor: pointer;">
+					<tr>
 						
 						<td class="align-center"><?php echo($deck['vote']) ?></td>
-						<td><?php echo($deck['deck_title']) ?></td>
+						<td><a href="<?php echo($main) ?>deck/<?php echo($deck['id']) ?>"><?php echo($deck['deck_title']) ?></a></td>
 						<td>
 							<?php if ($deck['growth'] == 1) {
 								echo('<i class="icon-growth"></i>');

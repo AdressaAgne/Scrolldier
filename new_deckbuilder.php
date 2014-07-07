@@ -11,6 +11,67 @@ if (!isset($_SESSION['username'])) {
 	header("location: ".$main."login.php?re=/deckbuilder/");
 }
 	
+	$query = $db->prepare("SELECT * FROM decks WHERE id=:id");
+	$arr = array(
+			'id' => $_GET['deck']
+		);
+	
+	$x->arrayBinder($query, $arr);
+	$query->execute();		
+	$row = $query->fetch(PDO::FETCH_ASSOC);
+	
+	
+	if (isset($_POST['form-submit']) && $_SESSION['username'] == $row['deck_author']) {
+	
+					$json = $_POST['form-json'];	
+					$data = json_decode($json, TRUE);
+					
+					$duplicate = "";
+					$phpArray = array(
+						"msg" => "success",
+						"data" => array(
+							"scrolls" =>array_unique(array()),
+							"name" => $data['deck'],
+							"deleted" => 0,
+							"resources" => array("growth")
+						),
+						"apiversion" => 1
+						
+					);
+					$total = 0;
+					for ($i = 0; $i < count($data['types']); $i++) {
+							$count = array_count_values($data['types']);
+							$toInsert = array(
+							        "id" => $data['types'][$i],
+							        "c" => $count[$data['types'][$i]]
+							);
+							array_push($phpArray['data']["scrolls"], $toInsert);
+							$total++;
+					}
+					$phpArray['data']['scrolls'] = array_map("unserialize", array_unique(array_map("serialize", $phpArray['data']['scrolls'])));
+					$phpArray['data']['scrolls'] = array_values($phpArray['data']['scrolls']);
+					
+
+					$data2 = json_encode($phpArray);
+					
+					$query = $db->prepare("UPDATE decks SET JSON=:JSON WHERE id=:id");
+					$arr = array(
+							'JSON' => $data2,
+							'id' => $_POST['form-id']
+					);
+
+					$x->arrayBinder($query, $arr);
+
+					
+					if ($query->execute()) {
+						header("location: ".$main."deck/".$_POST['form-id']);
+					}
+
+				
+				
+					
+	}
+	
 
  ?>
 
@@ -76,14 +137,6 @@ if (!isset($_SESSION['username'])) {
  		 				
  		 				<?php if (!empty($_GET['deck'])) { ?>
  		 					<?php 
- 		 					$query = $db->prepare("SELECT * FROM decks WHERE id=:id");
- 		 					$arr = array(
- 		 							'id' => $_GET['deck']
- 		 						);
- 		 					
- 		 					$x->arrayBinder($query, $arr);
- 		 					$query->execute();		
- 		 					$row = $query->fetch(PDO::FETCH_ASSOC);
  		 					$listOfScrolls = array();			
  		 					$json = $row['JSON'];
  		 					$data = json_decode($json, TRUE);
@@ -210,7 +263,7 @@ if (!isset($_SESSION['username'])) {
 		 		</div>
  			</div>
  			<div class="div-4">
- 				<p>Filters: t:, c:, d:, ap:, cd:, hp:</p>
+ 				<p>Filters: t:, c:, d:, ap:, cd:, hp:, s:</p>
  			</div>
  		</div>
  
@@ -283,6 +336,7 @@ if (!isset($_SESSION['username'])) {
  				<div id="scroll-top-cd" class="hidden"><?php echo(strtolower($cd)) ?></div>
  				<div id="scroll-top-type" class="hidden"><?php echo(strtolower($scrollType)) ?></div>
  				<div id="scroll-top-cost" class="hidden"><?php echo(strtolower($scrollsCost)) ?></div>
+ 				<div id="scroll-top-set" class="hidden"><?php echo(strtolower($card['scrollsSet'])) ?></div>
  				<div id="scroll-top-types" class="hidden"><?php echo(strtolower($card['kind'])) ?> <?php echo(strtolower($card['types'])) ?></div>
  				<div id="scroll-top-desc" class="hidden"><?php echo(strtolower($card['passiverules_1'])) ?> <?php echo(strtolower($card['passiverules_2'])) ?> <?php echo(strtolower($card['passiverules_3'])) ?> <?php echo(strtolower($card['description'])) ?></div>
  			</div>
@@ -298,7 +352,15 @@ if (!isset($_SESSION['username'])) {
  					<input type="textbox" id="deckName" class="textbox full" name="" value="" placeholder="deckname" />
  				</div>
  				<div class="div-4 div-margin">
- 					<button class="btn-modern btn-pagina" type="submit" id="saveBtn" name="">Save</button>
+ 					<button class="btn-modern btn-pagina btn-no-margin left" type="submit" id="saveBtn" name="">Save as new deck</button>
+ 					
+ 					<?php if ($_SESSION['username'] == $row['deck_author']) { ?>
+	 					<form method="post" action="" class="left">
+	 						<input type="hidden" id="jsonOUTPUT2" name="form-json" value="" />
+	 						<input type="hidden" name="form-id" value="<?php echo($_GET['deck']) ?>" />
+	 						<input class="btn-modern btn-pagina" type="submit" name="form-submit" value="Save over deck">
+	 					</form>
+ 					<?php } ?>
  				</div>
  			</div>
  		</div>
@@ -309,6 +371,6 @@ if (!isset($_SESSION['username'])) {
  	</div>
  	<?php include('inc_/footer.php') ?>
  <script src="<?php echo($main) ?>jquery.js"></script>	
- <script src="<?php echo($main) ?>deckbuilder.js" type="text/javascript"></script>
+ <script src="<?php echo($main) ?>min/deckbuilder-ck.js" type="text/javascript"></script>
 </body>
 </html>

@@ -17,11 +17,20 @@ if (!isset($_SESSION['username'])) {
 
 if(isset($_POST['submitScrolls']))  {
 
-	$url = "http://a.scrollsguide.com/scrolls";
+
+	
+	if (isset($_POST['file'])) {
+		$url = "admin/versions/".$_POST['vFile'];
+	} else {
+		$url = "http://a.scrollsguide.com/scrolls";
+		
+	}
+	
 	$json = file_get_contents($url);
 	$data = json_decode($json, TRUE);
-	if ($data['msg'] == "success") { 
-	$empty = $db->prepare("DELETE FROM scrollsCard");
+	
+	if ($data['msg'] == "success" && !isset($_POST['file'])) { 
+		$empty = $db->prepare("DELETE FROM scrollsCard");
 		if ($empty->execute()) {
 		for ($i = 0; $i < count($data['data']); $i++) {	
 			
@@ -118,6 +127,163 @@ if(isset($_POST['submitScrolls']))  {
 		}
 	}
 	}
+	
+	if (isset($_POST['file'])) {
+
+		 
+				$empty = $db->prepare("DELETE FROM scrollsCard");
+				
+				if ($empty->execute()) {
+
+					
+					
+//					echo("<pre>");
+//					print_r($data);
+//					echo("</pre>");
+					
+					
+					
+				
+				
+				for ($i = 0; $i < count($data['cardTypes']); $i++) {
+
+					$query = $db->prepare("INSERT INTO scrollsCard
+		
+					(id, name, description, kind, types, costgrowth, costorder, costenergy, costdecay, ap, ac, hp, flavor, rarity,
+					 scrollsSet, targetarea, image, bundle, animationpreview, version, introduced,
+					 passiverules_1, passiverules_2, passiverules_3,
+					 anim_left, anim_top, anim_right, anim_bottom, sound)
+					
+					 
+		
+					VALUES
+					(:id, :name, :description, :kind, :types, :costgrowth, :costorder, :costenergy, :costdecay, :ap, :ac, :hp, :flavor, :rarity,
+					:scrollsSet, :targetarea, :image, :bundle, :animationpreview, :version, :introduced,
+					:passiverules_1, :passiverules_2, :passiverules_3,
+					:anim_left, :anim_top, :anim_right, :anim_bottom, :sound)");
+					
+					if (isset($data['cardTypes'][$i]['passiveRules'][0]['displayName'])) {
+						$pass0 = $data['cardTypes'][$i]['passiveRules'][0]['displayName'];
+					} else {
+						$pass0 = "";
+					}
+					if (isset($data['cardTypes'][$i]['passiveRules'][1]['displayName'])) {
+						$pass1 = $data['cardTypes'][$i]['passiveRules'][1]['displayName'];
+					} else {
+						$pass1 = "";
+					}
+					if (isset($data['cardTypes'][$i]['passiveRules'][2]['displayName'])) {
+						$pass2 = $data['cardTypes'][$i]['passiveRules'][2]['displayName'];
+					} else {
+						$pass2 = "";
+					}
+					
+					if (isset($data['cardTypes'][$i]['anim']['left'])) {
+						$anim0 = $data['cardTypes'][$i]['anim']['left'];
+					} else {
+						$anim0 = NULL;
+					}
+					if (isset($data['cardTypes'][$i]['anim']['right'])) {
+						$anim2 = $data['cardTypes'][$i]['anim']['right'];
+					} else {
+						$anim2 = NULL;
+					}
+					if (isset($data['cardTypes'][$i]['anim']['top'])) {
+						$anim1 = $data['cardTypes'][$i]['anim']['top'];
+					} else {
+						$anim1 = NULL;
+					}
+					if (isset($data['cardTypes'][$i]['anim']['bottom'])) {
+						$anim3 = $data['cardTypes'][$i]['anim']['bottom'];
+					} else {
+						$anim3 = NULL;
+					}
+					
+					
+					
+					if (isset($data['cardTypes'][$i]['targetArea'])) {
+						$targetArea = $data['cardTypes'][$i]['targetArea'];
+					} else {
+						$targetArea = "";
+					}
+					
+					if (isset($data['cardTypes'][$i]['tags']['sound_attack'])) {
+						$sound_attack = $data['cardTypes'][$i]['tags']['sound_attack'];
+					} else {
+						$sound_attack = "";
+					}
+					
+					if (isset($data['cardTypes'][$i]['animationPreviewImage'])) {
+						$animationPreviewImage = $data['cardTypes'][$i]['animationPreviewImage'];
+					} else {
+						$animationBundle = "";
+					}
+					
+					if (isset($data['cardTypes'][$i]['animationBundle'])) {
+						$animationBundle = $data['cardTypes'][$i]['animationBundle'];
+					} else {
+						$animationBundle = "";
+					}
+					
+					
+					if (isset($data['cardTypes'][$i]['flavor'])) {
+						$flavor = $data['cardTypes'][$i]['flavor'];
+					} else {
+						$flavor = "";
+					}
+					
+					$arr = array(
+							'id' => $data['cardTypes'][$i]['id'],
+							'name' => $data['cardTypes'][$i]['name'],
+							'description' => $data['cardTypes'][$i]['description'],
+							'kind' => $data['cardTypes'][$i]['kind'],
+							'types' => $data['cardTypes'][$i]['subTypesStr'],
+							'costgrowth' => $data['cardTypes'][$i]['costGrowth'],
+							'costorder' => $data['cardTypes'][$i]['costOrder'],
+							'costenergy' => $data['cardTypes'][$i]['costEnergy'],
+							'costdecay' => $data['cardTypes'][$i]['costDecay'],
+							'ap' => $data['cardTypes'][$i]['ap'],
+							'ac' => $data['cardTypes'][$i]['ac'],
+							'hp' => $data['cardTypes'][$i]['hp'],
+							'flavor' => $flavor,
+							'rarity' => $data['cardTypes'][$i]['rarity'],
+							'scrollsSet' => $data['cardTypes'][$i]['set'],
+							'targetarea' => $targetArea,
+							'image' => $data['cardTypes'][$i]['cardImage'],
+							'bundle' => $animationBundle,
+							'animationpreview' => $animationBundle,
+							'version' => "",
+							'introduced' => "",
+							'passiverules_1' => $pass0,
+							'passiverules_2' => $pass1,
+							'passiverules_3' => $pass2,
+							'anim_left' => $anim0,
+							'anim_top' => $anim1,
+							'anim_right' => $anim2,
+							'anim_bottom' => $anim3,
+							'sound' => $sound_attack
+							
+						);
+					
+					$x->arrayBinder($query, $arr);
+					
+					
+
+						if ($query->execute()) {
+							$success = true;
+						} else {
+							$success = false;
+						}
+	
+				}
+			}
+			
+			if ($success == true) {
+				$success = "Total of ".count($data['cardTypes'])." was added";
+			}
+				
+		
+	}
 
 }
 
@@ -141,6 +307,10 @@ if (isset($_POST['submitAddBadge'])) {
 if (isset($_POST['submitDeleteBadge'])) {
 	$badge->deleteBadge($_POST['id']);
 }
+$query = $db->prepare("SELECT * FROM scrollsCard");	
+$query->execute();
+$total_scrolls = $query->fetch(PDO::FETCH_ASSOC);
+$total_Scroll = $query->rowCount();
 	
  ?>
 
@@ -165,22 +335,52 @@ if (isset($_POST['submitDeleteBadge'])) {
 	 <div class="indexbg fullScreen">
  <?php if (isset($_SESSION['username']) && ($_SESSION['rank'] <= 2)) { ?>
 	 	<div class="container">
-	 		<div class="wall_small">
-	 			<h3 class="modern">Total Accounts: <?php echo($x->totalAccounts()) ?></h3>
+	 		<div class="div-4">
+	 			<h3 class="modern">Total Accounts: <?php echo($x->totalAccounts()) ?>, Total Decks: <?php echo($x->totalDecks()) ?>, Total Fanart made:  <?php echo($x->totalFanart()) ?></h3>
+	 			
 	 			<div class="div-4">
-	 					
+	 					<div class="wall_big">
 	 				    <form method="post" action="">
-	 				    	<label>Update Scroll Library:</label>
+	 				    	<h2>Update Scroll Library: (currently <?php echo($total_Scroll) ?> scrolls)</h2><br />
+							<?php if (isset($success) && $success != false) { ?>
+								<p class="color-green">
+									<?php echo($success) ?>
+								</p>
+							<?php } ?>
+							
+	 				    	
+	 				    	<input type="checkbox" class="normal_checkbox" name="file" id="file" checked="" value="" />
+	 				    	<label for="file" class="normal_checkbox"></label>
+	 				    	<label for="file" class="hand">From File</label>
+	 				    	
+	 				    	
+								<select name="vFile">
+	 				    		<?php 
+	 				    		
+	 				    		$dir    = 'admin/versions/';
+	 				    		$files = scandir($dir);
+
+	 				    		for ($i = 0; $i < count($files); $i++) {
+	 				    			if ($files[$i] == ".") continue;
+	 				    			if ($files[$i] == "..") continue;
+	 				    		
+	 				    			echo("<option>".$files[$i]."</option>");
+	 				    		}
+
+
+	 				    		
+	 				    		 ?>
+								</select>
 	 				    	<input name="submitScrolls" type="submit" class="btn-modern" value="Update">
 	 				    </form>
-	 				   
 	 				    <?php if ($_SESSION['rank'] == 1) { ?>
 	 				    <form method="post" action="">
-	 				    	<label>Rename files to add .png</label>
+	 				    	<h2>Add .png extesion to image files</h2>
 	 				    	<input name="submitRename" type="submit" class="btn-modern" value="Rename">
 	 				    </form>
 	 					<?php  } ?>
-	 			
+	 			</div>
+	 			<div class="wall_small">
 	 			<div class="div-4">
 	 					<h2>Hidden Spoiler Posts</h2>
 	 					<?php $query = $db->prepare("SELECT * FROM scrolls WHERE isHidden=1 ORDER BY time DESC");	
@@ -208,9 +408,10 @@ if (isset($_POST['submitDeleteBadge'])) {
 	 				
 	 				</div>
 	 			</div>
+	 			</div>
 	 		</div>
 	 	
-	 	<div class="wall_big">
+	 	<div class="div-4">
 	 		<h3 class="modern">Badges</h3>
 	 		<form method="post" action="">
 				<div class="div-4">

@@ -60,6 +60,63 @@
 	
 	}
 	
+	if (isset($_POST['generalSave'])) {
+		$query = $db->prepare("UPDATE accounts SET twitch=:twitch, youtube=:youtube, feed_twitch=:fth, feed_twitter=:ftr, feed_match_history=:fmh WHERE ign=:ign");
+		
+		if (!isset($_POST['twitch'])) {
+			$_POST['twitch'] = "";
+		} else {
+			$_POST['twitch'] = str_replace("http://", "", $_POST['twitch']);
+			$_POST['twitch'] = str_replace("https://", "", $_POST['twitch']);
+			$_POST['twitch'] = str_replace("www.twitch.tv/", "", $_POST['twitch']);
+			$_POST['twitch'] = str_replace("twitch.tv/", "", $_POST['twitch']);
+		}
+		if (!isset($_POST['youtube'])) {
+			$_POST['youtube'] = "";
+		} else {
+			$_POST['youtube'] = str_replace("http://", "", $_POST['youtube']);
+			$_POST['youtube'] = str_replace("https://", "", $_POST['youtube']);
+			$_POST['youtube'] = str_replace("www.youtube.com/user/", "", $_POST['youtube']);
+			$_POST['youtube'] = str_replace("youtube.com/user/", "", $_POST['youtube']);
+			$_POST['youtube'] = str_replace("www.youtube.com/", "", $_POST['youtube']);
+			$_POST['youtube'] = str_replace("youtube.com/", "", $_POST['youtube']);
+		}
+		
+		if (isset($_POST['frontTwitch'])) {
+			$frontTwitch = 1;
+		} else {
+			$frontTwitch = 0;
+		}
+		
+		if (isset($_POST['frontTwitter'])) {
+			$frontTwitter = 1;
+		} else {
+			$frontTwitter = 0;
+		}
+		if (isset($_POST['profileMatch'])) {
+			$profileMatch = 1;
+		} else {
+			$profileMatch = 0;
+		}
+		
+		$arr = array(
+				'ign' => $_SESSION['username'],
+				'twitch' => $_POST['twitch'],
+				'youtube' => $_POST['youtube'],
+				'fth' => $frontTwitch,
+				'ftr' => $frontTwitter,
+				'fmh' => $profileMatch,
+		);
+		$x->arrayBinder($query, $arr);
+		
+
+		if ($query->execute()) {
+
+			header("location:".$main."edit/user?success=General Settings updated");
+		}
+		
+	}
+	
 	if (isset($_POST['changeHead']) && !empty($_POST['changeHead'])) {
 		if ($x->updatePlayerHead($row['ign'])) {
 			$_GET['success'] = "Head successfully updated, too see your new head please relog";
@@ -84,6 +141,7 @@
 	
 	<div class="body" id="blog">
 		<div class="container">
+			
 				<div class="wall_small">
 					<h1 class="modern">Avatar</h1>
 				<div class="avatar">
@@ -96,8 +154,19 @@
 			</div>
 				
 				<div class="wall_big">
+					
 				<h1 class="modern">Settings</h1>
 				<form method="post" action="" class="">
+				<?php if (isset($_GET['info']) && !empty($_GET['info'])) { ?>
+					<div class="div-3">
+						<p class="color-red"><?php echo($_GET['info']) ?></p>
+					</div>
+				<?php } ?>
+				<?php if (isset($_GET['success']) && !empty($_GET['success'])) { ?>
+					<div class="div-3">
+						<p class="color-green"><?php echo($_GET['success']) ?></p>
+					</div>
+				<?php } ?>
 					<!--<div class="div-3 settings-element">
 						<h4>General Settings</h4>
 						<div class="div-3">
@@ -109,36 +178,34 @@
 							<input type="email" class="textbox full div-1" name="mail" id="mail" value="<?php echo($row['mail']) ?>" placeholder="Mail" />
 						</div>
 					</div>-->
-					<div class="div-3 chooseBox left clear settings-element clearfix">
+					<div class="div-3 left clear settings-element clearfix">
 						<h4>Social</h4>
 						<div class="div-3">
 							<div class="span-4">
-							      <input id="twitch" type="checkbox" checked="checked" name="" value="">
 							      <label class="checkbox" for="twitch"><i class="icon-twitch"></i> Twitch</label> <br />
-							      <input type="text" class="textbox div-2" name="" value="" placeholder="Twtich url" />
+							      <input type="text" class="textbox div-2" name="twitch" id="twitch" value="<?php echo($row['twitch']) ?>" placeholder="Twtich url" />
 							</div>
 							<div class="span-4">   
-							      <input id="youtube" type="checkbox" checked="checked" name="" value="">
 							      <label class="checkbox" for="youtube"><i class="icon-youtube"></i> Youtube</label> <br />
-							       <input type="text" class="textbox div-2" name="" value="" placeholder="Youtube url" />
+							       <input type="text" class="textbox div-2" name="youtube" id="youtube" value="<?php echo($row['youtube']) ?>" placeholder="Youtube url" />
 							</div>
 						</div>
 					</div>
 					<div class="div-3 settings-element">
-						<h4>Frontpage</h4>
+						<h4>Frontpage  (does nothing yet)</h4>
 						<div class="div-3">
-							<input type="checkbox" class="normal_checkbox" name="frontTwitch" id="frontTwitch" checked="" value="" />
+							<input type="checkbox" class="normal_checkbox" name="frontTwitch" id="frontTwitch" <?php if ($row['feed_twitch'] == 1) { echo("checked"); } ?> value="" />
 							<label for="frontTwitch" class="normal_checkbox"></label>
 							<label for="frontTwitch" class="hand">Show Twitch stream's on front page</label>
 						</div>
 						<div class="div-3">
-							<input type="checkbox" class="normal_checkbox" name="frontTwitter" id="frontTwitter" checked="" value="" />
+							<input type="checkbox" class="normal_checkbox" name="frontTwitter" id="frontTwitter" <?php if ($row['feed_twitter'] == 1) { echo("checked"); } ?> value="" />
 							<label for="frontTwitter" class="normal_checkbox"></label>
 							<label for="frontTwitter" class="hand">Show Dev's Twitter feed on front page</label>
 						</div>
 						<h4>Profile</h4>
 						<div class="div-3">
-							<input type="checkbox" class="normal_checkbox" name="profileMatch" id="profileMatch" checked="" value="" />
+							<input type="checkbox" class="normal_checkbox" name="profileMatch" id="profileMatch" <?php if ($row['feed_match_history'] == 1) { echo("checked"); } ?> value="" />
 							<label for="profileMatch" class="normal_checkbox"></label>
 							<label for="profileMatch" class="hand">View my match history to other players</label>
 						</div>
@@ -151,16 +218,6 @@
 				</form>
 				<form method="post" action="">
 					<div class="div-3 settings-element">
-					<?php if (isset($_GET['info']) && !empty($_GET['info'])) { ?>
-						<div class="div-3">
-							<p class="color-red"><?php echo($_GET['info']) ?></p>
-						</div>
-					<?php } ?>
-					<?php if (isset($_GET['success']) && !empty($_GET['success'])) { ?>
-						<div class="div-3">
-							<p class="color-green"><?php echo($_GET['success']) ?></p>
-						</div>
-					<?php } ?>
 						<h4>Change Password</h4>
 						
 					<!--	Password 	-->	

@@ -271,6 +271,9 @@ if (!isset($_GET['s']) || empty($_GET['s'])) {
 					 ?>
 				
 					<form method="post" action="">
+						<div class="div-4">
+							<a href="<?php echo($main."deckbuilder/".$row['id']) ?>" class="btn-modern btn-no-margin">Send to deckbuilder</a>
+						</div>
 						<div class="div-4"><input class="textbox full" type="text" name="deck_title" value="<?php echo($row['deck_title']) ?>" /></div>
 						<div class="div-4">
 							
@@ -285,8 +288,9 @@ if (!isset($_GET['s']) || empty($_GET['s'])) {
 							<label>Change Game version for deck</label><br />
 							<select name="meta">
 								<option selected="selected" value="<?php echo($row['meta']) ?>"><?php echo($row['meta']) ?></option>
+								<option value="0.125.0">0.125.0 (Latest, Test Server)</option>
 								<option selected value="0.124.0">0.124.0 (Latest, Main Server)</option>
-								<option value="0.123.0">0.123.0 (Latest, Test Server)</option>
+								<option value="0.123.0">0.123.0</option>
 								<option value="0.122.0">0.122.0</option>
 								<option value="0.121.0">0.121.0</option>
 								<option value="0.119.1">0.119.1</option>

@@ -1,7 +1,7 @@
 $(function() {
 	var finalJSON = "";
 	var totalScrolls = 0;
-	
+	JSONlink();
 	$("#clearDeck").click(function() {
 		totalScrolls = 0;
 		setTotalScrolls();
@@ -56,6 +56,7 @@ $(function() {
 		setTotalScrolls();
 		finalJSON = JSON.stringify(scrolls);
 		$("#jsonOUTPUT").val(JSON.stringify(scrolls));
+		$("#jsonOUTPUT2").val(JSON.stringify(scrolls));
 	}
 	
 	$("[id='scroll']").click(function() {
@@ -156,21 +157,27 @@ $(function() {
 				
 			//cost: c:
 			} else if ($(search).val().match("^c:") || $(search).val().match("^c: ")) {
-				console.log("Searched type");
+				console.log("Searched cost");
 				$("div[id*='scroll-top-cost']:contains('" + $(search).val().replace("c: ","").replace("c:","").toLowerCase() + "')").parent().show(); 
 				
 			} else if ($(search).val().match("^d:") || $(search).val().match("^d: ")) {
-				console.log("Searched type");
+				console.log("Searched description");
 				$("div[id*='scroll-top-desc']:contains('" + $(search).val().replace("d: ","").replace("d:","").toLowerCase() + "')").parent().show(); 
 				
 			} else if ($(search).val().match("^hp:") || $(search).val().match("^hp: ")) {
-				console.log("Searched type");
+				console.log("Searched HP");
 				$("div[id*='scroll-top-hp']:contains('" + $(search).val().replace("hp: ","").replace("hp:","").toLowerCase() + "')").parent().show(); 
+				
 			} else if ($(search).val().match("^ap:") || $(search).val().match("^ap: ")) {
-				console.log("Searched type");
+				console.log("Searched Attack");
 				$("div[id*='scroll-top-ap']:contains('" + $(search).val().replace("ap: ","").replace("ap:","").toLowerCase() + "')").parent().show(); 
+			
+			} else if ($(search).val().match("^s:") || $(search).val().match("s: ")) {
+				console.log("Searched by set");
+				$("div[id*='scroll-top-set']:contains('" + $(search).val().replace("s: ","").replace("s:","").toLowerCase() + "')").parent().show(); 	
+				
 			} else if ($(search).val().match("^cd:") || $(search).val().match("^cd: ")) {
-				console.log("Searched type");
+				console.log("Searched Countdown");
 				$("div[id*='scroll-top-cd']:contains('" + $(search).val().replace("cd: ","").replace("cd:","").toLowerCase() + "')").parent().show(); 
 				
 			} else {

@@ -3,19 +3,25 @@ Copyright (c) 2003-2013, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.md or http://ckeditor.com/license
 */
 
+*{
+	padding: 0px;
+	margin: 0px;
+	outline: none;
+	font-family: 'Open Sans', sans-serif;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	text-decoration: none;
+}
+
 body
 {
-	/* Font */
-	font-size: 12px;
-
-	/* Text color */
-	color: #121314;
-
-	/* Remove the background color to make it transparent */
-	background-color: #f8f8f8;
-
+	background-color: #121314;
+	font-family: 'Open Sans', sans-serif;
+	color: #f8f8f8;
 	margin: 20px;
 }
+
+
 
 .cke_editable
 {
@@ -26,8 +32,8 @@ body
 blockquote
 {
 	font-style: italic;
-	font-family: Georgia, Times, "Times New Roman", serif;
-	padding: 2px 0;
+	font-family: 'Open Sans', sans-serif;
+	padding: 1px 0;
 	border-style: solid;
 	border-color: #ccc;
 	border-width: 0;
@@ -35,16 +41,18 @@ blockquote
 
 .cke_contents_ltr blockquote
 {
-	padding-left: 20px;
+	margin-left: 10px;
+	padding-left: 10px;
 	padding-right: 8px;
-	border-left-width: 5px;
+	border-left-width: 4px;
 }
 
 .cke_contents_rtl blockquote
 {
+	margin-left: 10px;
 	padding-left: 8px;
-	padding-right: 20px;
-	border-right-width: 5px;
+	padding-right: 10px;
+	border-right-width: 4px;
 }
 
 a
@@ -60,10 +68,59 @@ ol,ul,dl
 	padding: 0 40px;
 }
 
+@font-face {
+	font-family: sFont;
+	src: url('../../..//fonts/honeymeadbold.woff');
+	font-weight: bold;
+}
+
+@font-face {
+	font-family: dwaren;
+	src: url('../../../fonts/dwarven.woff');
+	font-weight: bold;
+}
+
 h1,h2,h3,h4,h5,h6
 {
 	font-weight: normal;
 	line-height: 1.2em;
+	font-family: sFont;
+	
+	color: #e4dabd;
+	text-shadow: 0 1px #000000;
+	
+	
+}
+
+h1 small a,h2 small a,h3 small a,h4 small a,h5 small a,h6 small a{
+	font-family: 'Open Sans';
+	font-size: 12px;
+}
+
+h3{
+	font-size: 30px;
+}
+h4{
+	font-size: 24px;
+}
+
+
+h1 strong{
+	font-size: 42px;
+	font-family: dwaren;
+}
+h2 strong{
+	font-size: 36px;
+	font-family: dwaren;
+}
+h3 strong{
+	font-size: 32px;
+	font-family: dwaren;
+}
+strong{
+	font-size: 22px;
+	font-family: sFont;
+	color: White;
 }
 
 hr

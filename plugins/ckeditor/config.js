@@ -20,9 +20,9 @@ CKEDITOR.editorConfig = function( config ) {
 		{ name: 'scrolls_icons' },
 		'/',
 		{ name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
-		{ name: 'paragraph',   groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ] },
+		{ name: 'paragraph',   groups: [ 'list', 'blocks', 'align', 'bidi' ] },
 		{ name: 'styles' },
-		{ name: 'colors' }
+
 	];
 
 	// Remove some buttons, provided by the standard plugins, which we don't
@@ -30,7 +30,7 @@ CKEDITOR.editorConfig = function( config ) {
 
 
 	// Se the most common block elements.
-	config.format_tags = 'p;h1;h2;h3;pre';
+	config.format_tags = 'p;h1;h2;h3';
 
 	// Make dialogs simpler.
 	config.removeDialogTabs = 'image:advanced;link:advanced';

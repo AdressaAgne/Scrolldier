@@ -609,6 +609,24 @@ function deckVote($id, $value=true, $user) {
 			return $query->rowCount();
 		
 	}
+	function totalDecks() {
+		
+			include('connect.php');
+			$query = $db->prepare("SELECT * FROM decks");
+			$query->execute();
+			
+			return $query->rowCount();
+		
+	}
+	function totalFanart() {
+		
+			include('connect.php');
+			$query = $db->prepare("SELECT * FROM fanScrolls");
+			$query->execute();
+			
+			return $query->rowCount();
+		
+	}
 	
 	function betaSignup($mail) {
 		$key = sha1(microtime().rand());

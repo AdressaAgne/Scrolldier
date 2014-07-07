@@ -1,7 +1,9 @@
 <?php 
 include('admin/mysql/connect.php');
 include('admin/mysql/function.php');
+include('admin/mysql/deck.php');
 $x = new xClass();
+$deckData = new deck();
 session_start();
 if (isset($_GET['logout'])) {
 	$x->logout();
@@ -204,6 +206,10 @@ for ($ex2 = 0; $ex2 < count($listOfScrolls); $ex2++){
 $JSONExport = trim($JSONExport,",");
 $JSONExport .= "]}";
 
+$dataArray = $deckData->getDeckDetails($row['id']);
+
+$deckType = $dataArray['faction'][0];
+
 ?>
 
 <!DOCTYPE html>
@@ -227,6 +233,7 @@ $JSONExport .= "]}";
 		
 		<div class="container">
 				<div class="container clearfix">
+					
 					<div class="left">
 						<i class="icon-deck"></i>	
 					</div>
@@ -234,9 +241,10 @@ $JSONExport .= "]}";
 					<div class="left">
 						<h1><a href="<?php echo($main) ?>deckbuilder/<?php echo($row['id']) ?>"><?php echo($row['deck_title']) ?></a></h1>
 						<small><?php echo($x->ago($row['time'])) ?> by <a href="<?php echo($main) ?>user/<?php echo($row['deck_author']) ?>"><?php echo($row['deck_author']) ?></a>, for scrolls version: <?php echo($row['meta']) ?>, with a Score of <?php echo($row['vote']) ?></small>
+						<br />
+						
 					</div>
 					
-
 				</div>
 				
 			<div class="news_wall right">
@@ -443,6 +451,91 @@ $JSONExport .= "]}";
 				</div>
 				<?php } ?>
 			</div>
+			
+					<div class="div-4">
+					<div class="span-9 div-center">
+						<?php 
+							$total_progress = $dataArray['CREATURE'] + $dataArray['STRUCTURE'] + $dataArray['SPELL'] + $dataArray['ENCHANTMENT'];
+							
+							$creatureProgess = round($dataArray['CREATURE'] / $total_progress * 100, 1);
+							$structureProgess =  round($dataArray['STRUCTURE'] / $total_progress * 100, 1);
+							$spellProgess =  round($dataArray['SPELL'] / $total_progress * 100, 1);
+							$enchantProgess =  round($dataArray['ENCHANTMENT'] / $total_progress * 100, 1);
+							
+							 ?>
+			
+						<table  style="width: 100%;" class="align-center">
+							<tr>
+								<?php if ($creatureProgess != 0) { ?>
+								<td><i class="icon-round color-green"></i> <?php echo($creatureProgess) ?>% Creatures (<?php echo($dataArray['CREATURE']) ?>)</td>
+								<?php } ?>
+								<?php if ($structureProgess != 0) { ?>
+								<td><i class="icon-round color-orange"></i> <?php echo($structureProgess) ?>% Structures (<?php echo($dataArray['STRUCTURE']) ?>)</td>
+								<?php } ?>
+							
+								<?php if ($spellProgess != 0) { ?>
+								<td><i class="icon-round color-red"></i> <?php echo($spellProgess) ?>% Spells (<?php echo($dataArray['SPELL']) ?>)</td>
+								<?php } ?>
+							
+								<?php if ($enchantProgess != 0) { ?>
+								<td><i class="icon-round color-blue"></i> <?php echo($enchantProgess) ?>% Enchantments (<?php echo($dataArray['ENCHANTMENT']) ?>)</td>
+								<?php } ?>
+							</tr>
+						</table>
+						
+						<div class="progressbar">
+							<div class="bar color-green" style="width: <?php echo($creatureProgess) ?>%;"></div>
+							<div class="bar color-orange" style="width: <?php echo($structureProgess) ?>%;"></div>
+							<div class="bar color-red" style="width: <?php echo($spellProgess) ?>%;"></div>
+							<div class="bar color-blue" style="width: <?php echo($enchantProgess) ?>%;"></div>
+						</div>
+					</div>
+					<div class="span-9 div-center">
+						<?php 
+							$total_progress = $dataArray['CREATURE'] + $dataArray['STRUCTURE'] + $dataArray['SPELL'] + $dataArray['ENCHANTMENT'];
+							
+							
+							$creatureProgess =  round($dataArray[0]['energy'] / $total_progress * 100, 1);
+							$structureProgess =  round($dataArray[0]['growth'] / $total_progress * 100, 1);
+							$spellProgess =  round($dataArray[0]['order'] / $total_progress * 100, 1);
+							$enchantProgess =  round($dataArray[0]['decay'] / $total_progress * 100, 1);
+							
+							 ?>
+			
+						<table  style="width: 100%; margin-top: 10px;" class="align-center">
+							<tr>
+								<?php if ($creatureProgess != 0) { ?>
+								<td><i class="icon-round color-energy"></i> <?php echo($creatureProgess) ?>% Energy (<?php echo($dataArray[0]['energy']) ?>)</td>
+								
+								<?php } ?>
+								
+								<?php if ($structureProgess != 0) { ?>
+								<td><i class="icon-round color-growth"></i> <?php echo($structureProgess) ?>% Growth (<?php echo($dataArray[0]['growth']) ?>)</td>
+							
+								<?php } ?>
+								
+								<?php if ($spellProgess != 0) { ?>
+								<td><i class="icon-round color-order"></i> <?php echo($spellProgess) ?>% Order (<?php echo($dataArray[0]['order']) ?>)</td>
+							
+								<?php } ?>
+								
+								<?php if ($enchantProgess != 0) { ?>
+								<td><i class="icon-round color-decay"></i> <?php echo($enchantProgess) ?>% Decay (<?php echo($dataArray[0]['decay']) ?>)</td>
+								
+								<?php } ?>
+							</tr>
+						</table>
+						
+						<div class="progressbar" style="margin-bottom: 10px;">
+							<div class="bar color-energy" style="width: <?php echo($creatureProgess) ?>%;"></div>
+							<div class="bar color-growth" style="width: <?php echo($structureProgess) ?>%;"></div>
+							<div class="bar color-order" style="width: <?php echo($spellProgess) ?>%;"></div>
+							<div class="bar color-decay" style="width: <?php echo($enchantProgess) ?>%;"></div>
+						</div>
+					</div>
+			
+		</div>
+
 		</div>
 	</div>
 	<?php include("inc_/footer.php"); ?>

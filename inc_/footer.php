@@ -72,7 +72,7 @@
 
 $(function() {
 
-	var r = Math.floor((Math.random() * 3));
+	var r = Math.floor((Math.random() * 4));
 
 	switch (r) {
 		case 0:

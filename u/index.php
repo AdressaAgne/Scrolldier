@@ -199,6 +199,17 @@ $userStats['ratio'] = round($userStats['won'] / $userStats['played'] * 100, 1);
 					<?php if ($scrolldierAccount == false) { ?>
 						<p class="align-center"><?php echo($user['ign']) ?> does not have an account on scrolldier</p>
 					<?php } else { ?>
+					
+					
+					<div class="div-4">
+					
+					<?php if (!empty($user['twitch'])) { ?>
+						<a target="_blank" href="http://www.twitch.tv/<?php echo($user['twitch']) ?>"><i class="icon-twitch" style="margin-bottom: -4px;"></i> <label class="hand"><?php echo($user['twitch']) ?></label></a>
+					<?php } ?>
+					<?php if (!empty($user['youtube'])) { ?>
+						<a target="_blank" href="https://www.youtube.com/user/<?php echo($user['youtube']) ?>"><i class="icon-youtube" style="margin-bottom: -4px;"></i> <label class="hand"><?php echo($user['youtube']) ?></label></a>
+					<?php } ?>
+					</div>
 						<div class="avatar">
 							<img src="<?php echo($main) ?>resources/head_<?php echo($user['headID']) ?>.png" width="400px" style="margin-left: -50px; margin-top: -20px;" alt="" />
 						</div>
@@ -318,6 +329,8 @@ $userStats['ratio'] = round($userStats['won'] / $userStats['played'] * 100, 1);
 								<li>Scrolls</li>
 								<li>Donor</li>
 								<li>Guild</li>
+							
+								
 							</ul>
 							<ul class="span-3 align-right">
 								<li><i class="icon-coin"></i> <?php echo($userStats['gold']) ?></li>
@@ -336,6 +349,7 @@ $userStats['ratio'] = round($userStats['won'] / $userStats['played'] * 100, 1);
 									No
 								<?php } ?>
 								</li>
+							
 							</ul>
 						</div>
 					</div>

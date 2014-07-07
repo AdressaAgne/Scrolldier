@@ -17,6 +17,18 @@
 	
 }
 
+blockquote
+{
+	font-style: italic;
+	font-family: 'Open Sans', sans-serif;
+	padding: 1px 0;
+	border-style: solid;
+	border-color: #ccc;
+	border-width: 0;
+	border-left-width: 4px;
+	padding-left: 10px;
+	margin-left: 10px;
+}
 
 [class^='btn-']{
 	color: #f8f8f8 !important;
@@ -170,6 +182,11 @@ body{
 	color: #f8f8f8;
 }
 
+strong{
+	font-size: 22px;
+	font-family: sFont !important;
+	color: White;
+}
 
 body.decay{
 	background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #121314 87.9%) center top / 100% 230px no-repeat, url(../img/decay_wallpaper.jpg) center top / auto 230px no-repeat #121314;
@@ -183,6 +200,63 @@ body.growth{
 body.order{
 	background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #121314 87.9%) center top / 100% 230px no-repeat, url(../img/banner_wallpaper_order.jpg) center top / auto 230px no-repeat #121314;
 }
+
+.spellbook{
+	width: 100%;
+	height: 300px;
+	background-image: url('../img/spellbook__base_result.png');
+	background-size: 100% 100%;
+	position: relative;
+	margin-bottom: 30px;
+	
+	
+	& .leftside{
+		z-index: 2;
+		position: absolute;
+		top: 16px;
+		left: 10px;
+		width: 190px;
+		height: 285px;
+		background: url('../img/spellbook__leftside_result.png') -43px top / auto 100% no-repeat;
+	}
+	
+	& .rightside{
+		z-index: 2;
+		position: absolute;
+		top: 17px;
+		right: 0px;
+		width: 190px;
+		height: 283px;
+		background: url('../img/spellbook__rightside_result.png') 70px top / auto 100% no-repeat;
+	}
+	
+	& .spells{
+		z-index: 1;
+		position: absolute;
+		width: 800px;
+		left: 80px;
+		height: 200px;
+		top: 40px;
+		
+		& ul {
+			width: 800px;
+			height: 280px;
+			overflow-x: scroll;
+			white-space: nowrap
+		}
+		& ul li{
+			cursor: pointer;
+			display: inline-block;
+			& img {
+				height: 180px;
+			}
+		}
+		
+	}
+	
+}
+
+
 
 .spoiler{
 	background-color: rgba(255, 255, 255, .4);
@@ -405,6 +479,78 @@ label{
 	background-image: linear-gradient(to bottom, #26262A 0%, #1C1C1F 100%);
 	border-radius: 3px;
 }
+
+.new_deck{
+	-moz-box-shadow: inset 0 -1px #000000, inset 0 1px 0 #38373B;
+	box-shadow: inset 0 -1px #000000, inset 0 1px 0 #38373B;
+
+	background: url(../img/banner_all.jpg) center bottom no-repeat #121314;
+	background-size: cover;
+	border-radius: 3px;
+	height: 130px;
+	
+	& .header{
+			width: 100%;
+			padding: 4px 10px;
+			border-radius: 3px 3px 0px 0px;
+			-moz-box-shadow: inset 0 -1px #000000, inset 0 1px 0 #38373B;
+			box-shadow: inset 0 -1px #000000, inset 0 1px 0 #38373B;
+			background-image: -webkit-linear-gradient(top, #26262A 0%, #1C1C1F 100%);
+			background-image: -moz-linear-gradient(top, #26262A 0%, #1C1C1F 100%);
+			background-image: -ms-linear-gradient(top, #26262A 0%, #1C1C1F 100%);
+			background-image: linear-gradient(to bottom, #26262A 0%, #1C1C1F 100%);
+	
+		}
+}
+
+.classic{
+	border-radius: 3px;
+	border: 1px solid #38373B;
+	& .header{
+		width: 100%;
+		padding: 6px 10px;
+		border-radius: 3px 3px 0px 0px;
+		-moz-box-shadow: inset 0 -1px #000000;
+		box-shadow: inset 0 -1px #000000;
+		background-image: -webkit-linear-gradient(top, #26262A 0%, #1C1C1F 100%);
+		background-image: -moz-linear-gradient(top, #26262A 0%, #1C1C1F 100%);
+		background-image: -ms-linear-gradient(top, #26262A 0%, #1C1C1F 100%);
+		background-image: linear-gradient(to bottom, #26262A 0%, #1C1C1F 100%);
+
+	}
+	& p, & div.classicDiv{
+		padding: 10px;
+		background-color: rgba(0, 0, 0, .75);
+		width: 100%;
+		
+		&:last-of-type{
+			border-radius: 0px 0px 3px 3px;
+		}
+	}
+	
+	& p{
+		border-radius: 0px 0px 0px 0px !important;
+	}
+	 
+	 &.decay{
+	 	background: url(../img/decay_wallpaper.jpg) center top / auto 230px no-repeat #121314;
+	 	background-size: cover;
+	 	
+	 }
+	 &.growth{
+	 	background: url(../img/banner_wallpaper_growth.jpg) center top / cover no-repeat #121314;
+	 }
+	 &.order{
+	 	background: url(../img/banner_wallpaper_order.jpg) center top / auto 230px no-repeat #121314;
+	 	background-size: cover;
+	 }
+	 &.energy{
+	 	background: url(../img/banner_wallpaper_energy.jpg) center top / auto 230px no-repeat #121314;
+	 	background-size: cover;
+	 }
+	 
+}
+
 ul li.modern{
 	padding: 10px;
 	-moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5), inset 0 -1px #000000, inset 0 1px 0 #38373B;
@@ -982,6 +1128,9 @@ p{
 .hand:hover{
 	cursor: pointer;
 }
+
+
+
 .container{
 	width: 960px;
 	margin: 50px auto;
@@ -996,12 +1145,7 @@ p{
 		width: 605px;
 		float: left;
 		
-		& .news_content{
-			margin: 10px;
-			& img{
-				max-width: 100%;
-			}
-		}
+		
 		
 		& small{
 			font-size: 10px;
@@ -1048,6 +1192,25 @@ p{
 	}
 	
 }
+
+.news_content{
+	margin: 10px;
+	& img{
+		display: block;
+		margin: 5px auto;
+		max-width: 100%;
+	}
+	& p{
+		margin-bottom: 10px;
+		margin-top: 5px;
+	}
+	& ul li{
+		list-style: square;
+		margin-left: 30px;
+	}
+}
+
+
 .well {
 	padding: 10px 5px;
 
@@ -1452,6 +1615,10 @@ i[class^='icon-']{
 i.icon-comment{
 	background-image: url('../img/comment_white.png');
 }
+i.icon-star{
+	margin-bottom: -3px;
+	background-image: url('../img/star.png');
+}
 i.icon-menu{
 	width: 40px !important;
 	height: 22px !important;
@@ -1464,13 +1631,17 @@ i.icon-menu{
 .readMore{
 	width: 100%;
 	text-align: center;
-	padding: 30px;
+	padding: 10px;
 }
 .resource{
 	margin-right: 7px;
 	& i[class^='icon-']{
 		margin-right: 5px;
 	}
+}
+.white{
+	color: #f8f8f8 !important;
+	
 }
 .isHidden{
 	background-color: rgba(255, 255, 255, .75) !important;
@@ -1482,6 +1653,13 @@ i.icon-menu{
 }
 i.icon-order{
 	background-image: url('../img/o.png');
+	
+	&.big{
+		width: 24px !important;
+		height: 24px !important;
+		background-size: 24px 24px !important;
+	}
+	
 }
 
 
@@ -1520,15 +1698,35 @@ i.icon-scrollsLogo{
 i.icon-growth{
 	background-image: url('../img/g.png');
 	background-size: 18px;
+	&.big{
+		width: 24px !important;
+		height: 24px !important;
+		background-size: 24px 24px !important;
+	}
 }
 i.icon-energy{
 	background-image: url('../img/e.png');
+	&.big{
+		width: 24px !important;
+		height: 24px !important;
+		background-size: 24px 24px !important;
+	}
 }
 i.icon-decay{
 	background-image: url('../img/d.png');
+	&.big{
+		width: 24px !important;
+		height: 24px !important;
+		background-size: 24px 24px !important;
+	}
 }
 i.icon-wild{
 	background-image: url('../img/w.png');
+	&.big{
+		width: 24px !important;
+		height: 24px !important;
+		background-size: 24px 24px !important;
+	}
 }
 i.icon-wild-old{
 	background-image: url('../img/w2.png');
@@ -1572,18 +1770,7 @@ i.icon-yes{
 i.icon-no{
 	background-image: url('../img/no.png');
 }
-i.icon-round{
-	width: 6px;
-	height: 6px;
-	border-radius: 3px;
-	background-color: #ecba24;
-	margin-left: 8px;
-	margin-right: 0px;
-	margin-bottom: 1px;
-	&.disabled{
-		background-color: #444;
-	}
-}
+
 i.icon-coin{
 	margin-bottom: -3px;
 	background-image: url('../img/gold_icon.png');
@@ -1640,6 +1827,103 @@ ul.badge-icon-admin{
 		}
 	}
 }
+i.icon-round{
+	width: 6px;
+	height: 6px;
+	border-radius: 3px;
+	background-color: #ecba24;
+	margin-left: 8px;
+	margin-right: 0px;
+	margin-bottom: 1px;
+	&.disabled{
+		background-color: #444;
+	}
+	
+	/* Creatures */
+	&.color-green{
+		background-color: #e2d5af;
+	}
+	/*Structures*/
+	&.color-orange{
+		background-color: #b7ac83;
+	}
+	/*Spells*/
+	&.color-red{
+		background-color: #bad6d8;
+	}
+	/*Enchantments*/
+	&.color-blue{
+		background-color: #90b1a6;
+	}
+	
+	&.color-energy{
+		background-color: #CC9500;
+	}
+	&.color-growth{
+		background-color: #A0CC56;
+	}
+	&.color-order{
+		background-color: #94B2CC;
+	}
+	&.color-decay{
+		background-color: #AD7FCC;
+	}
+}
+.progressbar{
+	width: 100%;
+	height: 12px;
+	
+	& .bar{
+		height: 10px;
+		float: left;
+		/* Creatures */
+		&.color-green{
+			background-color: #e2d5af;
+			border-bottom: 1px solid darken(#e2d5af, 20%);
+			border-top: 1px solid lighten(#e2d5af, 5%);
+			
+		}
+		/*Structures*/
+		&.color-orange{
+			background-color: #b7ac83;
+			border-bottom: 1px solid darken(#b7ac83, 20%);
+			border-top: 1px solid lighten(#b7ac83, 5%);
+		}
+		/*Spells*/
+		&.color-red{
+			background-color: #bad6d8;
+			border-bottom: 1px solid darken(#bad6d8, 20%);
+			border-top: 1px solid lighten(#bad6d8, 5%);
+		}
+		/*Enchantments*/
+		&.color-blue{
+			background-color: #90b1a6;
+			border-bottom: 1px solid darken(#90b1a6, 20%);
+			border-top: 1px solid lighten(#90b1a6, 5%);
+		}
+		
+		&.color-energy{
+			background-color: #CC9500;
+			border-bottom: 1px solid darken(#CC9500, 20%);
+			border-top: 1px solid lighten(#CC9500, 5%);
+		}
+		&.color-growth{
+			background-color: #A0CC56;
+			border-bottom: 1px solid darken(#A0CC56, 20%);
+			border-top: 1px solid lighten(#A0CC56, 5%);
+		}
+		&.color-order{
+			background-color: #94B2CC;
+			border-bottom: 1px solid darken(#94B2CC, 20%);
+			border-top: 1px solid lighten(#94B2CC, 5%);
+		}
+		&.color-decay{
+			background-color: #AD7FCC;
+			border-bottom: 1px solid darken(#AD7FCC, 20%);
+			border-top: 1px solid lighten(#AD7FCC, 5%);
+		}
+	}
+}
 
 label.normal_checkbox{
 	display: inline-block;
@@ -1667,7 +1951,7 @@ input[type='checkbox'].normal_checkbox:checked + label.normal_checkbox:before{
 	font-size: 18px;
 	color: #222222;
 	position: absolute;
-	margin-top: -3px;
+	margin-top: -5px;
 	display: block;
 	width: 16px;
 	height: 16px;
@@ -2038,6 +2322,17 @@ i.medal-Welcome-heart{
 			background-color: #f8f8f8;
 		}
 	}
+}
+
+
+p.byline{
+	font-size: 12px;
+	padding: 10px;
+
+}
+
+.indent{
+	margin-left: 20px !important;
 }
 
 
