@@ -27,7 +27,7 @@
 	<?php include('inc_/menu.php') ?>
 	<?php 
 		
-			$query = $db->prepare("SELECT * FROM guild WHERE isHidden = 0 ORDER BY time DESC");
+			$query = $db->prepare("SELECT * FROM guild WHERE isHidden = 0 ORDER BY guild_score DESC, time DESC");
 			$query->execute();
 	 ?>
 		<div class="container">
@@ -37,7 +37,9 @@
 					<a class="btn-modern" href="guild/index.php">New Guild</a><br />
 				</div>
 			<?php } ?>
-				
+				<div class="div-4">
+					To get a guild score, you need at least 5 members with a badge rank
+				</div>
 				<table>
 					<tr class="modern">
 						<td width="20px"></td>
@@ -73,7 +75,7 @@
 						<td><?php echo($deck['short_name']) ?></td>
 						<td><?php echo($total) ?></td>
 						<td><?php echo($deck['requerd_rating']) ?></td>
-						<td>NaN</td>
+						<td><?php echo($deck['guild_score']) ?></td>
 						<td><a href="user/<?php echo($deck['guild_leader']) ?>"><?php echo($deck['guild_leader']) ?></a></td>
 					</tr>
 					

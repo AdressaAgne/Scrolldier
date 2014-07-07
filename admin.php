@@ -311,6 +311,111 @@ $query = $db->prepare("SELECT * FROM scrollsCard");
 $query->execute();
 $total_scrolls = $query->fetch(PDO::FETCH_ASSOC);
 $total_Scroll = $query->rowCount();
+
+
+
+
+if (isset($_POST['submitGuildScore'])) {
+	
+	$data = array();
+	$requests = 5;
+	$playerPerRquest = 400;
+	
+	for ($i = 0; $i < $requests; $i++) {
+		
+		$url = "http://a.scrollsguide.com/ranking?fields=name,gold,rating,rank,badgerank&limit=".$playerPerRquest."&start=".$i*$playerPerRquest;
+		
+		$jsondata = file_get_contents($url);
+		$pullRequest = json_decode($jsondata, TRUE);
+		
+		if ($pullRequest['msg'] == "success") {
+			
+			for ($j = 0; $j < count($pullRequest['data']); $j++) {
+				
+				$data[$pullRequest['data'][$j]['name']] = array(
+					"rating" => $pullRequest['data'][$j]['rating'],
+					"badgerank" => $pullRequest['data'][$j]['badgerank'],
+					"gold" => $pullRequest['data'][$j]['gold'],
+					"rank" => $pullRequest['data'][$j]['rank']
+				);
+				
+
+
+			}
+			
+		}
+		
+		
+	}
+	
+	$guild_query = $db->prepare("SELECT * FROM guild");	
+	$guild_query->execute();
+	$guildID = 0;
+	
+	while ($guild = $guild_query->fetch(PDO::FETCH_ASSOC)) {
+		$guildID = $guild['id'];
+		$guild_data = array(
+			"guild_members" => 0,
+			"guild_ligal_members" => 0,
+			"guild_rating" => 0,
+			"guild_gold" => 0,
+			"guild_score" => 0
+			
+		);
+		
+		$member_query = $db->prepare("SELECT * FROM guildMembers WHERE guild_id=:gid");
+		$arr = array(
+				'gid' => $guildID,
+			);
+		
+		$x->arrayBinder($member_query, $arr);
+		$member_query->execute();
+		
+		while ($member = $member_query->fetch(PDO::FETCH_ASSOC)) {
+			if (isset($data[$member['user_id']])) {
+				$guild_data['guild_members']++;
+				
+				if ($data[$member['user_id']]['badgerank'] != -1) {
+					$guild_data['guild_ligal_members']++;
+					
+					$guild_data['guild_rating'] += $data[$member['user_id']]['rating'];
+				}
+				
+				$guild_data['guild_gold'] += $data[$member['user_id']]['gold'];
+			}
+			
+			// end while member
+		}
+		
+		if ($guild_data['guild_rating'] != 0 && $guild_data['guild_ligal_members'] > 4) {
+			$guild_data['guild_score'] = $guild_data['guild_rating'] / $guild_data['guild_ligal_members'];
+		}
+		
+		
+		$update_query = $db->prepare("UPDATE guild set guild_score=:score WHERE id=:gid");
+		$arr = array(
+				'score' => $guild_data['guild_score']
+			);
+		$arrInt = array(
+				'gid' => $guildID
+			);
+		
+		$x->arrayBinder($update_query, $arr);
+		$x->arrayBinderInt($update_query, $arrInt);
+		
+
+			if ($update_query->execute()) {
+				echo("<pre>");
+				print_r($guild_data);
+				echo("</pre>");	
+			}
+			
+		//end while guilde
+	}	
+ // end if
+}
+
+
 	
  ?>
 
@@ -379,6 +484,14 @@ $total_Scroll = $query->rowCount();
 	 				    	<input name="submitRename" type="submit" class="btn-modern" value="Rename">
 	 				    </form>
 	 					<?php  } ?>
+	 					
+	 					<div class="div-4">
+	 						<h2>Guilds</h2>
+	 						<form method="post" action="">
+	 							<input type="submit" name="submitGuildScore" value="Update Guild Score" class="btn-modern btn-no-margin"/>
+	 						</form>
+	 					
+	 					</div>
 	 			</div>
 	 			<div class="wall_small">
 	 			<div class="div-4">
