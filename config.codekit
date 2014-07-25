@@ -658,6 +658,182 @@
 		"outputPathIsSetByUser": 0,
 		"processed": 0
 		},
+	"\/img\/editor\/align-center.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 1313,
+		"inputAbbreviatedPath": "\/img\/editor\/align-center.png",
+		"outputAbbreviatedPath": "\/img\/editor\/align-center.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/img\/editor\/align-left.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 1267,
+		"inputAbbreviatedPath": "\/img\/editor\/align-left.png",
+		"outputAbbreviatedPath": "\/img\/editor\/align-left.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/img\/editor\/align-right.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 1313,
+		"inputAbbreviatedPath": "\/img\/editor\/align-right.png",
+		"outputAbbreviatedPath": "\/img\/editor\/align-right.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/img\/editor\/bold_white.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 1935,
+		"inputAbbreviatedPath": "\/img\/editor\/bold_white.png",
+		"outputAbbreviatedPath": "\/img\/editor\/bold_white.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/img\/editor\/break_white.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 2253,
+		"inputAbbreviatedPath": "\/img\/editor\/break_white.png",
+		"outputAbbreviatedPath": "\/img\/editor\/break_white.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/img\/editor\/chevron_down.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 1923,
+		"inputAbbreviatedPath": "\/img\/editor\/chevron_down.png",
+		"outputAbbreviatedPath": "\/img\/editor\/chevron_down.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/img\/editor\/header.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 1166,
+		"inputAbbreviatedPath": "\/img\/editor\/header.png",
+		"outputAbbreviatedPath": "\/img\/editor\/header.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/img\/editor\/italic_white.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 1595,
+		"inputAbbreviatedPath": "\/img\/editor\/italic_white.png",
+		"outputAbbreviatedPath": "\/img\/editor\/italic_white.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/img\/editor\/line.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 1027,
+		"inputAbbreviatedPath": "\/img\/editor\/line.png",
+		"outputAbbreviatedPath": "\/img\/editor\/line.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/img\/editor\/link_horisontal.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 2807,
+		"inputAbbreviatedPath": "\/img\/editor\/link_horisontal.png",
+		"outputAbbreviatedPath": "\/img\/editor\/link_horisontal.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/img\/editor\/link_vertical.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 2751,
+		"inputAbbreviatedPath": "\/img\/editor\/link_vertical.png",
+		"outputAbbreviatedPath": "\/img\/editor\/link_vertical.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/img\/editor\/money.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 2033,
+		"inputAbbreviatedPath": "\/img\/editor\/money.png",
+		"outputAbbreviatedPath": "\/img\/editor\/money.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/img\/editor\/more.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 1336,
+		"inputAbbreviatedPath": "\/img\/editor\/more.png",
+		"outputAbbreviatedPath": "\/img\/editor\/more.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/img\/editor\/picture.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 2115,
+		"inputAbbreviatedPath": "\/img\/editor\/picture.png",
+		"outputAbbreviatedPath": "\/img\/editor\/picture.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/img\/editor\/tab.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 1258,
+		"inputAbbreviatedPath": "\/img\/editor\/tab.png",
+		"outputAbbreviatedPath": "\/img\/editor\/tab.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/img\/editor\/trashcan.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 1255,
+		"inputAbbreviatedPath": "\/img\/editor\/trashcan.png",
+		"outputAbbreviatedPath": "\/img\/editor\/trashcan.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
 	"\/img\/egg.png": {
 		"fileType": 32768,
 		"ignore": 0,
@@ -798,6 +974,17 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 1
+		},
+	"\/img\/ok.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 1195,
+		"inputAbbreviatedPath": "\/img\/ok.png",
+		"outputAbbreviatedPath": "\/img\/ok.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
 		},
 	"\/img\/Patch\/12-1.png": {
 		"fileType": 32768,
@@ -1206,6 +1393,17 @@
 		"outputPathIsSetByUser": 0,
 		"processed": 0
 		},
+	"\/img\/trashcan.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 1417,
+		"inputAbbreviatedPath": "\/img\/trashcan.png",
+		"outputAbbreviatedPath": "\/img\/trashcan.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
 	"\/img\/Trials-swordinstone.png": {
 		"fileType": 32768,
 		"ignore": 0,
@@ -1375,6 +1573,15 @@
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/inc_\/analytics.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
+	"\/inc_\/comment.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/inc_\/comment.php",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
@@ -5180,6 +5387,17 @@
 		"outputPathIsSetByUser": 0,
 		"processed": 1
 		},
+	"\/resources\/badges\/badge-frame.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 8195,
+		"inputAbbreviatedPath": "\/resources\/badges\/badge-frame.png",
+		"outputAbbreviatedPath": "\/resources\/badges\/badge-frame.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
 	"\/resources\/badges\/banned.png": {
 		"fileType": 32768,
 		"ignore": 0,
@@ -5213,6 +5431,28 @@
 		"outputPathIsSetByUser": 0,
 		"processed": 1
 		},
+	"\/resources\/badges\/bronze_bunny.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 7057,
+		"inputAbbreviatedPath": "\/resources\/badges\/bronze_bunny.png",
+		"outputAbbreviatedPath": "\/resources\/badges\/bronze_bunny.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/resources\/badges\/carrot.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 5470,
+		"inputAbbreviatedPath": "\/resources\/badges\/carrot.png",
+		"outputAbbreviatedPath": "\/resources\/badges\/carrot.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
 	"\/resources\/badges\/Competitive_medal_result.png": {
 		"fileType": 32768,
 		"ignore": 0,
@@ -5234,6 +5474,28 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 1
+		},
+	"\/resources\/badges\/curse.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 15530,
+		"inputAbbreviatedPath": "\/resources\/badges\/curse.png",
+		"outputAbbreviatedPath": "\/resources\/badges\/curse.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/resources\/badges\/decay-glow.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 10982,
+		"inputAbbreviatedPath": "\/resources\/badges\/decay-glow.png",
+		"outputAbbreviatedPath": "\/resources\/badges\/decay-glow.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
 		},
 	"\/resources\/badges\/donor.png": {
 		"fileType": 32768,
@@ -5257,6 +5519,17 @@
 		"outputPathIsSetByUser": 0,
 		"processed": 1
 		},
+	"\/resources\/badges\/energy-glow.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 10982,
+		"inputAbbreviatedPath": "\/resources\/badges\/energy-glow.png",
+		"outputAbbreviatedPath": "\/resources\/badges\/energy-glow.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
 	"\/resources\/badges\/Generalmultiplayer_crossedswords_result.png": {
 		"fileType": 32768,
 		"ignore": 0,
@@ -5267,6 +5540,28 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 1
+		},
+	"\/resources\/badges\/gold_bunny.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 6982,
+		"inputAbbreviatedPath": "\/resources\/badges\/gold_bunny.png",
+		"outputAbbreviatedPath": "\/resources\/badges\/gold_bunny.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/resources\/badges\/growth-glow.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 12356,
+		"inputAbbreviatedPath": "\/resources\/badges\/growth-glow.png",
+		"outputAbbreviatedPath": "\/resources\/badges\/growth-glow.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
 		},
 	"\/resources\/badges\/guild-leader.png": {
 		"fileType": 32768,
@@ -5345,6 +5640,17 @@
 		"outputPathIsSetByUser": 0,
 		"processed": 1
 		},
+	"\/resources\/badges\/order-glow.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 11798,
+		"inputAbbreviatedPath": "\/resources\/badges\/order-glow.png",
+		"outputAbbreviatedPath": "\/resources\/badges\/order-glow.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
 	"\/resources\/badges\/red_kill_result.png": {
 		"fileType": 32768,
 		"ignore": 0,
@@ -5378,6 +5684,28 @@
 		"outputPathIsSetByUser": 0,
 		"processed": 1
 		},
+	"\/resources\/badges\/shard_pile.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 11701,
+		"inputAbbreviatedPath": "\/resources\/badges\/shard_pile.png",
+		"outputAbbreviatedPath": "\/resources\/badges\/shard_pile.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/resources\/badges\/silver_bunny.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 6783,
+		"inputAbbreviatedPath": "\/resources\/badges\/silver_bunny.png",
+		"outputAbbreviatedPath": "\/resources\/badges\/silver_bunny.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
 	"\/resources\/badges\/topDonor.png": {
 		"fileType": 32768,
 		"ignore": 0,
@@ -5410,6 +5738,17 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 1
+		},
+	"\/resources\/badges\/wild-glow.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 6802,
+		"inputAbbreviatedPath": "\/resources\/badges\/wild-glow.png",
+		"outputAbbreviatedPath": "\/resources\/badges\/wild-glow.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
 		},
 	"\/resources\/badges\/win_first_icon.png": {
 		"fileType": 32768,

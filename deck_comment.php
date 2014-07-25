@@ -62,7 +62,7 @@ if (isset($_POST['name']) && isset($_POST['submit']) && isset($_POST['comment'])
 } 
 
 if (isset($_POST['postID']) && !empty($_POST['postID'])) {
-	$x->delComment($_POST['postID']);
+	$x->delComment($_POST['postID'], $_SESSION['username']);
 }
 
 if (isset($_POST['warningUser']) && !empty($_POST['warningUser'])) {
@@ -355,18 +355,17 @@ $deckType = $dataArray['faction'][0];
 						<p><?php echo($row['text']) ?></p>
 				</div>
 				
+				<?php include("inc_/comment.php"); ?>
+				
 				<div class="containerComment">	
 				
 				<?php
-				$query = $db->prepare("SELECT * FROM comment WHERE commentToID=:id AND cWhere=2 ORDER BY TIME");
+				$query = $db->prepare("SELECT * FROM comment WHERE commentToID=:id AND cWhere=2 ORDER BY TIME DESC");
 				$arr = array(
 						'id' => $_GET['d']
 					);
 				$x->arrayBinder($query, $arr);	
 					
-				function makeClickableLinks($s) {
-				  return preg_replace('@(https?://([-\w\.]+[-\w])+(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?)@', '<a href="$1" target="_blank">$1</a>', $s);
-				}
 				
 				
 				$query->execute();		
@@ -377,33 +376,37 @@ $deckType = $dataArray['faction'][0];
 					<div class="avatar scrolls">
 						<img src="<?php echo($main) ?>resources/head_<?php echo($comment['headID']) ?>.png" alt="" />
 					</div>
+					
+					<?php $userGuild = $x->getGuild($comment['byUser']) ?>
 					<div class="commentPost scrolls">
-						<h4 class="clearfix"><a class="left" href="<?php echo($main) ?>user/<?php echo($comment['byUser']) ?>"><?php echo(strip_tags($comment['byUser'])) ?></a>
-						
-						
-						<?php $userGuild = $x->getGuild($comment['byUser']) ?>
+						<h4 class="clearfix">
 						<?php if (!$x->hasGuild($comment['byUser'])) { ?>
-							<div class="left" style="margin-left: 10px;"><img src="<?php echo($userGuild['badge_url']) ?>" height="16px" alt="" /></div>
+							<div class="left" style="margin-right: 10px;">
+									<img src="<?php echo($userGuild['badge_url']) ?>" height="22px" alt="" />
+							</div>
 						<?php } ?>
+						<a class="left" href="<?php echo($main) ?>user/<?php echo(strip_tags($comment['byUser'])) ?>">
+							<?php echo(strip_tags($comment['byUser'])) ?>
+						</a>
 						
 						
 						
 						
-						<?php if (isset($_SESSION['username']) && $_SESSION['rank'] < 3) { ?>
+						<?php if (isset($_SESSION['username']) && $_SESSION['rank'] < 3  || $_SESSION['username'] == $comment['byUser']) { ?>
 						<small>
 						
 						<form method="post" class="right" action="">
 							<input type="hidden" name="postID" value="<?php echo($comment['id']) ?>" />
-							<input type="submit" class="delBtn" name="" value="Delete" />
+							<button type="submit" class="btn-modern btn-no-margin" style="padding: 0px;"><i class="icon-trash" style="margin: 3px 3px 1px 3px;"></i></button>
 						</form>
-						<form method="post" class="right" action="">
+						<!--<form method="post" class="right" action="">
 							<input type="hidden" name="warningUser" value="<?php echo($comment['byUser']) ?>" />
 							<input type="hidden" name="warningPost" value="<?php echo($comment['id']) ?>" />
 							<input type="submit" class="warBtn" name="" value="Warning<?php if ($comment['Warning'] >= 1) {
 								echo("(".$comment['Warning'].")");
 							} ?>" />
 							
-						</form>
+						</form>-->
 						</small>
 						<?php } ?>
 						
@@ -411,7 +414,9 @@ $deckType = $dataArray['faction'][0];
 						<?php $thisUser = $comment['byUser']; ?>
 						<?php include("inc_/icon_comment.php") ?>
 						</h4>
-						<p><?php echo(makeClickableLinks(strip_tags($comment['comment']))) ?></p>
+						<div class="comment-text">
+							<p><?php echo($x->makeClickableLinks(strip_tags($comment['comment']))) ?></p>
+						</div>
 					</div>
 					
 					<?php } ?>
@@ -419,37 +424,6 @@ $deckType = $dataArray['faction'][0];
 					
 					
 				</div>
-				<?php if (isset($_SESSION['username'])) { ?>
-				<div class="containerComment">
-					<div class="avatar scrolls">
-						<?php if (isset($_SESSION['username'])) { ?>
-							<img src="<?php echo($main) ?>resources/head_<?php echo($_SESSION['headID']) ?>.png" alt="" />
-						<?php } else { ?>
-							<img src="<?php echo($main) ?>resources/head_195.png" alt="" />
-						<?php } ?>
-					</div>
-					<div class="scrolls comment clearfix">
-						<h4>Write a comment about this?</h4>
-						<small>Comments: <?php echo($x->totalComments($_GET['s'])) ?></small>
-						<form method="post" class="commentBox" action="">
-						
-							<?php if (isset($_SESSION['username'])) { ?>
-								<input type="hidden" class="textbox full div-3" name="name" value="<?php echo($_SESSION['username']) ?>" />
-								<input type="hidden" name="headID" value="<?php echo($_SESSION['headID']) ?>" />
-							<?php } else { ?>
-								<input type="text" class="textbox full div-3" name="name" placeholder="InGameName" value="" />
-								<input type="hidden" name="headID" value="195" />
-							<?php } ?>
-						
-							
-							<textarea name="comment" class="textarea full" placeholder="Comment"></textarea><br />
-							<div class="div-btn">
-								<input type="submit" class="btn-modern btn-no-margin" name="submit" value="Submit" />
-							</div>
-						</form>
-					</div>
-				</div>
-				<?php } ?>
 			</div>
 			
 					<div class="div-4">

@@ -26,7 +26,7 @@ if (isset($_POST['submitDeletePost']) && isset($_SESSION['username'])) {
 		$x->arrayBinder($query, $arr);
 
 		if ($query->execute()) {
-			header("location: admin.php");
+			header("location: ".$main);
 		}
 	}
 }
@@ -75,7 +75,7 @@ if (isset($_POST['name']) && isset($_POST['submit']) && isset($_POST['comment'])
 } 
 
 if (isset($_POST['postID']) && !empty($_POST['postID'])) {
-	$x->delComment($_POST['postID']);
+	$x->delComment($_POST['postID'], $_SESSION['username']);
 }
 
 if (isset($_POST['warningUser']) && !empty($_POST['warningUser'])) {
@@ -99,6 +99,7 @@ if (!isset($_GET['s']) || empty($_GET['s'])) {
 	<!--[if lt IE 9]>
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
+	<script src="<?php echo($main); ?>jquery.js"></script>
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="<?php echo($main) ?>css/style.css" />
 	<?php include("inc_/ad/main.php"); ?>
@@ -117,7 +118,7 @@ if (!isset($_GET['s']) || empty($_GET['s'])) {
 						<h3><?php echo($row['header']) ?><small><?php if (isset($_SESSION['username']) && ($_SESSION['rank'] == 1 || $_SESSION['username'] == $row['byName']))  { ?>
 								
 								<form method="post" action="" class="right">
-									<input type="button" class="btn-modern" onclick="location.href='edit.php?edit=<?php echo($row['id']) ?>'" name="" value="Edit" />
+									<input type="button" class="btn-modern" onclick="location.href='<?php echo($main) ?>edit.php?edit=<?php echo($row['id']) ?>'" name="" value="Edit" />
 									<input type="hidden" name="postID" value="<?php echo($row['id']) ?>" />
 									<input type="submit" name="submitDeletePost" class="btn-modern" value="Delete" />
 								</form>
@@ -126,11 +127,11 @@ if (!isset($_GET['s']) || empty($_GET['s'])) {
 						<small><?php echo($x->ago($row['time'])) ?>, By: <a href="<?php echo($main) ?>user/<?php echo($row['byName']) ?>"><?php echo($row['byName']) ?></a></small>
 					</div>
 					<div class="news_content">
-						<?php echo($row['html']) ?>
+						<?php echo($x->findAndReplace($row['html'])) ?>
 					</div>
 				</div>
 				
-				
+				<?php include("inc_/comment.php"); ?>
 				<div class="containerComment">	
 				
 				<?php
@@ -140,9 +141,6 @@ if (!isset($_GET['s']) || empty($_GET['s'])) {
 					);
 				$x->arrayBinder($query, $arr);	
 					
-				function makeClickableLinks($s) {
-				  return preg_replace('@(https?://([-\w\.]+[-\w])+(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?)@', '<a href="$1" target="_blank">$1</a>', $s);
-				}
 				
 				
 				$query->execute();		
@@ -153,30 +151,32 @@ if (!isset($_GET['s']) || empty($_GET['s'])) {
 					<div class="avatar scrolls">
 						<img src="<?php echo($main) ?>resources/head_<?php echo($row['headID']) ?>.png" alt="" />
 					</div>
+					<?php $userGuild = $x->getGuild($row['byUser']) ?>
 					<div class="commentPost scrolls">
-						<h4 class="clearfix"><a class="left" href="<?php echo($main) ?>user/<?php echo(strip_tags($row['byUser'])) ?>"><?php echo(strip_tags($row['byUser'])) ?></a>
-						<?php $userGuild = $x->getGuild($row['byUser']) ?>
-						
-						
+						<h4 class="clearfix">
 						<?php if (!$x->hasGuild($row['byUser'])) { ?>
-							<div class="left" style="margin-left: 10px;">
-									<img src="<?php echo($userGuild['badge_url']) ?>" height="16px" alt="" />
+							<div class="left" style="margin-right: 10px;">
+									<img src="<?php echo($userGuild['badge_url']) ?>" height="22px" alt="" />
 							</div>
 						<?php } ?>
-						<?php if (isset($_SESSION['username']) && $_SESSION['rank'] < 3) { ?>
+						<a class="left" href="<?php echo($main) ?>user/<?php echo(strip_tags($row['byUser'])) ?>">
+							<?php echo(strip_tags($row['byUser'])) ?>
+						</a>
+
+						<?php if (isset($_SESSION['username']) && $_SESSION['rank'] < 3 || $_SESSION['username'] == $row['byUser']) { ?>
 						<small>
 						
 						<form method="post" class="right" action="">
 							<input type="hidden" name="postID" value="<?php echo($row['id']) ?>" />
-							<input type="submit" class="delBtn" name="" value="Delete" />
+							<button type="submit" class="btn-modern btn-no-margin" style="padding: 0px;"><i class="icon-trash" style="margin: 3px 3px 1px 3px;"></i></button>
 						</form>
-						<form method="post" class="right" action="">
+						<!--<form method="post" class="right" action="">
 							<input type="hidden" name="warningUser" value="<?php echo($row['byUser']) ?>" />
 							<input type="hidden" name="warningPost" value="<?php echo($row['id']) ?>" />
 							<input type="submit" class="warBtn" name="" value="Warning<?php if ($row['Warning'] >= 1) {
 								echo("(".$row['Warning'].")");
 							} ?>" />
-						</form>
+						</form>-->
 						</small>
 						<?php } ?>
 						
@@ -185,7 +185,9 @@ if (!isset($_GET['s']) || empty($_GET['s'])) {
 						<?php include("inc_/icon_comment.php"); ?>
 						
 						</h4>
-						<p><?php echo(makeClickableLinks(strip_tags($row['comment']))) ?></p>
+						<div class="comment-text">
+							<p><?php echo($x->makeClickableLinks(strip_tags($row['comment']))) ?></p>
+						</div>
 						
 					</div>
 					
@@ -194,37 +196,7 @@ if (!isset($_GET['s']) || empty($_GET['s'])) {
 					
 					
 				</div>
-				<?php if (isset($_SESSION['username'])) { ?>
-				<div class="containerComment">
-					<div class="avatar scrolls">
-						<?php if (isset($_SESSION['username'])) { ?>
-							<img src="<?php echo($main) ?>resources/head_<?php echo($_SESSION['headID']) ?>.png" alt="" />
-						<?php } else { ?>
-							<img src="<?php echo($main) ?>resources/head_195.png" alt="" />
-						<?php } ?>
-					</div>
-					<div class="scrolls comment clearfix">
-						<h4>Write a comment about this?</h4>
-						<small>Comments: <?php echo($x->totalComments($_GET['s'])) ?></small>
-						<form method="post" class="commentBox" action="">
-						
-							<?php if (isset($_SESSION['username'])) { ?>
-								<input type="hidden" class="textbox full div-3" name="name" value="<?php echo($_SESSION['username']) ?>" />
-								<input type="hidden" name="headID" value="<?php echo($_SESSION['headID']) ?>" />
-							<?php } else { ?>
-								<input type="text" class="textbox full div-3" name="name" placeholder="InGameName" value="" />
-								<input type="hidden" name="headID" value="195" />
-							<?php } ?>
-						
-							
-							<textarea name="comment" class="textarea full" placeholder="Comment"></textarea><br />
-							<div class="div-btn">
-							<input type="submit" class="btn-modern btn-no-margin" name="submit" value="Submit" />
-							</div>
-						</form>
-					</div>
-				</div>
-				<?php } ?>
+				
 			</div>
 			
 			<?php if (($x->hasDonated($_SESSION['username']) == false && $_SESSION['rank'] == 4) || !isset($_SESSION['username'])) { ?>	

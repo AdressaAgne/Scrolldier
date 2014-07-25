@@ -56,20 +56,22 @@ if (!isset($_SESSION['username']) && $_SESSION['rank'] <= 2) {
 	 			
 	 			<div class="scrollsHardBack">
 					<form method="post" action="">
-						<div class="div-3">
-							<input type="text" class="textbox full" name="header" value="" placeholder="Header" />
-						</div>
-						<div class="div-3">
-							<input type="checkbox" name="isHidden" id="isHidden" value="" />
-							<label for="isHidden">Make post hidden</label>
-						</div>	
 						<div class="div-4">
-							<textarea class="ckeditor" name="html" id="editor"></textarea>
+							<div class="div-4">
+								<input type="text" class="textbox full span-4" name="header" value="" placeholder="Header" />
+								
+							</div>
+						
+							<div class="div-4">
+								<input type="checkbox" class="normal_checkbox" name="isHidden" id="isHidden" value="" />
+								<label for="isHidden" class="normal_checkbox"></label>
+								<label for="isHidden" class="hand">Make post hidden</label>
+							</div>
 						</div>
-						<br />
-						<div class="div-3">
-							<input type="hidden" name="name" value="<?php echo($_SESSION['username']) ?>" placeholder="User" />
-							<input type="submit" class="btn" name="submit" value="Post" />
+						<div class="div-4">
+
+							<?php include("inc_/editor.php") ?>
+							
 						</div>
 					</form>
 	 			</div>
@@ -78,5 +80,6 @@ if (!isset($_SESSION['username']) && $_SESSION['rank'] <= 2) {
 	 </div>
 
 <?php include("inc_/footer.php"); ?>
+
 </body>
 </html>

@@ -526,7 +526,292 @@ function deckVote($id, $value=true, $user) {
 			return($this->errorHandle($e));
 		}
 	}
+//	function parseCode($txt)
+//	{
+//	   // these functions will clean the code first
+//	   $ret = strip_tags($txt);
+//	    
+//	   // code replacements
+//	   $ret = preg_replace('#\[b\](.+)\[\/b\]#iUs', '<b>$1</b>', $ret);
+//	   $ret = preg_replace('#\[link\=(.+)\](.+)\[\/link\]#iUs', '<a href="$1">$2</a>', $ret);
+//	   $ret = preg_replace('#\[img\](.+)\[\/img\]#iUs', '<img src="$1" alt="Image" />', $ret); 
+//	   $ret = preg_replace('#\[quote\=(.+)\](.+)\[\/quote]#iUs', '<div class="quote">$2</div><div class="quote-by">By: $1</div>', $ret);
+//	 
+//	    
+//	   // return parsed string
+//	   return $ret;
+//	}
+
+	function findAndReplace($s) {
+		$s = preg_replace("#(https?://.+\.mp4)#iUs", '<video controls><source src="$1" type="video/mp4">Your browser does not support the video tag.</video>', $s);
+		
+		return $s;
+	}
+
+	function makeClickableLinks($s) {
+		//Line break
+		$s = preg_replace('@(\n)@', '</p><p>', $s);
+		$s = preg_replace('@(\t)@', '<span class="tab"></span>', $s);
+		
+//		$s = preg_replace("#([\"'](.+)[\"'])#iUs", '<span class="green">$1</span>', $s);
+//		$s = preg_replace("#(===|=>|==|->)#iUs", '<span class="gray">$1</span>', $s);
+//		$s = preg_replace("#(var )#iUs", '<span class="purple">$1</span>', $s);
+//		$s = preg_replace("#( array|if|function| as|elseif|else|foreach|for|each|return )#iUs", '<span class="blue">$1</span>', $s);
+//		$s = preg_replace("#d(true|false)#iUs", '<span class="red">$1</span>', $s);
+//		$s = preg_replace("#(//.*\n?)#iUs", '<span class="commentout">$1</span>', $s);
+//		$s = preg_replace("#([0-9]+)#iUs", '<span class="red">$1</span>', $s);
+//		$s = preg_replace("#([a-zA-z0-9_-]+\(.*\))#iUs", '<span class="red">$1</span>', $s);
+//		
+//		$s = preg_replace("#($[a-zA-Z0-9]+)#iUs", '<span class="purple">$1</span>', $s);
+//		
+		$s = preg_replace("#(\[code\](.+)\[/code\])#iUs", "<div class='code'>$2</div>", $s);
+		
 	
+		//$ret = preg_replace('#\[b\](.+)\[\/b\]#iUs', '<b>$1</b>', $ret);
+		//text tags
+		$bbCode_array = array(
+			"b" => "b",
+			"em" => "em",
+			"h" => "h3",
+			"h1" => "h1",
+			"h2" => "h2",
+			"h3" => "h3",
+			
+		);
+		
+		foreach ($bbCode_array as $key => $value) {
+			$s = preg_replace("#(\[".$key."\](.+)\[\/".$key."\])#iUs", "<".$value.">$2</".$value.">", $s);
+		}
+		
+		
+		//span class
+		$bbCodeClass_array = array(
+			"money" => "money",
+			"s" => "strike"
+			
+		);
+		
+		foreach ($bbCodeClass_array as $key => $value) {
+			$s = preg_replace("#(\[".$key."\](.+)\[/".$key."\])#iUs", "<span class='".$value."'>$2</span>", $s);
+		}
+		
+		//[code] block syntax highligther
+		//purple: 8f73af
+		//red: 8c3343
+		//green: 5e8a3e
+		//bg: 628a2d
+		//gray: d4d7de
+		//$s = preg_replace('#(/[code/].*[0-9]+.*/[/\code/])#iUs', '<span style="color: #8c3343;">$1</span>', $s);
+		
+		
+		
+		
+		
+		
+		
+			
+		//div class
+		$bbCodeDiv_array = array(
+			"center" => "align-center",
+			"left" => "align-left",
+			"right" => "align-right",
+			"code" => "code",
+			"block-1" => "block-1",
+			"block-2" => "block-2",
+			"block-3" => "block-3"
+			
+		);
+		
+		
+		
+		foreach ($bbCodeDiv_array as $key => $value) {
+			$s = preg_replace("#(\[".$key."\](.+)\[/".$key."\])#iUs", "<div class='".$value."'>$2</div>", $s);
+		}
+		
+		
+	
+		//icons
+		$magin_bottom = "-4px";
+		$arr = array(
+				'growth' => "<i style='margin-bottom: ".$magin_bottom.";' class='icon-growth'></i>",
+				'order' => "<i style='margin-bottom: ".$magin_bottom.";' class='icon-order'></i>",
+				'energy' => "<i style='margin-bottom: ".$magin_bottom.";' class='icon-energy'></i>",
+				'decay' => "<i style='margin-bottom: ".$magin_bottom.";' class='icon-decay'></i>",
+				'wild' => "<i style='margin-bottom: ".$magin_bottom.";' class='icon-wild'></i>",
+				'shard' => "<i style='margin-bottom: ".$magin_bottom.";' class='icon-shard'></i>",
+				'coin' => "<i style='margin-bottom: ".$magin_bottom.";' class='icon-coin'></i>",
+				'Adventurer' => "<i style='margin-bottom: ".$magin_bottom.";' class='icon-Adventurer'></i>",
+				'Adept' => "<i style='margin-bottom: ".$magin_bottom.";' class='icon-Adept'></i>",
+				'Trickster' => "<i style='margin-bottom: ".$magin_bottom.";' class='icon-Trickster'></i>",
+				'Sorcerer' => "<i style='margin-bottom: ".$magin_bottom.";' class='icon-Sorcerer'></i>",
+				'Apprentice-Caller' => "<i style='margin-bottom: ".$magin_bottom.";' class='icon-Apprentice-Caller'></i>",
+				'Caller' => "<i style='margin-bottom: ".$magin_bottom.";' class='icon-Caller'></i>",
+				'Accomplished-Caller' => "<i style='margin-bottom: ".$magin_bottom.";' class='icon-Accomplished-Caller'></i>",
+				'Master-Caller' => "<i style='margin-bottom: ".$magin_bottom.";' class='icon-Master-Caller'></i>",
+				'Exalted-Caller' => "<i style='margin-bottom: ".$magin_bottom.";' class='icon-Exalted-Caller'></i>",
+				'Grand-Master' => "<i style='margin-bottom: ".$magin_bottom.";' class='icon-Grand-Master'></i>",
+				'Aspect-Commander' => "<i style='margin-bottom: ".$magin_bottom.";' class='icon-Aspect-Commander'></i>",
+				'Ascendant' => "<i style='margin-bottom: ".$magin_bottom.";' class='icon-Ascendant'></i>",
+				't' => '<span class="tab"></span>'
+				
+			);
+	
+		foreach ($arr as $key => $value) {
+			$s = preg_replace("@(\[\/".$key."\])@", $value, $s);
+		}
+
+
+		//link
+		$s = preg_replace('@(\[url\=(https?://([-\w\.]+[-\w])+(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?)\](.+)\[\/url\])@', '<a href="$2" target="_blank">$8</a>', $s);
+		$s = preg_replace('@(\[url\](https?://([-\w\.]+[-\w])+(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?)\[\/url\])@', '<a href="$2" target="_blank">$2</a>', $s);
+		
+		//img
+		$s = preg_replace('@(\[img\](https?://([-\w\.]+[-\w])+(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?)\[\/img\])@', '<img src="$2" alt="$6" />', $s);
+		
+		//youtube
+		
+		//<iframe width="640" height="360" src="//www.youtube.com/embed/ES4yNj5LaJY" frameborder="0" allowfullscreen></iframe>
+
+		$s = preg_replace("#\[youtube\]http:\/\/(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-\_]*)(&(amp;)?[\w\?‌​=]*)?\[\/youtube\]#iUs", '<iframe width="640" height="360" src="//www.youtube.com/embed/$1" frameborder="0" allowfullscreen></iframe>', $s);
+		
+		$s = preg_replace("#\[youtube\]([a-zA-Z0-9_-]{11})\[\/youtube\]#iUs", '<iframe width="640" height="360" src="//www.youtube.com/embed/$1" frameborder="0" allowfullscreen></iframe>', $s);
+
+
+
+		//deck
+		
+		
+		
+		
+
+//		if (preg_match("@(\[deck\]([0-9]+)\[\/deck\])@",$s)) {
+//			$s = preg_replace('@(\[deck\]([0-9]+)\[\/deck\])@', $this->deckView("ball $2 ball"), $s);
+//		}
+		
+		
+		return $s;
+	}
+	function deckView($id) {
+		echo($id."<br />");
+		
+		
+		var_dump($id);
+		echo("<br />");
+		
+		$id = 'tall '.$id.' tall';
+		echo($id);
+		echo("<br />");
+		
+		$id = preg_match("(\d+)",$id, $rID);
+		var_dump($rID);
+		$id = (int)$rID[0];
+		
+		$html = "";
+		include("connect.php");
+		$deckData = new deck();
+		$query = $db->prepare("SELECT * FROM decks WHERE id = :id");
+		$arr = array(
+				'id' => $id
+			);
+
+		$this->arrayBinder($query, $arr);
+		
+		
+		if($query->execute()){
+		$i = 0;
+		$row = $query->fetch(PDO::FETCH_ASSOC);
+		
+		$dataArray = $deckData->getDeckDetails($row['id']);
+		$deckType = $dataArray['faction'][0];
+		
+		$html .= '<div class="div-4" id="'.$id.'">
+				  <div class="div-4 classic clearfix '.$deckType.'"  style="margin-bottom: 10px;">
+						<a class="" href="'.$main."deck/".$row['id'].'" >
+							<div class="header clearfix">
+								<h2 class="left clear" style="font-size: 24px;">'.substr($row['deck_title'],0 , 30).'</h2>
+							 </div>
+						</a>
+						<p class="left clear byline">'.$this->ago($row['time']).' ago by '.$row['deck_author'].'with '.$this->totalComments($row['id'], 2).' comment(s) for '.$row['meta'].'</p>';
+							
+		$html .= '<div class="left clear classicDiv">
+						
+						<span class="left">';
+		
+							if ($row['growth'] == 1) {
+								$html .= '<i class="icon-growth big" style="margin-bottom: -3px;"></i>';
+							}
+							
+							if ($row['decay'] == 1) {
+								$html .= '<i class="icon-decay big" style="margin-bottom: -3px;"></i>';
+							}
+							
+							if ($row['tOrder'] == 1) {
+								$html .= '<i class="icon-order big" style="margin-bottom: -3px;"></i>';
+							}
+							
+							if ($row['energy'] == 1) {
+								$html .= '<i class="icon-energy big" style="margin-bottom: -3px;"></i>';
+							}
+							
+							if ($row['wild'] == 1) {
+								$html .= '<i class="icon-wild big" style="margin-bottom: -3px;"></i>';
+							}
+							 
+		$html .= '</span>
+						
+						<span class="right white" style="margin-left: 10px;">
+							<i class="icon-scrolls"></i> <span>'.$row['scrolls'].'</span>
+						</span>
+						
+						<span class="right white" style="margin-left: 10px;">
+							<i class="icon-star"></i> <span>'.$row['vote'].'</span>
+						</span>
+					</div>
+					
+					
+					<div class="left clear classicDiv white align-center" style="font-size: 12px;">';
+					
+					
+						if (!empty($dataArray['CREATURE'])) {
+							$html .= '<span class="">'.$dataArray['CREATURE'].' Creatures</span>';
+						}
+						
+						if (!empty($dataArray['STRUCTURE'])) {
+							$html .= '<span>- '.$dataArray['STRUCTURE'].' Structurs</span>';
+						}
+						
+						if (!empty($dataArray['SPELL'])) {
+							$html .= '<span>- '.$dataArray['SPELL'].' Spells</span>';
+						}
+						
+						if (!empty($dataArray['ENCHANTMENT'])) {
+							$html .= '<span>- '.$dataArray['ENCHANTMENT'].' Enchantments</span>';
+						}
+						
+						
+						 
+						$total_progress = $dataArray['CREATURE'] + $dataArray['STRUCTURE'] + $dataArray['SPELL'] + $dataArray['ENCHANTMENT'];
+						
+						$creatureProgess = $dataArray['CREATURE'] / $total_progress * 100;
+						$structureProgess = $dataArray['STRUCTURE'] / $total_progress * 100;
+						$spellProgess = $dataArray['SPELL'] / $total_progress * 100;
+						$enchantProgess = $dataArray['ENCHANTMENT'] / $total_progress * 100;
+						
+						 
+			$html .= '</div>
+						<div class="progressbar">
+							<div class="bar color-green" style="width: '.$creatureProgess.'%;"></div>
+							<div class="bar color-orange" style="width: '.$structureProgess.'%;"></div>
+							<div class="bar color-red" style="width: '.$spellProgess.'%;"></div>
+							<div class="bar color-blue" style="width: '.$enchantProgess.'%;"></div>
+						</div>
+					</div>
+			</div>';
+		
+			}		
+		
+		return $html;
+	}
 	function getPost($option) {
 		include('connect.php');
 		$query = $db->prepare("SELECT * FROM scrolls WHERE id=:id");
@@ -768,21 +1053,43 @@ function deckVote($id, $value=true, $user) {
 		$query->execute();
 		return $query->rowCount();
 	}
-	function delComment($id) {
+	function delComment($id, $user) {
 		include('connect.php');
-		$query = $db->prepare("DELETE FROM comment where id = :id");
-		$arr = array(
+		
+		$Uquery = $db->prepare("SELECT * FROM accounts WHERE ign=:ign");
+		$Uarr = array(
+				'ign' => $user
+			);
+		$this->arrayBinder($Uquery, $Uarr);
+		
+		$Cquery = $db->prepare("SELECT * FROM comment WHERE id=:id");
+		$Carr = array(
 				'id' => $id
 			);
+		$this->arrayBinder($Cquery, $Carr);
 		
-		$this->arrayBinder($query, $arr);
-		try {
-			$query->execute();
+		
+			if ($Cquery->execute()) {	
+				if ($Uquery->execute()) {
+					
+					$u = $Uquery->fetch(PDO::FETCH_ASSOC);
+					$comment = $Cquery->fetch(PDO::FETCH_ASSOC);
+					
+					if (($comment['byUser'] == $user) || ($u['rank']) < 3) {
+						$query = $db->prepare("DELETE FROM comment where id = :id");
+						$arr = array(
+								'id' => $id
+							);
 						
-		} catch (PDOException $e) {
-			return($this->errorHandle($e));
+						$this->arrayBinder($query, $arr);
+						$query->execute();
+					}
+					
+				}
+				
+			}
 		}
-	}
+
 	function tof($i) {
 		if ($i == 0) {
 			return false;

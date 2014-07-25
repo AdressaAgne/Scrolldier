@@ -531,10 +531,20 @@ if (isset($_POST['submitGuildScore'])) {
 					<div class="div-4">
 						<ul class="badge-icon-admin left">
 							<?php for ($i = 0; $i < $badge->getBadge(0, true); $i++) { ?>
+							
+								<?php if ($badge->getBadge($i) == "icon-br") { ?>
+									<br /><br />
+								<?php } else { ?>
+								
 								<li>
 									<input type="radio" name="badge" id="badge-<?php echo($i) ?>" value="<?php echo($i) ?>" />
 									<label for="badge-<?php echo($i) ?>" class="checkbox"><i class="<?php echo($badge->getBadge($i)) ?>"></i></label>
+									<ul>
+										<li class="modern"><?php echo($badge->getBadge($i)) ?></li>
+									</ul>
 								</li>
+								
+								<?php } ?>
 							<?php } ?>
 							
 						</ul>

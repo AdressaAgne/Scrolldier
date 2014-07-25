@@ -26,7 +26,34 @@ class badges {
 			"crad",
 			"icecream",
 			"nr-200",
-			"topDonor"
+			"topDonor",
+			"gold_bunny",
+			"silver_bunny",
+			"bronze_bunny",
+			"br",
+			"carrot",
+			"shard-pile",
+			"curse",
+			"frame",
+			"br",
+			"order-glow",
+			"decay-glow",
+			"energy-glow",
+			"growth-glow",
+			"wild-glow",
+			"br",
+			"Adventurer",
+			"Adept",
+			"Trickster",
+			"Sorcerer",
+			"Apprentice-Caller",
+			"Caller",
+			"Accomplished-Caller",
+			"Master-Caller",
+			"Exalted-Caller",
+			"Grand-Master",
+			"Aspect-Commander",
+			"Ascendant"
 		);
 		if ($count == false) {
 			return "icon-".$badgeIcons[$i];
@@ -35,6 +62,8 @@ class badges {
 		}
 		
 	}
+	
+	
 	
 	function newBadge($ign, $badge, $text) {
 		include("connect.php");

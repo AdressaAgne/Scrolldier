@@ -40,7 +40,7 @@
 				<div class="div-4">
 					To get a guild score, you need at least 5 members with a badge rank
 				</div>
-				<table>
+				<table class="div-4">
 					<tr class="modern">
 						<td width="20px"></td>
 						<td width="300px">Name</td>

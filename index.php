@@ -103,10 +103,19 @@
 						</p>
 					</div>
 					<div class="news_content">
-						<?php echo($row['html']) ?>
+						<?php echo($x->findAndReplace($x->makeClickableLinks($row['html']))) ?>
 					</div>
 					<div class="readMore">
-						<a href="post/<?php echo($row['id']) ?>" class="readMore fontDwarven"><h1>Continue Reading</h1></a>
+						<a href="post/<?php echo($row['id']) ?>" class="readMore fontDwarven">
+							<h1>
+							
+							<?php if ($x->totalComments($row['id']) == 0) {
+								echo("Write A Comment");
+							} else {
+								echo("Read Comments");
+							}?>
+							</h1>
+						</a>
 					</div>
 				</div>
 				
@@ -127,7 +136,7 @@
 			<div class="div-4">
 				<?php 
 					include("inc_/curve.php");
-					$query = $db->prepare("SELECT * FROM decks WHERE isHidden = 0 AND competative = 1 AND vote > 2
+					$query = $db->prepare("SELECT * FROM decks WHERE isHidden = 0 AND competative = 1 AND vote > 3
 										   ORDER BY meta DESC, vote DESC,
 										   time DESC LIMIT 5");
 					
