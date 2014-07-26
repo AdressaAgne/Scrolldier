@@ -31,7 +31,7 @@
 		$x->arrayBinder($fan_query, $fan_arr);
 		
 	} else {
-		$fan_query = $db->prepare("SELECT * FROM fanScrolls ORDER BY id DESC");
+		$fan_query = $db->prepare("SELECT * FROM fanScrolls ORDER BY id DESC LIMIT 12");
 	}
 	
 		
@@ -71,6 +71,8 @@
 					<a href="<?php echo($main."scroll/library/4/") ?>"><i class="icon-wild"></i></a>
 				</div>
 			</div>
+			
+			<div id="artView">
 			<?php while ($fanScroll = $fan_query->fetch(PDO::FETCH_ASSOC)) { ?>
 			<div class="span-2">
 				<div class="div-4">	
@@ -81,9 +83,36 @@
 				</a>
 				</div>
 			</div>
-		<?php } ?>	
+			
+			<?php } ?>	
+		
+		
+			</div>
+		<div class="div-4">
+
+			<h1 id="moreArt" class="align-center hand">More...</h1>
+		</div>
 		</div>
 	</div>
 <?php include("../inc_/footer.php"); ?>
+<script>
+	$(function() {
+		var page = 2;
+		$("#moreArt").click(function() {
+			 console.log("Btw clicked");
+		
+			$.ajax({
+			  type: "POST",
+			  url: "<?php echo($main) ?>inc_/ajax/fanart.php",
+			  data: { p: page}
+			})
+			  .done(function( data ) {
+			    $("#artView").append(data);
+			    page += 1;
+			    console.log("Done loaded!");
+			  });
+		});
+	});
+</script>
 </body>
 </html>
