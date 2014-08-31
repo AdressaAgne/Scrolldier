@@ -1,7 +1,9 @@
 <?php 
 include('admin/mysql/connect.php');
 include('admin/mysql/function.php');
+include('admin/mysql/badges.php');
 $x = new xClass();
+$badge = new badges();
 
 session_start();
 if (isset($_GET['logout'])) {
@@ -32,46 +34,51 @@ if (isset($_GET['logout'])) {
  			<h2>Badges on Scrolldier:</h2>
  			</div>
  			<div class="div-4">
- 			<ul class="badge-icon left">
- 				<li><i class='icon-ig-mojang'></i><ul><li class='modern'>Mojangster</li></ul></li>
- 				<li><i class='icon-mod'></i><ul><li class='modern'>Moderator of scrolldier</li></ul></li>
- 				<li><i class='icon-ig-mod'></i><ul><li class='modern'>Moderator in-game</li></ul></li>
- 				<li><i class='icon-beetle'></i><ul><li class='modern'>Whit-listed on the Beetlestone Society Minecraft Server</li></ul></li>
- 				<li><i class='icon-admin'></i><ul><li class='modern'>Admin of scrolldier</li></ul></li>
- 				<li><i class='icon-donor'></i><ul><li class='modern'>Have donated to Scrolldier.com</li></ul></li>
- 				<li><i class='icon-guild'></i><ul><li class='modern'>Name is a guild leader</li></ul></li>
- 				<li><i class='icon-sgAdmin'></i><ul><li class='modern'>ScrollsGuide Admin</li></ul></li>
- 				<li><i class='icon-ig-demo'></i><ul><li class='modern'>Scrolls Demo user</li></ul></li>
- 				<li><i class='icon-alpha'></i><ul><li class='modern'>Scrolldier Alpha User</li></ul></li>
- 				<li><i class='icon-beta'></i><ul><li class='modern'>Scrolldier Beta user</li></ul></li>
- 				
- 				<li><i class='icon-ban'></i><ul><li class='modern'>Banned from Scrolldier</li></ul></li>
- 				
- 				
- 				<li><i class='icon-crad'></i><ul><li class='modern'>Cradstache</li></ul></li>
- 				<li><i class='icon-dota'></i><ul><li class='modern'>Zylus</li></ul></li>
- 				<li><i class='icon-icecream'></i><ul><li class='modern'>iScrE4m</li></ul></li>
- 				
-				<li><i class='icon-matches-2k'></i><ul><li class='modern'>Played over 2000 matches</li></ul></li>
-				<li><i class='icon-matches-1k'></i><ul><li class='modern'>Played over 1000 matches</li></ul></li>
-				<li><i class='icon-ranked-1k'></i><ul><li class='modern'>Won over 1000 ranked matches</li></ul></li>
-				<li><i class='icon-ranked-500'></i><ul><li class='modern'>Won over 500 ranked matches</li></ul></li>
-				<li><i class='icon-lost-1k'></i><ul><li class='modern'>Lost over 1000 matches</li></ul></li>
- 				
- 				
- 				<li><i class='icon-1st'></i><ul><li class='modern'>1at place in a tournament</li></ul></li>
- 				<li><i class='icon-2nd'></i><ul><li class='modern'>2nd place in a tournament</li></ul></li>
- 				<li><i class='icon-3rd'></i><ul><li class='modern'>3rd place in a tournament</li></ul></li>
- 				
- 				<li><i class='icon-win-1st'></i><ul><li class='modern'>Weekly winner 1st</li></ul></li>
- 				<li><i class='icon-win-most'></i><ul><li class='modern'>Weekly winner Most Wins</li></ul></li>
- 				<li><i class='icon-win-2nd'></i><ul><li class='modern'>Weekly winner 2nd</li></ul></li>
- 				<li><i class='icon-win-3rd'></i><ul><li class='modern'>Weekly winner 3rd</li></ul></li>
- 				
- 				
- 				
- 			
- 			</ul>
+ 				<ul class="badge-icon-admin left">
+ 					<?php for ($i = 0; $i < $badge->getBadge(0, true); $i++) { ?>
+ 					
+ 						<?php if ($badge->getBadge($i) == "icon-br") { ?>
+ 							<br /><br />
+ 						<?php } else { ?>
+ 						
+ 						<li>
+ 							<i class='<?php echo($badge->getBadge($i)) ?>'></i>
+ 							<ul>
+ 								<li class='modern'><?php echo($badge->getBadge($i)) ?></li>
+ 							</ul>
+ 						</li>
+ 						<?php } ?>
+ 					<?php } ?>
+ 						<br /><br />
+ 						<li><i class='icon-ig-mojang'></i><ul><li class='modern'>Mojangster</li></ul></li>
+ 							<li><i class='icon-mod'></i><ul><li class='modern'>Moderator of scrolldier</li></ul></li>
+
+ 							<li><i class='icon-beetle'></i><ul><li class='modern'>Whit-listed on the Beetlestone Society Minecraft Server</li></ul></li>
+ 							<li><i class='icon-admin'></i><ul><li class='modern'>Admin of scrolldier</li></ul></li>
+ 							<li><i class='icon-donor'></i><ul><li class='modern'>Have donated to Scrolldier.com</li></ul></li>
+
+
+ 							<li><i class='icon-ig-demo'></i><ul><li class='modern'>Scrolls Demo user</li></ul></li>
+ 							<li><i class='icon-alpha'></i><ul><li class='modern'>Scrolldier Alpha User</li></ul></li>
+ 							<li><i class='icon-beta'></i><ul><li class='modern'>Scrolldier Beta user</li></ul></li>
+ 							
+ 							<li><i class='icon-ban'></i><ul><li class='modern'>Banned from Scrolldier</li></ul></li>
+ 							
+ 							<li><i class="icon-scroll-badge"></i><ul><li class="modern">Have made a scroll in the scroll designer</li></ul></li>
+
+ 							
+ 						<li><i class='icon-matches-2k'></i><ul><li class='modern'>Played over 2000 matches</li></ul></li>
+ 						<li><i class='icon-matches-1k'></i><ul><li class='modern'>Played over 1000 matches</li></ul></li>
+ 						<li><i class='icon-ranked-1k'></i><ul><li class='modern'>Won over 1000 ranked matches</li></ul></li>
+ 						<li><i class='icon-ranked-500'></i><ul><li class='modern'>Won over 500 ranked matches</li></ul></li>
+ 						<li><i class='icon-lost-1k'></i><ul><li class='modern'>Lost over 1000 matches</li></ul></li>
+ 						
+ 						<li><i class='icon-assa'></i><ul><li class='modern'>Find and complete the Easter Egg (30 days left from 9th aug)</li></ul></li>
+
+ 							
+ 							
+ 					
+ 				</ul>
  			</div>
  		</div>
  	</div>

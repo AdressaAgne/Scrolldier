@@ -2,8 +2,10 @@
 include('admin/mysql/connect.php');
 include('admin/mysql/function.php');
 include('admin/mysql/badges.php');
+include('admin/mysql/deck.php');
 $x = new xClass();
 $badge = new badges();
+$deck = new deck();
 
 session_start();
 if (isset($_GET['logout'])) {
@@ -30,12 +32,23 @@ if(isset($_POST['submitScrolls']))  {
 	$data = json_decode($json, TRUE);
 	
 	if ($data['msg'] == "success" && !isset($_POST['file'])) { 
-		$empty = $db->prepare("DELETE FROM scrollsCard");
+		
+		
+		if (isset($_POST['server'])) {
+			$empty = $db->prepare("DELETE FROM scrollsCard_Test");
+		} else {
+			$empty = $db->prepare("DELETE FROM scrollsCard");
+		}
+		if (isset($_POST['server'])) {
+			$table = "scrollsCard_Test";
+		} else {
+			$table = "scrollsCard";
+		}
 		if ($empty->execute()) {
 		for ($i = 0; $i < count($data['data']); $i++) {	
 			
 				
-			$query = $db->prepare("INSERT INTO scrollsCard
+			$query = $db->prepare("INSERT INTO ".$table."
 
 			(id, name, description, kind, types, costgrowth, costorder, costenergy, costdecay, ap, ac, hp, flavor, rarity,
 			 scrollsSet, targetarea, image, bundle, animationpreview, version, introduced,
@@ -88,6 +101,7 @@ if(isset($_POST['submitScrolls']))  {
 			}
 			
 			
+			
 			$arr = array(
 					'id' => $data['data'][$i]['id'],
 					'name' => $data['data'][$i]['name'],
@@ -116,7 +130,8 @@ if(isset($_POST['submitScrolls']))  {
 					'anim_left' => $anim0,
 					'anim_top' => $anim1,
 					'anim_right' => $anim2,
-					'anim_bottom' => $anim3
+					'anim_bottom' => $anim3,
+					'table' => $table
 				);
 			
 			$x->arrayBinder($query, $arr);
@@ -131,7 +146,11 @@ if(isset($_POST['submitScrolls']))  {
 	if (isset($_POST['file'])) {
 
 		 
-				$empty = $db->prepare("DELETE FROM scrollsCard");
+				if (isset($_POST['server'])) {
+					$empty = $db->prepare("DELETE FROM scrollsCard_Test");
+				} else {
+					$empty = $db->prepare("DELETE FROM scrollsCard");
+				}
 				
 				if ($empty->execute()) {
 
@@ -140,14 +159,15 @@ if(isset($_POST['submitScrolls']))  {
 //					echo("<pre>");
 //					print_r($data);
 //					echo("</pre>");
-					
-					
-					
-				
+				if (isset($_POST['server'])) {
+					$table = "scrollsCard_Test";
+				} else {
+					$table = "scrollsCard";
+				}
 				
 				for ($i = 0; $i < count($data['cardTypes']); $i++) {
 
-					$query = $db->prepare("INSERT INTO scrollsCard
+					$query = $db->prepare("INSERT INTO ".$table."
 		
 					(id, name, description, kind, types, costgrowth, costorder, costenergy, costdecay, ap, ac, hp, flavor, rarity,
 					 scrollsSet, targetarea, image, bundle, animationpreview, version, introduced,
@@ -312,6 +332,11 @@ $query->execute();
 $total_scrolls = $query->fetch(PDO::FETCH_ASSOC);
 $total_Scroll = $query->rowCount();
 
+$query_test = $db->prepare("SELECT * FROM scrollsCard_Test");	
+$query_test->execute();
+$total_scrolls_test = $query_test->fetch(PDO::FETCH_ASSOC);
+$total_Scroll_test = $query_test->rowCount();
+
 
 
 
@@ -416,6 +441,20 @@ if (isset($_POST['submitGuildScore'])) {
 }
 
 
+if (isset($_POST['submitScrollVersion'])) {
+	if (isset($_POST['test_server'])) {
+		$test = false;
+	} else {
+		$test = true;
+	}
+
+	$deck->addServerVersion($_POST['version_text'], $test);
+}
+
+if (isset($_POST['delVersion'])) {
+	$deck->removeVerson($_POST['version_id']);
+}
+
 	
  ?>
 
@@ -445,15 +484,24 @@ if (isset($_POST['submitGuildScore'])) {
 	 			
 	 			<div class="div-4">
 	 					<div class="wall_big">
+	 					<div class="div-4 well clearfix" style="padding: 10px;">
 	 				    <form method="post" action="">
-	 				    	<h2>Update Scroll Library: (currently <?php echo($total_Scroll) ?> scrolls)</h2><br />
+	 				    	<h2>Update Scroll Library:<br />
+	 				    	Main Server: <?php echo($total_Scroll) ?> - Test Server: <?php echo($total_Scroll_test) ?><br /></h2>
+	 				    	
+	 				    	
 							<?php if (isset($success) && $success != false) { ?>
 								<p class="color-green">
 									<?php echo($success) ?>
 								</p>
 							<?php } ?>
 							
-	 				    	
+							<div class="div-4">
+							<input type="checkbox" class="normal_checkbox" name="server" id="server" value="" />
+							<label for="server" class="normal_checkbox"></label>
+							<label for="server" class="hand">Test Server (This scrolls DB is not used yet)</label>
+	 				    	</div>
+	 				    	<div class="div-4">
 	 				    	<input type="checkbox" class="normal_checkbox" name="file" id="file" checked="" value="" />
 	 				    	<label for="file" class="normal_checkbox"></label>
 	 				    	<label for="file" class="hand">From File</label>
@@ -464,7 +512,6 @@ if (isset($_POST['submitGuildScore'])) {
 	 				    		
 	 				    		$dir    = 'admin/versions/';
 	 				    		$files = scandir($dir);
-
 	 				    		for ($i = 0; $i < count($files); $i++) {
 	 				    			if ($files[$i] == ".") continue;
 	 				    			if ($files[$i] == "..") continue;
@@ -476,16 +523,87 @@ if (isset($_POST['submitGuildScore'])) {
 	 				    		
 	 				    		 ?>
 								</select>
-	 				    	<input name="submitScrolls" type="submit" class="btn-modern" value="Update">
+							</div>
+							<div class="div-4">
+								<input name="submitScrolls" type="submit" class="btn-modern btn-no-margin" value="Update">
+							</div>
 	 				    </form>
-	 				    <?php if ($_SESSION['rank'] == 1) { ?>
+	 				    <hr />
 	 				    <form method="post" action="">
-	 				    	<h2>Add .png extesion to image files</h2>
-	 				    	<input name="submitRename" type="submit" class="btn-modern" value="Rename">
-	 				    </form>
+	 				    	<div class="span-4" style="padding: 10px;">
+	 				    	<div class="div-4">
+	 				    		<div class="div-4">
+	 				    		<input type="checkbox" class="normal_checkbox" name="test_server" id="test_server" value="" />
+	 				    		<label for="test_server" class="normal_checkbox"></label>
+	 				    		<label for="test_server" class="hand">Test Server</label>
+	 				    		</div>
+	 				    		<div class="div-4">
+	 				    		<label for="">Version Lable</label><br />
+	 				    		<input type="text" class="textbox div-4" placeholder="0.123.4" name="version_text" value="" />
+	 				    		</div>
+	 				    	</div>
+	 				    		<div class="div-4">
+	 				    			<input name="submitScrollVersion" type="submit" class="btn-modern btn-no-margin" value="Add Version">
+	 				    		</div>
+	 				    	</div>
+	 				    	</form>
+	 				    	
+	 				    	<div class="span-4" style="padding: 10px;">
+	 				    		<h2>All versions</h2>
+	 				    			<ul>
+	 				    				<?php $query = $db->prepare("SELECT * FROM scrolldier_settings WHERE type=1 ORDER BY id DESC");	
+	 				    				$query->execute();
+	 				    				
+	 				    				while ($row = $query->fetch(PDO::FETCH_ASSOC)) { 
+	 				    					if ($row['value_int'] == 1) {
+	 				    						$server_v = "Main Server";
+	 				    					} else {
+	 				    						$server_v = "Test Server";
+	 				    					}
+	 				    				?>
+	 				    				
+	 				    					<li>
+	 				    						<form method="post" action="">
+	 				    							<input type="hidden" name="version_id" value="<?php echo($row['id']) ?>" />
+	 				    							<button type="submite" class="btn-modern btn-no-mraign" name="delVersion">&times;</button>
+	 				    							<span><?php echo($row['value_var']." - ".$server_v); ?></span>
+	 				    						</form>
+	 				    					</li>
+	 				    				
+	 				    				<?php } ?>
+	 				    				
+	 				    			</ul>
+	 				    	</div>
+	 				    	
+	 				    
+	 				    </div>
+	 				    <?php if ($_SESSION['rank'] == 1) { ?>
+		 				   <div class="div-4 well" style="padding: 10px;">
+			 				   <form method="post" action="">
+			 				   		<h2>Add .png extesion to image files</h2>
+			 				   		<input name="submitRename" type="submit" class="btn-modern" value="Rename">
+			 				   </form>
+		 				   </div>
+	 				    
+	 				    	<div class="div-4 well" style="padding: 10px;">
+	 				    		<h2>Suggestion Box:</h2>
+	 				    		<?php $query = $db->prepare("SELECT * FROM suggestions_box ORDER BY id DESC");	
+	 				    		$query->execute();
+	 				    		
+	 				    		while ($sug = $query->fetch(PDO::FETCH_ASSOC)) {  ?>
+	 				    		
+	 				    		<div class="div-4">
+		 				    		<div class="div-4">Suggestion by: <?php echo($sug['user']) ?></div>
+		 				    		<p><?php echo($sug['text']) ?></p>
+		 				    		<a href="<?php echo($main) ?>inbox/message/<?php echo($sug['user']) ?>">Send Feedback</a>
+		 				    		<hr />
+	 				    		</div>
+	 				    		
+	 				    		<?php } ?>
+	 				    	</div>
 	 					<?php  } ?>
 	 					
-	 					<div class="div-4">
+	 					<div class="div-4 well" style="padding: 10px;">
 	 						<h2>Guilds</h2>
 	 						<form method="post" action="">
 	 							<input type="submit" name="submitGuildScore" value="Update Guild Score" class="btn-modern btn-no-margin"/>
@@ -493,7 +611,7 @@ if (isset($_POST['submitGuildScore'])) {
 	 					
 	 					</div>
 	 			</div>
-	 			<div class="wall_small">
+	 			<div class="wall_small well" style="padding: 10px;">
 	 			<div class="div-4">
 	 					<h2>Hidden Spoiler Posts</h2>
 	 					<?php $query = $db->prepare("SELECT * FROM scrolls WHERE isHidden=1 ORDER BY time DESC");	
@@ -501,7 +619,7 @@ if (isset($_POST['submitGuildScore'])) {
 	 					
 	 					while ($row = $query->fetch(PDO::FETCH_ASSOC)) { ?>
 	 					
-						<p><a href="spoiler.php?s=<?php echo($row['id']) ?>"><?php echo($row['header']) ?></a></p>
+						<p><a href="<?php echo($main) ?>post/<?php echo($row['id']) ?>"><?php echo($row['header']) ?></a></p>
 	 					
 	 					<?php } ?>
 	 					

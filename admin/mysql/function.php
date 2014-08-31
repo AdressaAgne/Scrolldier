@@ -447,6 +447,8 @@ function deckVote($id, $value=true, $user) {
 		}
 	}
 	
+	
+	
 	function insertNewUser($username, $password, $name, $rank) {
 		include('connect.php');
 		$query = $db->prepare("INSERT INTO accounts (nick, password, rank) VALUES(:username, :password, :rank)");

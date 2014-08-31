@@ -1,7 +1,9 @@
 <?php 
 include('admin/mysql/connect.php');
 include('admin/mysql/function.php');
+include('admin/mysql/deck.php');
 $x = new xClass();
+$deckData = new deck();
 
 session_start();
 if (isset($_GET['logout'])) {
@@ -53,11 +55,36 @@ if (!isset($_SESSION['username'])) {
 					
 
 					$data2 = json_encode($phpArray);
-					
-					$query = $db->prepare("UPDATE decks SET JSON=:JSON WHERE id=:id");
+					$factions = $deckData->getDeckFaction($data2);
+						if (isset($factions['growth']) && $factions['growth'] != 0) {
+							$growth = 1;
+						} else {
+							$growth = 0;
+						}
+						if (isset($factions['order']) && $factions['order'] != 0) {
+							$order = 1;
+						} else {
+							$order = 0;
+						}
+						if (isset($factions['energy']) && $factions['energy'] != 0) {
+							$energy = 1;
+						} else {
+							$energy = 0;
+						}
+						if (isset($factions['decay']) && $factions['decay'] != 0) {
+							$decay = 1;
+						} else {
+							$decay = 0;
+						}
+						
+					$query = $db->prepare("UPDATE decks SET JSON=:JSON, growth=:growth, energy=:energy,tOrder=:order,decay=:decay WHERE id=:id");
 					$arr = array(
 							'JSON' => $data2,
-							'id' => $_POST['form-id']
+							'id' => $_POST['form-id'],
+							'growth' => $growth,
+							'energy' => $energy,
+							'order' => $order,
+							'decay' => $decay
 					);
 
 					$x->arrayBinder($query, $arr);

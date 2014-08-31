@@ -25,8 +25,6 @@ $x = new xClass();
 	 <div class="indexbg fullScreen">
 	 	<div class="container">
 	 		<div id="patchNews" class="clearfix">
-	 			
-	 			
 	 			<div class="scrollsHardBack">
 					<form method="post" action="">
 						<?php include("../inc_/editor.php") ?>

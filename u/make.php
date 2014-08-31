@@ -161,6 +161,15 @@ if (isset($_POST['link']) && !empty($_POST['link'])) {
 		 	</div>
 		 	<div class="div-4">
 		 		<p>Art</p>
+		 		
+		 		<!--<div class="div-4">
+		 			<input type="radio" name="chooseArt" id="pre" value="0" />
+		 			<label for="pre">Preset art</label>
+		 			
+		 			<input type="radio" name="chooseArt" id="custome" value="1" />
+		 			<label for="custome">Custom art</label>
+		 		</div>-->
+		 		
 		 		<ul class="badge-icon-scroll">
 			 			<?php if (isset($fanScroll)) { ?>
 						<li>
@@ -172,19 +181,46 @@ if (isset($_POST['link']) && !empty($_POST['link'])) {
 			 			<?php } ?>
 			 		
 		 		
-		 		<?php for ($i = 0; $i <= 26; $i++) { ?>
 		 				<li>
+		 					<input type="radio" name="cardImage" id="art-s" value="<?php echo($main) ?>resources/cardImages/spoilerArt/s.png" />
 		 					
-		 					<input type="radio" <?php if ($i == 0 && !isset($fanScroll)) {
-		 						echo("checked");
-		 					} ?>  name="cardImage" id="art-<?php echo($i) ?>" value="spoilerArt/<?php echo($i) ?>" />
+		 					<label for="art-s" class="checkbox" style="background-image: url(<?php echo($main) ?>resources/cardImages/spoilerArt/s.png);">
+		 					</label>
+		 				</li>
+		 				<li>
+		 					<input type="radio" name="cardImage" id="art-e" value="<?php echo($main) ?>resources/cardImages/spoilerArt/e.png" />
 		 					
-		 					<label for="art-<?php echo($i) ?>" class="checkbox" style="background-image: url(<?php echo($main) ?>resources/cardImages/spoilerArt/<?php echo($i) ?>.png);">
+		 					<label for="art-e" class="checkbox" style="background-image: url(<?php echo($main) ?>resources/cardImages/spoilerArt/e.png);">
+		 					</label>
+		 				</li>
+		 				<li>
+		 					<input type="radio" name="cardImage" id="art-d" value="<?php echo($main) ?>resources/cardImages/spoilerArt/d.png" />
+		 					
+		 					<label for="art-d" class="checkbox" style="background-image: url(<?php echo($main) ?>resources/cardImages/spoilerArt/d.png);">
+		 					</label>
+		 				</li>
+		 				
+		 				<li>
+		 					<input type="radio" name="cardImage" id="art-g" value="<?php echo($main) ?>resources/cardImages/spoilerArt/g.png" />
+		 					
+		 					<label for="art-g" class="checkbox" style="background-image: url(<?php echo($main) ?>resources/cardImages/spoilerArt/g.png);">
+		 					</label>
+		 				</li>
+		 				
+		 				<li>
+		 					<input type="radio" name="cardImage" id="art-o" value="<?php echo($main) ?>resources/cardImages/spoilerArt/o.png" />
+		 					
+		 					<label for="art-o" class="checkbox" style="background-image: url(<?php echo($main) ?>resources/cardImages/spoilerArt/o.png);">
+		 					</label>
+		 				</li>
+		 				
+		 				<li>
+		 					<input type="radio" name="cardImage" id="art-w" value="<?php echo($main) ?>resources/cardImages/spoilerArt/w.png" />
+		 					
+		 					<label for="art-w" class="checkbox" style="background-image: url(<?php echo($main) ?>resources/cardImages/spoilerArt/w.png);">
 		 					</label>
 		 				</li>
 		 			
-		 		
-		 		<?php } ?>
 		 		</ul>
 		 		
 		 		
@@ -219,15 +255,102 @@ if (isset($_POST['link']) && !empty($_POST['link'])) {
 			<div class="div-4">
 				<div class="span-3">	
 					<p>Trait 1</p>
-					<input type="text" class="textbox div-2" name="p" value="<?php if (isset($fanScroll)) {echo($fanScroll['passive_1']);} ?>" placeholder="Trait 1"/>
+					<label class="select">
+					<select id="trais-1" style="margin-bottom: 10px;">
+						<option>Select a trait</option>
+						<option>Armor</option>
+						<option>Dominion</option>
+						<option>Flying</option>
+						<option>Haste</option>
+						<option>Idol Strike</option>
+						<option>Inspiring</option>
+						<option>Linger</option>
+						<option>Lobber</option>
+						<option>Magic Armor</option>
+						<option>Piercing</option>
+						<option>Pillage</option>
+						<option>Ranged Attack</option>
+						<option>Regeneration</option>
+						<option>Relentless</option>
+						<option>Replenish</option>
+						<option>Resonance</option>
+						<option>Slayer</option>
+						<option>Spiky</option>
+						<option>Surge</option>
+						<option>Taxing</option>
+						<option>Unique</option>
+						<option>Unstable</option>
+						<option>Ward</option>
+					</select>
+					</label>
+					<input type="text" class="textbox div-2" name="p" id="p" value="<?php if (isset($fanScroll)) {echo($fanScroll['passive_1']);} ?>" placeholder="Trait 1"/>
+					<p class="color-red" id="warning-trait-1"></p>
 				</div>
 				<div class="span-3">
 					<p>Trait 2</p>
-					<input type="text" class="textbox div-2"  name="pa" value="<?php if (isset($fanScroll)) {echo($fanScroll['passive_2']);} ?>" placeholder="Trait 2"/>
+					<label class="select">
+					<select id="trais-2" style="margin-bottom: 10px;">
+						<option>Select a trait</option>
+						<option>Armor</option>
+						<option>Dominion</option>
+						<option>Flying</option>
+						<option>Haste</option>
+						<option>Idol Strike</option>
+						<option>Inspiring</option>
+						<option>Linger</option>
+						<option>Lobber</option>
+						<option>Magic Armor</option>
+						<option>Piercing</option>
+						<option>Pillage</option>
+						<option>Ranged Attack</option>
+						<option>Regeneration</option>
+						<option>Relentless</option>
+						<option>Replenish</option>
+						<option>Resonance</option>
+						<option>Slayer</option>
+						<option>Spiky</option>
+						<option>Surge</option>
+						<option>Taxing</option>
+						<option>Unique</option>
+						<option>Unstable</option>
+						<option>Ward</option>
+					</select>
+					</label>
+					<input type="text" class="textbox div-2"  name="pa" id="pa" value="<?php if (isset($fanScroll)) {echo($fanScroll['passive_2']);} ?>" placeholder="Trait 2"/>
+					<p class="color-red" id="warning-trait-2"></p>
 				</div>
 				<div class="span-3">
 					<p>Trait 3</p>
-					<input type="text" class="textbox div-2" name="pas" value="<?php if (isset($fanScroll)) {echo($fanScroll['passive_3']);} ?>" placeholder="Trait 3"/>
+					<label class="select">
+					<select id="trais-3" style="margin-bottom: 10px;">
+						<option>Select a trait</option>
+						<option>Armor</option>
+						<option>Dominion</option>
+						<option>Flying</option>
+						<option>Haste</option>
+						<option>Idol Strike</option>
+						<option>Inspiring</option>
+						<option>Linger</option>
+						<option>Lobber</option>
+						<option>Magic Armor</option>
+						<option>Piercing</option>
+						<option>Pillage</option>
+						<option>Ranged Attack</option>
+						<option>Regeneration</option>
+						<option>Relentless</option>
+						<option>Replenish</option>
+						<option>Resonance</option>
+						<option>Slayer</option>
+						<option>Spiky</option>
+						<option>Surge</option>
+						<option>Taxing</option>
+						<option>Unique</option>
+						<option>Unstable</option>
+						<option>Ward</option>
+					</select>
+					</label>
+					<input type="text" class="textbox div-2" name="pas" id="pas" value="<?php if (isset($fanScroll)) {echo($fanScroll['passive_3']);} ?>" placeholder="Trait 3"/>
+					<p class="color-red" id="warning-trait-3"></p>
 				</div>
 			</div>
 			
@@ -242,7 +365,12 @@ if (isset($_POST['link']) && !empty($_POST['link'])) {
 			
 			<div class="div-3">
 				<p>Description</p>
-				<textarea name="de" class="textarea div-4" maxlength="280" placeholder="Desciption"><?php if (isset($fanScroll)) {echo($fanScroll['description']);} ?></textarea>
+				<textarea name="de" id="de" class="textarea div-4" maxlength="280" placeholder="Desciption"><?php if (isset($fanScroll)) {echo($fanScroll['description']);} ?></textarea>
+				<p><b>Tips:<b></p>
+				<p>Decay: Death, Selfishness</p>
+				<p>Energy: Resource management, Brute Force, Destruction</p>
+				<p>Growth: Tokens, Buffs, Flooding the board, Life</p>
+				<p>Order: Efficiency, Board placement, Synergistic, Military</p>
 			</div>
 			
 			<div class="div-3">
@@ -289,6 +417,19 @@ if (isset($_POST['link']) && !empty($_POST['link'])) {
 					<div class="scrollCD"></div>
 					<div class="scrollHP"></div>
 				</div>
+				
+				<div class="scrollPassive">
+					<ul>
+						<li id="passive1"></li>
+						<li id="passive2"></li>
+						<li id="passive3"></li>
+					</ul>
+					<div class="scrollDesc">
+						This is the scroll description and its very long as you can tell by this long text, its very long
+					</div>
+				</div>
+				
+				
 			</div>
 		</div>
 	 </div>
@@ -296,7 +437,10 @@ if (isset($_POST['link']) && !empty($_POST['link'])) {
 <?php include('../inc_/footer.php'); ?>
 <script>
 $(function() {
-	updateScroll()
+	updateScroll();
+	
+	
+	
 	function getScrollType(i) {
 		scroll = [
 		 "scroll/256_decay_result.png",
@@ -372,8 +516,13 @@ $(function() {
 		var scroll_CD = $(".scrollCD");
 		var scroll_HP = $(".scrollHP");
 		
+		var passive_1 = $("#passive1");
+		var passive_2 = $("#passive2");
+		var passive_3 = $("#passive3");
 		
-		var art = url + "resources/cardImages/" + $("input[name=cardImage]:checked").val() + ".png";
+		var desc = $(".scrollDesc");
+		
+		var art = $("input[name=cardImage]:checked").val();
 		var base = url + "u/" + getScollBase($("input[name=type]:checked").val(), $("input[name=rarity]:checked").val());
 		var title = $("#scroll_title").val()
 		
@@ -393,7 +542,7 @@ $(function() {
 			$(scroll_stat).hide()
 		}
 		
-		
+	
 		if (sub_type == 0) {
 			sub_type = "CREATURE"
 		}
@@ -411,7 +560,82 @@ $(function() {
 		}
 		
 		
+		if ($("#p").val() != "") {
+			$(passive_1).text("* "+$("#p").val());
+		}
+		if ($("#pa").val() != "") {
+			$(passive_2).text("* "+$("#pa").val());
+		}
+		if ($("#pas").val() != "") {
+			$(passive_3).text("* "+$("#pas").val());
+		}
 		
+		//decay, energy, growth, order
+		var scrollTypeInt = $("input[name=type]:checked").val();
+		if (scrollTypeInt == 0) {
+			var scrollTypeString = "decay";
+			var non_traits = new Array(
+				"armor",
+				"haste",
+				"pillage",
+				"spiky"
+			)
+		}
+		if (scrollTypeInt == 1) {
+			var scrollTypeString = "energy";
+			var non_traits = new Array(
+				"dominion",
+				"haste",
+				"spiky"
+			)
+		}
+		
+		if (scrollTypeInt == 2) {
+			var scrollTypeString = "growth";
+			var non_traits = new Array(
+				"armor",
+				"dominion",
+				"lobber",
+				"piercing",
+				"ranged Attack",
+				"unstable"
+			)
+		}
+		
+		if (scrollTypeInt == 3) {
+			var scrollTypeString = "order";
+			var non_traits = new Array(
+				"haste",
+				"pillage"
+			)
+		}
+		
+		if (scrollTypeInt <= 3) {
+			var index_1 = non_traits.indexOf($("#p").val().toLowerCase());		
+			if (index_1 != -1) {
+				$("#warning-trait-1").text($("#p").val() + " is not a " + scrollTypeString + " trait");
+			} else {
+				$("#warning-trait-1").text("");
+			}
+			
+			var index_2 = non_traits.indexOf($("#pa").val().toLowerCase());		
+			if (index_2 != -1) {
+				$("#warning-trait-2").text($("#pa").val() + " is not a " + scrollTypeString + " trait");
+			} else {
+				$("#warning-trait-2").text("");
+			}
+			
+			var index_3 = non_traits.indexOf($("#pas").val().toLowerCase());		
+			if (index_3 != -1) {
+				$("#warning-trait-3").text($("#pas").val() + " is not a " + scrollTypeString + " trait");
+			} else {
+				$("#warning-trait-3").text("");
+			}
+		}
+		
+
+		
+		$(desc).text($("#de").val());
 
 		$(scroll_tier).css("background-image", "url('"+tier+"')");
 		$(scroll_art).css("background-image", "url('"+art+"')");
@@ -430,10 +654,29 @@ $(function() {
 	$("input[name=cardImage]:radio, input[name=type]:radio, input[name=rarity]:radio, #cost, #tier, input[name=scrollType]:radio,  #ap, #hp, #cd").change(function () {
 		updateScroll();
 	});
-	$("#scroll_title, #kin, #ap, #hp, #cd").keyup(function () {
+	$("#scroll_title, #kin, #ap, #hp, #cd, #p, #pa, #pas, #de").keyup(function () {
+		updateScroll();
+	});
+	$("#scroll_title, #kin, #ap, #hp, #cd, #p, #pa, #pas, #de").keypress(function () {
+		updateScroll();
+	});
+	$("#scroll_title, #kin, #ap, #hp, #cd, #p, #pa, #pas, #de").keydown(function () {
 		updateScroll();
 	});
 	
+	
+	$("#trais-1").change(function() {
+		$("#p").val($(this).val());
+		updateScroll();
+	});
+	$("#trais-2").change(function() {
+		$("#pa").val($(this).val());
+		updateScroll();
+	});
+	$("#trais-3").change(function() {
+		$("#pas").val($(this).val());
+		updateScroll();
+	});
 	
 	//$('html, body').animate({scrollTop: dest_pos}, 1000);
 	$(document).scroll(function () {
@@ -445,10 +688,10 @@ $(function() {
 		if (scrollLoc > height - footerHeight - divHeight - 200) {
 			
 		} else {
-			if (scrollLoc < 100) {
+			if (scrollLoc < 150) {
 				
 			} else {
-				$(div).css("margin-top", scrollLoc-100);
+				$(div).css("margin-top", scrollLoc-160);
 			}
 			
 		}

@@ -213,6 +213,11 @@ h3 strong{
 	src: url('../fonts/honeymeadbold.woff');
 	font-weight: bold;
 }
+@font-face {
+	font-family: sFont;
+	src: url('../fonts/honeymeadbolditalic.woff');
+	font-style: italic;
+}
 
 @font-face {
 	font-family: dwaren;
@@ -535,6 +540,9 @@ label{
 .color-red{
 	color: #CE0000 !important;
 }
+.color-warning{
+	color: #f9d207 !important;
+}
 .color-gray{
 	color: #CCC !important;
 }
@@ -543,6 +551,9 @@ label{
 }
 .color-dark{
 	color: #222222 !important;
+}
+.color-white{
+	color: #f8f8f8 !important;
 }
 /* @group Menu */
 .loginContainer{
@@ -558,7 +569,7 @@ label{
 	}
 }
 .hidden{
-	display: none;
+	display: none !important;
 }
 .deckScrollsInfo{
 	padding: 5px 10px;
@@ -733,7 +744,7 @@ video{
 	width: 600px;
 	float: left;
 	margin: 0px 5px;
-	padding: 0px 10px;
+	padding: 0px;
 	border-radius: 3px;
 	overflow: hidden;
 	-moz-box-shadow: inset 0 -1px #000000, inset 0 1px 0 #38373B;
@@ -742,10 +753,7 @@ video{
 	background-image: -moz-linear-gradient(top, #26262A 0%, #1C1C1F 100%);
 	background-image: -ms-linear-gradient(top, #26262A 0%, #1C1C1F 100%);
 	background-image: linear-gradient(to bottom, #26262A 0%, #1C1C1F 100%);
-	
-	&.center{
-		text-align: center;
-	}	
+		
 
 	
 	&.active{
@@ -755,14 +763,71 @@ video{
 	}
 	
 	& ul li{
-		padding: 15px 8px;
+		padding: 0px;
+		width: 150px;
 		list-style: none;
 		display: inline-block;
-		height: 60px;
 		border-right: 1px solid rgba(0, 0, 0, .4);
 		border-left: 1px solid rgba(255, 255, 255, .1);
 		margin-left: -4px;
 		text-align: center;
+		
+		& a {
+			display: block;
+			width: 100%;
+		}
+		
+		& ul.sub {
+			z-index: 9999999999;
+			position: absolute;
+			display: none;
+		
+
+		
+			width: 149px;
+			
+			margin: 0px;
+
+			box-sizing: border-box;
+			
+			-moz-box-shadow: inset 0 -1px #000000, inset 0 1px #38373B;
+			box-shadow: inset 0 -1px #000000, inset 0 1px #38373B;
+		
+
+			
+			& li {
+				background-color:  darken(#26262A, 5%);
+				border: none;
+				margin: 0px;
+				width: 149px;
+				padding: 3px 0px;
+				text-align: left;
+				/*
+				background-image: -webkit-linear-gradient(top, #26262A 0%, #1C1C1F 100%);
+				background-image: -moz-linear-gradient(top, #26262A 0%, #1C1C1F 100%);
+				background-image: -ms-linear-gradient(top, #26262A 0%, #1C1C1F 100%);
+				background-image: linear-gradient(to bottom, #26262A 0%, #1C1C1F 100%);
+				*/
+				& a.sub-menu {
+					display: block;
+					width: 100%;
+					color: #f8f8f8 !important;
+					padding: 0px 10px;
+					text-decoration: none;
+					font: normal 22px sFont;
+				}
+			}
+			
+		}
+		
+		&:hover > ul {
+			display: block;
+		}
+		
+		& img {
+			height: 50px;
+			width: auto;
+		}
 		
 		&:last-of-type{
 			border-right: none;
@@ -782,19 +847,6 @@ video{
 		
 	}
 	
-	
-	& ul li a{
-		height: 60px;
-		padding: 25px 5px;
-		text-decoration: none;
-		font: normal 30px sFont;
-		color: #f0f0f0;
-		font-family: sFont;
-		&:hover{
-			color: darken(#f0f0f0, 10%);
-			
-		}
-	}
 	&.menu-login{
 		width: 340px;
 		& ul li, ul li a{
@@ -802,12 +854,12 @@ video{
 
 		}
 	}
-	.avatar{	
-		float: left;
-		margin-top: -40px;
+	.avatar{
+		position: absolute;
+		margin-top: -170px;
 		margin-bottom: -9px;
-		margin-left: -20px;
-		height: 100px;
+		margin-left: -400px;
+		height: 150px;
 		width: 140px;
 		& img{
 			margin-left: -45px;
@@ -820,7 +872,20 @@ video{
 	overflow: hidden;
 	height: 200px;
 	width: 100%;
+	
 }
+
+.user-name{
+	padding: 5px;
+	& a {
+		font-size: 32px;
+		font-family: sFont;
+		padding: 8px 22px 15px;
+		display: block;
+		width: 100%;
+	}
+}
+
 /* @end */
 .body{
 
@@ -888,6 +953,32 @@ video{
 
 			top: 68px;
 			left: 36px;
+		}
+		
+	& .scrollPassive{
+		z-index: 9999;
+		
+		font-size: 18px;
+		color: rgb(61, 43, 33);
+		text-align: left;
+		position: absolute;
+		width: @artW;
+
+		top: 305px;
+		left: 50px;
+		& ul li{
+			font-family: sFont;
+			font-style: italic;
+			line-height: 18px;
+		}
+	}
+	
+	& .scrollDesc{
+			font-family: sFont;
+
+			line-height: 18px;
+
+			width: @artW - 20px;
 		}
 	
 	@plateW: 105px;
@@ -1033,6 +1124,10 @@ input[type='range']{
 	float: left;
 	width: 282px;
 }
+.span-1{
+	float: left;
+	width: 10%;
+}
 .span-2{
 	float: left;
 	width: 25%;
@@ -1101,6 +1196,7 @@ input[type='range']{
 
 
 .scrolls_statsbar{
+	display: none;
 	position: absolute;
 	float: left;
 	clear: left;
@@ -1177,6 +1273,11 @@ input[type='range']{
 		margin-left: 30px;
 	}
 }
+
+.context p{
+	margin: 20px;
+}
+
 .div-center{
 	margin: 0 auto !important;
 	float: none !important;
@@ -1311,7 +1412,6 @@ p{
 		max-width: 100%;
 	}
 	& p{
-		margin-bottom: 10px;
 		margin-top: 5px;
 	}
 	& ul li{
@@ -1912,7 +2012,7 @@ li.split{
 /* @group Icons */
 
 i[class^='icon-']{
-	display: inline-block;
+	display: inline-block !important;
 	margin: 2px;
 	width: 20px;
 	height: 20px;
@@ -1972,6 +2072,9 @@ i.icon-comment{
 i.icon-trash{
 	background-image: url('../img/editor/trashcan.png');
 }
+
+
+
 i.icon-code{
 	background-image: url('../img/editor/code.png');
 }
@@ -2464,6 +2567,15 @@ i.icon-mod{
 	
 	background-image: url('../resources/badges/mod.png');
 }
+
+i.icon-assa{
+	background-image: url('../resources/badges/assasin.png');
+	width: @icon-badge*.822916667;
+	height: @icon-badge;
+	margin-bottom: -10px;
+	background-size: @icon-badge*.822916667 @icon-badge;
+}
+
 i.icon-ban{
 	width: @icon-badge;
 	height: @icon-badge;
@@ -3039,3 +3151,64 @@ p.byline{
 .chooseBox [type='checkbox'] {
   display: none;
 }
+
+.assasians-caller{
+	position: relative;
+	bottom: 10px;
+	left: 10px;
+	opacity: .1;
+	background-image: url('../img/icon-assasian.png');
+	background-size: 20px auto;
+	background-repeat: no-repeat;
+	width: 20px;
+	height: 25px;
+	cursor: pointer;
+}
+
+.assasian{
+	width: 100%;
+	height: 100%;
+	display: none;
+	background-color: rgba(0, 0, 0, .95);
+	position: fixed;
+	z-index: 9999999;
+	top: 0px;
+	left: 0px;
+	
+	& input[type="text"]{
+		width: 100%;
+		height: 30px;
+		background-color: transparent;
+		border: none;
+		color: lime;
+		padding: 30px;
+		position: absolute;
+		bottom: 20px;
+	}
+	
+	& textarea{
+		width: 100%;
+		height: 100%;
+		background-color: transparent;
+		border: none;
+		color: lime;
+		padding: 120px 30px 30px;
+		position: relative;
+		bottom: 90px;
+	}
+	& .close{
+		width: 100%;
+		height: 20px;
+		font-size: 20px;
+		position: relative;
+		z-index: 9999999999999;
+		& div{
+			float: right;
+			margin-right: 20px;
+			cursor: pointer;
+		}
+	}
+}
+
+@import "bet.less";
+@import "library.less";

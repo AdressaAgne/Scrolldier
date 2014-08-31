@@ -14,10 +14,12 @@ RewriteRule ^editdeck/([^/.]+)/?$ deck_edit.php?d=$1 [L]
 RewriteRule ^decks/(([0-9]+/)?(([a-zA-Z0-9]+)?(/(order|energy|growth|decay|wild|s|c))*/)?)$ deck.php?page=$2&search=$4&para=$3&SearchType=$6 [L]
 
 RewriteRule ^decks-in-the-last-day$ deck_24.php [L]
+RewriteRule ^my/decks$ deck_my.php [L]
+RewriteRule ^my/favorites$ deck_fav.php [L]
 
 RewriteRule ^new/deck$ new_deck_choose.php [L]
 
-
+RewriteRule ^scrolllib$ library/index.php [L]
 
 RewriteRule ^inbox/message/([^/.]*)/?$ inboxMsg.php?player=$1 [L]
 
@@ -43,10 +45,13 @@ RewriteRule ^error$ error/db.php [L]
 RewriteRule ^fanart/([^/.]*)/?$ u/viewScroll.php?image=$1 [L]
 
 RewriteRule ^scrolls$ scrolls.php [L]
+RewriteRule ^suggest$ sugBox.php [L]
 RewriteRule ^scroll/designer$ u/make.php [L]
 RewriteRule ^scroll/library/([^/.]*)/?$  u/library.php?r=$1 [L]
 
 RewriteRule ^userImage/([^/.]*)/?$ u/img.php?user=$1 [L]
+
+RewriteRule ^bb$ bbrules.php [L]
 
 
 RewriteRule ^scroll/([^/.]*)/([^/.]*)/([^/.]*)/([^/.]*)/([^/.]*)/([^/.]*)/([^/.]*)/([^/.]*)/([^/.]*)?$ u/scroll.php?type=$1&rarity=$2&nr=$3&tier=$4&cardImage=$5&text=$6&scrollType=$7&kin=$8&ap=$9 [L]
@@ -57,6 +62,8 @@ RewriteRule ^userAvatar/([^/.]*)/?$ u/avatar.php?user=$1 [L]
 RewriteRule ^deckbuilder/([^/.]*)/?$ new_deckbuilder.php?deck=$1 [L]
 
 RewriteRule ^new/import/scrollguide$ new_deck_sg.php [L]
+
+RewriteRule ^bet$ bet.php [L]
 
 RewriteRule ^new/import/in-game/([^/.]*)/?$ new_deck_ig.php?json=$1 [L]
 

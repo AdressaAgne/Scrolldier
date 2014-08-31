@@ -1,6 +1,11 @@
 <?php 
 include('admin/mysql/connect.php');
 include('admin/mysql/function.php');
+
+include('admin/mysql/deck.php');
+$deckData = new deck();
+
+
 $x = new xClass();
 
 session_start();
@@ -22,33 +27,7 @@ if (!isset($_SESSION['username'])) {
 					if (empty($_SESSION['username'])) {
 						$_SESSION['username'] = $_POST['deck_author'];
 					}
-	
-			
-					if (isset($_POST['type_growth'])) {
-						$growth = 1;
-					} else {
-						$growth = 0;
-					}
-					if (isset($_POST['type_order'])) {
-						$order = 1;
-					} else {
-						$order = 0;
-					}
-					if (isset($_POST['type_energy'])) {
-						$energy = 1;
-					} else {
-						$energy = 0;
-					}
-					if (isset($_POST['type_decay'])) {
-						$decay = 1;
-					} else {
-						$decay = 0;
-					}
-					if (isset($_POST['type_wild'])) {
-						$wild = 1;
-					} else {
-						$wild = 0;
-					}
+
 					
 					if (isset($_POST['comp'])) {
 						$comp = 1;
@@ -95,6 +74,39 @@ if (!isset($_SESSION['username'])) {
 
 					$data2 = json_encode($phpArray);
 					
+					$factions = $deckData->getDeckFaction($data2);
+				
+				
+					if (isset($factions['growth']) && $factions['growth'] != 0) {
+						$growth = 1;
+					} else {
+						$growth = 0;
+					}
+					if (isset($factions['order']) && $factions['order'] != 0) {
+						$order = 1;
+					} else {
+						$order = 0;
+					}
+					if (isset($factions['energy']) && $factions['energy'] != 0) {
+						$energy = 1;
+					} else {
+						$energy = 0;
+					}
+					if (isset($factions['decay']) && $factions['decay'] != 0) {
+						$decay = 1;
+					} else {
+						$decay = 0;
+					}
+					if (isset($_POST['type_wild'])) {
+						$wild = 1;
+					} else {
+						$wild = 0;
+					}
+//				
+//					echo("<pre>");
+//						print_r($factions);
+//					echo("</pre>");
+				
 					if (empty($data['deck'])) {
 						$data['deck'] = "Unknown";
 					}
@@ -165,32 +177,14 @@ if (!isset($_SESSION['username'])) {
 			</div>
 			
 			<div class="div-3 div-marign">
-					<label for="deck_scrolls">What type of deck is this?</label><br />
+					<label for="deck_scrolls">Does this deck need wild to work?</label><br />
 					<div class="chooseBox clearfix">
 						<div class="checkbox">
 							<ul class="">
-							  <li>
-							      <input id="order_checkbox2" type="checkbox" checked="checked" name="type_order" value="">
-							      <label class="checkbox" for="order_checkbox2"><i class="icon-order"></i></label> 
-							      
-							  </li>
-							  <li>  
-							      <input id="energy_checkbox2" type="checkbox" name="type_energy" value="">
-							      <label class="checkbox" for="energy_checkbox2"><i class="icon-energy"></i></label> 
-							     
-							  </li>
-							  <li>
-							      <input id="growth_checkbox2" type="checkbox" name="type_growth" value="">
-							      <label class="checkbox" for="growth_checkbox2"><i class="icon-growth"></i></label> 
-							  </li>
-							 <li class="">
-							     <input id="decay_checkbox2" type="checkbox" name="type_decay" value="">
-							     <label class="checkbox" class="" for="decay_checkbox2"><i class="icon-decay"></i></label> 
-							 </li>
-							 <li class="">
-							     <input id="wild_checkbox2" type="checkbox" name="type_wild" value="">
-							     <label class="checkbox" class="" for="wild_checkbox2"><i class="icon-wild"></i></label> 
-							 </li>
+								 <li class="">
+								     <input id="wild_checkbox2" type="checkbox" name="type_wild" value="">
+								     <label class="checkbox" class="" for="wild_checkbox2"><i class="icon-wild"></i></label> 
+								 </li>
 							</ul>
 						</div>
 					</div>
@@ -200,24 +194,30 @@ if (!isset($_SESSION['username'])) {
 				<label>What meta is this deck designed for</label><br />
 				<label class="select">
 				<select name="meta">
-					<option value="0.125.0">0.125.0 (Latest, Test Server)</option>
-					<option selected value="0.124.0">0.124.0 (Latest, Main Server)</option>
-					<option value="0.123.0">0.123.0</option>
-					<option value="0.122.0">0.122.0</option>
-					<option value="0.121.0">0.121.0</option>
-					<option value="0.119.1">0.119.1</option>
-					<option value="0.117">0.117</option>
-					<option value="0.112.2">0.112.2</option>
-					<option value="0.110.5">0.110.5</option>
-					<option value="0.105">0.105</option>
-					<option value="0.103">0.103</option>
-					<option value="0.97">0.97</option>
+					<?php $query = $db->prepare("SELECT * FROM scrolldier_settings WHERE type=1 ORDER BY id DESC");	
+					$query->execute();
+					
+					while ($row = $query->fetch(PDO::FETCH_ASSOC)) { 
+						if ($row['value_var'] == $deckData->getLatestMainServerVersion()) {
+							$sufix = " (Latest, Main Server)";
+						} elseif ($row['value_var'] == $deckData->getLatestTestServerVersion()) {
+							$sufix = " (Latest, Test Server)";
+						} else {
+							$sufix = "";
+						}
+						
+					?>
+						<option value="<?php echo($row['value_var']) ?>">
+								<span><?php echo($row['value_var'].$sufix); ?></span>
+						</option>
+					
+					<?php } ?>
 				</select>
 				</label>
  			</div>
  			<div class="div-3">
  				<input type="checkbox" name="comp" id="comp" value="1" />
- 				<label for="comp">Is this a competitive deck? 1600+ Rating (Master Caller)</label>
+ 				<label for="comp">Is this a competitive deck? 1600+ Rating <i class="icon-Master-Caller"></i></label>
  			</div>
  			<div class="div-3">
  				<input type="checkbox" name="isHidden" id="isHidden" value="1" />

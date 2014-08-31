@@ -118,7 +118,7 @@ if ($_POST['tier'] != 0) {
 }
 
 
-$cardImage = imagecreatefrompng(getCardImage($_POST['cardImage']));
+$cardImage = imagecreatefrompng($_POST['cardImage']);
 
 $number = imagecreatefrompng(getCostNumber($_POST['nr']));
 
@@ -248,13 +248,13 @@ $statTableW = 420;
 $statTableStart = 74;
 imagecopyresampled($bg, $statTable, 73, $offset+460, 0, 0, $statTableW, $statTableW * .25, 1024, 256);
 
-if (empty($_POST['ap'])) {
+if (empty($_POST['ap']) && $_POST['ap'] != 0) {
 	$_POST['ap'] = -1;
 }
-if (empty($_POST['cd'])) {
+if (empty($_POST['cd']) && $_POST['cd'] != 0) {
 	$_POST['cd'] = -1;
 }
-if (empty($_POST['hp'])) {
+if (empty($_POST['hp']) && $_POST['hp'] != 0) {
 	$_POST['hp'] = -1;
 }
 

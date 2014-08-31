@@ -14,6 +14,55 @@
 	<!--[if lt IE 9]>
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
+	
+	<style>
+		.block{
+			width: 10px;
+			height: 10px;
+			float: left;
+			margin: 5px;
+		}
+		
+		.gray{
+			background-color: #58555B;
+		}
+		.blue{
+			background-color: #35367D;
+		}
+		.orange{
+			background-color: #EE6032;
+		}
+		.green{
+			background-color: #238A02;
+			/*6EB40A*/
+		}
+		.red{
+			background-color: #F00305;
+		}
+		.brown{
+			background-color: #724432;
+		}
+		
+		.grobbling{
+			height: 0px;
+			width: 10px;
+			float: left;
+			margin: 0px 5px;
+			border-bottom: 10px solid #238A02;
+			border-top: 10px solid #6EB40A;
+		}
+		
+		.container{
+			padding: 10px;
+		}
+		
+		.image img{
+			float: left;
+			width: 280px;
+			margin: 5px;
+		}
+	
+	</style>
 </head>
 <body>
 
@@ -41,21 +90,23 @@
 	
 	
 	<h3>HOW TO PLAY:</h3>
+	<div class="container">
 	<p>Doubleclick Grobblings.bat to start. Click to place markers where you want grobblings to explode.</p>
 	
 	
 	
 	<h4>What is on screen:</h4>
-	<p>Green stuff:	Grobbling. Or if darker and static; grobbling egg.</p>
-	<p>Gray stuff:	Rock, wall and floor.</p>
-	<p>Blue stuff:	Water. Essential.</p>
-	<p>Orange stuff:	Shrooms. Needs fertilizer.</p>
-	<p>Brown stuff:	Grobbling poop. Excellent fertilizer. Grobblings tidy their own cave.</p>
-	<p>Red stuff:	Your "explode-here"-marker.</p>
+	<p><div class="grobbling"></div>Green stuff:	Grobbling. Or if darker and static; grobbling egg.</p>
+	<p><div class="block gray"></div>Gray stuff:	Rock, wall and floor.</p>
+	<p><div class="block blue"></div>Blue stuff:	Water. Essential.</p>
+	<p><div class="block orange"></div>Orange stuff:	Shrooms. Needs fertilizer.</p>
+	<p><div class="block brown"></div>Brown stuff:	Grobbling poop. Excellent fertilizer. Grobblings tidy their own cave.</p>
+	<p><div class="block red"></div>Red stuff:	Your "explode-here"-marker.</p>
 	
-	
+	</div>
 	
 	<h4>Keyboard shortcuts:</h4>
+	<div class="container">
 	<p>c 	- show collisionMap</p>
 	<p>w 	- show water potential field/ant trails</p>
 	<p>f 	- show food potential field/ant trails</p>
@@ -69,11 +120,17 @@
 
 	<b>Note:</b>
 	<p>To experiment you can edit the file collisionMap.png to make your own map. Save a backup though.</p>
-
+	</div>
 	<h3>Screenshots</h3>
-	<a href="1.png"><img src="1.png" alt="" width="400px"/></a>
-	<a href="3.png"><img src="3.png" alt="" width="400px"/></a>
-	<a href="2.png"><img src="2.png" alt="" width="400px"/></a>
-	
+	<div class="image">
+		<a href="http://carnalizer.scrolldier.com/1.png"><img src="http://carnalizer.scrolldier.com/1.png" alt="" /></a>
+	</div>
+	<div class="image">
+		<a href="http://carnalizer.scrolldier.com/3.png"><img src="http://carnalizer.scrolldier.com/3.png" alt="" /></a>
+	</div>
+	<div class="image">
+		<a href="http://carnalizer.scrolldier.com/2.png"><img src="http://carnalizer.scrolldier.com/2.png" alt="" /></a>
+	</div>
+
 </body>
 </html>

@@ -4,67 +4,48 @@
 	<div class="logo" onclick="location.href='<?php echo($main) ?>'"></div>
 
 <div class="container clearfix">
+		<div class="menu" <?php if (isset($_SESSION['username'])) {
+			echo("style='margin-top: 22px;'");
+		} ?>>
+		<ul>
+
+			<li <?php if ($thisPage == "/index.php") { echo(" class='active'"); }?>><a href="<?php echo($main) ?>"><img src="/img/menu/home.png" alt="" /></a></a></li>
+			
 	
-	<?php if (isset($_SESSION['username'])) { ?>
-		<div class="menu center" style="margin-top: 22px;">
-	<?php } else { ?>
-		<div class="menu center">
-	<?php }?>
-		
-				<ul>
-					<?php if ($thisPage == "/index.php") { ?>
-						<li class="active"><a href="<?php echo($main) ?>">Home</a></li>
-					<?php } else { ?>
-						<li><a href="<?php echo($main) ?>">Home</a></li>
-					<?php } ?>
+			<li <?php if ($thisPage == "/deck.php") { echo(" class='active'"); }?>><a href="<?php echo($main) ?>decks/1/"><img src="/img/menu/decks.png" alt="" /></a>
+				<ul class="sub">
+				<?php if (isset($_SESSION['username'])) { ?>
+					<li><a class="sub-menu" href="<?php echo($main) ?>new/deck">New deck</a></li>
+					<li><a class="sub-menu" href="<?php echo($main) ?>my/decks">My decks</a></li>
+					<li><a class="sub-menu" href="<?php echo($main) ?>my/favorites">Favorite Decks</a></li>
 					
-					
-					<?php if ($thisPage == "/deck.php") { ?>
-						<li class="active"><a href="<?php echo($main) ?>decks/1/">Decks</a></li>
-					<?php } else { ?>
-						<li><a href="<?php echo($main) ?>decks/1/">Decks</a></li>
-					<?php } ?>
-					
-					<?php if ($thisPage == "/guild.php") { ?>
-						<li class="active"><a href="<?php echo($main) ?>guilds">Guilds</a></li>
-					<?php } else { ?>
-						<li><a href="<?php echo($main) ?>guilds">Guilds</a></li>
-					<?php } ?>
-					
-					
-					<?php if (isset($_SESSION['username']) && $_SESSION['rank'] <= 2) { ?>
-						<?php if ($thisPage == "/new_spoiler.php") { ?>
-							<li class="active"><a href="<?php echo($main) ?>new_spoiler.php">New Spoiler</a></li>
-						<?php } else { ?>
-							<li><a href="<?php echo($main) ?>new_spoiler.php">New Spoiler</a></li>
-						<?php } ?>
-					<?php } else { ?>
-						<?php if ($thisPage == "/feedback.php") { ?>
-							<li class="active"><a href="<?php echo($main) ?>feedback.php">Feedback</a></li>
-						<?php } else { ?>
-							<li><a href="<?php echo($main) ?>feedback.php">Feedback</a></li>
-						<?php } ?>
-					<?php } ?>
-					
-					
-					<?php if ($thisPage == "/u/library.php") { ?>
-						<li class="active"><a href="<?php echo($main) ?>scroll/library/">FanScroll</a></li>
-					<?php } else { ?>
-						<li><a href="<?php echo($main) ?>scroll/library/">FanScroll</a></li>
-					<?php } ?>
-					
+				<?php } ?>
+					<li><a class="sub-menu" href="<?php echo($main) ?>deckbuilder/">Deckbuilder</a></li>
+					<li><a class="sub-menu" href="<?php echo($main) ?>decks-in-the-last-day">Last 24 hours</a></li>
 				</ul>
+			</li>
+
+		
+			<li <?php if ($thisPage == "/guild.php") { echo(" class='active'"); }?>><a href="<?php echo($main) ?>guilds"><img src="/img/menu/guilds.png" alt="" /></a></li>
+
+
+			<li <?php if ($thisPage == "/library.php") { echo(" class='active'"); }?>><a href="<?php echo($main) ?>scroll/library/"><img src="/img/menu/scrolls.png" alt="" /></a>
+				<ul class="sub">
+				<?php if (isset($_SESSION['username'])) { ?>
+					<li><a class="sub-menu" href="<?php echo($main) ?>scroll/designer">New Scroll</a></li>
+				<?php } ?>
+					<li><a class="sub-menu" href="<?php echo($main) ?>scrolls.php">In-Game</a></li>
+				</ul>
+			</li>
+			
+		</ul>
 		
 		
 	</div>
 	
 	<?php if (isset($_SESSION['username'])) { ?>
-		<div class="logout">
-	<div class="right"><a class="modern" href="<?php echo($main) ?>logout">logout</a></div>
-	
-		
-	 
-	
+	<div class="logout">
+		<div class="right"><a class="modern" href="<?php echo($main) ?>logout">logout</a></div>
 	<?php if ($_SESSION['rank'] == 1) { ?>
 		<div class="left"><a class="modern" href="<?php echo($main) ?>admin.php">Admin</a></div>
 	<?php } elseif ($_SESSION['rank'] == 2) { ?>
@@ -88,7 +69,6 @@
 			<?php $guild = $x->getGuild($_SESSION['username']) ?>
 			<div class="left"><a class="modern" href="<?php echo($main) ?>guild/<?php echo($x->getGuildID2($_SESSION['username'])) ?>"><?php echo($guild['short_name']) ?></a></div>	
 		<?php } ?>
-		
 		</div>
 	<?php } ?>
 	
@@ -104,31 +84,24 @@
 				<div class="avatar">
 					
 					<?php if (file_exists('resources/head_'.$_SESSION['headID'].'.png') || file_exists('../resources/head_'.$_SESSION['headID'].'.png')) { ?>
-						
-						
-						
 						<?php if ($_SESSION['headID'] == 194) { ?>
 							<img style="margin-top: 15px;" src="<?php echo($main) ?>resources/head_<?php echo($_SESSION['headID']) ?>.png" width="200px" alt="" />
 						<?php } else { ?>
 							<img src="<?php echo($main) ?>resources/head_<?php echo($_SESSION['headID']) ?>.png" width="200px" alt="" />
 						<?php } ?>
 						
-				
 					<?php } else {
 						$_GET['w'] = 'Could not find in game head! Contact <a href="mailto:support@scrolldier.com">support@scrolldier.com</a> for help';
 					 } ?>
 				</div>
-				<?php if ($thisPage == "/u/index.php" || $thisPage == "/u/edit.php") { ?>
-					<li><a href="<?php echo($main) ?>"><?php echo($_SESSION['username']) ?></a></li>
-				<?php } else { ?>
-					<li><a href="<?php echo($main) ?>user"><?php echo($_SESSION['username']) ?></a></li>
-				<?php } ?>
+				
+				<li style="width: 101%;" class="user-name"><a href="<?php echo($main) ?>user"><?php echo($_SESSION['username']) ?></a></li>
 			</ul>
 		<?php } else { ?>
 			<ul>
 			<?php $actual_link = $_SERVER['REQUEST_URI']; ?>
-				<li><a href="<?php echo($main) ?>login.php?re=<?php echo($actual_link) ?>">Login</a></li>
-				<li><a href="<?php echo($main) ?>u/reg.php">Sign up</a></li>
+				<li style="width: 50%;"><a href="<?php echo($main) ?>login.php?re=<?php echo($actual_link) ?>"><img src="/img/menu/login.png" alt="" /></a></li>
+				<li style="width: 51%;"><a href="<?php echo($main) ?>u/reg.php"><img src="/img/menu/signup.png" alt="" /></a></li>
 			</ul>
 		<?php } ?>
 	</div>

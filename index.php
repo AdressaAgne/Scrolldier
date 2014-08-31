@@ -125,11 +125,21 @@
 			
 			<div class="wall_small">
 			
-				<a href="<?php echo($main) ?>new/deck" class="div-4 align-center btn-modern" style="margin-top: -1px;">
+				<a href="<?php echo($main) ?>suggest" class="div-4 align-center btn-modern" style="margin-top: -1px;">
+					<div class="header">
+						<h1>Something Missing on Scrolldier?</h1>
+						<p>Submit a Suggestion here!</p>
+					</div>
+				</a>
+			
+				<a href="<?php echo($main) ?>new/deck" class="div-4 align-center btn-modern">
 					<div class="header">
 						<h1>Add a new deck!</h1>
 					</div>
 				</a>
+				
+				
+				
 			
 			<h2 class="align-center modern div-4">Top 5 decks at the moment</h2>
 			
@@ -245,9 +255,19 @@
 				
 			</div>
 			
-			<h2 class="align-center modern div-4">Twitter Feed from devs</h2>
-			<a class="twitter-timeline" href="https://twitter.com/Agne240/scrolls-devs" data-widget-id="453777615828963328">Tweets from https://twitter.com/Agne240/scrolls-devs</a>
-			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+			
+			<div class="div-4 align-center">
+				<h2 class=" modern div-4">Last Fan made scroll</h2>
+				<?php $fan_query = $db->prepare("SELECT * FROM fanScrolls ORDER BY id DESC LIMIT 1");							
+					$fan_query->execute();
+					$fanScroll = $fan_query->fetch(PDO::FETCH_ASSOC);
+			?>
+			
+				<a href="<?php echo($main."fanart/".$fanScroll['link']) ?>"><img src="<?php echo($fanScroll['parma_link']) ?>" class="div-4" alt="" /></a>
+					
+				
+			</div>
+			
 			
 				<?php if (($x->hasDonated($_SESSION['username']) == false && $_SESSION['rank'] == 4) || !isset($_SESSION['username'])) { ?>
 				

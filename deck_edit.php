@@ -1,7 +1,9 @@
 <?php 
 include('admin/mysql/connect.php');
 include('admin/mysql/function.php');
+include('admin/mysql/deck.php');
 $x = new xClass();
+$deckData = new deck();
 session_start();
 if (isset($_GET['logout'])) {
 	$x->logout();
@@ -288,18 +290,26 @@ if (!isset($_GET['s']) || empty($_GET['s'])) {
 							<label>Change Game version for deck</label><br />
 							<select name="meta">
 								<option selected="selected" value="<?php echo($row['meta']) ?>"><?php echo($row['meta']) ?></option>
-								<option value="0.125.0">0.125.0 (Latest, Test Server)</option>
-								<option selected value="0.124.0">0.124.0 (Latest, Main Server)</option>
-								<option value="0.123.0">0.123.0</option>
-								<option value="0.122.0">0.122.0</option>
-								<option value="0.121.0">0.121.0</option>
-								<option value="0.119.1">0.119.1</option>
-								<option value="0.117">0.117</option>
-								<option value="0.112.2">0.112.2</option>
-								<option value="0.110.5">0.110.5</option>
-								<option value="0.105">0.105</option>
-								<option value="0.103">0.103</option>
-								<option value="0.97">0.97</option>
+								
+								<?php $query = $db->prepare("SELECT * FROM scrolldier_settings WHERE type=1 ORDER BY id DESC");	
+								$query->execute();
+								
+								while ($version = $query->fetch(PDO::FETCH_ASSOC)) { 
+									if ($version['value_var'] == $deckData->getLatestMainServerVersion()) {
+										$sufix = " (Latest, Main Server)";
+									} elseif ($version['value_var'] == $deckData->getLatestTestServerVersion()) {
+										$sufix = " (Latest, Test Server)";
+									} else {
+										$sufix = "";
+									}
+									
+								?>
+									<option value="<?php echo($version['value_var']) ?>">
+											<span><?php echo($version['value_var'].$sufix); ?></span>
+									</option>
+								
+								<?php } ?>
+								
 							</select>
 						</div>
 						<div class="div-4">

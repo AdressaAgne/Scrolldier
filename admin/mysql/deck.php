@@ -15,6 +15,105 @@ class deck {
 	}
 	
 	
+	function getLatestMainServerVersion() {
+		include('connect.php');
+		$query = $db->prepare("SELECT * FROM scrolldier_settings WHERE type=1 AND value_int=1 ORDER BY id DESC LIMIT 1");
+
+		if ($query->execute()) {
+			$deck = $query->fetch(PDO::FETCH_ASSOC);
+			
+			return $deck['value_var'];
+		}
+	}
+	function getLatestTestServerVersion() {
+		include('connect.php');
+			$query = $db->prepare("SELECT * FROM scrolldier_settings WHERE type=1 AND value_int=0 ORDER BY id DESC LIMIT 1");
+	
+			if ($query->execute()) {
+				$deck = $query->fetch(PDO::FETCH_ASSOC);
+				
+				return $deck['value_var'];
+			}
+		}
+	
+	function addServerVersion($version, $test) {
+		include('connect.php');
+		$query = $db->prepare("INSERT INTO scrolldier_settings (name, value_int, value_var, type) VALUES (:name, :int, :var, :type)");
+		
+		if ($test === false) {
+			$test = 0;
+		} else {
+			$test = 1;
+		}
+
+		
+		$arr = array(
+				'name' => "scrolls library",
+				'var' => $version
+			);
+		$this->arrayBinder($query, $arr);
+		
+		//type = scrolls server versions
+		$arr = array(
+				'int' => $test,
+				'type' => 1
+			);
+		$this->arrayBinderInt($query, $arr);
+		
+
+		return $query->execute();
+
+	}
+	function removeVerson($id) {
+		include('connect.php');
+		
+		
+		$query = $db->prepare("DELETE FROM scrolldier_settings WHERE id = :id");
+
+		$arr = array(
+				'id' => $id
+			);
+		$this->arrayBinderInt($query, $arr);
+		
+
+		return $query->execute();
+	}
+	function addFavoriteDeck($name, $deck) {
+		include('connect.php');
+		
+		$query = $db->prepare("INSERT INTO saved_decks (user, deck_id) VALUES(:user, :deck)");
+		$arr = array(
+				'user' => $name,
+				'deck' => $deck
+			);
+		
+		$this->arrayBinder($query, $arr);
+		
+		try {
+			return $query->execute();
+			
+		} catch (PDOException $e) {
+			return($this->errorHandle($e));
+		}
+	}
+	
+	function removeFavoriteDeck($deck) {
+		include('connect.php');
+		
+		$query = $db->prepare("DELETE FROM saved_decks WHERE id = :id");
+		$arr = array(
+				'id' => $deck
+			);
+		
+		$this->arrayBinder($query, $arr);
+		
+		try {
+			return $query->execute();
+			
+		} catch (PDOException $e) {
+			return($this->errorHandle($e));
+		}
+	}
 	function getDeckDetails($id, $gold = false) {
 		include('connect.php');
 		$query = $db->prepare("SELECT * FROM decks WHERE id=:id");
@@ -126,4 +225,49 @@ class deck {
 		}
 	}
 	
+	function getDeckFaction($json) {
+		include('connect.php');
+			$factionsCost = array(
+				"growth" => 0,
+				"order" => 0,
+				"energy" => 0,
+				"decay" => 0
+			);
+			
+			
+			$getString = "";
+			$json = $json;
+			$data = json_decode($json, TRUE);
+			if ($data['msg'] == "success") { 
+			
+				for ($i = 0; $i < count($data['data']['scrolls']); $i++) {
+					$query = $db->prepare("SELECT * FROM scrollsCard WHERE id=:id");
+					$arr = array(
+							'id' => $data['data']['scrolls'][$i]['id']
+						);
+					
+					$this->arrayBinderInt($query, $arr);
+					$query->execute();		
+					$scroll = $query->fetch(PDO::FETCH_ASSOC);
+					
+					
+					if (!empty($scroll['costgrowth'])) {
+						$factionsCost["growth"] += $data['data']['scrolls'][$i]['c'];
+					}
+					if (!empty($scroll['costorder'])) {
+						$factionsCost["order"] += $data['data']['scrolls'][$i]['c'];
+					}
+					if (!empty($scroll['costenergy'])) {
+						$factionsCost["energy"]+= $data['data']['scrolls'][$i]['c'];
+					}
+					if (!empty($scroll['costdecay'])) {
+						$factionsCost["decay"]+= $data['data']['scrolls'][$i]['c'];}
+					
+				}
+			
+				return $factionsCost;
+			
+			}
+		
+	}
 }

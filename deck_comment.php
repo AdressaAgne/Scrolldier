@@ -195,7 +195,10 @@ for ($ex = 0; $ex < count($listOfScrolls); $ex++){
 $planeTextExport .= "\nTotal: ".$total;
 
 //export to in-game JSON
-$JSONExport = '{"deck":"'.$row['deck_title'].'","author":"'.$row['deck_author'].'","types":[';
+
+$deckTitle = preg_replace('/(\'|&#0*39;|")/', '', $row['deck_title']);
+
+$JSONExport = '{"deck":"'.$deckTitle.'","author":"'.$row['deck_author'].'","types":[';
 
 for ($ex2 = 0; $ex2 < count($listOfScrolls); $ex2++){
 	for ($i = 0; $i < $listOfScrolls[$ex2][4]; $i++) {
@@ -239,10 +242,16 @@ $deckType = $dataArray['faction'][0];
 					</div>
 					
 					<div class="left">
-						<h1><a href="<?php echo($main) ?>deckbuilder/<?php echo($row['id']) ?>"><?php echo($row['deck_title']) ?></a></h1>
-						<small><?php echo($x->ago($row['time'])) ?> by <a href="<?php echo($main) ?>user/<?php echo($row['deck_author']) ?>"><?php echo($row['deck_author']) ?></a>, for scrolls version: <?php echo($row['meta']) ?>, with a Score of <?php echo($row['vote']) ?></small>
-						<br />
+						<h1><a href="<?php echo($main) ?>deckbuilder/<?php echo($row['id']) ?>"><?php echo($row['deck_title']) ?></a>
 						
+						</h1>
+						<small><?php echo($x->ago($row['time'])) ?> ago by <a href="<?php echo($main) ?>user/<?php echo($row['deck_author']) ?>"><?php echo($row['deck_author']) ?></a>, for scrolls version: <?php echo($row['meta']) ?>, with a Score of <?php echo($row['vote']) ?></small>
+						<br />
+						<?php if ($row['meta'] == $deckData->getLatestTestServerVersion()) {
+							echo("<small class='color-warning'>This deck is for the current Test server version</small>");
+						} elseif ($row['meta'] != $deckData->getLatestMainServerVersion()) {
+							echo("<small class='color-red'>This deck is outdated</small>");
+						} ?>
 					</div>
 					
 				</div>
@@ -271,6 +280,12 @@ $deckType = $dataArray['faction'][0];
 								<input type="hidden" name="VoteDown" value="VoteDown" />
 								<input type="hidden" name="deckID" value="<?php echo($row['id']) ?>" />
 								<input type="submit" class="btn-modern btn-pagina btn-no-margin" name="submit" value="Vote Down" />
+							</form>
+							
+							<form method="post" action="" class="left">
+								<input type="hidden" name="voteFav" value="voteFav" />
+								<input type="hidden" name="deckID" value="<?php echo($row['id']) ?>" />
+								<button type="sumbit" name="favoriteBtn" class="btn-modern btn-pagina btn-no-margin"><i class="icon-star"></i></button>
 							</form>
 						
 						<?php } ?>
@@ -306,7 +321,13 @@ $deckType = $dataArray['faction'][0];
 						</div>
 						<div class="right">
 							<div class="left"><i class="icon-scrolls"></i></div>
-							<div class="left" style="margin-left: 5px; margin-top: 1px;"><?php echo($row['scrolls']) ?></div>
+							<div class="left" style="margin-left: 5px; margin-top: 1px;">
+							<?php if ($row['scrolls'] < 50) {
+								echo("<span class='color-red'>".$row['scrolls']."</span>");
+							} else {
+								echo($row['scrolls']);
+							} ?>
+							</div>
 						</div>
 					</div>
 				

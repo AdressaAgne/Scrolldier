@@ -82,6 +82,23 @@ class badges {
 		return $badgeQuery->execute() ? true : false;	
 	}
 	
+	function newBadgeText($ign, $badge, $text) {
+		include("connect.php");
+		//Table: badges: id, type, text, user, time
+		
+		$badgeQuery = $db->prepare("INSERT INTO badges (type, text, user) VALUES(:type, :text, :ign)");
+		
+		$badgeArray = array(
+				'type' => $badge,
+				'ign' => strtolower($ign),
+				'text' => $text
+			); 
+		
+		$this->arrayBinder($badgeQuery, $badgeArray);
+		
+		return $badgeQuery->execute() ? true : false;	
+	}
+	
 	function deleteBadge($id) {
 		include("connect.php");
 		
