@@ -145,8 +145,8 @@ session_start();
 		$("#scroll-search").keyup(function() {
 			search();
 		});
-	
-		$("#close").click(function() {
+		
+		$(document).on("click", "#close", function() {
 			$(".outer-library").hide();
 			$(".overlay").hide();
 		});
