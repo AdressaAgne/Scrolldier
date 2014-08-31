@@ -692,6 +692,39 @@
 		"outputPathIsSetByUser": 0,
 		"processed": 0
 		},
+	"\/img\/deck_decay.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 28890,
+		"inputAbbreviatedPath": "\/img\/deck_decay.png",
+		"outputAbbreviatedPath": "\/img\/deck_decay.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/img\/deck_energy.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 27416,
+		"inputAbbreviatedPath": "\/img\/deck_energy.png",
+		"outputAbbreviatedPath": "\/img\/deck_energy.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/img\/deck_growth.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 27729,
+		"inputAbbreviatedPath": "\/img\/deck_growth.png",
+		"outputAbbreviatedPath": "\/img\/deck_growth.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
 	"\/img\/deck_icon.png": {
 		"fileType": 32768,
 		"ignore": 0,
@@ -699,6 +732,17 @@
 		"initialSize": 12528,
 		"inputAbbreviatedPath": "\/img\/deck_icon.png",
 		"outputAbbreviatedPath": "\/img\/deck_icon.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/img\/deck_order.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 27216,
+		"inputAbbreviatedPath": "\/img\/deck_order.png",
+		"outputAbbreviatedPath": "\/img\/deck_order.png",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 0

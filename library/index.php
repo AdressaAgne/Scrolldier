@@ -85,51 +85,11 @@ session_start();
 						} ?>
 				</div>
 		</div>
-		<div class="library-info">
-			<div class="div-4">
-				<div class="span-4">
-					<div class="div-4">
-						<h3 class="color-white">Related Scrolls</h3>
-						<div class="image-holder" data-id="1">
-							<p class="visible-desktop">Scroll Name</p>
-							<img src="../resources/cardImages/479.png" alt="" />
-						</div>
-						<div class="image-holder" data-id="1">
-							<p class="visible-desktop">Scroll Name</p>
-							<img src="../resources/cardImages/480.png" alt="" />
-						</div>
-						<div class="image-holder" data-id="1">
-							<p class="visible-desktop">Scroll Name</p>
-							<img src="../resources/cardImages/481.png" alt="" />
-						</div>
-						<div class="image-holder" data-id="1">
-							<p class="visible-desktop">Scroll Name</p>
-							<img src="../resources/cardImages/482.png" alt="" />
-						</div>
-					</div>
-					<div class="div-4">
-						<h1 class="color-white">Unit Name</h1>
-						<p class="">This is the scrolls description</p>
-					
-					</div>
-				</div>
-				<div class="span-4">
-			
-			
-				</div>
-			</div>
-			<div class="div-4">
-				<div >
-					<img class="left" src="../img/deck_decay.png" alt="" />
-					<h3 class="left color-white" style="width: 300px;">[Unit Name] is used in X decks on scrolldier.com</h3>
-				</div>
-			</div>
+		<div class="overlay"></div>
 		
-		</div>
-		
+		<div class="outer-library"></div>
 	</div>
 	
-<!-- 	<?php include("../inc_/footer.php"); ?> -->
 <script src="../jquery.js"></script>
 <script>
 
@@ -139,7 +99,6 @@ session_start();
 	
 		function hideAll() {
 			$("[id*='scroll-name']").parent().hide();
-			
 		}
 	
 		function showAll() {
@@ -158,8 +117,18 @@ session_start();
 		
 		//Interacton
 		
-		$("div[class*='image-holder']").click(function() {
-			alert($(this).attr("data-id"));
+		$(document).on("click", "div[class*='image-holder']", function() {
+			var id = $(this).attr("data-id");
+			$.ajax({
+			  type: "POST",
+			  url: "<?php echo($main) ?>inc_/ajax/scrollLibrary.php",
+			  data: { scroll: id}
+			  
+			}).done(function(data) {
+				$(".outer-library").show();
+				$(".overlay").show();
+			    $(".outer-library").html(data);
+			 });
 		});
 	
 		$("[type='checkbox']").change(function() {
@@ -175,6 +144,16 @@ session_start();
 	
 		$("#scroll-search").keyup(function() {
 			search();
+		});
+	
+		$("#close").click(function() {
+			$(".outer-library").hide();
+			$(".overlay").hide();
+		});
+		
+		$(".overlay").click(function() {
+			$(".outer-library").hide();
+			$(".overlay").hide();
 		});
 	
 	});

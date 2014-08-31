@@ -34,7 +34,7 @@
 				<?php if (isset($_SESSION['username'])) { ?>
 					<li><a class="sub-menu" href="<?php echo($main) ?>scroll/designer">New Scroll</a></li>
 				<?php } ?>
-					<li><a class="sub-menu" href="<?php echo($main) ?>scrolls.php">In-Game</a></li>
+					<li><a class="sub-menu" href="<?php echo($main) ?>scrolllib">In-Game</a></li>
 				</ul>
 			</li>
 			
