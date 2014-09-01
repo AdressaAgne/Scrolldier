@@ -2,8 +2,10 @@
 	include('../../admin/mysql/connect.php');
 	include('../../admin/mysql/function.php');
 	include('../../admin/mysql/scrolls.php');
+	include('../../admin/mysql/deck.php');
 	$x = new xClass();
 	$scroll = new scrolls();
+	$deckData = new deck();
 	
 	
 	$query = $db->prepare("SELECT * FROM scrollsCard WHERE id=:id");
@@ -32,6 +34,12 @@
 		$scrollType = "decay";
 		$scrollCost = $scroll['costdecay'];
 	}
+	
+	$queryTotal = $db->prepare("SELECT * FROM decks WHERE isHidden = 0 AND JSON LIKE '%\"id\":".$scroll['id'].",%'");
+	$queryTotal->execute();
+	
+	$totalDecks = $queryTotal->rowCount();
+	
 
 ?>
 
@@ -41,7 +49,7 @@
 		<button id="close" class="btn-modern right">&times;</button>
 	</div>
 	<div class="div-4">
-		<div class="span-6">
+		<div class="span-4">
 			<div class="div-4">
 				<img class="left" src="../resources/cardImages/<?php echo($scroll['image']) ?>.png" alt="" />
 				<div class="left div-4">
@@ -70,7 +78,120 @@
 				</div>
 			</div>
 		</div>
-	
+		<div class="span-4">
+			<h2 class="left clear color-white right" style="width: 350px;">Top decks with <?php echo($scroll['name']) ?> (<?php echo($totalDecks); ?>)</h2>
+			
+			<div class="div-4  right" style="width: 350px;">
+				<?php 
+					$query = $db->prepare("SELECT * FROM decks WHERE isHidden = 0 AND JSON LIKE '%\"id\":".$scroll['id'].",%' ORDER BY meta DESC, vote DESC, time DESC LIMIT 2");
+					
+					
+					
+					$query->execute();
+					$i = 0;
+					while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
+					$i++;
+					
+					
+						$dataArray = $deckData->getDeckDetails($row['id']);
+						
+						$deckType = $dataArray['faction'][0];
+					
+				 ?>
+			
+			
+				<div class="div-4 classic clearfix <?php echo($deckType) ?>"  style="margin-bottom: 10px;">
+				<a class="" href="<?php echo($main."deck/".$row['id']) ?>" >
+					<div class="header clearfix">
+					
+						 <h2 class="left clear" style="font-size: 24px;">
+						  	<?php echo($i.". ".substr($row['deck_title'],0 , 30)) ?>
+					 	 </h2>
+						
+					 </div>
+					  </a>
+					<p class="left clear byline"><?php echo($x->ago($row['time'])) ?> ago by <?php echo($row['deck_author']) ?> with <?php echo($x->totalComments($row['id'], 2)) ?> comment(s) for <?php echo($row['meta']) ?></p>
+
+					<div class="left clear classicDiv">
+						
+						<span class="left">
+							<?php if ($row['growth'] == 1) {
+								echo('<i class="icon-growth big" style="margin-bottom: -3px;"></i>');
+							}
+							
+							if ($row['decay'] == 1) {
+								echo('<i class="icon-decay big" style="margin-bottom: -3px;"></i>');
+							}
+							
+							if ($row['tOrder'] == 1) {
+								echo('<i class="icon-order big" style="margin-bottom: -3px;"></i>');
+							}
+							
+							if ($row['energy'] == 1) {
+								echo('<i class="icon-energy big" style="margin-bottom: -3px;"></i>');
+							}
+							
+							if ($row['wild'] == 1) {
+								echo('<i class="icon-wild big" style="margin-bottom: -3px;"></i>');
+							}
+							 ?>
+						</span>
+						
+						<span class="right white" style="margin-left: 10px;">
+							<i class="icon-scrolls"></i> <span><?php echo($row['scrolls']) ?></span>
+						</span>
+						
+						<span class="right white" style="margin-left: 10px;">
+							<i class="icon-star"></i> <span><?php echo($row['vote']) ?></span>
+						</span>
+					</div>
+					
+					
+					<div class="left clear classicDiv white align-center" style="font-size: 12px;">
+						<?php if (!empty($dataArray['CREATURE'])) { ?>
+							<span class=""><?php echo($dataArray['CREATURE']) ?> Creatures</span>
+						<?php } ?>
+						
+						<?php if (!empty($dataArray['STRUCTURE'])) { ?>
+							<span>- <?php echo($dataArray['STRUCTURE']) ?> Structurs</span>
+						<?php } ?>
+						
+						<?php if (!empty($dataArray['SPELL'])) { ?>
+							<span>- <?php echo($dataArray['SPELL']) ?> Spells</span>
+						<?php } ?>
+						
+						<?php if (!empty($dataArray['ENCHANTMENT'])) { ?>
+							<span>- <?php echo($dataArray['ENCHANTMENT']) ?> Enchantments</span>
+						<?php } ?>
+						
+						
+						<?php 
+						$total_progress = $dataArray['CREATURE'] + $dataArray['STRUCTURE'] + $dataArray['SPELL'] + $dataArray['ENCHANTMENT'];
+						
+						$creatureProgess = $dataArray['CREATURE'] / $total_progress * 100;
+						$structureProgess = $dataArray['STRUCTURE'] / $total_progress * 100;
+						$spellProgess = $dataArray['SPELL'] / $total_progress * 100;
+						$enchantProgess = $dataArray['ENCHANTMENT'] / $total_progress * 100;
+						
+						 ?>
+					</div>
+					
+					<div class="progressbar">
+						<div class="bar color-green" style="width: <?php echo($creatureProgess) ?>%;"></div>
+						<div class="bar color-orange" style="width: <?php echo($structureProgess) ?>%;"></div>
+						<div class="bar color-red" style="width: <?php echo($spellProgess) ?>%;"></div>
+						<div class="bar color-blue" style="width: <?php echo($enchantProgess) ?>%;"></div>
+					</div>
+					
+				</div>
+				
+				<?php } ?>
+				<?php if ($totalDecks > 2) { ?>
+					<button class="btn-modern" style="width: 100%;" id="show-all-decks" data-id="<?php echo($scroll['id']) ?>">Show all decks</button>
+				<?php } ?>
+			</div>
+			
+		</div>
 	</div>
 
 <div class="div-4">
@@ -78,22 +199,19 @@
 	
 	<?php  
 		if (!empty($scroll['costorder'])) {
-			$query = $db->prepare("SELECT * FROM scrollsCard WHERE kind = :type AND (costorder != 0) AND name != :name LIMIT 6");
+			$typeString = "costorder";
 			
 		} elseif (!empty($scroll['costgrowth'])) {
-		
-			$query = $db->prepare("SELECT * FROM scrollsCard WHERE kind = :type AND (costgrowth != 0) AND name != :name LIMIT 6");
+			$typeString = "costgrowth";
 			
 		} elseif (!empty($scroll['costenergy'])) {
-		
-			$query = $db->prepare("SELECT * FROM scrollsCard WHERE kind = :type AND (costenergy != 0) AND name != :name LIMIT 6");
+			$typeString = "costenergy";
 			
 		} elseif (!empty($scroll['costdecay'])) {
-		
-			$query = $db->prepare("SELECT * FROM scrollsCard WHERE kind = :type AND (costdecay != 0) AND name != :name LIMIT 6");
-		
+			$typeString = "costdecay";
+			
 		}
-	
+	$query = $db->prepare("SELECT * FROM scrollsCard WHERE kind = :type AND name != :name AND types LIKE '%".$scroll['types']."%' ORDER BY ".$typeString." DESC, kind, types LIMIT 5");
 		
 		$arr = array(
 				'type' => $scroll['kind'],

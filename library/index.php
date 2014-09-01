@@ -10,12 +10,23 @@ session_start();
 
 <!DOCTYPE html>
 <html lang="en">
-	<?php include('../inc_/head.php') ?>
+	<head>
+		<meta charset="utf-8">
+		<title>Scrolldier.com</title>
+		<link rel="icon" type="image/png" href="<?php echo($main) ?>img/bunny.png">
+		<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="<?php echo($main) ?>css/style.css" />
+		<link rel="stylesheet" href="<?php echo($main) ?>css/library.css"/>
+	</head>
+	
 <body>
 	<?php include('../inc_/menu.php') ?>
 	
 	
-	<div class="library-contaienr">
+	<div class="library-container">
 	
 		<div class="library-view">
 			
@@ -77,7 +88,7 @@ session_start();
 						 
 						 <span class="hidden" id="scroll-name"><?php echo(strtolower($scroll['name'])) ?></span>
 						 <span class="hidden" id="scroll-faction"><?php echo($scrollType) ?></span>
-						<p class="visible-desktop"><?php echo($scroll['name']) ?></p>
+						<p class=""><?php echo($scroll['name']) ?></p>
 						<img src="../resources/cardImages/<?php echo($scroll['image']) ?>.png" alt="" />
 					</div>
 							
@@ -130,6 +141,34 @@ session_start();
 			    $(".outer-library").html(data);
 			 });
 		});
+		
+		$(document).on("click", "#closeDeck", function() {
+			var id = $(this).attr("data-id");
+			$.ajax({
+			  type: "POST",
+			  url: "<?php echo($main) ?>inc_/ajax/scrollLibrary.php",
+			  data: { scroll: id}
+			  
+			}).done(function(data) {
+				$(".outer-library").show();
+				$(".overlay").show();
+			    $(".outer-library").html(data);
+			 });
+		});
+		
+		$(document).on("click", "#show-all-decks", function() {
+			var id = $(this).attr("data-id");
+			$.ajax({
+			  type: "POST",
+			  url: "<?php echo($main) ?>inc_/ajax/relatedDeck.php",
+			  data: { scroll: id}
+			  
+			}).done(function(data) {
+				$(".outer-library").show();
+				$(".overlay").show();
+			    $(".outer-library").html(data);
+			 });
+		});
 	
 		$("[type='checkbox']").change(function() {
 			if ($(this).is(":checked")) {
@@ -149,6 +188,13 @@ session_start();
 		$(document).on("click", "#close", function() {
 			$(".outer-library").hide();
 			$(".overlay").hide();
+		});
+		
+		
+		$(".outer-library").click(function(e){
+		 if(e.target != this) return
+		 $(".outer-library").hide();
+		 $(".overlay").hide();
 		});
 		
 		$(".overlay").click(function() {

@@ -16,8 +16,8 @@
 				<ul class="sub">
 				<?php if (isset($_SESSION['username'])) { ?>
 					<li><a class="sub-menu" href="<?php echo($main) ?>new/deck">New deck</a></li>
-					<li><a class="sub-menu" href="<?php echo($main) ?>my/decks">My decks</a></li>
-					<li><a class="sub-menu" href="<?php echo($main) ?>my/favorites">Favorite Decks</a></li>
+					<!--<li><a class="sub-menu" href="<?php echo($main) ?>my/decks">My decks</a></li>
+					<li><a class="sub-menu" href="<?php echo($main) ?>my/favorites">Favorite Decks</a></li>-->
 					
 				<?php } ?>
 					<li><a class="sub-menu" href="<?php echo($main) ?>deckbuilder/">Deckbuilder</a></li>
