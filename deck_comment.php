@@ -78,6 +78,10 @@ if (isset($_POST['VoteDown']) && !empty($_POST['VoteDown'])) {
 	$x->deckVote($_POST['deckID'], false, $_SESSION['username']);
 }
 
+if (isset($_POST['favoriteBtn']) && !empty($_POST['deckID'])) {
+	$deckData->addFavoriteDeck($_SESSION['username'], $_POST['deckID']);
+}
+
 if (!isset($_GET['s']) || empty($_GET['s'])) {
 	$_GET['s'] = 1;
 }
@@ -226,9 +230,7 @@ $deckType = $dataArray['faction'][0];
 	<![endif]-->
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="<?php echo($main) ?>css/style.css" />
-	<link href="<?php echo($main) ?>plugins/lightbox/css/lightbox.css" rel="stylesheet" />
-	<script src="<?php echo($main) ?>plugins/lightbox/js/jquery-1.11.0.min.js"></script>
-	<script src="<?php echo($main) ?>plugins/lightbox/js/lightbox.min.js"></script>
+	<link rel="stylesheet" href="<?php echo($main) ?>css/library.css" />
 </head>
 <body>
 	<?php include('inc_/menu.php') ?>
@@ -242,54 +244,60 @@ $deckType = $dataArray['faction'][0];
 					</div>
 					
 					<div class="left">
-						<h1><a href="<?php echo($main) ?>deckbuilder/<?php echo($row['id']) ?>"><?php echo($row['deck_title']) ?></a>
+						<h1 class="left"><a href="<?php echo($main) ?>deckbuilder/<?php echo($row['id']) ?>"><?php echo($row['deck_title']) ?></a>
 						
 						</h1>
-						<small><?php echo($x->ago($row['time'])) ?> ago by <a href="<?php echo($main) ?>user/<?php echo($row['deck_author']) ?>"><?php echo($row['deck_author']) ?></a>, for scrolls version: <?php echo($row['meta']) ?>, with a Score of <?php echo($row['vote']) ?></small>
+						
+						
+						<small class="left clear"><?php echo($x->ago($row['time'])) ?> ago by <a href="<?php echo($main) ?>user/<?php echo($row['deck_author']) ?>"><?php echo($row['deck_author']) ?></a>, for scrolls version: <?php echo($row['meta']) ?>, with a Score of <?php echo($row['vote']) ?></small>
 						<br />
 						<?php if ($row['meta'] == $deckData->getLatestTestServerVersion()) {
-							echo("<small class='color-warning'>This deck is for the current Test server version</small>");
+							echo("<small class='color-warning left clear'>This deck is for the current Test server version</small>");
 						} elseif ($row['meta'] != $deckData->getLatestMainServerVersion()) {
-							echo("<small class='color-red'>This deck is outdated</small>");
+							echo("<small class='color-red left clear'>This deck is outdated</small>");
 						} ?>
 					</div>
-					
-				</div>
-				
-			<div class="news_wall right">
-				<div class="clearfix">
-				<button class="btn-modern btn-pagina btn-no-margin left" id="btn-Export-submit">Export</button>
-				<?php if (isset($_SESSION['username'])) { ?>
-					<?php if ($row['deck_author'] == $_SESSION['username']) { ?>
-					<a href="<?php echo($main) ?>editdeck/<?php echo($row['id']) ?>" class="btn-modern btn-pagina btn-no-margin left">edit</a>
-					
-					<form method="post" action="" class="left">
-						<input type="submit" class="btn-modern btn-pagina btn-no-margin" name="submitDelete" value="Delete" />
-					</form>
-					
-					<?php } ?>
-						<?php if ($x->hasVoted($_SESSION['username'], $row['id'])) { ?>
+					<div class="right">
+					<?php if (isset($_SESSION['username'])) { ?>
 						
-							<form method="post" action="" class="left">
-								<input type="hidden" name="VoteUp" value="VoteUp" />
-								<input type="hidden" name="deckID" value="<?php echo($row['id']) ?>" />
-								<input type="submit" class="btn-modern btn-pagina btn-no-margin" name="submit" value="Vote Up" />
-							</form>
+						
+							<?php if ($x->hasVoted($_SESSION['username'], $row['id'])) { ?>
 							
-							<form method="post" action="" class="left">
-								<input type="hidden" name="VoteDown" value="VoteDown" />
-								<input type="hidden" name="deckID" value="<?php echo($row['id']) ?>" />
-								<input type="submit" class="btn-modern btn-pagina btn-no-margin" name="submit" value="Vote Down" />
-							</form>
-							
+								<form method="post" action="" class="left">
+									<input type="hidden" name="VoteUp" value="VoteUp" />
+									<input type="hidden" name="deckID" value="<?php echo($row['id']) ?>" />
+									<input type="submit" class="btn-modern btn-pagina btn-no-margin" name="submit" value="Vote Up" />
+								</form>
+								
+								<form method="post" action="" class="left">
+									<input type="hidden" name="VoteDown" value="VoteDown" />
+									<input type="hidden" name="deckID" value="<?php echo($row['id']) ?>" />
+									<input type="submit" class="btn-modern btn-pagina btn-no-margin" name="submit" value="Vote Down" />
+								</form>
+							<?php } ?>
+							<?php if ($x->isFavDeck($_SESSION['username'], $row['id'])) { ?>
 							<form method="post" action="" class="left">
 								<input type="hidden" name="voteFav" value="voteFav" />
 								<input type="hidden" name="deckID" value="<?php echo($row['id']) ?>" />
-								<button type="sumbit" name="favoriteBtn" class="btn-modern btn-pagina btn-no-margin"><i class="icon-star"></i></button>
+								<button type="sumbit" name="favoriteBtn" class="btn-modern btn-pagina btn-no-margin">Favorite</button>
 							</form>
-						
-						<?php } ?>
-				<?php } ?>
+							<?php } ?>
+							<?php if ($row['deck_author'] == $_SESSION['username']) { ?>
+							
+							<a href="<?php echo($main) ?>editdeck/<?php echo($row['id']) ?>" class="btn-modern btn-pagina btn-no-margin left">Edit</a>
+							
+							<form method="post" action="" class="left">
+								<button type="submit" class="btn-modern btn-pagina btn-no-margin" name="submitDelete">Delete</button>
+							</form>
+							
+							<?php } ?>
+					<?php } ?>
+					</div>
+				</div>
+			
+			<div class="news_wall right">
+				<div class="clearfix">
+					<button class="btn-modern btn-pagina btn-no-margin left" id="btn-Export-submit">Export</button>
 					<a class="btn-modern btn-pagina btn-no-margin left" href="<?php echo($main."u/makeDeckImage.php?d=".$row['id']) ?>">Deck as image (WIP)</a>
 						<div class="modern left clearfix export" id="export">
 							<textarea class="exportBox" rows="10" readonly><?php echo($planeTextExport) ?></textarea>
@@ -338,7 +346,7 @@ $deckType = $dataArray['faction'][0];
 
 					<?php for ($j = 0; $j < count($listOfScrolls); $j++) { ?>
 						
-				<div class="clearfix" id="ScrollsNr<?php echo($listOfScrolls[$j][3]); ?>">
+				<div class="clearfix" id="ScrollsNr<?php echo($listOfScrolls[$j][3]); ?>" data-id="<?php echo($listOfScrolls[$j][15]); ?>">
 					<div id="" class="deckScrollList mR " style="overflow: hidden;"> 
 						 <span class="left">
 							<span class="resource"><i class="icon-<?php echo($listOfScrolls[$j][6]) ?> small"></i><?php echo($listOfScrolls[$j][2]) ?></span>
@@ -347,7 +355,7 @@ $deckType = $dataArray['faction'][0];
 						<span class="left"><?php echo($listOfScrolls[$j][5]); ?></span>
 
 						<span class="right">
-							<a href="<?php echo($main) ?>resources/cardImages/<?php echo($listOfScrolls[$j][3]) ?>.png" data-title="<?php echo($listOfScrolls[$j][5]); ?>, x<?php echo($listOfScrolls[$j][4]); ?>" data-lightbox="Scrolls"><img class="listScroll" src="<?php echo($main) ?>resources/cardImages/<?php echo($listOfScrolls[$j][3]) ?>.png" alt="" /></a>
+							<img class="listScroll" src="<?php echo($main) ?>resources/cardImages/<?php echo($listOfScrolls[$j][3]) ?>.png" alt="" />
 						</span>
 						
 						<span class="right" style="margin-right: 20px;">x<?php echo($listOfScrolls[$j][4]); ?></span>
@@ -533,18 +541,80 @@ $deckType = $dataArray['faction'][0];
 
 		</div>
 	</div>
+	<div class="overlay"></div>
+	
+	<div class="outer-library"></div>
 	<?php include("inc_/footer.php"); ?>
 	<script>
 	$(function() {
 
-	$("[id*=ScrollsNr]").hover(function() {
-		$(this).find("div").next("div").toggle();
-	});
-	
-	
-	$("#btn-Export-submit").click(function() {
-		$("#export").toggle();
-	});
+		$("[id*=ScrollsNr]").hover(function() {
+			$(this).find("div").next("div").toggle();
+		});
+		
+		
+		$("#btn-Export-submit").click(function() {
+			$("#export").toggle();
+		});
+		
+		$(document).on("click", "div[id^='ScrollsNr'], div[class*='image-holder']", function() {
+			var id = $(this).attr("data-id");
+			$.ajax({
+			  type: "POST",
+			  url: "<?php echo($main) ?>inc_/ajax/scrollLibrary.php",
+			  data: { scroll: id}
+			  
+			}).done(function(data) {
+				$(".outer-library").show();
+				$(".overlay").show();
+			    $(".outer-library").html(data);
+			 });
+		});
+		
+		$(document).on("click", "#closeDeck", function() {
+			var id = $(this).attr("data-id");
+			$.ajax({
+			  type: "POST",
+			  url: "<?php echo($main) ?>inc_/ajax/scrollLibrary.php",
+			  data: { scroll: id}
+			  
+			}).done(function(data) {
+				$(".outer-library").show();
+				$(".overlay").show();
+			    $(".outer-library").html(data);
+			 });
+		});
+		
+		$(document).on("click", "#show-all-decks", function() {
+			var id = $(this).attr("data-id");
+			$.ajax({
+			  type: "POST",
+			  url: "<?php echo($main) ?>inc_/ajax/relatedDeck.php",
+			  data: { scroll: id}
+			  
+			}).done(function(data) {
+				$(".outer-library").show();
+				$(".overlay").show();
+			    $(".outer-library").html(data);
+			 });
+		});
+		
+		$(document).on("click", "#close", function() {
+			$(".outer-library").hide();
+			$(".overlay").hide();
+		});
+		
+		
+		$(".outer-library").click(function(e){
+		 if(e.target != this) return
+		 $(".outer-library").hide();
+		 $(".overlay").hide();
+		});
+		
+		$(".overlay").click(function() {
+			$(".outer-library").hide();
+			$(".overlay").hide();
+		});
 	});
 	
 	</script>

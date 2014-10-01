@@ -35,17 +35,26 @@
 		$scrollCost = $scroll['costdecay'];
 	}
 	
+	if ($scroll['rarity'] == 0) {
+		$rareity = "Common";
+	} elseif ($scroll['rarity'] == 1) {
+		$rareity = "Uncommon";
+	} elseif ($scroll['rarity'] == 2) {
+		$rareity = "Rare";
+	}
+	
 	$queryTotal = $db->prepare("SELECT * FROM decks WHERE isHidden = 0 AND JSON LIKE '%\"id\":".$scroll['id'].",%'");
 	$queryTotal->execute();
 	
 	$totalDecks = $queryTotal->rowCount();
+	
 	
 
 ?>
 
 <div class="library-info clearfix">
 	<div class="div-4">
-		<h1 class="color-white left"><?php echo($scrollCost) ?> <i class="icon-<?php echo($scrollType) ?> big" style="margin-bottom: -4px;"></i> <?php echo($scroll['name']) ?> <small><?php echo($scroll['kind'].": ".$scroll['types']) ?></small></h1>
+		<h1 class="color-white left"><?php echo($scrollCost) ?> <i class="icon-<?php echo($scrollType) ?> big" style="margin-bottom: -4px;"></i> <?php echo($scroll['name']) ?> <small><?php echo($rareity." ".$scroll['kind'].": ".$scroll['types']) ?></small></h1>
 		<button id="close" class="btn-modern right">&times;</button>
 	</div>
 	<div class="div-4">
@@ -53,7 +62,7 @@
 			<div class="div-4">
 				<img class="left" src="../resources/cardImages/<?php echo($scroll['image']) ?>.png" alt="" />
 				<div class="left div-4">
-										<?php if ($scroll['kind'] == "CREATURE" || $scroll['kind'] == "STRUCTURE" ) { ?>
+			<?php if ($scroll['kind'] == "CREATURE" || $scroll['kind'] == "STRUCTURE" ) { ?>
 						<div class="scrolls_statsbar_lib" style="display: block;">
 						 	<h1 id="scroll-ap-lib"><?php echo($scroll['ap']) ?></h1>
 						 	<h1 id="scroll-ac-lib"><?php echo($scroll['ac']) ?></h1>
@@ -73,6 +82,7 @@
 					} ?>
 					</ul>
 					<p class="sFont left clear textFont" style="width: 300px;"><?php echo($scroll['description']) ?></p>
+					<p class="sFont left clear textFont" style="width: 300px;">A part of set <?php echo($scroll['scrollsSet']) ?></p>
 					
 					
 				</div>

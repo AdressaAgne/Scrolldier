@@ -21,6 +21,8 @@ RewriteRule ^new/deck$ new_deck_choose.php [L]
 
 RewriteRule ^scrolllib$ library/index.php [L]
 
+RewriteRule ^missing$ library/missing.php [L]
+
 RewriteRule ^inbox/message/([^/.]*)/?$ inboxMsg.php?player=$1 [L]
 
 RewriteRule ^inbox/main inbox.php [L]

@@ -53,7 +53,10 @@ class badges {
 			"Exalted-Caller",
 			"Grand-Master",
 			"Aspect-Commander",
-			"Ascendant"
+			"Ascendant",
+			"br",
+			"mnd-master-winner",
+			"mnd-winner"
 		);
 		if ($count == false) {
 			return "icon-".$badgeIcons[$i];

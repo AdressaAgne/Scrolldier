@@ -94,7 +94,7 @@ if (isset($_POST['link']) && !empty($_POST['link'])) {
 	 			</ul>
 	 			
 	 		</div>
-	 		<div class="div-4 hidden" id="colorChanger">
+	 		<div class="div-4" style="display: none;" id="colorChanger">
 	 			<p>Choose Colors</p>
 	 			
 	 			<div class="span-4">
@@ -134,7 +134,7 @@ if (isset($_POST['link']) && !empty($_POST['link'])) {
 		 	<div class="div-4">
 		 		<div class="span-4">
 		 			<p>Cost</p>
-		 			<label class="select">
+
 		 			<select id="cost" name="nr">
 		 					<?php if (isset($fanScroll)) { ?>
 		 					<option selected value="<?php echo($fanScroll['cost']) ?>">Cost <?php echo($fanScroll['cost']) ?></option>
@@ -143,11 +143,11 @@ if (isset($_POST['link']) && !empty($_POST['link'])) {
 		 					<option value="<?php echo($i) ?>">Cost <?php echo($i) ?></option>
 		 				<?php } ?>
 		 			</select>
-		 			</label>
+
 		 		</div>
 		 		<div class="span-4">
 		 			<p>Tier</p>
-		 			<label class="select">
+
 			 			<select id="tier" name="tier">
 			 				<?php if (isset($fanScroll)) { ?>
 			 				<option selected="" value="<?php echo($fanScroll['tier']) ?>">Tier <?php echo($fanScroll['tier']+1) ?></option>
@@ -156,7 +156,7 @@ if (isset($_POST['link']) && !empty($_POST['link'])) {
 			 				<option value="1">Tier 2</option>
 			 				<option value="2">Tier 3</option>
 			 			</select>
-		 			</label>
+
 		 		</div>
 		 	</div>
 		 	<div class="div-4">
@@ -255,7 +255,7 @@ if (isset($_POST['link']) && !empty($_POST['link'])) {
 			<div class="div-4">
 				<div class="span-3">	
 					<p>Trait 1</p>
-					<label class="select">
+
 					<select id="trais-1" style="margin-bottom: 10px;">
 						<option>Select a trait</option>
 						<option>Armor</option>
@@ -282,13 +282,13 @@ if (isset($_POST['link']) && !empty($_POST['link'])) {
 						<option>Unstable</option>
 						<option>Ward</option>
 					</select>
-					</label>
+
 					<input type="text" class="textbox div-2" name="p" id="p" value="<?php if (isset($fanScroll)) {echo($fanScroll['passive_1']);} ?>" placeholder="Trait 1"/>
 					<p class="color-red" id="warning-trait-1"></p>
 				</div>
 				<div class="span-3">
 					<p>Trait 2</p>
-					<label class="select">
+
 					<select id="trais-2" style="margin-bottom: 10px;">
 						<option>Select a trait</option>
 						<option>Armor</option>
@@ -315,13 +315,13 @@ if (isset($_POST['link']) && !empty($_POST['link'])) {
 						<option>Unstable</option>
 						<option>Ward</option>
 					</select>
-					</label>
+
 					<input type="text" class="textbox div-2"  name="pa" id="pa" value="<?php if (isset($fanScroll)) {echo($fanScroll['passive_2']);} ?>" placeholder="Trait 2"/>
 					<p class="color-red" id="warning-trait-2"></p>
 				</div>
 				<div class="span-3">
 					<p>Trait 3</p>
-					<label class="select">
+
 					<select id="trais-3" style="margin-bottom: 10px;">
 						<option>Select a trait</option>
 						<option>Armor</option>
@@ -348,7 +348,7 @@ if (isset($_POST['link']) && !empty($_POST['link'])) {
 						<option>Unstable</option>
 						<option>Ward</option>
 					</select>
-					</label>
+
 					<input type="text" class="textbox div-2" name="pas" id="pas" value="<?php if (isset($fanScroll)) {echo($fanScroll['passive_3']);} ?>" placeholder="Trait 3"/>
 					<p class="color-red" id="warning-trait-3"></p>
 				</div>
@@ -357,7 +357,7 @@ if (isset($_POST['link']) && !empty($_POST['link'])) {
 			<div class="div-4" id="ability_div">
 				<input type="checkbox" <?php if (isset($fanScroll) && !empty($fanScroll['btn'])) {echo("checked");} ?> name="Ability_btn" id="Ability_btn" value="btn" />
 				<label class="hand" for="Ability_btn">Add ability button</label>
-				<div class="div-4 div-no-margin hidden" id="Ability_input">
+				<div class="div-4 div-no-margin" style="display: none;" id="Ability_input">
 					<p>Button text</p>
 					<input type="text" class="textbox" name="Ability_btn_true" value="<?php if (isset($fanScroll)) {echo($fanScroll['btn']);} ?>" placeholder="Button text" />
 				</div>
@@ -714,7 +714,6 @@ $(function() {
 	$("#Ability_btn").change(function () {
 		if ($(this).is(":checked")) {
 			$("#Ability_input").slideDown();
-			
 		} else {
 			$("#Ability_input").slideUp();
 		}

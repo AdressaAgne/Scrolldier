@@ -793,7 +793,7 @@ video{
 			-moz-box-shadow: inset 0 -1px #000000, inset 0 1px #38373B;
 			box-shadow: inset 0 -1px #000000, inset 0 1px #38373B;
 		
-
+			
 			
 			& li {
 				background-color:  darken(#26262A, 5%);
@@ -816,7 +816,11 @@ video{
 					text-decoration: none;
 					font: normal 22px sFont;
 				}
+				&:nth-last-of-type(odd){
+					background-color:  darken(#26262A, 3%);
+				}
 			}
+			
 			
 		}
 		
@@ -2566,6 +2570,24 @@ i.icon-mod{
 	background-size: @icon-badge @icon-badge;
 	
 	background-image: url('../resources/badges/mod.png');
+}
+
+i.icon-mnd-winner{
+	width: @icon-badge;
+	height: @icon-badge;
+	margin-bottom: -10px;
+	background-size: @icon-badge @icon-badge;
+	
+	background-image: url('../resources/badges/mnd_winner.png');
+}
+
+i.icon-mnd-master-winner{
+	width: @icon-badge;
+	height: @icon-badge;
+	margin-bottom: -10px;
+	background-size: @icon-badge @icon-badge;
+	
+	background-image: url('../resources/badges/mnd_master_winner.png');
 }
 
 i.icon-assa{

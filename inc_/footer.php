@@ -66,17 +66,7 @@
 			<p class="align-center">© Scrolldier.com 2014</p>
 		</div>
 	</div>
-	<?php if (isset($_SESSION['username'])) { ?>
-	<div class="assasians-caller"></div>
-	<!-- So your looking for a clue? here you go: its case sensitive -->
-	<div class="assasian">
-		<div class="close">
-			<div id="close">&times;</div>
-		</div>
-		<textarea id="program" disabled="disabled"></textarea>
-		<input type="text" id="assasian-text" name="" value="" />
-	</div>
-	<?php } ?>
+
 </div>
 
 	
@@ -104,76 +94,6 @@ $(function() {
 	}
 	
 	$("body").addClass(s);
-	
-	
-	<?php if (isset($_SESSION['username'])) { ?>
-	$("#close").click(function() {
-		$(".assasian").hide();
-
-	});
-	$(".assasians-caller").click(function() {
-		$(".assasian").show();
-		$("#assasian-text").focus();
-		assasian();
-		
-	});
-	
-	$(".assasian").click(function() {
-		$("#assasian-text").focus();
-	});
-	
-	<?php 
-		$thingy = rand(0,20);
-		
-		if ($thingy == 10) {
-			$textCode = "Welcome to the A**a**in ****** Program.";
-		} elseif ($thingy == 9) {
-			$textCode = "Welcome to the ********* *a**er Program.";
-		} else {
-			$textCode = "Welcome to the ********* ****** Program.";
-		}
-	
-	 ?>
-	
-	function assasian() {
-		var text = [
-			"<?php echo($textCode) ?>",
-			"Please Enter the password"
-		];
-
-		
-		for (var i = 0; i < text.length; i++) {
-			var j = 0;
-			
-			var interval = 400;
-			setTimeout(function() {
-				$("#program").append(text[j] + "\n");
-				j++;
-			}, i*interval);
-			
-		}
-	}
-
-	$("#assasian-text").keypress(function(e) {
-	    if(e.which == 13 && $(this).val() != "") {
-	        $("#program").append("> " + $(this).val() + "\n");
-	       	var pw = $(this).val();
-	        $(this).val("");
-	         
-        	$.ajax({
-        	
-        	  type: "POST",
-        	  url: "<?php echo($main) ?>inc_/ajax/assa.php",
-        	  data: { code: pw}
-        	  
-        	}).done(function(data) {
-        	    $("#program").append(data);
-        	    $("#program").scrollTop($('#program')[0].scrollHeight);
-        	 });
-	    }
-	    
-	});
-	<?php } ?>
 });
 
 

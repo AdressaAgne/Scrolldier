@@ -81,7 +81,7 @@ class deck {
 	function addFavoriteDeck($name, $deck) {
 		include('connect.php');
 		
-		$query = $db->prepare("INSERT INTO saved_decks (user, deck_id) VALUES(:user, :deck)");
+		$query = $db->prepare("INSERT INTO favDeck (user, deck_id) VALUES(:user, :deck)");
 		$arr = array(
 				'user' => $name,
 				'deck' => $deck
@@ -97,12 +97,13 @@ class deck {
 		}
 	}
 	
-	function removeFavoriteDeck($deck) {
+	function removeFavoriteDeck($name, $deck) {
 		include('connect.php');
 		
-		$query = $db->prepare("DELETE FROM saved_decks WHERE id = :id");
+		$query = $db->prepare("DELETE FROM favDeck WHERE deck_id = :id AND user = :name");
 		$arr = array(
-				'id' => $deck
+				'id' => $deck,
+				'name' => $name
 			);
 		
 		$this->arrayBinder($query, $arr);

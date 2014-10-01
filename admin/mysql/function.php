@@ -71,6 +71,30 @@ class xClass {
 			return($this->errorHandle($e));
 		}
 	}
+	function isFavDeck($user, $id) {
+		include('connect.php');
+		$query = $db->prepare("SELECT * FROM favDeck WHERE deck_id=:id AND user=:ign");
+		$arr = array(
+				'id' => $id,
+				'ign' => $user
+			);
+		
+		$this->arrayBinder($query, $arr);
+		
+		
+		try {
+			$query->execute();
+			
+			if ($query->rowCount() == 1) {
+				return false;
+			} else {
+				return true;
+			}
+			
+		} catch (PDOException $e) {
+			return($this->errorHandle($e));
+		}
+	}
 	function hasVoted($user, $id) {
 		include('connect.php');
 		$query = $db->prepare("SELECT * FROM votes WHERE id_post=:id AND id_user=:ign");
@@ -1302,6 +1326,8 @@ function deckVote($id, $value=true, $user) {
 				$_SESSION['username'] = $row['ign'];
 				$_SESSION['rank'] = $row['rank'];
 				$_SESSION['headID'] = $row['headID'];
+				
+				
 			} else {
 				$_GET['error'] = "Wrong login information";
 				if (isset($_GET['success'])) {
@@ -1319,6 +1345,13 @@ function deckVote($id, $value=true, $user) {
 		unset($_SESSION['username']);
 		unset($_SESSION['rank']);
 		unset($_SESSION['headID']);
+		
+		unset($_COOKIE['scrolldier_usernmae']);
+		unset($_COOKIE['scrolldier_password']);
+		
+		setcookie('scrolldier_usernmae', null, -1, '/');
+		setcookie('scrolldier_password', null, -1, '/');
+		
 		session_destroy();
 		
 		header("location: index.php");

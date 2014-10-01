@@ -213,6 +213,14 @@ $userStats['ratio'] = round($userStats['won'] / $userStats['played'] * 100, 1);
 						<div class="avatar">
 							<img src="<?php echo($main) ?>resources/head_<?php echo($user['headID']) ?>.png" width="400px" style="margin-left: -50px; margin-top: -20px;" alt="" />
 						</div>
+						
+						
+							
+						
+					<?php } ?>
+					
+					<?php if (strtolower($user['ign']) == "colorplant") { ?>
+						<img src="http://f.cl.ly/items/0m0c2u3d3u0t3Q2T3h3e/Noobplant%20of%20the%20year.png" class="div-4" alt="" />
 					<?php } ?>
 					
 				</div>

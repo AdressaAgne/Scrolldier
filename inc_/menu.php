@@ -1,5 +1,22 @@
+
 <?php include_once("analytics.php"); ?>
-<?php $thisPage = $_SERVER['PHP_SELF']; ?>
+<?php $thisPage = $_SERVER['PHP_SELF']; 
+//
+//if (!isset($_SESSION['username'])) {
+//
+//	if (isset($_COOKIE['remember_user'])) {
+//	
+//		if (isset($_COOKIE['scrolldier_usernmae'])) {
+//			
+//			if (isset($_COOKIE['scrolldier_password'])) {
+//				$login = $x->login($_COOKIE['scrolldier_usernmae'], $_COOKIE['scrolldier_password']);
+//			}
+//			
+//		}
+//			
+//	}	
+//}
+?>
 	<div class="wallpaper"></div>
 	<div class="logo" onclick="location.href='<?php echo($main) ?>'"></div>
 
@@ -15,11 +32,11 @@
 			<li <?php if ($thisPage == "/deck.php") { echo(" class='active'"); }?>><a href="<?php echo($main) ?>decks/1/"><img src="/img/menu/decks.png" alt="" /></a>
 				<ul class="sub">
 				<?php if (isset($_SESSION['username'])) { ?>
-					<li><a class="sub-menu" href="<?php echo($main) ?>new/deck">New deck</a></li>
-					<!--<li><a class="sub-menu" href="<?php echo($main) ?>my/decks">My decks</a></li>
-					<li><a class="sub-menu" href="<?php echo($main) ?>my/favorites">Favorite Decks</a></li>-->
 					
+					<li><a class="sub-menu" href="<?php echo($main) ?>my/decks">My decks</a></li>
+					<li><a class="sub-menu" href="<?php echo($main) ?>my/favorites">Favorite Decks</a></li>
 				<?php } ?>
+					<li><a class="sub-menu" href="<?php echo($main) ?>new/deck">New deck</a></li>
 					<li><a class="sub-menu" href="<?php echo($main) ?>deckbuilder/">Deckbuilder</a></li>
 					<li><a class="sub-menu" href="<?php echo($main) ?>decks-in-the-last-day">Last 24 hours</a></li>
 				</ul>
@@ -35,6 +52,7 @@
 					<li><a class="sub-menu" href="<?php echo($main) ?>scroll/designer">New Scroll</a></li>
 				<?php } ?>
 					<li><a class="sub-menu" href="<?php echo($main) ?>scrolllib">In-Game</a></li>
+					<li><a class="sub-menu" href="<?php echo($main) ?>missing">Your Collection</a></li>
 				</ul>
 			</li>
 			
@@ -60,7 +78,6 @@
 	
 		<?php $notfiCount = $x->notfiCount($_SESSION['username']); ?>
 		<div class="left"><a class="modern" href="<?php echo($main) ?>inbox/main">Inbox<?php if ($notfiCount == 0) {
-			echo("<i class='icon-round disabled'></i>");
 		} else {
 			echo("<i class='icon-round'></i>");
 		}?></a></div>

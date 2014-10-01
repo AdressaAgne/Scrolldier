@@ -1,7 +1,9 @@
 <?php 
 	include('admin/mysql/connect.php');
 	include_once('admin/mysql/function.php');
+	include_once('admin/mysql/deck.php');
 	$x = new xClass();
+	$deckData = new deck();
 	
 	
 	session_start();
@@ -9,18 +11,18 @@
 		$x->logout();
 	}
 	
+	if (!isset($_SESSION['username'])) {
+		header("location: ".$main."login.php?re=/my/decks");
+	}
+	
 
-		
-
-
-
-		$query = $db->prepare("SELECT * FROM decks WHERE deck_author = :user");
-		$arr = array(
-				'user' => $_SESSION['username']
-			);
-		$x->arrayBinder($query, $arr);
-		
-		$query->execute();
+	$query = $db->prepare("SELECT * FROM decks WHERE deck_author = :user");
+	$arr = array(
+			'user' => $_SESSION['username']
+		);
+	$x->arrayBinder($query, $arr);
+	
+	$query->execute();
 		
 		
 		
