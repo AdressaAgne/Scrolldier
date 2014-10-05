@@ -1,21 +1,18 @@
 
 <?php include_once("analytics.php"); ?>
 <?php $thisPage = $_SERVER['PHP_SELF']; 
-//
-//if (!isset($_SESSION['username'])) {
-//
-//	if (isset($_COOKIE['remember_user'])) {
-//	
-//		if (isset($_COOKIE['scrolldier_usernmae'])) {
-//			
-//			if (isset($_COOKIE['scrolldier_password'])) {
-//				$login = $x->login($_COOKIE['scrolldier_usernmae'], $_COOKIE['scrolldier_password']);
-//			}
-//			
-//		}
-//			
-//	}	
-//}
+//authLogin
+if (isset($_COOKIE['remember_user'])) {
+
+	if (isset($_COOKIE['scrolldier_usernmae'])) {
+		
+		if (isset($_COOKIE['scrolldier_token'])) {
+			$login = $x->authLogin($_COOKIE['scrolldier_usernmae'], $_COOKIE['scrolldier_token']);
+		}
+		
+	}
+		
+}
 ?>
 	<div class="wallpaper"></div>
 	<div class="logo" onclick="location.href='<?php echo($main) ?>'"></div>
@@ -26,7 +23,7 @@
 		} ?>>
 		<ul>
 
-			<li <?php if ($thisPage == "/index.php") { echo(" class='active'"); }?>><a href="<?php echo($main) ?>"><img src="/img/menu/home.png" alt="" /></a></a></li>
+			<li <?php if ($tasPage == "/index.php") { echo(" class='active'"); }?>><a href="<?php echo($main) ?>"><img src="/img/menu/home.png" alt="" /></a></a></li>
 			
 	
 			<li <?php if ($thisPage == "/deck.php") { echo(" class='active'"); }?>><a href="<?php echo($main) ?>decks/1/"><img src="/img/menu/decks.png" alt="" /></a>

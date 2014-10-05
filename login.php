@@ -6,27 +6,44 @@
 	
 	session_start();
 	
-//	if (isset($_POST['remember_user'])) {
-//		
-//		$expire=time()+60*60*24*30;
-//		setcookie("remember_user", true, $expire);
-//		setcookie("scrolldier_usernmae", $_POST['lign'], $expire);
-//		setcookie("scrolldier_password", $_POST['lpassword'], $expire);
-//	}
-//	
-//	
-//	if (isset($_COOKIE['remember_user'])) {
-//	
-//		if (isset($_COOKIE['scrolldier_usernmae'])) {
-//			
-//			if (isset($_COOKIE['scrolldier_password'])) {
-//				$login = $x->login($_COOKIE['scrolldier_usernmae'], $_COOKIE['scrolldier_password']);
-//			}
-//			
-//		}
-//			
-//	}
-//	
+	if (isset($_POST['remember_user'])) {
+		
+		
+		
+		$query = $db->prepare("SELECT * FROM accounts WHERE ign=:username AND password=:password");
+		$arr = array(
+				'username' => $_POST['lign'],
+				'password' => sha1($_POST['lpassword'])
+			);
+		
+		$x->arrayBinder($query, $arr);
+		
+		$query->execute();
+		
+		if ($query->rowCount() === 1) {
+			$row = $query->fetch(PDO::FETCH_ASSOC);
+			
+			$expire=time()+60*60*24*30;
+			setcookie("remember_user", true, $expire);
+			setcookie("scrolldier_usernmae", $_POST['lign'], $expire);
+			setcookie("scrolldier_token", $row['betaKey'], $expire);
+		}
+		
+	}
+	
+	
+	if (isset($_COOKIE['remember_user'])) {
+	
+		if (isset($_COOKIE['scrolldier_usernmae'])) {
+			
+			if (isset($_COOKIE['scrolldier_token'])) {
+				$login = $x->authLogin($_COOKIE['scrolldier_usernmae'], $_COOKIE['scrolldier_token']);
+			}
+			
+		}
+			
+	}
+	
 	
 	if (isset($_POST['lign']) && isset($_POST['lpassword'])) {
 		$login = $x->login($_POST['lign'], $_POST['lpassword']);
@@ -81,11 +98,11 @@
 				<label for="lpassword">Password</label><br />
 				<input type="password" class="textbox full div-2" name="lpassword" id="lpassword" value="" placeholder="Password" />
 			</div>
-			<!--<div class="div-3">
+			<div class="div-3">
 				<input type="checkbox" class="normal_checkbox" name="remember_user" id="remember_user"  value="" />
 				<label for="remember_user" class="normal_checkbox"></label>
 				<label for="remember_user" class="hand">Remember me for 1 month (Uses Cookies)</label>
-			</div>-->
+			</div>
 			<div class="div-4 div-margin">
 				<input type="submit" name="" class="btn-modern btn-no-margin" value="Login" />
 				<span>Don't have an account? <a href="<?php echo($main) ?>u/reg.php">Sign Up</a></span>

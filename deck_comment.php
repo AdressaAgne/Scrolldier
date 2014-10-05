@@ -156,11 +156,13 @@ if ($data['msg'] == "success") {
 	  	}
 	  
 	  	$singelScroll = array(
+	  		6 => $scrollType,
 	  		2 => $scrollsCost,
+	  		5 => $card['name'],
 	  		3 => $card['image'],
 	  		4 => $data['data']['scrolls'][$i]['c'],
-	  		5 => $card['name'],
-	  		6 => $scrollType,
+	  		
+	  		
 	  		7 => 0,
 	  		8 => 0,
 	  		9 => $card['description'],

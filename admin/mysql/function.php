@@ -1341,6 +1341,39 @@ function deckVote($id, $value=true, $user) {
 		
 	}
 	
+	
+	function authLogin($username, $token) {
+		include('connect.php');
+		$query = $db->prepare("SELECT * FROM accounts WHERE ign=:username AND betaKey=:token");
+		$arr = array(
+				'username' => $username,
+				'token' => $token
+			);
+		
+		$this->arrayBinder($query, $arr);
+		
+		try {
+			$query->execute();
+			
+			if ($query->rowCount() === 1) {
+				$row = $query->fetch(PDO::FETCH_ASSOC);
+				$_SESSION['username'] = $row['ign'];
+				$_SESSION['rank'] = $row['rank'];
+				$_SESSION['headID'] = $row['headID'];
+				
+				
+			} else {
+				$_GET['error'] = "Wrong login information";
+				if (isset($_GET['success'])) {
+					unset($_GET['success']);
+				}	
+			};
+		} catch (PDOException $e) {
+			return($this->errorHandle($e));
+		}
+		
+	}
+	
 	function logout() {
 		unset($_SESSION['username']);
 		unset($_SESSION['rank']);
@@ -1350,7 +1383,7 @@ function deckVote($id, $value=true, $user) {
 		unset($_COOKIE['scrolldier_password']);
 		
 		setcookie('scrolldier_usernmae', null, -1, '/');
-		setcookie('scrolldier_password', null, -1, '/');
+		setcookie('scrolldier_token', null, -1, '/');
 		
 		session_destroy();
 		

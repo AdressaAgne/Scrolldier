@@ -63,11 +63,13 @@ set_time_limit(5000);
 		  	}
 		  
 		  	$singelScroll = array(
+		  		6 => $scrollType,
 		  		2 => $scrollsCost,
+		  		5 => $card['name'],
 		  		3 => $card['image'],
 		  		4 => $data['data']['scrolls'][$i]['c'],
-		  		5 => $card['name'],
-		  		6 => $scrollType,
+		  		
+		  		
 		  		7 => 0,
 		  		8 => 0,
 		  		9 => $card['description'],
@@ -89,7 +91,6 @@ set_time_limit(5000);
 	   return ($a<$b)?-1:1;
 	}
 					
-					
 	usort($listOfScrolls, "my_sort");
 
 	function getRType($i) {
@@ -104,6 +105,8 @@ set_time_limit(5000);
 	
 	$iw = 100;
 	$ih = $iw*.75;
+	
+	$offset = 87 * 2;
 	
 	$imagesPerRow = 1;
 	
@@ -126,7 +129,7 @@ set_time_limit(5000);
 		$width = $imagesPerRow * $iw;
 		$height = ceil($NUM_IMAGES / $imagesPerRow) * $ih;
 
-		$wallpaper = imagecreatetruecolor(678, $ih*count($listOfScrolls));
+		$wallpaper = imagecreatetruecolor(678, $ih*count($listOfScrolls) + $offset);
 		
 		$c = 0;
 		$gradientBG = imagecreatefrompng("deckImage/bg1.png");
@@ -143,7 +146,20 @@ set_time_limit(5000);
 		
 		$fontSize = 25;
 		
-	
+		$largefontSize = 50;
+		
+		$fontW = imagettfbbox($largefontSize, 0, "honeymeadbold.ttf", $row['deck_author']);
+		$fontWidht = $fontW[2];
+		imagecopyresampled($wallpaper, $gradientBG, 0, 0, 0, 0, 678, 88, 678, 88);
+		imagettftext($wallpaper, $largefontSize, 0, (678 / 2) - ($fontWidht / 2), $largefontSize + 7, $color, "honeymeadbold.ttf", $row['deck_author']);
+		
+		
+		$fontW2 = imagettfbbox($largefontSize - 5, 0, "honeymeadbold.ttf", substr($row['deck_title'], 0, 30));
+		$fontWidht2 = $fontW2[2];
+		imagecopyresampled($wallpaper, $gradientBG, 0, $offset / 2, 0, 0, 678, 88, 678, 88);
+		imagettftext($wallpaper, $largefontSize - 5, 0, (678 / 2) - ($fontWidht2 / 2), 60 * 2.4, $color, "honeymeadbold.ttf", substr($row['deck_title'], 0, 30));
+		
+		
 		
 	for ($j = 0; $j < count($listOfScrolls); $j++) {
 			$imgFile = $path . $listOfScrolls[$j][3].".png";
@@ -158,8 +174,8 @@ set_time_limit(5000);
 			$row = floor($c / $imagesPerRow);
 			$col = $c % $imagesPerRow;
 			
-			$dx = $col * $iw;
-			$dy = $row * $ih;
+			$dx = $col * $iw ;
+			$dy = $row * $ih + $offset;
 			$typeIcon = imagecreatefrompng(getRType($listOfScrolls[$j][6]));
 			
 			imagecopyresampled($wallpaper, $gradientBG, $dx, $dy, 0, 0, 678, 88, 678, 88);
