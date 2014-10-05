@@ -20,13 +20,24 @@
 		
 		$query->execute();
 		
-		if ($query->rowCount() === 1) {
-			$row = $query->fetch(PDO::FETCH_ASSOC);
-			
-			$expire=time()+60*60*24*30;
-			setcookie("remember_user", true, $expire);
-			setcookie("scrolldier_usernmae", $_POST['lign'], $expire);
-			setcookie("scrolldier_token", $row['betaKey'], $expire);
+		$token = sha1(microtime());
+		//6c5b810c938882a8e4d04e24313987885909f3ff
+		$newToekn = $db->prepare("UPDATE accounts SET betaKey = :token WHERE ign = :username");
+		$newToeknArr = array(
+				'token' => $token,
+				'username' => $_POST['lign']
+			); 
+		
+		$x->arrayBinder($newToekn, $newToeknArr);
+		if ($newToekn->execute()) {
+			if ($query->rowCount() === 1) {
+				$row = $query->fetch(PDO::FETCH_ASSOC);
+				
+				$expire=time()+60*60*24*30;
+				setcookie("remember_user", true, $expire);
+				setcookie("scrolldier_usernmae", $_POST['lign'], $expire);
+				setcookie("scrolldier_token", $token, $expire);
+			}
 		}
 		
 	}

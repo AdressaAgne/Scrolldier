@@ -14,3 +14,5 @@ admin/mysql/connect.php
 *.espressostorage
 
 *.codekit
+
+*.espressostorage
