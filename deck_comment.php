@@ -105,7 +105,7 @@ if (isset($_POST['submitDelete'])) {
 	$x->arrayBinder($query, $arr);
 	
 	if ($query->execute()) {
-		header("location: ".$main."decks/");
+		header("location: ".$main."my/decks");
 	}
 	
 		
@@ -233,6 +233,7 @@ $deckType = $dataArray['faction'][0];
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="<?php echo($main) ?>css/style.css" />
 	<link rel="stylesheet" href="<?php echo($main) ?>css/library.css" />
+	<script src="<?=$main?>jquery.js"></script>
 </head>
 <body>
 	<?php include('inc_/menu.php') ?>
@@ -608,9 +609,9 @@ $deckType = $dataArray['faction'][0];
 		
 		
 		$(".outer-library").click(function(e){
-		 if(e.target != this) return
-		 $(".outer-library").hide();
-		 $(".overlay").hide();
+			 if(e.target != this) return
+			 $(".outer-library").hide();
+			 $(".overlay").hide();
 		});
 		
 		$(".overlay").click(function() {

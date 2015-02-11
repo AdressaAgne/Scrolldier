@@ -1,4 +1,5 @@
 
+
 <?php include_once("analytics.php"); ?>
 <?php $thisPage = $_SERVER['PHP_SELF']; 
 //authLogin
@@ -18,12 +19,14 @@ if (isset($_COOKIE['remember_user'])) {
 	<div class="logo" onclick="location.href='<?php echo($main) ?>'"></div>
 
 <div class="container clearfix">
+	
+	
 		<div class="menu" <?php if (isset($_SESSION['username'])) {
 			echo("style='margin-top: 22px;'");
 		} ?>>
 		<ul>
 
-			<li <?php if ($tasPage == "/index.php") { echo(" class='active'"); }?>><a href="<?php echo($main) ?>"><img src="/img/menu/home.png" alt="" /></a></a></li>
+			<li <?php if ($thisPage == "/index.php") { echo(" class='active'"); }?>><a href="<?php echo($main) ?>"><img src="/img/menu/home.png" alt="" /></a></a></li>
 			
 	
 			<li <?php if ($thisPage == "/deck.php") { echo(" class='active'"); }?>><a href="<?php echo($main) ?>decks/1/"><img src="/img/menu/decks.png" alt="" /></a>
@@ -134,3 +137,13 @@ if (isset($_COOKIE['remember_user'])) {
 		<div class="modern last"><?php echo($_GET['w']) ?></div>
 	</div>
 <?php } ?>
+
+<div class="container hidden" id="Secresy">
+	<div class="modern last">
+		<p>Are you looking for something out of the ordinary?
+		   Maybe a small guild that does not recruit openly?</p>
+		<p>A guild that does everything in highest secrecy?
+		Maybe you should you should <a href="http://freescrollers.scrolldier.com/">contact</a> us</p>
+	</div>
+</div>
+

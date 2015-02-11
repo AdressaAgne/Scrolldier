@@ -20,7 +20,7 @@
 				<li><a href="http://scrollstoolbox.com/" target="_blank">ScrollsToolbox</a></li>
 				<li><a href="http://theyseemescrollin.com/" target="_blank">They See Me scrollin</a></li>
 				<li><a href="http://reddit.com/r/scrolls" target="_blank">/r/scrolls</a></li>
-				<li><a href="http://alpha.scrolldier.com" target="_blank">Scrolldier Dev</a></li>
+				<li><a href="http://dev.scrolldier.com" target="_blank">Scrolldier Dev</a></li>
 			</ul>
 		</div>
 		<div class="div-2 div-margin">
@@ -38,6 +38,7 @@
 		<div class="div-1 div-margin">
 			<h4>Contact</h4>
 				<ul>
+					<li><a href="http://scrolldier.com/terms.php">Terms of conditions</a></li>
 					<li>Support: <a href="mailto:support@scrolldier.com" target="_blank">support@scrolldier.com</a></li>
 					<li>Contact: <a href="mailto:contact@scrolldier.com" target="_blank">contact@scrolldier.com</a></li>
 					<li>Creator: <a href="mailto:orangee@scrolldier.com" target="_blank">orangee@scrolldier.com</a></li>
@@ -69,7 +70,8 @@
 
 </div>
 
-	
+
+<script src="" type="text/javascript"></script>
 <script src="<?php echo($main) ?>jquery.js"></script>
 <script>
 

@@ -27,6 +27,8 @@ RewriteRule ^inbox/message/([^/.]*)/?$ inboxMsg.php?player=$1 [L]
 
 RewriteRule ^inbox/main inbox.php [L]
 
+RewriteRule ^competition comp/index.php [L]
+
 
 
 RewriteRule ^beetlestone beetlestone.php [L]

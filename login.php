@@ -8,8 +8,6 @@
 	
 	if (isset($_POST['remember_user'])) {
 		
-		
-		
 		$query = $db->prepare("SELECT * FROM accounts WHERE ign=:username AND password=:password");
 		$arr = array(
 				'username' => $_POST['lign'],
@@ -103,11 +101,11 @@
 		<form method="post" class="div-4" action="">
 			<div class="div-4 div-margin">
 				<label for="ign">In Game Name</label><br />
-				<input type="text" class="textbox full div-2" name="lign" id="ign" value="" placeholder="In Game Name" />
+				<input type="text" class="textbox full div-4" name="lign" id="ign" value="" placeholder="In Game Name" />
 			</div>
 			<div class="div-4 div-margin">
 				<label for="lpassword">Password</label><br />
-				<input type="password" class="textbox full div-2" name="lpassword" id="lpassword" value="" placeholder="Password" />
+				<input type="password" class="textbox full div-4" name="lpassword" id="lpassword" value="" placeholder="Password" />
 			</div>
 			<div class="div-3">
 				<input type="checkbox" class="normal_checkbox" name="remember_user" id="remember_user"  value="" />

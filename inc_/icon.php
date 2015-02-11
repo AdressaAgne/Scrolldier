@@ -25,7 +25,7 @@
  		echo("<li><i class='icon-alpha'></i><ul><li class='modern'>Scrolldier Alpha user</li></ul></li>");
  	}
  	
- 	if ($thisID > 70) {
+ 	if ($thisID > 70 && $thisID < 600) {
  		echo("<li><i class='icon-beta'></i><ul><li class='modern'>Scrolldier Beta user</li></ul></li>");
  	}
  }

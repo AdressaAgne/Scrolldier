@@ -220,11 +220,35 @@ if (isset($_POST['link']) && !empty($_POST['link'])) {
 		 					<label for="art-w" class="checkbox" style="background-image: url(<?php echo($main) ?>resources/cardImages/spoilerArt/w.png);">
 		 					</label>
 		 				</li>
+		 				<li>
+	 						<input type="radio" name="cardImage" id="art-scholar" value="<?php echo($main) ?>resources/cardImages/spoilerArt/scholar_1.png" />
+	 						
+	 						<label for="art-scholar" class="checkbox" style="background-image: url(<?php echo($main) ?>resources/cardImages/spoilerArt/scholar_1.png);">
+	 						</label>
+	 					</li>
+ 						<li>
+ 							<input type="radio" name="cardImage" id="art-2" value="<?php echo($main) ?>resources/cardImages/spoilerArt/2.png" />
+ 							
+ 							<label for="art-2" class="checkbox" style="background-image: url(<?php echo($main) ?>resources/cardImages/spoilerArt/2.png);">
+ 							</label>
+ 						</li>
+ 						
+ 						
 		 			
 		 		</ul>
 		 		
 		 		
 		 	</div>
+		 	<div class="div-4 clear">
+		 			
+		 			<label for="">Own image? (300x225 & .png)<br />
+		 				<input type="text" class="textbox div-2" name="cardImage" id="art-2" value="" />
+		 			</label>
+		 			<label for="">
+		 				<p>If this is a success with own images i'll keep it and make them resizable from here</p>
+		 				
+		 			</label>
+		 					 	</div>
 		 	<div class="div-4">
 		 		<p>Type</p>
 

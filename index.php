@@ -10,19 +10,25 @@
 	if (isset($_GET['logout'])) {
 		$x->logout();
 	}
+	
+	
  ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Scrolldier.com</title>
+	<title>Scrolldier.com | A scrolls fan site</title>
+	<meta name="description" content="A scrolls fan site. Browse over 500 user created decks. View All in-game scrolls. Create your own scroll. " />
 	<link rel="icon" type="image/png" href="img/bunny.png">
 	<!--[if lt IE 9]>
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="css/style.css" />
+	
+	<script src="jquery.js"></script>
+	
 	<?php include("inc_/ad/main.php"); ?>
 </head>
 <body>
@@ -39,9 +45,15 @@
 		<div class="container">
 			
 			<div class="wall_big">
+				<div class="news">
+				<iframe src="http://www.twitch.tv/scrolls/embed" frameborder="0" scrolling="no" height="378" width="600"></iframe>
+				</div>
+				<!--<center>
+				<iframe scrolling="no" frameborder="0" style="border:none; margin: 0 auto;" src="https://www.humblebundle.com/_widget/" width="410" height="150"></iframe>
+				</center>-->
 				<!-- Blog -->
 				<div class="div-4 modern" style="margin-top: 0px;">
-					<h3>Spoilers & news</h3>
+					<h3>News</h3>
 				</div>
 				<?php
 				//[LIMIT {[offset,] row_count | row_count OFFSET offset}]
@@ -80,43 +92,40 @@
 						
 				?>		
 				
-				<div class="last well div-4">
-					<div class="header">
-						<h1 style="margin-left: 10px;">
-							<a href="post/<?php echo($row['id']) ?>">
-								<?php echo($row['header']) ?>
+				
+				
+				<div class="news">
+								<!-- Blog -->
+								
+					<div class="last">
+						<div  style="max-height: 500px; overflow: hidden;">
+						<div class="header">
+							<h3><?php echo($row['header']) ?><small><?php if (isset($_SESSION['username']) && ($_SESSION['rank'] == 1 || $_SESSION['username'] == $row['byName']))  { ?>
+									
+									<form method="post" action="" class="right">
+										<input type="button" class="btn-modern" onclick="location.href='<?php echo($main) ?>edit.php?edit=<?php echo($row['id']) ?>'" name="" value="Edit" />
+										<input type="hidden" name="postID" value="<?php echo($row['id']) ?>" />
+										<input type="submit" name="submitDeletePost" class="btn-modern" value="Delete" />
+									</form>
+									
+							<?php } ?></small></h3>
+							<small><?php echo($x->ago($row['time'])) ?>, By: <a href="<?php echo($main) ?>user/<?php echo($row['byName']) ?>"><?php echo($row['byName']) ?></a></small>
+						</div>
+						<div class="news_content">
+							<?php echo($x->findAndReplace($row['html'])) ?>
+						</div>
+					</div>
+						<div class="readMore">
+							<a href="post/<?php echo($row['id']) ?>" class="readMore fontDwarven">
+								<h1>
+									Read More
+								</h1>
 							</a>
-						</h1>
-						
-						
-						
-						<p class="byline">
-							<?php echo($x->ago($row['time'])) ?> ago by
-							 <a href="user/<?php echo($row['byName']) ?>"><?php echo($row['byName']) ?></a>
-							 with <?php echo($x->totalComments($row['id'])) ?> comment(s)
-							 
-							 <small>
-							 	<?php if (isset($_SESSION['username']) && ($_SESSION['rank'] == 1 || $_SESSION['username'] == $row['byName']))  { ?>
-							 		<a class="btn-pagina modern right" href="edit.php?edit=<?php echo($row['id']) ?>">Edit</a>	
-							 	<?php } ?>
-							 </small>
-						</p>
+						</div>
 					</div>
-					<div class="news_content">
-						<?php echo($x->findAndReplace($x->makeClickableLinks($row['html']))) ?>
-					</div>
-					<div class="readMore">
-						<a href="post/<?php echo($row['id']) ?>" class="readMore fontDwarven">
-							<h1>
-							
-							<?php if ($x->totalComments($row['id']) == 0) {
-								echo("Write A Comment");
-							} else {
-								echo("Read Comments");
-							}?>
-							</h1>
-						</a>
-					</div>
+					
+					
+					
 				</div>
 				
 				<?php } ?>

@@ -481,7 +481,14 @@ if (isset($_POST['delVersion'])) {
 	 	<div class="container">
 	 		<div class="div-4">
 	 			<h3 class="modern">Total Accounts: <?php echo($x->totalAccounts()) ?>, Total Decks: <?php echo($x->totalDecks()) ?>, Total Fanart made:  <?php echo($x->totalFanart()) ?></h3>
-	 			
+	 			<div class="div-4 well">
+	 					<div class="left">
+	 						<a href="<?= $main ?>/new_spoiler.php"  class="btn-modern">New post on front page</a>
+	 					</div>
+	 					<form method="post" action="" class="left">
+	 						<input type="submit" name="submitGuildScore" style="margin-top: -4px;" value="Update Guild Score" class="btn-modern"/>
+	 					</form>
+	 				</div>
 	 			<div class="div-4">
 	 					<div class="wall_big">
 	 					<div class="div-4 well clearfix" style="padding: 10px;">
@@ -548,7 +555,7 @@ if (isset($_POST['delVersion'])) {
 	 				    	</div>
 	 				    	</form>
 	 				    	
-	 				    	<div class="span-4" style="padding: 10px;">
+	 				    	<div class="span-4" style="padding: 10px; height: 400px; overflow: scroll;">
 	 				    		<h2>All versions</h2>
 	 				    			<ul>
 	 				    				<?php $query = $db->prepare("SELECT * FROM scrolldier_settings WHERE type=1 ORDER BY id DESC");	
@@ -577,39 +584,6 @@ if (isset($_POST['delVersion'])) {
 	 				    	
 	 				    
 	 				    </div>
-	 				    <?php if ($_SESSION['rank'] == 1) { ?>
-		 				   <div class="div-4 well" style="padding: 10px;">
-			 				   <form method="post" action="">
-			 				   		<h2>Add .png extesion to image files</h2>
-			 				   		<input name="submitRename" type="submit" class="btn-modern" value="Rename">
-			 				   </form>
-		 				   </div>
-	 				    
-	 				    	<div class="div-4 well" style="padding: 10px;">
-	 				    		<h2>Suggestion Box:</h2>
-	 				    		<?php $query = $db->prepare("SELECT * FROM suggestions_box ORDER BY id DESC");	
-	 				    		$query->execute();
-	 				    		
-	 				    		while ($sug = $query->fetch(PDO::FETCH_ASSOC)) {  ?>
-	 				    		
-	 				    		<div class="div-4">
-		 				    		<div class="div-4">Suggestion by: <?php echo($sug['user']) ?></div>
-		 				    		<p><?php echo($sug['text']) ?></p>
-		 				    		<a href="<?php echo($main) ?>inbox/message/<?php echo($sug['user']) ?>">Send Feedback</a>
-		 				    		<hr />
-	 				    		</div>
-	 				    		
-	 				    		<?php } ?>
-	 				    	</div>
-	 					<?php  } ?>
-	 					
-	 					<div class="div-4 well" style="padding: 10px;">
-	 						<h2>Guilds</h2>
-	 						<form method="post" action="">
-	 							<input type="submit" name="submitGuildScore" value="Update Guild Score" class="btn-modern btn-no-margin"/>
-	 						</form>
-	 					
-	 					</div>
 	 			</div>
 	 			<div class="wall_small well" style="padding: 10px;">
 	 			<div class="div-4">
@@ -627,7 +601,7 @@ if (isset($_POST['delVersion'])) {
 	 			<div class="div-4">
 	 				<h2>Password resets:</h2>
 	 					<ul>
-	 					<?php $query = $db->prepare("SELECT * FROM resets ORDER BY id DESC");	
+	 					<?php $query = $db->prepare("SELECT * FROM resets ORDER BY id DESC LIMIT 24");	
 	 					$query->execute();
 	 					
 	 					while ($row = $query->fetch(PDO::FETCH_ASSOC)) { ?>
@@ -723,6 +697,31 @@ if (isset($_POST['delVersion'])) {
 	 		</div>
 	 		
 	 	</div>
+	 	<?php if ($_SESSION['rank'] == 1) { ?>
+	 		   <div class="div-4 well" style="padding: 10px;">
+	 			   <form method="post" action="">
+	 			   		<h2>Add .png extesion to image files</h2>
+	 			   		<input name="submitRename" type="submit" class="btn-modern" value="Rename">
+	 			   </form>
+	 		   </div>
+	 	 
+	 	 	<div class="div-4 well" style="padding: 10px;">
+	 	 		<h2>Suggestion Box:</h2>
+	 	 		<?php $query = $db->prepare("SELECT * FROM suggestions_box ORDER BY id DESC");	
+	 	 		$query->execute();
+	 	 		
+	 	 		while ($sug = $query->fetch(PDO::FETCH_ASSOC)) {  ?>
+	 	 		
+	 	 		<div class="div-4">
+	 		    		<div class="div-4">Suggestion by: <?php echo($sug['user']) ?></div>
+	 		    		<p><?php echo($sug['text']) ?></p>
+	 		    		<a href="<?php echo($main) ?>inbox/message/<?php echo($sug['user']) ?>">Send Feedback</a>
+	 		    		<hr />
+	 	 		</div>
+	 	 		
+	 	 		<?php } ?>
+	 	 	</div>
+	 		<?php  } ?>
 </div>
 				
 			

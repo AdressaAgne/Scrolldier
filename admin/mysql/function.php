@@ -120,6 +120,49 @@ class xClass {
 		}
 	}
 	
+	function hasVotedComp($user, $id) {
+		include('connect.php');
+		$query = $db->prepare("SELECT * FROM competition_vote WHERE vote_deck_id=:id AND vote_author=:ign");
+		$arr = array(
+				'id' => $id,
+				'ign' => $user
+			);
+		
+		$this->arrayBinder($query, $arr);
+		
+		
+		try {
+			$query->execute();
+			
+			if ($query->rowCount() == 1) {
+				return false;
+			} else {
+				return true;
+			}
+			
+		} catch (PDOException $e) {
+			return($this->errorHandle($e));
+		}
+	}
+function hasSubmitted($cat, $user) {
+	include('connect.php');
+	$query = $db->prepare("SELECT * FROM competition WHERE deck_category=:cat AND deck_author=:ign");
+	$arr = array(
+			'cat' => $cat,
+			'ign' => $user
+		);
+	
+	$this->arrayBinder($query, $arr);
+	
+
+	if ($query->execute()) {
+		if ($query->rowCount() >= 1) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+}	
 function deckVote($id, $value=true, $user) {
 		include('connect.php');
 	if ($this->hasVoted($user, $id)) {
@@ -151,6 +194,42 @@ function deckVote($id, $value=true, $user) {
 						'post' => $id,
 						'user' => $user,
 						'state' => $state
+					); 
+				
+				$this->arrayBinder($vote, $votearr);
+				
+					if ($vote->execute()) {
+						return true;
+					} else {
+						return false;
+					}
+			} else {
+				return false;
+			}
+		} catch (PDOException $e) {
+			return($this->errorHandle($e));
+		}
+	}
+}
+
+function deckVoteComp($id, $user) {
+		include('connect.php');
+	if ($this->hasVotedComp($user, $id)) {
+			$query = $db->prepare("UPDATE competition SET deck_vote=deck_vote+1 WHERE id=:id");
+			$arr = array(
+					'id' => $id
+				); 
+		
+		$this->arrayBinder($query, $arr);
+		
+		try {
+			if ($query->execute()) {	
+						
+				$vote = $db->prepare("INSERT INTO competition_vote (vote_deck_id, vote_author) VALUES(:id, :user)");
+				
+				$votearr = array(
+						'id' => $id,
+						'user' => $user
 					); 
 				
 				$this->arrayBinder($vote, $votearr);
@@ -694,6 +773,13 @@ function deckVote($id, $value=true, $user) {
 		//img
 		$s = preg_replace('@(\[img\](https?://([-\w\.]+[-\w])+(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?)\[\/img\])@', '<img src="$2" alt="$6" />', $s);
 		
+		//link
+		$s = preg_replace('@(\[url\=(http?://([-\w\.]+[-\w])+(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?)\](.+)\[\/url\])@', '<a href="$2" target="_blank">$8</a>', $s);
+		$s = preg_replace('@(\[url\](http?://([-\w\.]+[-\w])+(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?)\[\/url\])@', '<a href="$2" target="_blank">$2</a>', $s);
+		
+		//img
+		$s = preg_replace('@(\[img\](http?://([-\w\.]+[-\w])+(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?)\[\/img\])@', '<img src="$2" alt="$6" />', $s);
+		
 		//youtube
 		
 		//<iframe width="640" height="360" src="//www.youtube.com/embed/ES4yNj5LaJY" frameborder="0" allowfullscreen></iframe>
@@ -1115,6 +1201,8 @@ function deckVote($id, $value=true, $user) {
 				
 			}
 		}
+		
+		
 
 	function tof($i) {
 		if ($i == 0) {
@@ -1308,6 +1396,22 @@ function deckVote($id, $value=true, $user) {
 		}
 	}
 	
+	function delPostComp($id) {
+		include('connect.php');
+		$query = $db->prepare("DELETE FROM competition where id = :id");
+		$arr = array(
+				'id' => $id
+			);
+		
+		$this->arrayBinder($query, $arr);
+		try {
+			$query->execute();
+						
+		} catch (PDOException $e) {
+			return($this->errorHandle($e));
+		}
+	}
+	
 	function login($username, $password) {
 		include('connect.php');
 		$query = $db->prepare("SELECT * FROM accounts WHERE ign=:username AND password=:password");
@@ -1363,7 +1467,7 @@ function deckVote($id, $value=true, $user) {
 				
 				
 			} else {
-				$_GET['error'] = "Wrong login information";
+				$_GET['error'] = "Your account got logged in from somewhere else. If that was not you, you should change your password.";
 				if (isset($_GET['success'])) {
 					unset($_GET['success']);
 				}	
@@ -1379,11 +1483,14 @@ function deckVote($id, $value=true, $user) {
 		unset($_SESSION['rank']);
 		unset($_SESSION['headID']);
 		
-		unset($_COOKIE['scrolldier_usernmae']);
-		unset($_COOKIE['scrolldier_password']);
 		
 		setcookie('scrolldier_usernmae', null, -1, '/');
 		setcookie('scrolldier_token', null, -1, '/');
+		
+		unset($_COOKIE['scrolldier_usernmae']);
+		unset($_COOKIE['scrolldier_token']);
+		
+		
 		
 		session_destroy();
 		

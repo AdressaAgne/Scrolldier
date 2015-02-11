@@ -248,7 +248,7 @@ if (!isset($_SESSION['username'])) {
  		 						<span class="left" id="scroll-in-deck-name"><?php echo($listOfScrolls[$j][5]) ?></span>
  		 					
  		 						<span class="right">
- 		 							<img class="listScroll" src="http://localhost/resources/cardImages/<?php echo($listOfScrolls[$j][3]) ?>.png" alt="">
+ 		 							<img class="listScroll" src="<?php echo($main) ?>resources/cardImages/<?php echo($listOfScrolls[$j][3]) ?>.png" alt="">
  		 						</span>
  		 						<span class="right" id="quantity" style="margin-right: 20px;"><?php echo($listOfScrolls[$j][4]) ?></span>
  		 						<span class="right">x</span>
